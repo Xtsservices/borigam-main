@@ -129,7 +129,7 @@ const Header = () => {
             About
           </Link>
           <Dropdown overlay={menu} trigger={['hover']}>
-            <span
+            <span   
               style={isCoursesActive ? activeLinkStyle : linkStyle}
             >
               Courses <span style={{ fontSize: '0.6rem' }}>▼</span> {/* Dropdown arrow */}
