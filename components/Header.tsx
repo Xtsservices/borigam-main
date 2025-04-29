@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dropdown, Menu } from 'antd';
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons'; // Import Ant Design icons
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons'; 
+
 
 const Header = () => {
   const router = useRouter();
@@ -129,7 +130,7 @@ const Header = () => {
             About
           </Link>
           <Dropdown overlay={menu} trigger={['hover']}>
-            <span   
+            <span
               style={isCoursesActive ? activeLinkStyle : linkStyle}
             >
               Courses <span style={{ fontSize: '0.6rem' }}>▼</span> {/* Dropdown arrow */}

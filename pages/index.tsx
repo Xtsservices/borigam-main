@@ -1,496 +1,854 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Carousel, Card, Row, Col, Button, Typography } from 'antd';
+import { UserOutlined, BookOutlined, TrophyOutlined, StarOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Header from '../components/Header';
-import { Carousel, Card, Row, Col, Button } from 'antd';
-import { UserOutlined, BookOutlined, TrophyOutlined, StarOutlined } from '@ant-design/icons';
+import AnimatedBoxesPage from './AnimatedBoxesPage';
+const { Title, Text } = Typography;
 
-const iconStyle: React.CSSProperties = {
-  fontSize: 48,  // Use number instead of string for pixels
-  color: 'orange',
-  margin: '20px 0',
-  textAlign: 'center' as const,  // Use 'as const' to narrow the type
-};
+const videoLinks = [
+  'https://youtu.be/qR9Uu9w9aMg?si=Vm5Sn198JhdZWmhc',
+  'https://youtu.be/s0deY2c1E18?si=D8tHot6toW98_xpi',
+  'https://youtu.be/XNCyeh2jEC4?si=zC1KOkdWtSxjUh5p',
+  'https://youtu.be/KlCvUVQL28k?si=UmWPEe--QR3tB9me',
+  'https://youtu.be/_MLkkvWLMNg?si=ZUaj050MC6wUYjSA',
+  'https://youtu.be/BfdbpS-Crag?si=UyMzP2EKA6MIWk1p',
+  'https://youtu.be/hFcKkso7k10?si=4YvL5RVFKXXVCPPZ',
+  'https://youtu.be/POBTVum-a1k?si=kAr4Cwc40M7DkF7r',
+  'https://youtu.be/CIo24etQ-cU?si=kU_wUZoshC0oUQB2',
+];
 
-const HomePage = () => {
+function getYouTubeId(url: string) {
+  if (!url) return null;
+
+  if (url.includes('youtu.be/')) {
+    return url.split('youtu.be/')[1].split(/[/?&#]/)[0];
+  }
+
+  if (url.includes('v=')) {
+    return url.split('v=')[1].split(/[&?/#]/)[0];
+  }
+  if (url.includes('embed/')) {
+    return url.split('embed/')[1].split(/[/?&#]/)[0];
+  }
+
+  const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+
+  return (match && match[2].length === 11) ? match[2] : null;
+}
+
+export const HomePage = () => {
+  const [expanded, setExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setWindowWidth(window.innerWidth);
+    };
+    
+    if (typeof window !== 'undefined') {
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
+  const shortText = `Borigam Coaching Institution, established in 2019, is dedicated to nurturing creative minds through
+  exceptional coaching for design and architecture entrance exams like NIFT, NID, NATA...`;
+
+  const fullText = `Borigam Coaching Institution, established in 2019, is dedicated to nurturing creative minds through
+  exceptional coaching for design and architecture entrance exams like NIFT, NID, NATA, B.ARCH, UCEED,
+  and CEED. With personalized learning, detailed study material, and regular mock tests available both
+  offline and online, we ensure students are fully prepared.`;
+
+  const CustomPrevArrow = (props: any) => {
+    const { onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          position: 'absolute',
+          left: -25,
+          zIndex: 1,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          cursor: 'pointer',
+          backgroundColor: 'rgba(255,255,255,0.7)',
+          borderRadius: '50%',
+          width: 40,
+          height: 40,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+        }}
+      >
+        <LeftOutlined style={{ fontSize: 18, color: '#0a2c64' }} />
+      </div>
+    );
+  };
+
+  const CustomNextArrow = (props: any) => {
+    const { onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          position: 'absolute',
+          right: -25,
+          zIndex: 1,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          cursor: 'pointer',
+          backgroundColor: 'rgba(255,255,255,0.7)',
+          borderRadius: '50%',
+          width: 40,
+          height: 40,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+        }}
+      >
+        <RightOutlined style={{ fontSize: 18, color: '#0a2c64' }} />
+      </div>
+    );
+  };
+
+  const carouselSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
+    customPaging: (i: number) => (
+      <div style={{
+        width: '12px',
+        height: '12px',
+        borderRadius: '0%',
+        backgroundColor: '#f97316',
+        margin: '0 4px',
+        cursor: 'pointer',
+        opacity: 0.5,
+        transition: 'all 0.3s',
+      }} />
+    ),
+    appendDots: (dots: React.ReactNode) => (
+      <div style={{ position: 'absolute', bottom: '-30px', left: 0, right: 0 }}>
+        <ul style={{ margin: 0, padding: 0, textAlign: 'center' }}>{dots}</ul>
+      </div>
+    ),
+  };
+
   return (
-    <div style={{ padding: '0 70px' }}>
+    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 20px' }}>
+      <style>{`
+        .slick-dots li.slick-active div {
+          opacity: 1 !important;
+          transform: scale(1.2);
+        }
+        .slick-dots li div:hover {
+          opacity: 0.8;
+        }
+        .slick-arrow {
+          z-index: 10;
+        }
+        .slick-prev {
+          left: -40px !important;
+        }
+        .slick-next {
+          right: -40px !important;
+        }
+        @media (max-width: 768px) {
+          .slick-prev {
+            left: -20px !important;
+          }
+          .slick-next {
+            right: -20px !important;
+          }
+        }
+      `}</style>
+      
       <Header />
-      <main style={{ padding: '0px', margin: '0 auto' }}>
-        <Carousel autoplay arrows style={{ marginBottom: '20px' }}>
-          <div style={{ position: 'relative', textAlign: 'center' }}>
-            <img
-              src="https://borigaminstitute.in/wp-content/uploads/2025/04/cropped-WhatsApp-Image-2025-04-20-at-12.50.11-PM-scaled-1-2048x773.jpeg"
-              alt="Slide 1"
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div style={{ position: 'relative', textAlign: 'center' }}>
-            <img src="/assets/carousel-2.jpg" alt="Slide 2" style={{ width: '100%' }} />
-          </div>
-          <div style={{ position: 'relative', textAlign: 'center' }}>
-            <img src="/assets/carousel-3.jpg" alt="Slide 3" style={{ width: '100%' }} />
+
+      {/* Hero Carousel */}
+      <div style={{ position: 'relative', marginBottom: '60px' }}>
+        <Carousel {...carouselSettings}>
+          <div key="intro-video" style={{ position: 'relative', borderRadius: 8 }}>
+            <video 
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ width: '100%', height: 'auto', maxHeight: '500px', borderRadius: 8 }}
+            >
+              <source src="/images/intro.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </Carousel>
+      </div>
 
-        {/* Toppers and About Us Section */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '20px' }}>
-          <div style={{ flex: '1 1 50%', paddingRight: '20px' }}></div>
-          <div style={{ flex: '1 1 45%', paddingLeft: '20px' }}>
-            <h2 style={{
-              fontSize: '28px',
-              fontWeight: 'bold',
-              fontFamily: '"Open Sans", sans-serif',
-              color: '#002147',
-              padding: '0 60px'
+      {/* About Us Section */}
+      <section style={{ marginBottom: 60 }}>
+        <Row gutter={[32, 32]} align="middle" justify="center">
+          <Col xs={24} md={12} lg={10} xl={8} style={{ marginLeft: isMobile ? 0 : 'auto' }}>
+            <Title level={2} style={{ 
+              color: '#002147', 
+              fontFamily: "'Open Sans', sans-serif", 
+              textAlign: isMobile ? 'center' : 'left',
+              fontSize: windowWidth < 768 ? '24px' : '30px'
             }}>
               About Us
-            </h2>
-            {/* <div style={{
-  height: '4px',
-  width: '50px',
-  backgroundColor: 'orange',
-  margin: '10px 0',
-  padding: '0 60px'
-}}></div> */}
-            <p style={{
-              padding: '0 60px',
-              fontSize: '14px',
-              fontFamily: '"Open Sans", sans-serif',
-              color: '#666666',
-              lineHeight: '1.6',
-              textAlign: 'justify'
-            }}>
-              Borigam Coaching Institution, established in 2019, is dedicated to nurturing creative minds through
-              exceptional coaching for design and architecture entrance exams like NIFT, NID, NATA, B.ARCH, UCEED,
-              and CEED. With personalized learning, detailed study material, and regular mock tests available both
-              offline and online, we ensure students are fully prepared. Our proven success record reflects our
-              commitment to helping students achieve their dreams of securing admission to prestigious colleges.
-            </p>
-            <a href="#" style={{
-              fontFamily: '"Open Sans", sans-serif',
-              color: 'orange',
-              padding: '0 60px'
-            }}>
-              Continue Reading...
-            </a>
-            <br /><br /><br /><br />
-          </div>
+            </Title>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 1.6,
+                color: '#666666',
+                fontFamily: "'Open Sans', sans-serif",
+                textAlign: 'justify',
+                display: 'block',
+              }}
+            >
+              {expanded ? fullText : shortText}
+            </Text>
+            <div style={{ textAlign: isMobile ? 'center' : 'right' }}>
+              <Button
+                type="primary"
+                style={{
+                  marginTop: 20,
+                  backgroundColor: '#f97316',
+                  borderColor: '#f97316',
+                  fontFamily: "'Open Sans', sans-serif",
+                }}
+                onClick={() => setExpanded(!expanded)}
+              >
+                {expanded ? 'Show Less' : 'Continue Reading'}
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </section>
 
-        </div>
-        <h1 style={{
-          color: '#002147',
-          fontSize: '22px',
-          fontFamily: '"Open Sans", sans-serif', fontWeight: 'bold', textAlign: 'center'
-        }}>
-          Design & Architecture Entrance Exam Coaching
-        </h1>
+      {/* Features Section */}
+      <section style={{ padding: '40px 0', backgroundColor: '#f8f9fa', borderRadius: 16, marginBottom: 60 }}>
+        <Title
+          level={2}
+          style={{
+            color: '#0a2c64',
+            fontWeight: 600,
+            fontSize: 30,
+            marginBottom: 0,
+            textAlign: 'center',
+            paddingBottom: '50px'
+          }}
+        >
+          What We Offer
+        </Title>
 
-        <section style={{ padding: '40px 20px' }}>
-          <section style={{ padding: '40px 20px', backgroundColor: '#ffffff' }}>
-            <Row gutter={[32, 32]}>
-              {/* Left Column: Coaching Info in Cards */}
-              <Col xs={24} md={12}>
-                <div>
-                  <Row gutter={[16, 16]}>
-                    {/* Top Row: First Two Cards */}
-                    <Col xs={24} sm={12}>
-                      <Card hoverable style={{ textAlign: 'center', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-                        <h3 style={{ color: '#ff6600' }}>Design</h3>
-                        <p>Entrance Exam Coaching</p>
-                        <p>NIFT | NID | UCEED | CEED | FDDI | UID | WUD</p>
-                      </Card>
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <Card hoverable style={{ textAlign: 'center', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-                        <h3 style={{ color: '#ff6600' }}>Architecture</h3>
-                        <p>Entrance Exam Coaching</p>
-                        <p>NATA | B.Arch | IIT-AAT</p>
-                      </Card>
-                    </Col>
-                  </Row>
-
-                  <Row gutter={[16, 16]}>
-                    {/* Bottom Row: Last Two Cards */}
-                    <Col xs={24} sm={12}>
-                      <Card hoverable style={{ textAlign: 'center', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-                        <h3 style={{ color: '#ff6600' }}>BFA | Interior Design</h3>
-                        <p>Entrance Exam Coaching</p>
-                      </Card>
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <Card hoverable style={{ textAlign: 'center', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-                        <h3 style={{ color: '#ff6600' }}>Foundation Program (2 Yrs)</h3>
-                        <p>For 11th Students</p>
-                      </Card>
-                    </Col>
-                  </Row>
+        <Row gutter={[24, 24]} justify="center">
+          {[
+            {
+              title: 'Personalized Attention',
+              image: '/images/personalizedAttention.jpg',
+              description: 'Tailored guidance for each student to maximize potential'
+            },
+            {
+              title: 'Online & Offline',
+              image: '/images/online.png',
+              description: 'Flexible learning options to suit your schedule'
+            },
+            {
+              title: 'Foundation Batch',
+              image: '/images/foundation.jpeg',
+              description: 'Strong fundamentals for long-term success'
+            },
+            {
+              title: 'Mastering with Mocks',
+              image: '/images/mastering.jpg',
+              description: 'Regular practice tests for exam readiness'
+            },
+          ].map((card, index) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={index}>
+              <div
+                style={{
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  backgroundColor: '#fff',
+                  transition: 'transform 0.3s',
+                  height: '100%',
+                }}
+              >
+                <div
+                  style={{
+                    width: '100%',
+                    height: '180px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#fef3c7',
+                  }}
+                >
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                    }}
+                  />
                 </div>
-              </Col>
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    backgroundColor: '#fff',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: '160px',
+                  }}
+                >
+                  <div>
+                    <h3 style={{ margin: '0 0 10px 0', color: '#0a2c64' }}>{card.title}</h3>
+                    <p style={{ color: '#666', fontSize: 14 }}>{card.description}</p>
+                  </div>
+                  <div style={{ fontSize: '20px', marginTop: 'auto', color: '#f97316', textAlign: 'right' }}>&rarr;</div>
+                </div>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </section>
 
-              {/* Right Column: Latest News in a Single Card */}
-              <Col xs={24} md={12}>
-                <Card hoverable style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-                  <div style={{ padding: '0 60px' }}>
-                    <h2 style={{ color: '#002147', fontWeight: 'bold' }}>LATEST NEWS</h2>
-                    <ul style={{ paddingLeft: '20px' }}>
-                      <li style={{ marginBottom: '15px' }}>
-                        <strong>New Batches for NIFT, NID, U/CEED -2025-26 Entrance Coaching.</strong><br />
-                        <small>Starting from 26th & 27th April, 2025 — <em>By Takshshila, 21 Apr, 2025</em></small>
-                      </li>
-                      <li style={{ marginBottom: '15px' }}>
-                        <strong>New Batches for NATA & JEE Architecture - 2025</strong><br />
-                        <small>Starting from 26th & 27th April, 2025 — <em>By Takshshila, 21 Apr, 2025</em></small>
-                      </li>
-                      <li style={{ marginBottom: '15px' }}>
-                        <strong>NIFT | NID Situation Test - 2025</strong><br />
-                        <small>Batch starts 26th & 27th April, 2025 — <em>By Takshshila, 21 Apr, 2025</em></small>
-                      </li>
-                      <li style={{ marginBottom: '15px' }}>
-                        <strong>NATA 2025 Examination Dates are announced</strong><br />
-                        <small><em>By Takshshila, 08 Feb, 2025</em></small>
-                      </li>
-                    </ul>
-                    <div style={{ textAlign: 'right' }}>
-                      <Button type="primary" size="middle">Browse All</Button>
+      {/* News Section */}
+      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <Title
+          level={2}
+          style={{
+            color: '#0a2c64',
+            fontWeight: 600,
+            fontSize: 30,
+            marginBottom: 0,
+          }}
+        >
+          News & Updates
+        </Title>
+        <div
+          style={{
+            height: 3,
+            width: 40,
+            backgroundColor: '#fbb034',
+            margin: '10px auto 30px',
+          }}
+        ></div>
+      </div>
+
+      <Row gutter={[16, 16]} justify="center">
+        {[1, 2, 3, 4].map((item, index) => (
+          <Col xs={24} sm={12} md={6} key={index}>
+            <Card 
+              hoverable
+              // cover={
+              //   <img
+              //     alt={`news-${item}`}
+              //     src={`/images/news-${item}.jpg`}
+              //     style={{ height: 160, objectFit: 'cover' }}
+              //   />
+              // }
+              style={{ borderRadius: 8 }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
+                <div style={{
+                  backgroundColor: '#f97316',
+                  color: 'white',
+                  padding: '4px 8px',
+                  borderRadius: 4,
+                  fontSize: 12,
+                  marginRight: 8
+                }}>
+                  News
+                </div>
+                <Text type="secondary" style={{ fontSize: 12 }}>May {15 + item}, 2023</Text>
+              </div>
+              <Title level={4} style={{ marginBottom: 8 }}>Latest Updates from Borigam</Title>
+              <Text>Stay updated with our latest achievements and news...</Text>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+      
+      <div style={{ textAlign: 'center', margin: '40px 0' }}>
+        <Button
+          style={{
+            backgroundColor: '#fff',
+            border: '1px solid #ccc',
+            padding: '10px 40px',
+            fontSize: '14px',
+            fontFamily: 'sans-serif',
+            color: '#000000',
+            borderRadius: '30px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+
+          VIEW ALL NEWS &gt;&gt;
+        </Button>
+      </div>
+
+      {/* Career Guide Section */}
+      <section style={{ marginBottom: 60 }}>
+        <Title
+          level={2}
+          style={{
+            color: '#0a2c64',
+            fontWeight: 600,
+            fontSize: 30,
+            marginBottom: 0,
+            textAlign: 'center',
+            paddingBottom: '50px'
+          }}
+        >
+          Your Career Guide at Every Step
+        </Title>
+
+        <Row gutter={[24, 24]} justify="center">
+          {[
+            { 
+              title: 'Design Entrances', 
+              image: '/images/design.png',
+              description: 'NIFT, NID, UCEED, CEED and more'
+            },
+            { 
+              title: 'Architecture Entrance', 
+              image: '/images/architecture.png',
+              description: 'NATA, JEE B.Arch, and other exams'
+            },
+            { 
+              title: 'BFA / Interiors', 
+              image: '/images/bfi.jpeg',
+              description: 'Bachelor of Fine Arts programs'
+            },
+            { 
+              title: 'Foundation Batch', 
+              image: '/images/foundationBatch.jpeg',
+              description: 'For early starters in design field'
+            },
+            { 
+              title: 'Advance Batch', 
+              image: '/images/foundation.jpeg',
+              description: 'For serious aspirants'
+            },
+            { 
+              title: 'Top Designing', 
+              image: '/images/top.jpeg',
+              description: 'Specialized coaching for top colleges'
+            }
+          ].map((card, index) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={index}>
+              <Card
+                hoverable
+                cover={
+                  <img
+                    alt={card.title}
+                    src={card.image}
+                    style={{ height: 200, objectFit: 'cover' }}
+                  />
+                }
+                style={{ borderRadius: 8, height: '100%' }}
+                bodyStyle={{ padding: '16px' }}
+              >
+                <Title level={4} style={{ textAlign: 'center', marginBottom: 8 }}>{card.title}</Title>
+                <Text style={{ textAlign: 'center', display: 'block', color: '#666' }}>{card.description}</Text>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </section>
+
+      {/* Stats Section */}
+      <section style={{
+        backgroundColor: '#0a2c64',
+        color: '#fff',
+        padding: '60px 20px',
+        borderRadius: 16,
+        marginBottom: 60,
+        backgroundImage: 'linear-gradient(135deg, #0a2c64 0%, #1a1a1a 100%)'
+      }}>
+        <Title level={2} style={{ color: '#fff', textAlign: 'center', marginBottom: 40 }}>
+          Our Achievements
+        </Title>
+        <Row gutter={[24, 24]} justify="space-around">
+          {[
+            { value: '560+', label: 'Selected in Design Colleges' },
+            { value: '670+', label: 'Selected in Architecture' },
+            { value: '14', label: 'UCEED IIT Qualifiers' },
+            { value: '103', label: 'NIFT Selections' },
+            { value: '24', label: 'NID Admissions' },
+            { value: '2018', label: 'Since Year' }
+          ].map((stat, index) => (
+            <Col xs={12} sm={8} md={4} key={index} style={{ textAlign: 'center', padding: 20 }}>
+              <Title level={2} style={{ color: '#fff', marginBottom: 8, fontSize: 36 }}>{stat.value}</Title>
+              <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{stat.label}</Text>
+            </Col>
+          ))}
+        </Row>
+      </section>
+
+      {/* Gallery Section */}
+      <section style={{ marginBottom: 60, textAlign: 'center', fontFamily: "'Poppins', sans-serif" }}>
+        <Title
+          level={2}
+          style={{
+            color: '#0a2c64',
+            fontWeight: 600,
+            fontSize: 30,
+            marginBottom: 0,
+          }}
+        >
+          Gallery
+        </Title>
+        <div
+          style={{
+            height: 3,
+            width: 40,
+            backgroundColor: '#fbb034',
+            margin: '10px auto 30px',
+          }}
+        ></div>
+
+        {/* Image Carousel */}
+        <div style={{ padding: '0 20px', position: 'relative', marginBottom: '40px' }}>
+          <Carousel
+            arrows
+            dots={true}
+            slidesToShow={4}
+            infinite
+            draggable
+            nextArrow={<CustomNextArrow />}
+            prevArrow={<CustomPrevArrow />}
+            customPaging={(i: number) => (
+              <div style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '0%',
+                backgroundColor: '#0a2c64',
+                margin: '0 4px',
+                cursor: 'pointer',
+                opacity: 0.5,
+                transition: 'all 0.3s',
+              }} />
+            )}
+            appendDots={(dots: React.ReactNode) => (
+              <div style={{ position: 'absolute', bottom: '-30px', left: 0, right: 0 }}>
+                <ul style={{ margin: 0, padding: 0, textAlign: 'center' }}>{dots}</ul>
+              </div>
+            )}
+            responsive={[
+              {
+                breakpoint: 1200,
+                settings: {
+                  slidesToShow: 3,
+                },
+              },
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 576,
+                settings: {
+                  slidesToShow: 1,
+                },
+              },
+            ]}
+          >
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <div key={item} style={{ padding: '0 10px' }}>
+                <div
+                  style={{
+                    boxShadow: '0 0 12px rgba(0, 0, 0, 0.1)',
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                    backgroundColor: '#fff',
+                    transition: 'transform 0.3s',
+                  }}
+                >
+                  <img
+                    src={`/images/${item}.jpeg`}
+                    alt={`Gallery ${item}`}
+                    style={{
+                      width: '100%',
+                      height: 250,
+                      objectFit: 'cover',
+                      borderRadius: 8,
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+
+        {/* Video Carousel */}
+        <div style={{ padding: '0 20px', position: 'relative', marginBottom: '40px' }}>
+          <Carousel
+            arrows
+            dots={true}
+            slidesToShow={4}
+            infinite
+            draggable
+            nextArrow={<CustomNextArrow />}
+            prevArrow={<CustomPrevArrow />}
+            customPaging={(i: number) => (
+              <div style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '0%',
+                backgroundColor: '#0a2c64',
+                margin: '0 4px',
+                cursor: 'pointer',
+                opacity: 0.5,
+                transition: 'all 0.3s',
+              }} />
+            )}
+            appendDots={(dots: React.ReactNode) => (
+              <div style={{ position: 'absolute', bottom: '-30px', left: 0, right: 0 }}>
+                <ul style={{ margin: 0, padding: 0, textAlign: 'center' }}>{dots}</ul>
+              </div>
+            )}
+            responsive={[
+              {
+                breakpoint: 1200,
+                settings: {
+                  slidesToShow: 3,
+                },
+              },
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 576,
+                settings: {
+                  slidesToShow: 1,
+                },
+              },
+            ]}
+          >
+            {videoLinks.map((link, index) => {
+              const videoId = getYouTubeId(link);
+              return (
+                <div key={index} style={{ padding: '0 10px' }}>
+                  <div
+                    onClick={() => window.open(link, '_blank')}
+                    style={{
+                      position: 'relative',
+                      cursor: 'pointer',
+                      borderRadius: 8,
+                      overflow: 'hidden',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                      transition: 'transform 0.3s',
+                    }}
+                  >
+                    <img
+                      src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                      alt={`Video ${index + 1}`}
+                      style={{
+                        width: '100%',
+                        height: 180,
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = '/images/default-video-thumbnail.jpg';
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        fontSize: 40,
+                        color: 'white',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        borderRadius: '50%',
+                        width: 60,
+                        height: 60,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'all 0.3s',
+                      }}
+                    >
+                      ▶
                     </div>
                   </div>
-                </Card>
-              </Col>
-            </Row>
-          </section>
-          <h1>Your Career guide at every step with Takshshila</h1>
-
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<UserOutlined style={iconStyle} />}>
-                <h2>Advanced Batch</h2>
-                <p>Interactive classroom and online training for NID, NIFT, UCEED & CEED.</p>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<BookOutlined style={iconStyle} />}>
-                <h2>Foundation Batch</h2>
-                <p>Coaching with dedicated worksheets for NATA, JEE B.Arch & B.Plan.</p>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<TrophyOutlined style={iconStyle} />}>
-                <h2>Crash course</h2>
-                <p>Entrance coaching for BFI programs and interior design careers.</p>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<StarOutlined style={iconStyle} />}>
-                <h2>Top design & architecture colleges</h2>
-                <p>Perfect for 11th grade students starting early in design fields.</p>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<StarOutlined style={iconStyle} />}>
-                <h2>Previous year question papers and mock test series</h2>
-                <p>Get your design and architecture portfolios ready with expert help.</p>
-              </Card>
-            </Col>
-          </Row>
-
-          <div style={{ backgroundColor: 'black', color: 'white', padding: '40px 20px' }}>
-            <Row justify="space-around" gutter={[16, 16]}>
-              <Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
-                <h2 style={{ fontSize: '36px', fontWeight: 'bold' }}>5000</h2>
-                <p>Selected in Design Colleges</p>
-              </Col>
-              <Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
-                <h2 style={{ fontSize: '36px', fontWeight: 'bold' }}>8000</h2>
-                <p>Selected in Architecture</p>
-              </Col>
-              <Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
-                <h2 style={{ fontSize: '36px', fontWeight: 'bold' }}>100</h2>
-                <p>UCEED</p>
-              </Col>
-              <Col xs={24} sm={12} md={6} style={{ textAlign: 'center' }}>
-                <h2 style={{ fontSize: '36px', fontWeight: 'bold' }}>2001</h2>
-                <p>Since Year</p>
-              </Col>
-            </Row>
-          </div>
-          <br /><br />
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h1>GALLERY</h1>
-          </div>
-
-          <Carousel autoplay style={{ margin: '40px 0' }}>
-            <div style={{ textAlign: 'center' }}>
-              <img src="/assets/architecture1.jpg" alt="College Slide 1" style={{ width: '80%', height: 'auto', borderRadius: '10px' }} />
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <img src="/assets/architecture2.jpg" alt="College Slide 2" style={{ width: '80%', height: 'auto', borderRadius: '10px' }} />
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <img src="/assets/architecture3.jpg" alt="College Slide 3" style={{ width: '80%', height: 'auto', borderRadius: '10px' }} />
-            </div>
+                </div>
+              );
+            })}
           </Carousel>
+        </div>
 
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <Button type="primary" size="large">BROWSE GALLERY &gt;&gt;</Button>
-          </div>
+        <div style={{ marginTop: 30 }}>
+        <Button
+          style={{
+            backgroundColor: '#fff',
+            border: '1px solid #ccc',
+            padding: '10px 40px',
+            fontSize: '14px',
+            fontFamily: 'sans-serif',
+            color: '#000000',
+            borderRadius: '30px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
 
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h1>LATEST NEWS</h1>
-          </div>
+            EXPLORE GALLERY
+          </Button>
+        </div>
+      </section>
 
-          {/* EXTRA THREE CARDS */}
-          <Row gutter={[16, 16]} style={{ marginTop: '20px' }}>
-            <Col xs={24} sm={12} md={8}>
-              <Card hoverable>
-                <h3>Career Guidance</h3>
-                <p>Personalized sessions to guide students in choosing the right path.</p>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Card hoverable>
-                <h3>Alumni Success</h3>
-                <p>Stories from our alumni who cracked top design & architecture colleges.</p>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Card hoverable>
-                <h3>Scholarships</h3>
-                <p>Get info on scholarships available for design/architecture aspirants.</p>
-              </Card>
-            </Col>
-          </Row>
-          <br /><br />
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <Button type="primary" size="large">LATEST NEWS &gt;&gt;</Button>
-          </div>
+      {/* Testimonials Section */}
+      <section style={{ marginBottom: 60, backgroundColor: '#f8f9fa', padding: '60px 20px', borderRadius: 16 }}>
+        <Title level={2} style={{ textAlign: 'center', marginBottom: 40, color: '#0a2c64' }}>
+          What Our Students Say
+          <div
+            style={{
+              height: 3,
+              width: 90,
+              backgroundColor: '#fbb034',
+              margin: '10px auto 30px',
+            }}
+          ></div>
+        </Title>
 
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<UserOutlined />}>
-                <h2>NEWS</h2>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<BookOutlined />}>
-                <h2>NEWS</h2>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<StarOutlined />}>
-                <h2>NEWS</h2>
-              </Card>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Card hoverable cover={<StarOutlined />}>
-                <h2>NEWS</h2>
-              </Card>
-            </Col>
-          </Row>
-
-          <br /><br />
-
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <Button type="primary" size="large">BROWSE ALL NEWS &gt;&gt;</Button>
-          </div>
-
-          {/* STUDENT REVIEWS SECTION */}
-          <section style={{ padding: '60px 20px', backgroundColor: '#fafafa' }}>
-            <h2 style={{
-              textAlign: 'center',
-              fontSize: '28px',
-              fontWeight: 'bold',
-              color: '#002147',
-              marginBottom: '10px'
-            }}>
-              STUDENT REVIEWS
-            </h2>
-            <div style={{
-              width: '80px',
-              height: '4px',
-              backgroundColor: 'orange',
-              margin: '0 auto 40px auto'
-            }}></div>
-
-            <Carousel
-              dots={false}
-              slidesToShow={2}
-              arrows
-              responsive={[
-                {
-                  breakpoint: 768,
-                  settings: {
-                    slidesToShow: 1
-                  }
-                }
-              ]}
-            >
-              <div>
-                <Row gutter={16} justify="center">
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-                      <h3>Riya Sharma</h3>
-                      <p>
-                        "Thanks to Borigam Coaching, I cracked NIFT with ease. Their mock tests and personal attention made the difference!"
-                      </p>
-                    </Card>
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-                      <h3>Arjun Mehta</h3>
-                      <p>
-                        "The support from mentors and well-planned curriculum helped me clear NATA with confidence. Highly recommend!"
-                      </p>
-                    </Card>
-                  </Col>
-                </Row>
+        <div style={{ padding: '0 40px', position: 'relative' }}>
+          <Carousel
+            dots={true}
+            arrows
+            slidesToShow={3}
+            nextArrow={<CustomNextArrow />}
+            prevArrow={<CustomPrevArrow />}
+            customPaging={(i: number) => (
+              <div style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '0%',
+                backgroundColor: '#fbb034',
+                margin: '0 4px',
+                cursor: 'pointer',
+                opacity: 0.5,
+                transition: 'all 0.3s',
+              }} />
+            )}
+            appendDots={(dots: React.ReactNode) => (
+              <div style={{ position: 'absolute', bottom: '-30px', left: 0, right: 0 }}>
+                <ul style={{ margin: 0, padding: 0, textAlign: 'center' }}>{dots}</ul>
               </div>
-              <div>
-                <Row gutter={16} justify="center">
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-
-                    </Card>
-                  </Col>
-                </Row>
+            )}
+            responsive={[
+              { 
+                breakpoint: 768, 
+                settings: { 
+                  slidesToShow: 1,
+                  arrows: true
+                } 
+              },
+              { 
+                breakpoint: 992, 
+                settings: { 
+                  slidesToShow: 2,
+                  arrows: true
+                } 
+              }
+            ]}
+          >
+            {[
+              { 
+                name: 'Riya Sharma', 
+                college: 'NIFT Mumbai',
+                review: "Thanks to Borigam Coaching, I cracked NIFT with ease. The faculty's personalized attention and study material were exceptional."
+              },
+              { 
+                name: 'Arjun Mehta', 
+                college: 'CEPT Ahmedabad',
+                review: 'The support from mentors and well-planned curriculum helped me secure a good rank in NATA. Highly recommended!' 
+              },
+              { 
+                name: 'Sneha Rao', 
+                college: 'NID Bangalore',
+                review: 'Great study material and weekly tests really kept me on track. The mock interviews were especially helpful.' 
+              },
+              { 
+                name: 'Rahul Verma', 
+                college: 'IIT Bombay (UCEED)',
+                review: 'Best institute for design aspirants! The environment pushes you to do your best while providing all necessary support.' 
+              }
+            ].map((testimonial, index) => (
+              <div key={index} style={{ padding: '0 15px' }}>
+                <Card
+                  hoverable
+                  style={{
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '8px',
+                    padding: 20,
+                    height: '100%',
+                    backgroundColor: '#fff'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+                    <div style={{
+                      width: 50,
+                      height: 50,
+                      borderRadius: '50%',
+                      backgroundColor: '#f97316',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'white',
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                      marginRight: 16
+                    }}>
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <Title level={4} style={{ marginBottom: 0 }}>{testimonial.name}</Title>
+                      <Text type="secondary">{testimonial.college}</Text>
+                    </div>
+                  </div>
+                  <Text style={{ fontStyle: 'italic', color: '#555' }}>"{testimonial.review}"</Text>
+                  <div style={{ textAlign: 'right', marginTop: 16 }}>
+                    <StarOutlined style={{ color: '#fbb034' }} />
+                    <StarOutlined style={{ color: '#fbb034' }} />
+                    <StarOutlined style={{ color: '#fbb034' }} />
+                    <StarOutlined style={{ color: '#fbb034' }} />
+                    <StarOutlined style={{ color: '#fbb034' }} />
+                  </div>
+                </Card>
               </div>
-            </Carousel>
-          </section>
-          {/* STUDENT REVIEWS SECTION */}
-          <section style={{ padding: '60px 20px', backgroundColor: '#fafafa' }}>
-            <h2 style={{
-              textAlign: 'center',
-              fontSize: '28px',
-              fontWeight: 'bold',
-              color: '#002147',
-              marginBottom: '10px'
-            }}>
-              Testimonials
-            </h2>
-            <div style={{
-              width: '80px',
-              height: '4px',
-              backgroundColor: 'orange',
-              margin: '0 auto 40px auto'
-            }}></div>
+            ))}
+          </Carousel>
+        </div>
+      </section>
 
-            <Carousel
-              dots={false}
-              slidesToShow={2}
-              arrows
-              responsive={[
-                {
-                  breakpoint: 768,
-                  settings: {
-                    slidesToShow: 1
-                  }
-                }
-              ]}
-            >
-              <div>
-                <Row gutter={16} justify="center">
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-                      <h3>Riya Sharma</h3>
-                      <p>
-                        "Thanks to Borigam Coaching, I cracked NIFT with ease. Their mock tests and personal attention made the difference!"
-                      </p>
-                    </Card>
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-                      <h3>Arjun Mehta</h3>
-                      <p>
-                        "The support from mentors and well-planned curriculum helped me clear NATA with confidence. Highly recommend!"
-                      </p>
-                    </Card>
-                  </Col>
-                </Row>
-              </div>
-              <div>
-                <Row gutter={16} justify="center">
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-                      <h3>Sneha Rao</h3>
-                      <p>
-                        "Great study material and weekly tests really kept me on track. I’m now studying at CEPT!"
-                      </p>
-                    </Card>
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <Card
-                      hoverable
-                      style={{
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px',
-                        marginBottom: '20px'
-                      }}
-                    >
-                      <h3>Rahul Verma</h3>
-                      <p>
-                        "Best institute for design aspirants! The environment is encouraging and the faculty are top-notch."
-                      </p>
-                    </Card>
-                  </Col>
-                </Row>
-              </div>
-            </Carousel>
-          </section>
-
-
-          <section style={{ backgroundColor: '#f9f9f9', padding: '40px 20px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', textAlign: 'center', color: '#002147' }}>
-              Top Design & Architecture Colleges
-            </h2>
-            <p style={{ textAlign: 'center', color: '#444', marginBottom: '30px' }}>
-              Top Architecture colleges in India
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap' }}>
-              {/* Add logos/images of colleges here */}
-            </div>
-          </section>
-        </section>
-      </main>
+      {/* Colleges Section */}
+      <AnimatedBoxesPage />
     </div>
   );
 };
