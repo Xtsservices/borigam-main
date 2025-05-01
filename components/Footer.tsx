@@ -19,7 +19,7 @@ const AppFooter = () => {
       <Footer
         style={{
           backgroundColor: '#ffffff',
-          padding: '40px 20px',
+          padding: '5px',
           fontFamily: '"Open Sans", sans-serif',
           color: '#000',
         }}

@@ -1,11 +1,18 @@
 import React from "react";
-import Header from "../components/Header";
-import AppFooter from "../components/Footer";
-import { Form, Input, Button, Card, Row, Col } from "antd";
+import { useRouter } from "next/router";
+import { LeftOutlined } from "@ant-design/icons";
 
 const Admissions = () => {
+  const router = useRouter();
+
   return (
     <div className="container">
+      {/* Back Button (works on mobile and web) */}
+      <button className="back-button" onClick={() => router.push("/")}>
+        <LeftOutlined style={{ marginRight: "6px" }} />
+        Back
+      </button>
+
       <div className="form-box">
         <h2>Admission Form</h2>
         <form>
@@ -77,6 +84,32 @@ const Admissions = () => {
           align-items: center;
           justify-content: center;
           padding: 2rem;
+          position: relative;
+        }
+
+        .back-button {
+          position: fixed;
+          top: 16px;
+          left: 16px;
+          background: white;
+          border: 1px solid #d1d5db;
+          padding: 6px 12px;
+          border-radius: 999px;
+          color: #1e3a8a;
+          font-weight: 500;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+
+        .back-button:hover {
+          background: #f0f9ff;
+          color: #1d4ed8;
+          border-color: #93c5fd;
         }
 
         .form-box {
@@ -86,6 +119,7 @@ const Admissions = () => {
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
           width: 100%;
           max-width: 500px;
+          margin-top: 2rem;
         }
 
         h2 {
@@ -93,6 +127,20 @@ const Admissions = () => {
           margin-bottom: 1.5rem;
           color: #1e3a8a;
         }
+        @media (max-width: 480px) {
+  .form-box {
+    padding: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .back-button {
+    top: 12px;
+    left: 12px;
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+}
+
 
         form {
           display: flex;
@@ -124,7 +172,7 @@ const Admissions = () => {
           box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
         }
 
-        button {
+        button[type="submit"] {
           background-color: #2563eb;
           color: white;
           font-weight: 600;
@@ -135,7 +183,7 @@ const Admissions = () => {
           transition: background-color 0.3s ease;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
           background-color: #1e40af;
         }
       `}</style>

@@ -189,7 +189,6 @@ export const HomePage = () => {
               style={{ width: '100%', height: 'auto', maxHeight: '500px', borderRadius: 8 }}
             >
               <source src="/images/intro.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
           </div>
         </Carousel>
