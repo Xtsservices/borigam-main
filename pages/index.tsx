@@ -4,6 +4,8 @@ import { UserOutlined, BookOutlined, TrophyOutlined, StarOutlined, LeftOutlined,
 import Header from '../components/Header';
 import AnimatedBoxesPage from './AnimatedBoxesPage';
 const { Title, Text } = Typography;
+import CareerGuideSection from './CareerGuideSection';
+import StatsSection from './StatsSection';
 
 const videoLinks = [
   'https://youtu.be/qR9Uu9w9aMg?si=Vm5Sn198JhdZWmhc',
@@ -204,7 +206,7 @@ export const HomePage = () => {
               textAlign: isMobile ? 'center' : 'left',
               fontSize: windowWidth < 768 ? '24px' : '30px'
             }}>
-              About Us
+              Why Choose Borigam?
             </Title>
             <Text
               style={{
@@ -237,7 +239,7 @@ export const HomePage = () => {
       </section>
 
       {/* Features Section */}
-      <section style={{ padding: '40px 0', backgroundColor: '#f8f9fa', borderRadius: 16, marginBottom: 60 }}>
+      {/* <section style={{ padding: '40px 0', backgroundColor: '#f8f9fa', borderRadius: 16, marginBottom: 60 }}>
         <Title
           level={2}
           style={{
@@ -326,10 +328,10 @@ export const HomePage = () => {
             </Col>
           ))}
         </Row>
-      </section>
+      </section> */}
 
       {/* News Section */}
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+      {/* <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <Title
           level={2}
           style={{
@@ -349,9 +351,9 @@ export const HomePage = () => {
             margin: '10px auto 30px',
           }}
         ></div>
-      </div>
+      </div> */}
 
-      <Row gutter={[16, 16]} justify="center">
+      {/* <Row gutter={[16, 16]} justify="center">
         {[1, 2, 3, 4].map((item, index) => (
           <Col xs={24} sm={12} md={6} key={index}>
             <Card 
@@ -383,124 +385,14 @@ export const HomePage = () => {
             </Card>
           </Col>
         ))}
-      </Row>
+      </Row> */}
       
-      <div style={{ textAlign: 'center', margin: '40px 0' }}>
-        <Button
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ccc',
-            padding: '10px 40px',
-            fontSize: '14px',
-            fontFamily: 'sans-serif',
-            color: '#000000',
-            borderRadius: '30px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-
-          VIEW ALL NEWS &gt;&gt;
-        </Button>
-      </div>
-
+      
       {/* Career Guide Section */}
-      <section style={{ marginBottom: 60 }}>
-        <Title
-          level={2}
-          style={{
-            color: '#0a2c64',
-            fontWeight: 600,
-            fontSize: 30,
-            marginBottom: 0,
-            textAlign: 'center',
-            paddingBottom: '50px'
-          }}
-        >
-          Your Career Guide at Every Step
-        </Title>
-
-        <Row gutter={[24, 24]} justify="center">
-          {[
-            { 
-              title: 'Design Entrances', 
-              image: '/images/design.png',
-              description: 'NIFT, NID, UCEED, CEED and more'
-            },
-            { 
-              title: 'Architecture Entrance', 
-              image: '/images/architecture.png',
-              description: 'NATA, JEE B.Arch, and other exams'
-            },
-            { 
-              title: 'BFA / Interiors', 
-              image: '/images/bfi.jpeg',
-              description: 'Bachelor of Fine Arts programs'
-            },
-            { 
-              title: 'Foundation Batch', 
-              image: '/images/foundationBatch.jpeg',
-              description: 'For early starters in design field'
-            },
-            { 
-              title: 'Advance Batch', 
-              image: '/images/foundation.jpeg',
-              description: 'For serious aspirants'
-            },
-            { 
-              title: 'Top Designing', 
-              image: '/images/top.jpeg',
-              description: 'Specialized coaching for top colleges'
-            }
-          ].map((card, index) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={index}>
-              <Card
-                hoverable
-                cover={
-                  <img
-                    alt={card.title}
-                    src={card.image}
-                    style={{ height: 200, objectFit: 'cover' }}
-                  />
-                }
-                style={{ borderRadius: 8, height: '100%' }}
-                bodyStyle={{ padding: '16px' }}
-              >
-                <Title level={4} style={{ textAlign: 'center', marginBottom: 8 }}>{card.title}</Title>
-                <Text style={{ textAlign: 'center', display: 'block', color: '#666' }}>{card.description}</Text>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </section>
+      <CareerGuideSection />
 
       {/* Stats Section */}
-      <section style={{
-        backgroundColor: '#0a2c64',
-        color: '#fff',
-        padding: '60px 20px',
-        borderRadius: 16,
-        marginBottom: 60,
-        backgroundImage: 'linear-gradient(135deg, #0a2c64 0%, #1a1a1a 100%)'
-      }}>
-        <Title level={2} style={{ color: '#fff', textAlign: 'center', marginBottom: 40 }}>
-          Our Achievements
-        </Title>
-        <Row gutter={[24, 24]} justify="space-around">
-          {[
-            { value: '560+', label: 'Selected in Design Colleges' },
-            { value: '670+', label: 'Selected in Architecture' },
-            { value: '14', label: 'UCEED IIT Qualifiers' },
-            { value: '103', label: 'NIFT Selections' },
-            { value: '24', label: 'NID Admissions' },
-            { value: '2018', label: 'Since Year' }
-          ].map((stat, index) => (
-            <Col xs={12} sm={8} md={4} key={index} style={{ textAlign: 'center', padding: 20 }}>
-              <Title level={2} style={{ color: '#fff', marginBottom: 8, fontSize: 36 }}>{stat.value}</Title>
-              <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{stat.label}</Text>
-            </Col>
-          ))}
-        </Row>
-      </section>
+      <StatsSection/>
 
       {/* Gallery Section */}
       <section style={{ marginBottom: 60, textAlign: 'center', fontFamily: "'Poppins', sans-serif" }}>

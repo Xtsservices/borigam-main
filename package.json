@@ -19,6 +19,7 @@
     "next": "^15.3.1",
     "rc-util": "^5.27.0",
     "react": "^19.1.0",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-multi-carousel": "^2.8.6"
   },

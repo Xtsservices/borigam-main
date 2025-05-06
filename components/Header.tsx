@@ -37,6 +37,7 @@ const Header: React.FC<HeaderProps> = () => {
     color: "orange",
   };
 
+
   const entranceMenuItems: MenuProps["items"] = [
     { key: "nift", label: <Link href="/entrance/nift">NIFT Entrance</Link> },
     { key: "bfa", label: <Link href="/entrance/bfa">BFA Entrance</Link> },
@@ -58,6 +59,10 @@ const Header: React.FC<HeaderProps> = () => {
       label: "Entrance Exam", 
       dropdown: true,
       items: entranceMenuItems 
+    },
+    { 
+      path: "/careerOpportunities", 
+      label: "Career Opportunities", 
     },
     { path: "/success-stories", label: "Success Stories" },
     { path: "/contact", label: "Contact" },
@@ -296,7 +301,7 @@ const Header: React.FC<HeaderProps> = () => {
           justify-content: center;
           flex-wrap: wrap;
           padding: 15px 0;
-          margin-left: 700px;
+          margin-left: 496px;
           margin-top: -5px;
           border-top: 0px solid #eee;
         }

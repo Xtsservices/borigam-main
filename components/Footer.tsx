@@ -1,15 +1,14 @@
-import React from 'react';
-import { Layout, Row, Col } from 'antd';
 import {
+  EnvironmentOutlined,
   FacebookOutlined,
-  TwitterOutlined,
-  LinkedinOutlined,
   InstagramOutlined,
-  YoutubeOutlined,
+  LinkedinOutlined,
   MailOutlined,
   PhoneOutlined,
-  EnvironmentOutlined
+  TwitterOutlined,
+  YoutubeOutlined
 } from '@ant-design/icons';
+import { Col, Layout, Row } from 'antd';
 
 const { Footer } = Layout;
 
@@ -27,7 +26,7 @@ const AppFooter = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <Row gutter={[32, 32]}>
             <Col xs={24} sm={12} md={6}>
-              <h2 style={{ fontWeight: 'bold', color: '#b58e2f', fontSize: '28px' }}>BORIGAM</h2>
+              <h2 style={{ fontWeight: 'bold', color: '#b58e2f', fontSize: '28px',paddingTop:'30px' }}>BORIGAM</h2>
               <h4 style={{ fontSize: '16px', color: '#333' }}>Design | Architecture</h4>
               <p style={styles.text}><EnvironmentOutlined /> #1-11-206/A,<br />Opposite Seasons Florists,<br />Begumpet, Hyderabad - 500016,<br />Telangana, India.</p>
               <p style={styles.text}><PhoneOutlined /> 96661 69555, <br />93905 35851,<br />79952 97686</p>
