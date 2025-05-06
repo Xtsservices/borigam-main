@@ -67,22 +67,22 @@ const Blog = () => {
             <ul style={{ listStyleType: 'none', padding: 0, lineHeight: '1.8em' }}>
               <li>
                 <strong>New Batches For NIFT, NID, U/CEED - 2025-26 Entrance Coaching. Batches Staring</strong><br />
-                <small>BY TAKSHSHILA | 21 APR, 2025</small>
+                <small>BY BORIGAM | 21 APR, 2025</small>
               </li>
               <hr />
               <li>
                 <strong>New Batches For NATA & JEE Architecture - 2025 Is Starting From 26th & 27th April</strong><br />
-                <small>BY TAKSHSHILA | 21 APR, 2025</small>
+                <small>BY BORIGAM | 21 APR, 2025</small>
               </li>
               <hr />
               <li>
                 <strong>NIFT | NID Situation Test - 2025 Batch Starts From 26th & 27th April, 25</strong><br />
-                <small>BY TAKSHSHILA | 21 APR, 2025</small>
+                <small>BY BORIGAM | 21 APR, 2025</small>
               </li>
               <hr />
               <li>
                 <strong>NATA 2025 Examination Dates Are Announced</strong><br />
-                <small>BY TAKSHSHILA | 08 FEB, 2025</small>
+                <small>BY BORIGAM | 08 FEB, 2025</small>
               </li>
             </ul>
             <div style={{ marginTop: '20px', textAlign: 'right' }}>

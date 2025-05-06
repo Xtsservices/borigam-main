@@ -223,8 +223,7 @@ const Header: React.FC<HeaderProps> = () => {
         .custom-header {
           padding: 0;
           background-color: #fff;
-          border-bottom: 1px solid #ddd;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          border-bottom: 0px solid #ddd;
           position: sticky;
           top: 0;
           z-index: 1000;
@@ -278,8 +277,8 @@ const Header: React.FC<HeaderProps> = () => {
           margin: 0;
           height: 400px;
           margin-bottom: -155px;
-          margin-top: -220px;
-          margin-left: -10px;
+          margin-top: -195px;
+          margin-left: -15px;
         }
 
         .contact-info {
@@ -296,8 +295,10 @@ const Header: React.FC<HeaderProps> = () => {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          padding: 10px 0;
-          border-top: 1px solid #eee;
+          padding: 15px 0;
+          margin-left: 700px;
+          margin-top: -5px;
+          border-top: 0px solid #eee;
         }
 
         .desktop-nav {

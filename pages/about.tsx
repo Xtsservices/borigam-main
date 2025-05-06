@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/Header";
 
 const AboutPage = () => {
@@ -144,7 +143,7 @@ const AboutPage = () => {
                   Batches Starting
                 </strong>
                 <br />
-                <small>BY TAKSHSHILA | 21 APR, 2025</small>
+                <small>BY BORIGAM | 21 APR, 2025</small>
               </li>
               <hr />
               <li>
@@ -153,7 +152,7 @@ const AboutPage = () => {
                   From 26th & 27th April
                 </strong>
                 <br />
-                <small>BY TAKSHSHILA | 21 APR, 2025</small>
+                <small>BY BORIGAM | 21 APR, 2025</small>
               </li>
               <hr />
               <li>
@@ -162,13 +161,13 @@ const AboutPage = () => {
                   April, 25
                 </strong>
                 <br />
-                <small>BY TAKSHSHILA | 21 APR, 2025</small>
+                <small>BY BORIGAM | 21 APR, 2025</small>
               </li>
               <hr />
               <li>
                 <strong>NATA 2025 Examination Dates Are Announced</strong>
                 <br />
-                <small>BY TAKSHSHILA | 08 FEB, 2025</small>
+                <small>BY BORIGAM | 08 FEB, 2025</small>
               </li>
             </ul>
             <div style={{ marginTop: "20px", textAlign: "right" }}>
