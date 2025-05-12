@@ -1,155 +1,369 @@
-import React from 'react';
+import React from "react";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
+import Header from "@/components/Header";
+
+
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
 
 const BArchPage = () => {
   return (
     <Layout>
-      <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">B.ARCH ENTRANCE EXAM</h1>
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">1. About B.Arch Course</h2>
-        <ul className="list-disc pl-6">
-          <li>Duration: 5 Years</li>
-          <li>Course Type: Undergraduate Professional Degree</li>
-          <li>Objective: To train students in architectural design, structural engineering, building construction, and sustainable design.</li>
-          <li>Career Scope: Licensed architects, urban planners, interior designers, landscape architects, or pursue higher studies.</li>
-        </ul>
-      </section>
+      <header/>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            Bachelor of Architecture (B.Arch)
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            B.Arch is a 5-year professional undergraduate degree that prepares students for careers in architecture, 
+            combining artistic vision with technical knowledge of building design and construction.
+          </Paragraph>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">2. Popular B.Arch Entrance Exams in India</h2>
-        <ul className="list-disc pl-6">
-          <li>NATA – Conducted by the Council of Architecture (CoA)</li>
-          <li>JEE Main Paper 2 – Conducted by the National Testing Agency (NTA)</li>
-          <li>State-Level Exams:
-            <ul className="list-disc pl-6">
-              <li>KEAM (Kerala)</li>
-              <li>TANCET (Tamil Nadu)</li>
-              <li>UPSEE (Uttar Pradesh)</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>About B.Arch Course</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Duration: 5 Years",
+                    "Course Type: Undergraduate Professional Degree",
+                    "Objective: Train students in architectural design and construction",
+                    "Career Scope: Architects, urban planners, interior designers"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">3. Eligibility Criteria for B.Arch</h2>
-        <ul className="list-disc pl-6">
-          <li>10+2 with Physics, Chemistry, and Mathematics as compulsory subjects</li>
-          <li>Minimum 50% aggregate in PCM and overall (For NATA)</li>
-          <li>60% aggregate for IITs (through JEE Advanced)</li>
-          <li>Diploma in Architecture (3 Years) holders are also eligible</li>
-          <li>No age limit for most exams</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Popular Entrance Exams</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>National Level</Title>
+                  {listItems([
+                    "NATA – Conducted by Council of Architecture (CoA)",
+                    "JEE Main Paper 2 – Conducted by NTA"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>State Level</Title>
+                  {listItems([
+                    "KEAM (Kerala)",
+                    "TANCET (Tamil Nadu)",
+                    "UPSEE (Uttar Pradesh)"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">4. B.Arch Entrance Exam Structure</h2>
-        <h3 className="text-xl font-semibold mt-2">A. NATA</h3>
-        <ul className="list-disc pl-6">
-          <li>Mode: Computer-Based and Offline Drawing Test</li>
-          <li>Duration: 3 Hours</li>
-          <li>Total Marks: 200</li>
-          <li>Sections: Cognitive and Drawing, Mathematics, General Aptitude</li>
-        </ul>
-        <h3 className="text-xl font-semibold mt-4">B. JEE Main Paper 2</h3>
-        <ul className="list-disc pl-6">
-          <li>Mode: Computer-Based and Offline Drawing Test</li>
-          <li>Duration: 3 Hours</li>
-          <li>Total Marks: 400</li>
-          <li>Sections: Mathematics – 100, Aptitude – 200, Drawing – 100</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "10+2 with Physics, Chemistry, and Mathematics",
+                    "Minimum 50% aggregate in PCM (For NATA)",
+                    "60% aggregate for IITs (through JEE Advanced)",
+                    "Diploma in Architecture holders also eligible",
+                    "No age limit for most exams"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">5. Syllabus for B.Arch Entrance Exams</h2>
-        <h3 className="text-xl font-semibold mt-2">Mathematics</h3>
-        <ul className="list-disc pl-6">
-          <li>Algebra, Trigonometry, Calculus</li>
-          <li>Geometry and Coordinate Geometry</li>
-          <li>Probability and Statistics</li>
-          <li>Matrices and Determinants</li>
-          <li>3D Geometry and Vectors</li>
-        </ul>
-        <h3 className="text-xl font-semibold mt-2">Aptitude</h3>
-        <ul className="list-disc pl-6">
-          <li>Visualizing 3D Objects</li>
-          <li>Mental Ability, Logical Reasoning</li>
-          <li>Architecture GK</li>
-          <li>Spatial Reasoning</li>
-          <li>Pictorial Composition</li>
-        </ul>
-        <h3 className="text-xl font-semibold mt-2">Drawing</h3>
-        <ul className="list-disc pl-6">
-          <li>Sketching and Drawing</li>
-          <li>Perspective and Geometric Drawing</li>
-          <li>Freehand and Memory Sketching</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Structure</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>NATA</Title>
+                  {listItems([
+                    "Mode: Computer-Based + Offline Drawing",
+                    "Duration: 3 Hours",
+                    "Total Marks: 200",
+                    "Sections: Cognitive, Drawing, Mathematics, Aptitude"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>JEE Main Paper 2</Title>
+                  {listItems([
+                    "Mode: Computer-Based + Offline Drawing",
+                    "Duration: 3 Hours",
+                    "Total Marks: 400",
+                    "Sections: Mathematics (100), Aptitude (200), Drawing (100)"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">6. Application Process</h2>
-        <ol className="list-decimal pl-6">
-          <li>Visit official exam websites</li>
-          <li>Register with valid credentials</li>
-          <li>Fill and submit application form</li>
-          <li>Upload necessary documents</li>
-          <li>Pay application fee</li>
-          <li>Download admit card</li>
-        </ol>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Mathematics</Title>
+                  {listItems([
+                    "Algebra, Trigonometry, Calculus",
+                    "Geometry and Coordinate Geometry",
+                    "Probability and Statistics"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Aptitude</Title>
+                  {listItems([
+                    "Visualizing 3D Objects",
+                    "Mental Ability, Logical Reasoning",
+                    "Architecture GK"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Drawing</Title>
+                  {listItems([
+                    "Sketching and Drawing",
+                    "Perspective and Geometric Drawing",
+                    "Freehand and Memory Sketching"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">7. Important Dates (Tentative)</h2>
-        <ul className="list-disc pl-6">
-          <li>NATA Application: March</li>
-          <li>NATA Exam: April–July</li>
-          <li>JEE Main Application: December</li>
-          <li>JEE Main Exam: January and April</li>
-          <li>Results: Within a month after exams</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { exam: "NATA Application", date: "March" },
+                      { exam: "NATA Exam", date: "April–July" },
+                      { exam: "JEE Main Application", date: "December" },
+                      { exam: "JEE Main Exam", date: "January and April" },
+                      { exam: "Results", date: "Within a month after exams" },
+                    ]} 
+                    columns={[
+                      { title: 'Exam', dataIndex: 'exam', key: 'exam' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">8. B.Arch Exam Preparation Tips</h2>
-        <ul className="list-disc pl-6">
-          <li>Enhance Drawing Skills</li>
-          <li>Focus on Mathematics</li>
-          <li>Improve Observation</li>
-          <li>Stay Updated on Architecture</li>
-          <li>Time Management</li>
-          <li>Attempt Mock Tests</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Top Architecture Colleges</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "IITs (Kharagpur, Roorkee, BHU)",
+                    "NITs (Trichy, Calicut, Nagpur)",
+                    "School of Planning and Architecture (SPA Delhi, Bhopal, Vijayawada)",
+                    "CEPT University, Ahmedabad",
+                    "Sir JJ College of Architecture, Mumbai"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">9. Admission Process</h2>
-        <ul className="list-disc pl-6">
-          <li>Shortlisting based on exam scores</li>
-          <li>Counseling by authorities</li>
-          <li>Seat allocation by rank and preference</li>
-        </ul>
-        <p className="mt-2 font-medium">Top Colleges:</p>
-        <ul className="list-disc pl-6">
-          <li>IITs</li>
-          <li>NITs</li>
-          <li>SPA</li>
-          <li>Private and State Architecture Colleges</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold">10. Career Opportunities After B.Arch</h2>
-        <ul className="list-disc pl-6">
-          <li>Architect</li>
-          <li>Urban Planner</li>
-          <li>Interior Designer</li>
-          <li>Landscape Architect</li>
-          <li>Project Manager</li>
-          <li>Sustainability Consultant</li>
-        </ul>
-        <p className="mt-2">Graduates can also pursue higher education in Urban Design, Sustainable Architecture, or Construction Management.</p>
-      </section>
-    </div>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Architect", description: "Design buildings and spaces" },
+                      { role: "Urban Planner", description: "Plan and develop urban areas" },
+                      { role: "Interior Designer", description: "Design interior spaces" },
+                      { role: "Landscape Architect", description: "Design outdoor environments" },
+                      { role: "Project Manager", description: "Oversee construction projects" },
+                      { role: "Sustainability Consultant", description: "Eco-friendly design solutions" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    Graduates can also pursue higher education in Urban Design, Sustainable Architecture, or Construction Management.
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };

@@ -1,178 +1,387 @@
-import React from 'react';
+import React from "react";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
+import Header from "@/components/Header";
 
-const UCEEDpage = () => {
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
+
+const UCEEDPage = () => {
   return (
     <Layout>
-      <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">UCEED Entrance Exam Content</h1>
+      <header/>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            UCEED Entrance Exam
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            The Undergraduate Common Entrance Exam for Design (UCEED) is conducted by IIT Bombay for admission to 
+            Bachelor of Design (B.Des) programs at premier institutes including IITs and IIITDM Jabalpur.
+          </Paragraph>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">1. About UCEED</h2>
-        <ul className="list-disc pl-6">
-          <li>Full Form: Undergraduate Common Entrance Exam for Design</li>
-          <li>Conducting Body: IIT Bombay</li>
-          <li>Course Offered: Bachelor of Design (B.Des)</li>
-          <li>Duration: 4 Years</li>
-          <li>Mode of Exam: Computer-Based Test (CBT)</li>
-          <li>Frequency: Conducted once a year</li>
-          <li>Score Validity: 1 Year</li>
-          <li>Participating Institutes: IIT Bombay, IIT Delhi, IIT Guwahati, IIT Hyderabad, IIITDM Jabalpur</li>
-        </ul>
-      </section>
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>About UCEED</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Conducting Body: IIT Bombay",
+                    "Course Offered: Bachelor of Design (B.Des)",
+                    "Duration: 4 Years",
+                    "Mode: Computer-Based Test + Offline Drawing",
+                    "Score Validity: 1 Year"
+                  ])}
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Participating Institutes</Title>
+                  {listItems([
+                    "IIT Bombay",
+                    "IIT Delhi",
+                    "IIT Guwahati",
+                    "IIT Hyderabad",
+                    "IIITDM Jabalpur"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">2. Why Appear for UCEED?</h2>
-        <ul className="list-disc pl-6">
-          <li>Admission to Prestigious Institutes</li>
-          <li>Holistic Assessment</li>
-          <li>Career in Design</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Part A - Computer-Based Test (240 Marks)</Title>
+                  {listItems([
+                    "Duration: 2 Hours 30 Minutes",
+                    "Sections: NAT, MCQ, MSQ",
+                    "Tests: Visualization, Observation, Logical Reasoning"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Part B - Drawing Test (60 Marks)</Title>
+                  {listItems([
+                    "Duration: 30 Minutes",
+                    "Offline - Drawing tasks",
+                    "Evaluates creativity and visualization"
+                  ])}
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <strong>Total Duration:</strong> 3 Hours | <strong>Total Marks:</strong> 300
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">3. Eligibility Criteria for UCEED</h2>
-        <h3 className="font-medium">A. Educational Qualification</h3>
-        <ul className="list-disc pl-6">
-          <li>Class 12 or equivalent in any stream</li>
-          <li>Appearing students are also eligible</li>
-        </ul>
-        <h3 className="font-medium">B. Age Limit</h3>
-        <ul className="list-disc pl-6">
-          <li>General/EWS/OBC-NCL: Born on or after October 1, 2005</li>
-          <li>SC/ST/PwD: Born on or after October 1, 2000</li>
-        </ul>
-        <h3 className="font-medium">C. Number of Attempts</h3>
-        <p>Maximum two attempts in consecutive years</p>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Educational Qualification</Title>
+                  {listItems([
+                    "Class 12 or equivalent in any stream",
+                    "Appearing students are also eligible"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Age Limit</Title>
+                  {listItems([
+                    "General/EWS/OBC-NCL: Born on or after October 1, 2005",
+                    "SC/ST/PwD: Born on or after October 1, 2000"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Attempts</Title>
+                  <Paragraph style={{ fontSize: 18 }}>
+                    Maximum two attempts in consecutive years
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">4. UCEED Exam Pattern</h2>
-        <p><strong>Part A – Computer-Based Test</strong></p>
-        <ul className="list-disc pl-6">
-          <li>Duration: 2 Hours 30 Minutes</li>
-          <li>Total Marks: 240</li>
-          <li>NAT, MCQ, MSQ sections</li>
-        </ul>
-        <p><strong>Part B – Drawing Test</strong></p>
-        <ul className="list-disc pl-6">
-          <li>Duration: 30 Minutes</li>
-          <li>Total Marks: 60</li>
-          <li>Offline – Drawing tasks</li>
-        </ul>
-        <p><strong>Total Duration:</strong> 3 Hours</p>
-        <p><strong>Total Marks:</strong> 300</p>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Part A Syllabus</Title>
+                  {listItems([
+                    "Visualization and Spatial Ability",
+                    "Observation and Design Sensitivity",
+                    "Environmental and Social Awareness",
+                    "Analytical and Logical Reasoning"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Part B Syllabus</Title>
+                  {listItems([
+                    "Drawing Skills",
+                    "Creativity and Originality",
+                    "Visualization and Composition"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">5. UCEED Syllabus</h2>
-        <h3 className="font-medium">Part A Syllabus</h3>
-        <ul className="list-disc pl-6">
-          <li>Visualization and Spatial Ability</li>
-          <li>Observation and Design Sensitivity</li>
-          <li>Environmental and Social Awareness</li>
-          <li>Analytical and Logical Reasoning</li>
-          <li>Language and Creativity</li>
-        </ul>
-        <h3 className="font-medium">Part B Syllabus</h3>
-        <ul className="list-disc pl-6">
-          <li>Drawing Skills</li>
-          <li>Creativity</li>
-          <li>Visualization</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { event: "Application Start Date", date: "September 2024" },
+                      { event: "Last Date to Apply", date: "November 2024" },
+                      { event: "Admit Card Release", date: "January 2025" },
+                      { event: "Exam Date", date: "January 2025" },
+                      { event: "Result Declaration", date: "March 2025" },
+                    ]} 
+                    columns={[
+                      { title: 'Event', dataIndex: 'event', key: 'event' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">6. Application Process for UCEED</h2>
-        <ol className="list-decimal pl-6">
-          <li>Visit the Official Website</li>
-          <li>Register with email ID and phone number</li>
-          <li>Fill Application Form</li>
-          <li>Upload Documents</li>
-          <li>Pay Application Fee</li>
-          <li>Download Admit Card</li>
-        </ol>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "Practice drawing daily",
+                        "Solve previous years' papers",
+                        "Enhance visual thinking"
+                      ])}
+                    </Col>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "Stay updated on design trends",
+                        "Improve time management",
+                        "Develop spatial reasoning"
+                      ])}
+                    </Col>
+                  </Row>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">7. Important Dates for UCEED (Tentative)</h2>
-        <table className="w-full border border-gray-400">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="border p-2">Event</th>
-              <th className="border p-2">Date (Tentative)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border p-2">Application Start Date</td>
-              <td className="border p-2">September 2024</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Last Date to Apply</td>
-              <td className="border p-2">November 2024</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Admit Card Release</td>
-              <td className="border p-2">January 2025</td>
-            </tr>
-            <tr>
-              <td className="border p-2">UCEED Exam Date</td>
-              <td className="border p-2">January 2025</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Result Declaration</td>
-              <td className="border p-2">March 2025</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Product Designer", description: "Design consumer products and electronics" },
+                      { role: "UI/UX Designer", description: "Create digital interfaces and experiences" },
+                      { role: "Visual Communication Designer", description: "Develop branding and visual systems" },
+                      { role: "Automobile Designer", description: "Design vehicles and transportation systems" },
+                      { role: "Graphic Designer", description: "Create visual content for various media" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">8. UCEED Preparation Tips</h2>
-        <ul className="list-disc pl-6">
-          <li>Practice Drawing Regularly</li>
-          <li>Solve Past Papers</li>
-          <li>Enhance Visual Thinking</li>
-          <li>Stay Updated on Design Trends</li>
-          <li>Time Management</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">9. Colleges Accepting UCEED Scores</h2>
-        <ul className="list-disc pl-6">
-          <li>IIT Bombay</li>
-          <li>IIT Delhi</li>
-          <li>IIT Guwahati</li>
-          <li>IIT Hyderabad</li>
-          <li>IIITDM Jabalpur</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold">10. Career Opportunities After B.Des</h2>
-        <table className="w-full border border-gray-400">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="border p-2">Career Option</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td className="border p-2">Product Designer</td></tr>
-            <tr><td className="border p-2">UI/UX Designer</td></tr>
-            <tr><td className="border p-2">Visual Communication Designer</td></tr>
-            <tr><td className="border p-2">Automobile Designer</td></tr>
-            <tr><td className="border p-2">Furniture Designer</td></tr>
-            <tr><td className="border p-2">Graphic Designer</td></tr>
-            <tr><td className="border p-2">Art Director</td></tr>
-            <tr><td className="border p-2">Animation Specialist</td></tr>
-          </tbody>
-        </table>
-      </section>
-    </div>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>How to Apply</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ 
+                    padding: "24px",
+                    background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%)"
+                  }}
+                >
+                  {listItems([
+                    "Visit the official UCEED website",
+                    "Register with email and phone number",
+                    "Fill the application form completely",
+                    "Upload required documents",
+                    "Pay application fee online",
+                    "Download admit card when released"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };
 
-export default UCEEDpage;
+export default UCEEDPage;

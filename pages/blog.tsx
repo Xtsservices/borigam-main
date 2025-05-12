@@ -19,87 +19,43 @@ const getEmbedUrl = (url: string) => {
   return `https://www.youtube.com/embed/${videoId}`;
 };
 
-const latestNews = [
-  "🚀 New online course on JavaScript launched!",
-  "📚 Admissions open for 2025 batch.",
-  "📰 Our blog just crossed 10,000 views!",
-  "🎓 Top 10 tips for clearing competitive exams.",
-  "📢 Guest lecture by industry expert next week."
-];
-
 const Blog = () => {
   return (
     <>
       <Header />
       <div className="main-container">
-        <div className="left-column">
-          <h1>Video Blog</h1>
-          {videoLinks.map((link, index) => (
-            <div className="video" key={index}>
-              <iframe
-                src={getEmbedUrl(link)}
-                title={`YouTube Video ${index + 1}`}
-                allowFullScreen
-              ></iframe>
-            </div>
-          ))}
-        </div>
-
-        {/* Right Column - Latest News */}
-        <aside style={{
-          flex: 1,
-          backgroundColor: '#f9f9f9',
-          borderLeft: '4px solid orange',
-          padding: '20px',
-          borderRadius: '8px',
-          boxShadow: '0 0 10px rgba(0,0,0,0.1)'
-        }}>
-          <div>
-            <h2 style={{
-              backgroundColor: 'orange',
-              color: 'white',
-              padding: '10px',
-              borderRadius: '4px 4px 0 0',
-              marginBottom: '20px'
-            }}>
-              LATEST NEWS
-            </h2>
-            <ul style={{ listStyleType: 'none', padding: 0, lineHeight: '1.8em' }}>
-              <li>
-                <strong>New Batches For NIFT, NID, U/CEED - 2025-26 Entrance Coaching. Batches Staring</strong><br />
-                <small>BY BORIGAM | 21 APR, 2025</small>
-              </li>
-              <hr />
-              <li>
-                <strong>New Batches For NATA & JEE Architecture - 2025 Is Starting From 26th & 27th April</strong><br />
-                <small>BY BORIGAM | 21 APR, 2025</small>
-              </li>
-              <hr />
-              <li>
-                <strong>NIFT | NID Situation Test - 2025 Batch Starts From 26th & 27th April, 25</strong><br />
-                <small>BY BORIGAM | 21 APR, 2025</small>
-              </li>
-              <hr />
-              <li>
-                <strong>NATA 2025 Examination Dates Are Announced</strong><br />
-                <small>BY BORIGAM | 08 FEB, 2025</small>
-              </li>
-            </ul>
-            <div style={{ marginTop: '20px', textAlign: 'right' }}>
-              <a href="#" style={{ color: 'orange', fontWeight: 'bold', textDecoration: 'none' }}>BROWSE ALL &raquo;</a>
+        <div className="content-wrapper">
+          <div className="left-column">
+            <div className="videos-grid">
+              {videoLinks.map((link, index) => (
+                <div className="video-container" key={index}>
+                  <div className="video">
+                    <iframe
+                      src={getEmbedUrl(link)}
+                      title={`YouTube Video ${index + 1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <div className="video-overlay"></div>
+                </div>
+              ))}
             </div>
           </div>
-        </aside>
+        </div>
       </div>
       <AppFooter />
 
       <style jsx>{`
         .main-container {
+          width: 100%;
+          padding: 1rem;
+          margin: 10rem auto;
+        }
+
+        .content-wrapper {
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-start;
-          padding: 2rem;
           gap: 2rem;
           max-width: 1200px;
           margin: 0 auto;
@@ -115,12 +71,16 @@ const Blog = () => {
           border-radius: 0.75rem;
           padding: 1.5rem;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+          height: fit-content;
+          position: sticky;
+          top: 1rem;
         }
 
         h1 {
           text-align: center;
           margin-bottom: 2rem;
           color: #1e3a8a;
+          font-size: 2rem;
         }
 
         h2 {
@@ -129,19 +89,41 @@ const Blog = () => {
           color: #111827;
         }
 
-        .video {
-          margin-bottom: 2rem;
+        .videos-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .video-container {
+          width: 100%;
           position: relative;
-          padding-bottom: 56.25%;
+          transition: all 0.3s ease;
+          z-index: 1;
+        }
+
+        .video-container:hover {
+          transform: scale(1.05);
+          z-index: 10;
+        }
+
+        .video {
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 aspect ratio */
           height: 0;
           overflow: hidden;
           border-radius: 0.75rem;
-          box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          background: #000;
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .video-container:hover .video {
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .video iframe {
           position: absolute;
-          margin-right:5rem;
           top: 0;
           left: 0;
           width: 100%;
@@ -149,8 +131,25 @@ const Blog = () => {
           border: none;
         }
 
+        .video-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.2);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          border-radius: 0.75rem;
+          pointer-events: none;
+        }
+
+        .video-container:hover .video-overlay {
+          opacity: 1;
+        }
+
         ul {
-          padding-left: 1rem;
+          padding-left: 1.25rem;
           list-style: disc;
         }
 
@@ -158,15 +157,58 @@ const Blog = () => {
           margin-bottom: 0.75rem;
           font-size: 1rem;
           color: #374151;
+          line-height: 1.5;
         }
 
-        @media (max-width: 768px) {
-          .main-container {
+        @media (max-width: 1024px) {
+          .content-wrapper {
             flex-direction: column;
           }
 
           .right-column {
+            position: static;
             margin-top: 2rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .videos-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .video-container:hover {
+            transform: scale(1.03);
+          }
+
+          h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+          }
+
+          h2 {
+            font-size: 1.3rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .main-container {
+            padding: 0.5rem;
+          }
+
+          .content-wrapper {
+            gap: 1rem;
+          }
+
+          .right-column {
+            padding: 1rem;
+          }
+
+          h1 {
+            font-size: 1.5rem;
+          }
+
+          li {
+            font-size: 0.9rem;
           }
         }
       `}</style>

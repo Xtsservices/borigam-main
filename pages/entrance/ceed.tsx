@@ -1,206 +1,342 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
+import Layout from '../../components/Layout';
+import Header from "@/components/Header";
 
-const ceedpage = () => {
+
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
+
+const CEEDPage = () => {
   return (
     <Layout>
-      <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">CEED Entrance Exam Content</h1>
+      <header/>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            Common Entrance Exam for Design (CEED)
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            CEED is a national-level entrance exam conducted by IIT Bombay for admission to Master of Design (M.Des) 
+            and Ph.D. programs at premier design institutes in India.
+          </Paragraph>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">1. About CEED</h2>
-        <ul className="list-disc list-inside">
-          <li>Full Form: Common Entrance Exam for Design</li>
-          <li>Conducting Body: IIT Bombay</li>
-          <li>Courses Offered:
-            <ul className="list-disc list-inside ml-4">
-              <li>Master of Design (M.Des)</li>
-              <li>Ph.D. in Design</li>
-            </ul>
-          </li>
-          <li>Mode of Exam: Computer-Based Test (CBT) and Offline Drawing Test</li>
-          <li>Frequency: Conducted once a year</li>
-          <li>Score Validity: 1 Year</li>
-          <li>Participating Institutes:
-            <ul className="list-disc list-inside ml-4">
-              <li>IIT Bombay</li>
-              <li>IIT Delhi</li>
-              <li>IIT Guwahati</li>
-              <li>IIT Hyderabad</li>
-              <li>IIT Kanpur</li>
-              <li>IIT Roorkee</li>
-              <li>IIITDM Jabalpur</li>
-              <li>Other design institutes</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>About CEED</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Full Form: Common Entrance Exam for Design",
+                    "Conducting Body: IIT Bombay",
+                    "Courses Offered: M.Des and Ph.D. in Design",
+                    "Mode: Computer-Based Test + Offline Drawing",
+                    "Score Validity: 1 Year"
+                  ])}
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Participating Institutes</Title>
+                  {listItems([
+                    "IIT Bombay, Delhi, Guwahati, Hyderabad, Kanpur, Roorkee",
+                    "IIITDM Jabalpur",
+                    "Other premier design institutes"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">2. Why Appear for CEED?</h2>
-        <ul className="list-disc list-inside">
-          <li>Prestigious Institutes: Admission to top IITs and other reputed design institutes.</li>
-          <li>Career in Design: Opens up various design career opportunities in product design, visual communication, UI/UX design, and more.</li>
-          <li>Skill Assessment: Tests both analytical thinking and design abilities.</li>
-          <li>Ph.D. in Design: For candidates seeking research and academic careers.</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Part A - Computer-Based Test (1 Hour, 100 Marks)</Title>
+                  {listItems([
+                    "Objective Questions (NAT, MSQ, MCQ)",
+                    "Sections: Visualization, Environmental Awareness, Logical Reasoning",
+                    "Shortlisting for Part B"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Part B - Drawing Test (2 Hours, 100 Marks)</Title>
+                  {listItems([
+                    "Offline (Pen and Paper)",
+                    "Tasks: Sketching, Product Conceptualization, Storytelling",
+                    "Evaluates design and problem-solving skills"
+                  ])}
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <strong>Final Score:</strong> Part A (25%) + Part B (75%)
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">3. Eligibility Criteria for CEED</h2>
-        <ul className="list-disc list-inside">
-          <li>Educational Qualification:
-            <ul className="list-disc list-inside ml-4">
-              <li>Bachelor’s degree in Design, Engineering, Architecture, or Fine Arts.</li>
-              <li>Final year students can also apply.</li>
-            </ul>
-          </li>
-          <li>No upper age limit.</li>
-          <li>No restriction on number of attempts.</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Bachelor's degree in Design, Engineering, Architecture or Fine Arts",
+                    "Final year students can apply",
+                    "No upper age limit",
+                    "No restriction on number of attempts"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">4. CEED Exam Pattern</h2>
-        <p className="mb-2 font-medium">Part A – Computer-Based Test (1 Hour, 100 Marks)</p>
-        <ul className="list-disc list-inside">
-          <li>Objective Questions (NAT, MSQ, MCQ)</li>
-          <li>Shortlisting candidates for Part B</li>
-          <li>Sections:
-            <ul className="list-disc list-inside ml-4">
-              <li>Visualization and Spatial Ability</li>
-              <li>Environmental and Social Awareness</li>
-              <li>Analytical and Logical Reasoning</li>
-              <li>Language and Creativity</li>
-              <li>Design Thinking and Problem Solving</li>
-            </ul>
-          </li>
-        </ul>
-        <p className="mt-4 mb-2 font-medium">Part B – Drawing Test (2 Hours, 100 Marks)</p>
-        <ul className="list-disc list-inside">
-          <li>Offline (Pen and Paper)</li>
-          <li>Evaluate design, drawing, and problem-solving skills</li>
-          <li>Tasks Include:
-            <ul className="list-disc list-inside ml-4">
-              <li>Sketching and Visual Representation</li>
-              <li>Product Conceptualization</li>
-              <li>Storytelling through Illustrations</li>
-              <li>Problem Identification and Solution</li>
-            </ul>
-          </li>
-        </ul>
-        <p className="mt-2">Final Score Calculation: Part A - 25% Weightage, Part B - 75% Weightage</p>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Part A Syllabus</Title>
+                  {listItems([
+                    "Visualization and Spatial Ability",
+                    "Environmental and Social Awareness",
+                    "Analytical and Logical Reasoning",
+                    "Design and Creativity",
+                    "Language Skills"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Part B Syllabus</Title>
+                  {listItems([
+                    "Drawing Skills",
+                    "Creativity and Problem Solving",
+                    "Form and Material Understanding",
+                    "Storytelling through Illustrations"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">5. CEED Syllabus</h2>
-        <p className="font-medium">Part A Syllabus</p>
-        <ul className="list-disc list-inside ml-4">
-          <li>Visualization and Spatial Ability</li>
-          <li>Environmental and Social Awareness</li>
-          <li>Analytical and Logical Reasoning</li>
-          <li>Design and Creativity</li>
-          <li>Language Skills</li>
-        </ul>
-        <p className="font-medium mt-4">Part B Syllabus</p>
-        <ul className="list-disc list-inside ml-4">
-          <li>Drawing Skills</li>
-          <li>Creativity and Problem Solving</li>
-          <li>Form and Material Understanding</li>
-          <li>Storytelling</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { event: "Application Start Date", date: "September 2024" },
+                      { event: "Last Date to Apply", date: "October 2024" },
+                      { event: "Admit Card Release", date: "January 2025" },
+                      { event: "CEED Exam Date", date: "January 2025" },
+                      { event: "Result Declaration", date: "March 2025" },
+                    ]} 
+                    columns={[
+                      { title: 'Event', dataIndex: 'event', key: 'event' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    Official Website: <a href="https://ceed.iitb.ac.in" target="_blank" rel="noopener noreferrer" style={{ color: "#FF8C00" }}>www.ceed.iitb.ac.in</a>
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">6. Application Process for CEED</h2>
-        <ol className="list-decimal list-inside">
-          <li>Visit the Official Website: www.ceed.iitb.ac.in</li>
-          <li>Register: Provide basic details to create an account</li>
-          <li>Fill the Application Form: Enter academic, personal, and exam center preferences</li>
-          <li>Upload Documents: Photograph, signature, certificates</li>
-          <li>Pay Application Fee</li>
-          <li>Download Admit Card</li>
-        </ol>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Practice daily sketching and perspective drawing",
+                    "Develop observation skills - study everyday objects",
+                    "Solve previous years' CEED papers",
+                    "Improve speed and accuracy for Part A",
+                    "Build a portfolio of creative work",
+                    "Stay updated on design trends and technology"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">7. Important Dates for CEED (Tentative)</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border px-6 py-3 text-left text-sm font-medium text-gray-700">Event</th>
-                <th className="border px-6 py-3 text-left text-sm font-medium text-gray-700">Date (Tentative)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="even:bg-white odd:bg-gray-50">
-                <td className="border px-6 py-3">Application Start Date</td>
-                <td className="border px-6 py-3">September 2024</td>
-              </tr>
-              <tr className="even:bg-white odd:bg-gray-50">
-                <td className="border px-6 py-3">Last Date to Apply</td>
-                <td className="border px-6 py-3">October 2024</td>
-              </tr>
-              <tr className="even:bg-white odd:bg-gray-50">
-                <td className="border px-6 py-3">Admit Card Release</td>
-                <td className="border px-6 py-3">January 2025</td>
-              </tr>
-              <tr className="even:bg-white odd:bg-gray-50">
-                <td className="border px-6 py-3">CEED Exam Date</td>
-                <td className="border px-6 py-3">January 2025</td>
-              </tr>
-              <tr className="even:bg-white odd:bg-gray-50">
-                <td className="border px-6 py-3">Result Declaration</td>
-                <td className="border px-6 py-3">March 2025</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">8. CEED Preparation Tips</h2>
-        <ul className="list-disc list-inside">
-          <li>Practice Drawing and Perspective Sketching</li>
-          <li>Stay Updated on Design Trends and Architecture</li>
-          <li>Develop Analytical Thinking and Spatial Skills</li>
-          <li>Solve Past CEED Papers</li>
-          <li>Improve Storytelling through Illustrations</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">9. Colleges Accepting CEED Scores</h2>
-        <ul className="list-disc list-inside">
-          <li>IIT Bombay</li>
-          <li>IIT Delhi</li>
-          <li>IIT Guwahati</li>
-          <li>IIT Hyderabad</li>
-          <li>IIT Kanpur</li>
-          <li>IIT Roorkee</li>
-          <li>IIITDM Jabalpur</li>
-          <li>Other Design Institutes</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">10. Career Opportunities After M.Des</h2>
-        <ul className="list-disc list-inside">
-          <li>Industrial Designer</li>
-          <li>UI/UX Designer</li>
-          <li>Product Designer</li>
-          <li>Automotive Designer</li>
-          <li>Graphic Designer</li>
-          <li>Fashion Designer</li>
-          <li>Packaging Designer</li>
-          <li>Design Consultant</li>
-        </ul>
-        <p className="mt-2">Candidates can also pursue a Ph.D. in Design and specialize in fields like Sustainability in Design and AI in Design.</p>
-      </section>
-    </div>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Industrial Designer", description: "Design consumer products and equipment" },
+                      { role: "UI/UX Designer", description: "Create user interfaces and experiences" },
+                      { role: "Product Designer", description: "Develop new product concepts" },
+                      { role: "Automotive Designer", description: "Design vehicles and components" },
+                      { role: "Graphic Designer", description: "Create visual communications" },
+                      { role: "Design Consultant", description: "Provide expert design advice" },
+                      { role: "Design Researcher", description: "Conduct user research and testing" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    Graduates can also pursue Ph.D. in specialized fields like Sustainable Design or Human-Computer Interaction.
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };
 
-export default ceedpage;
+export default CEEDPage;

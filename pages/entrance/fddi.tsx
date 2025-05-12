@@ -1,233 +1,359 @@
-import React from 'react';
+import React from "react";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
+import Header from "@/components/Header";
 
-const FDDIpage = () => {
+
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
+
+const FDDIPage = () => {
   return (
     <Layout>
-      <div className="p-4 space-y-6">
-      <h1 className="text-2xl font-bold">FDDI Entrance Exam</h1>
+      <header/>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            FDDI AIST Entrance Exam
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            Footwear Design and Development Institute All India Selection Test (FDDI AIST) is the gateway to premier 
+            design and business programs in footwear, fashion, and retail management.
+          </Paragraph>
 
-      <section>
-        <h2 className="text-xl font-semibold">1. About FDDI AIST</h2>
-        <ul className="list-disc list-inside">
-          <li><strong>Full Form:</strong> Footwear Design and Development Institute All India Selection Test (FDDI AIST)</li>
-          <li><strong>Conducting Body:</strong> FDDI</li>
-          <li><strong>Courses Offered:</strong>
-            <ul className="list-disc ml-6">
-              <li>Bachelor of Design (B.Des)</li>
-              <li>Master of Design (M.Des)</li>
-              <li>Bachelor of Business Administration (BBA)</li>
-              <li>Master of Business Administration (MBA)</li>
-            </ul>
-          </li>
-          <li><strong>Mode of Exam:</strong> Computer-Based Test (CBT)</li>
-          <li><strong>Frequency:</strong> Once a year</li>
-          <li><strong>Score Validity:</strong> 1 Year</li>
-          <li><strong>Duration:</strong> 2 Hours 30 Minutes</li>
-        </ul>
-      </section>
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>About FDDI AIST</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Conducting Body: Footwear Design and Development Institute",
+                    "Mode: Computer-Based Test (CBT)",
+                    "Duration: 2 Hours 30 Minutes",
+                    "Score Validity: 1 Year",
+                    "Frequency: Conducted once a year"
+                  ])}
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Courses Offered</Title>
+                  {listItems([
+                    "Bachelor of Design (B.Des)",
+                    "Master of Design (M.Des)",
+                    "Bachelor of Business Administration (BBA)",
+                    "Master of Business Administration (MBA)"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section>
-        <h2 className="text-xl font-semibold">2. Why Choose FDDI?</h2>
-        <ul className="list-disc list-inside">
-          <li>Industry-Focused Curriculum</li>
-          <li>State-of-the-Art Infrastructure</li>
-          <li>Strong Industry Connect</li>
-          <li>Global Recognition as Institution of National Importance</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { section: "Quantitative Aptitude", questions: 25, marks: 25 },
+                      { section: "Verbal Ability", questions: 25, marks: 25 },
+                      { section: "General Awareness", questions: 50, marks: 50 },
+                      { section: "Business/Design Aptitude", questions: 50, marks: 50 },
+                    ]} 
+                    columns={[
+                      { title: 'Section', dataIndex: 'section', key: 'section' },
+                      { title: 'Questions', dataIndex: 'questions', key: 'questions' },
+                      { title: 'Marks', dataIndex: 'marks', key: 'marks' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <strong>Total Duration:</strong> 2 Hours 30 Minutes | <strong>No Negative Marking</strong>
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section>
-        <h2 className="text-xl font-semibold">3. Eligibility Criteria for FDDI AIST</h2>
-        <h3 className="font-semibold">A. For Undergraduate Courses (B.Des/BBA)</h3>
-        <ul className="list-disc list-inside">
-          <li>Passed or appearing in 10+2 or equivalent</li>
-          <li>Age Limit: Not exceeding 25 years as of July 1st of the admission year</li>
-        </ul>
-        <h3 className="font-semibold">B. For Postgraduate Courses (M.Des/MBA)</h3>
-        <ul className="list-disc list-inside">
-          <li>Bachelor’s degree in any discipline</li>
-          <li>No age limit</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Undergraduate Courses (B.Des/BBA)</Title>
+                  {listItems([
+                    "Passed or appearing in 10+2 or equivalent",
+                    "Age Limit: Not exceeding 25 years"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Postgraduate Courses (M.Des/MBA)</Title>
+                  {listItems([
+                    "Bachelor's degree in any discipline",
+                    "No age limit"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section>
-        <h2 className="text-xl font-semibold">4. FDDI AIST Exam Pattern</h2>
-        <>
-  <style>
-    {`
-      .custom-table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .custom-table th,
-      .custom-table td {
-        border: 1px solid #ccc;
-        padding: 0.75rem;
-        text-align: left;
-      }
-      .custom-table thead {
-        background-color: #f3f4f6; /* Tailwind's gray-100 */
-      }
-    `}
-  </style>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Quantitative Aptitude</Title>
+                  {listItems([
+                    "Algebra, Profit and Loss, Percentage",
+                    "Ratio and Proportion, Time and Work",
+                    "Probability, Permutation"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Verbal Ability</Title>
+                  {listItems([
+                    "Reading Comprehension, Grammar",
+                    "Sentence Correction, Vocabulary",
+                    "Synonyms, Antonyms, Para Jumbles"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>General Awareness</Title>
+                  {listItems([
+                    "Current Affairs",
+                    "Fashion and Footwear Industry Updates",
+                    "Indian and International Events"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-  <table className="custom-table">
-    <thead>
-      <tr>
-        <th>Section</th>
-        <th>Number of Questions</th>
-        <th>Marks</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Quantitative Aptitude</td>
-        <td>25</td>
-        <td>25</td>
-      </tr>
-      <tr>
-        <td>Verbal Ability</td>
-        <td>25</td>
-        <td>25</td>
-      </tr>
-      <tr>
-        <td>General Awareness</td>
-        <td>50</td>
-        <td>50</td>
-      </tr>
-      <tr>
-        <td>Business/Design Aptitude</td>
-        <td>50</td>
-        <td>50</td>
-      </tr>
-    </tbody>
-  </table>
-</>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { event: "Application Start", date: "January 2025" },
+                      { event: "Last Date to Apply", date: "April 2025" },
+                      { event: "Admit Card Release", date: "May 2025" },
+                      { event: "Exam Date", date: "June 2025" },
+                      { event: "Result Declaration", date: "July 2025" },
+                    ]} 
+                    columns={[
+                      { title: 'Event', dataIndex: 'event', key: 'event' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-        <p>Total Duration: 2 Hours 30 Minutes | No Negative Marking</p>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Top FDDI Campuses</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "FDDI Noida",
+                        "FDDI Chennai",
+                        "FDDI Kolkata",
+                        "FDDI Hyderabad"
+                      ])}
+                    </Col>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "FDDI Rohtak",
+                        "FDDI Chandigarh",
+                        "FDDI Jodhpur",
+                        "FDDI Patna"
+                      ])}
+                    </Col>
+                  </Row>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section>
-        <h2 className="text-xl font-semibold">5. FDDI AIST Syllabus</h2>
-        <ul className="list-disc list-inside">
-          <li><strong>Quantitative Aptitude:</strong> Algebra, Profit and Loss, Percentage, Ratio and Proportion, Time and Work, Probability, Permutation</li>
-          <li><strong>Verbal Ability:</strong> Reading Comprehension, Grammar, Sentence Correction, Vocabulary, Synonyms, Antonyms, Para Jumbles</li>
-          <li><strong>General Awareness:</strong> Current Affairs, Fashion and Footwear Industry Updates, Indian and International Events, History, Culture, Environment</li>
-          <li><strong>Business/Design Aptitude:</strong> Aesthetic Sense, Logical Thinking, Visualization, Analytical Reasoning, Business Awareness</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-semibold">6. Application Process for FDDI AIST</h2>
-        <ol className="list-decimal list-inside">
-          <li>Visit www.fddiindia.com</li>
-          <li>Register with your details</li>
-          <li>Fill application form</li>
-          <li>Upload documents</li>
-          <li>Pay application fee</li>
-          <li>Download admit card</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-semibold">7. Important Dates for FDDI AIST (Tentative)</h2>
-        <>
-  <style>
-    {`
-      .custom-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-      }
-      .custom-table th,
-      .custom-table td {
-        border: 1px solid #d1d5db; /* Tailwind gray-300 */
-        padding: 0.75rem;
-        text-align: left;
-      }
-      .custom-table thead {
-        background-color: #f3f4f6; /* Tailwind gray-100 */
-      }
-    `}
-  </style>
-
-  <table className="custom-table">
-    <thead>
-      <tr>
-        <th>Event</th>
-        <th>Date (Tentative)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Application Start</td>
-        <td>January 2025</td>
-      </tr>
-      <tr>
-        <td>Last Date to Apply</td>
-        <td>April 2025</td>
-      </tr>
-      <tr>
-        <td>Admit Card Release</td>
-        <td>May 2025</td>
-      </tr>
-      <tr>
-        <td>Exam Date</td>
-        <td>June 2025</td>
-      </tr>
-      <tr>
-        <td>Result Declaration</td>
-        <td>July 2025</td>
-      </tr>
-    </tbody>
-  </table>
-</>
-
-      </section>
-
-      <section>
-        <h2 className="text-xl font-semibold">8. FDDI AIST Preparation Tips</h2>
-        <ul className="list-disc list-inside">
-          <li>Practice aptitude questions regularly</li>
-          <li>Stay updated with current affairs</li>
-          <li>Enhance creativity and visualization</li>
-          <li>Attempt mock tests</li>
-          <li>Improve business awareness for MBA applicants</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-semibold">9. Top FDDI Campuses</h2>
-        <ul className="list-disc list-inside">
-          <li>FDDI Noida</li>
-          <li>FDDI Chennai</li>
-          <li>FDDI Kolkata</li>
-          <li>FDDI Hyderabad</li>
-          <li>FDDI Rohtak</li>
-          <li>FDDI Chandigarh</li>
-          <li>FDDI Jodhpur</li>
-          <li>FDDI Patna</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-semibold">10. Career Opportunities After FDDI</h2>
-        <ul className="list-disc list-inside">
-          <li>Footwear Designer</li>
-          <li>Fashion Designer</li>
-          <li>Retail Manager</li>
-          <li>Visual Merchandiser</li>
-          <li>Product Manager</li>
-          <li>Leather Goods Designer</li>
-          <li>Supply Chain Manager</li>
-          <li>Entrepreneur in Fashion and Footwear</li>
-        </ul>
-        <p>Top recruiters include Adidas, Bata, Nike, Puma, Reliance Retail, and more.</p>
-      </section>
-    </div>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Footwear Designer", description: "Design innovative footwear products" },
+                      { role: "Fashion Designer", description: "Create fashion collections and styles" },
+                      { role: "Retail Manager", description: "Oversee store operations and sales" },
+                      { role: "Product Manager", description: "Manage product development lifecycle" },
+                      { role: "Entrepreneur", description: "Start your own fashion/footwear business" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <strong>Top Recruiters:</strong> Adidas, Bata, Nike, Puma, Reliance Retail
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };
 
-export default FDDIpage;
+export default FDDIPage;

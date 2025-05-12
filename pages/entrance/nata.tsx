@@ -1,196 +1,395 @@
-import React from 'react';
+import React from "react";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
+import Layout from '../../components/Layout';
 import Head from 'next/head';
 import Image from 'next/image';
-import Layout from '../../components/Layout';
+import Header from "@/components/Header";
+
+
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
 
 const NataPage = () => {
   return (
     <Layout>
+      <header/>
       <Head>
         <title>NATA Entrance Exam - Complete Guide</title>
       </Head>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            National Aptitude Test in Architecture (NATA)
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          
+          <div style={{ marginBottom: 40, borderRadius: 16, overflow: 'hidden' }}>
+            <Image 
+              src="/images/nata-banner.jpg" 
+              alt="NATA Overview" 
+              width={1200}
+              height={400}
+              layout="responsive"
+              priority
+            />
+          </div>
 
-      <main>
-        <h1>NATA Entrance Exam</h1>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            NATA is the national level entrance exam for admission to 5-year B.Arch programs at most architecture colleges across India, 
+            conducted by the Council of Architecture (CoA).
+          </Paragraph>
 
-        <Image 
-          src="/images/nata-banner.jpg" 
-          alt="NATA Overview" 
-          width={800}
-          height={300}
-          priority
-        />
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>About NATA</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "Conducting Body: Council of Architecture (CoA)",
+                    "Course Offered: Bachelor of Architecture (B.Arch)",
+                    "Mode: Computer-Based Test + Offline Drawing",
+                    "Frequency: Conducted multiple times a year",
+                    "Score Validity: 1 Year"
+                  ])}
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <strong>Note:</strong> IITs, NITs, and SPAs accept JEE Main Paper 2 scores instead of NATA.
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-        <section>
-          <h2>1. About NATA</h2>
-          <ul>
-            <li>Full Form: National Aptitude Test in Architecture</li>
-            <li>Conducting Body: Council of Architecture (CoA)</li>
-            <li>Course Offered: Bachelor of Architecture (B.Arch)</li>
-            <li>Mode of Exam: Computer-Based Test (CBT) and Offline Drawing Test</li>
-            <li>Frequency: Conducted multiple times a year</li>
-            <li>Score Validity: 1 Year</li>
-          </ul>
-          <p>NATA is accepted by most architecture colleges across India, except IITs, NITs, and SPAs which accept JEE Main Paper 2 scores.</p>
-        </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Part A - Cognitive Skills Test (125 Marks)</Title>
+                  {listItems([
+                    "Mode: Computer-Based Test",
+                    "Duration: 72 Minutes",
+                    "Subjects: General Aptitude, Logical Reasoning, Visual Perception"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Part B - Drawing Test (75 Marks)</Title>
+                  {listItems([
+                    "Mode: Offline (Pen and Paper)",
+                    "Duration: 72 Minutes",
+                    "Tasks: Freehand Sketching, Perspective Drawing, Visual Composition"
+                  ])}
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <strong>Total Duration:</strong> 3 Hours | <strong>Total Marks:</strong> 200
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-        <section>
-          <h2>2. Why Appear for NATA?</h2>
-          <ul>
-            <li>Provides entry to prestigious Architecture Colleges across India</li>
-            <li>Tests both creative thinking and mathematical skills</li>
-            <li>Flexibility to attempt the exam multiple times</li>
-            <li>Opens pathways to a promising career in Architecture and Design</li>
-          </ul>
-        </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  {listItems([
+                    "10+2 with Mathematics as compulsory subject",
+                    "Minimum 50% aggregate marks in PCM",
+                    "10+3 Diploma with Mathematics also eligible",
+                    "No upper age limit"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-        <section>
-          <h2>3. Eligibility Criteria for NATA</h2>
-          <ul>
-            <li>10+2 or equivalent with Mathematics as a compulsory subject</li>
-            <li>Minimum 50% aggregate marks in PCM</li>
-            <li>10+3 Diploma with Mathematics is also eligible</li>
-            <li>No upper age limit</li>
-          </ul>
-        </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Aptitude Test</Title>
+                  {listItems([
+                    "Visual and Spatial Ability",
+                    "Logical and Analytical Reasoning",
+                    "Architectural Awareness",
+                    "Mathematics - Algebra, Geometry, Trigonometry"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Drawing Test</Title>
+                  {listItems([
+                    "Sketching Objects and Scenes from Memory",
+                    "Perspective and Scale Drawing",
+                    "Composition using Shapes and Forms",
+                    "Understanding of Proportions and Aesthetics"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-        <Image 
-          src="/images/nata-banner.jpg" 
-          alt="NATA Drawing Test" 
-          width={800}
-          height={300}
-        />
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Fees</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { attempt: "Single Attempt", general: "₹2,000", scst: "₹1,500" },
+                      { attempt: "Double Attempt", general: "₹4,000", scst: "₹3,000" },
+                      { attempt: "Triple Attempt", general: "₹5,500", scst: "₹4,000" },
+                    ]} 
+                    columns={[
+                      { title: 'Attempt Type', dataIndex: 'attempt', key: 'attempt' },
+                      { title: 'General', dataIndex: 'general', key: 'general' },
+                      { title: 'SC/ST', dataIndex: 'scst', key: 'scst' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-        <section>
-          <h2>4. NATA Exam Pattern</h2>
-          <h3>Part A – Cognitive Skills Test (Aptitude)</h3>
-          <ul>
-            <li>Mode: Computer-Based Test</li>
-            <li>Duration: 72 Minutes</li>
-            <li>Marks: 125</li>
-            <li>Subjects: General Aptitude, Logical Reasoning, Visual Perception, Architectural Awareness</li>
-          </ul>
-          <h3>Part B – Drawing and Visual Composition</h3>
-          <ul>
-            <li>Mode: Offline (Pen and Paper)</li>
-            <li>Duration: 72 Minutes</li>
-            <li>Marks: 75</li>
-            <li>Tasks: Freehand Sketching, Perspective Drawing, Visual Composition, Conceptual Design</li>
-          </ul>
-          <p>Total Duration: 3 Hours | Total Marks: 200</p>
-        </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { event: "Application Start", date: "March 2025" },
+                      { event: "Last Date to Apply", date: "April 2025" },
+                      { event: "Admit Card Release", date: "April 2025" },
+                      { event: "Exam Dates", date: "April – July 2025" },
+                      { event: "Results", date: "Within 7 Days of Exam" },
+                    ]} 
+                    columns={[
+                      { title: 'Event', dataIndex: 'event', key: 'event' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-        <section>
-          <h2>5. NATA Syllabus</h2>
-          <h3>Aptitude Test</h3>
-          <ul>
-            <li>Visual and Spatial Ability</li>
-            <li>Logical and Analytical Reasoning</li>
-            <li>Architectural Awareness</li>
-            <li>General Knowledge Related to Architecture</li>
-            <li>Mathematics – Algebra, Geometry, Trigonometry</li>
-          </ul>
-          <h3>Drawing Test</h3>
-          <ul>
-            <li>Sketching Objects and Scenes from Memory</li>
-            <li>Perspective and Scale Drawing</li>
-            <li>Composition using Shapes and Forms</li>
-            <li>Understanding of Proportions and Aesthetics</li>
-            <li>Visualizing 3D Objects from 2D Drawings</li>
-          </ul>
-        </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Top Colleges Accepting NATA</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "School of Planning and Architecture (SPA), Delhi",
+                        "CEPT University, Ahmedabad",
+                        "Sir JJ College of Architecture, Mumbai"
+                      ])}
+                    </Col>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "JNAFAU, Hyderabad",
+                        "BIT Mesra, Ranchi",
+                        "Chandigarh College of Architecture"
+                      ])}
+                    </Col>
+                  </Row>
+                </Card>
+              </motion.div>
+            </Col>
 
-        <section>
-          <h2>6. Application Process</h2>
-          <ol>
-            <li>Visit the official website: <a href="https://www.nata.in" target="_blank" rel="noopener noreferrer">www.nata.in</a></li>
-            <li>Register and create an account</li>
-            <li>Fill in academic and personal details</li>
-            <li>Upload scanned documents</li>
-            <li>Pay application fee online</li>
-            <li>Download the admit card</li>
-          </ol>
-        </section>
-
-        <section>
-          <h2>7. NATA Exam Fees</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Attempt Type</th>
-                <th>General</th>
-                <th>SC/ST</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Single Attempt</td>
-                <td>₹2,000</td>
-                <td>₹1,500</td>
-              </tr>
-              <tr>
-                <td>Double Attempt</td>
-                <td>₹4,000</td>
-                <td>₹3,000</td>
-              </tr>
-              <tr>
-                <td>Triple Attempt</td>
-                <td>₹5,500</td>
-                <td>₹4,000</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section>
-          <h2>8. Important Dates (Tentative)</h2>
-          <ul>
-            <li>Application Start: March 2025</li>
-            <li>Last Date to Apply: April 2025</li>
-            <li>Admit Card Release: April 2025</li>
-            <li>NATA Exam Dates: April – July 2025</li>
-            <li>Results: Within 7 Days of Exam</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>9. NATA Preparation Tips</h2>
-          <ul>
-            <li>Improve Drawing Skills: Freehand, perspective, and composition</li>
-            <li>Stay updated on architectural topics and famous buildings</li>
-            <li>Practice math, logic, and aptitude regularly</li>
-            <li>Use mock tests for time management</li>
-            <li>Practice 3D visualization techniques</li>
-            <li>Solve previous year papers</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>10. Top Colleges Accepting NATA Scores</h2>
-          <ul>
-            <li>School of Planning and Architecture (SPA), Delhi</li>
-            <li>CEPT University, Ahmedabad</li>
-            <li>Sir JJ College of Architecture, Mumbai</li>
-            <li>JNAFAU, Hyderabad</li>
-            <li>BIT Mesra, Ranchi</li>
-            <li>Chandigarh College of Architecture</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>11. Career Opportunities After B.Arch</h2>
-          <ul>
-            <li>Architect</li>
-            <li>Urban Planner</li>
-            <li>Interior Designer</li>
-            <li>Landscape Architect</li>
-            <li>Sustainability Consultant</li>
-            <li>Project Manager / Construction Manager</li>
-            <li>3D Visualizer</li>
-          </ul>
-          <p>Graduates may pursue higher studies like M.Arch, Urban Design, or Landscape Architecture.</p>
-        </section>
-      </main>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Architect", description: "Design buildings and structures" },
+                      { role: "Urban Planner", description: "Plan and develop urban spaces" },
+                      { role: "Interior Designer", description: "Design functional indoor spaces" },
+                      { role: "Landscape Architect", description: "Design outdoor environments" },
+                      { role: "3D Visualizer", description: "Create architectural renderings" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    Graduates may pursue higher studies like M.Arch, Urban Design, or Landscape Architecture.
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };

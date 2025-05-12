@@ -1,178 +1,348 @@
-import React from 'react';
+import React from "react";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
+import Header from "@/components/Header";
 
-const niftpage = () => {
+
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
+
+const NIFTPage = () => {
   return (
     <Layout>
-      <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">NIFT Entrance Exam Overview</h1>
+      <header />
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            NIFT Entrance Exam
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            The National Institute of Fashion Technology (NIFT) is India's premier institution for fashion education, offering undergraduate and postgraduate programs in design, technology, and management across 18 campuses.
+          </Paragraph>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">1. About NIFT</h2>
-        <p>
-          The National Institute of Fashion Technology (NIFT) is one of India’s premier institutions for fashion, design,
-          technology, and management. Established in 1986 under the Ministry of Textiles, Government of India, it has 18
-          campuses across India with headquarters in New Delhi. The institute offers programs in design, fashion
-          technology, and fashion management.
-        </p>
-      </section>
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Courses Offered</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Undergraduate Programs (4 Years)</Title>
+                  {listItems([
+                    "B.Des: Fashion, Leather, Accessory, Textile, Knitwear Design",
+                    "B.FTech: Apparel Production"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Postgraduate Programs (2 Years)</Title>
+                  {listItems([
+                    "M.Des: Master of Design",
+                    "M.FTech: Master of Fashion Technology",
+                    "MFM: Master of Fashion Management"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">2. Courses Offered at NIFT</h2>
-        <h3 className="font-semibold">Undergraduate (Bachelor's) Programs</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>B.Des (Bachelor of Design) – 4 years
-            <ul className="list-disc list-inside ml-6">
-              <li>Fashion Design</li>
-              <li>Leather Design</li>
-              <li>Accessory Design</li>
-              <li>Textile Design</li>
-              <li>Knitwear Design</li>
-              <li>Fashion Communication</li>
-            </ul>
-          </li>
-          <li>B.FTech (Bachelor of Fashion Technology) – 4 years
-            <ul className="list-disc list-inside ml-6">
-              <li>Apparel Production</li>
-            </ul>
-          </li>
-        </ul>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Structure</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>For B.Des Applicants</Title>
+                  {listItems([
+                    "General Ability Test (GAT)",
+                    "Creative Ability Test (CAT)",
+                    "Situation Test"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>For B.FTech Applicants</Title>
+                  {listItems([
+                    "Only General Ability Test (GAT)"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>For M.Des Applicants</Title>
+                  {listItems([
+                    "GAT + CAT",
+                    "Group Discussion & Personal Interview"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-        <h3 className="font-semibold mt-4">Postgraduate (Master's) Programs</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>M.Des (Master of Design) – 2 years</li>
-          <li>M.FTech (Master of Fashion Technology) – 2 years</li>
-          <li>MFM (Master of Fashion Management) – 2 years</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>General Ability Test (GAT)</Title>
+                  {listItems([
+                    "Quantitative Ability (Class 10 Math)",
+                    "Communication Ability & English",
+                    "Analytical & Logical Reasoning",
+                    "General Knowledge & Current Affairs"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Creative Ability Test (CAT)</Title>
+                  {listItems([
+                    "Drawing skills assessment",
+                    "Creativity & innovation evaluation",
+                    "Visual perception testing"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">3. Eligibility Criteria</h2>
-        <h3 className="font-semibold">For B.Des and B.FTech</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>Must have passed Class 12 (10+2) from a recognized board.</li>
-          <li>B.Des: Any stream (Science/Commerce/Arts).</li>
-          <li>B.FTech: Must have studied Physics, Chemistry, and Mathematics.</li>
-          <li>Upper age limit: 24 years (5 years relaxation for SC/ST/PwD).</li>
-        </ul>
-        <h3 className="font-semibold mt-2">For M.Des, M.FTech, and MFM</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>Relevant undergraduate degree from a recognized university.</li>
-          <li>No age limit.</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { event: "Application Start", date: "November" },
+                      { event: "Application Deadline", date: "December" },
+                      { event: "Admit Card Release", date: "January" },
+                      { event: "Exam Date", date: "February" },
+                      { event: "Results", date: "March/April" },
+                      { event: "Counselling", date: "May/June" },
+                    ]} 
+                    columns={[
+                      { title: 'Event', dataIndex: 'event', key: 'event' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">4. NIFT Entrance Exam Structure</h2>
-        <h3 className="font-semibold">For B.Des Applicants</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>General Ability Test (GAT)</li>
-          <li>Creative Ability Test (CAT)</li>
-          <li>Situation Test</li>
-        </ul>
-        <h3 className="font-semibold">For B.FTech Applicants</h3>
-        <p>Only General Ability Test (GAT).</p>
-        <h3 className="font-semibold">For M.Des Applicants</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>GAT</li>
-          <li>CAT</li>
-          <li>Group Discussion (GD) & Personal Interview (PI)</li>
-        </ul>
-        <h3 className="font-semibold">For M.FTech & MFM Applicants</h3>
-        <p>GAT + GD & PI</p>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Fashion Designer", description: "Create original clothing and accessories" },
+                      { role: "Textile Designer", description: "Design fabrics and surface patterns" },
+                      { role: "Fashion Stylist", description: "Style looks for photoshoots and events" },
+                      { role: "Apparel Production Manager", description: "Oversee garment manufacturing" },
+                      { role: "Fashion Entrepreneur", description: "Start your own fashion business" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">5. Exam Pattern & Syllabus</h2>
-        <h3 className="font-semibold">General Ability Test (GAT)</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>Quantitative Ability (Class 10 Math)</li>
-          <li>Communication Ability & English Comprehension</li>
-          <li>Analytical & Logical Ability</li>
-          <li>General Knowledge & Current Affairs</li>
-        </ul>
-        <h3 className="font-semibold">Creative Ability Test (CAT)</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>Drawing skills</li>
-          <li>Creativity & innovation</li>
-          <li>Visual perception</li>
-          <li>Observation & imagination</li>
-        </ul>
-        <h3 className="font-semibold">Situation Test – For B.Des</h3>
-        <ul className="list-disc list-inside ml-4">
-          <li>Create a 3D model from provided materials based on a theme (2 hours).</li>
-          <li>Write-up explaining the concept and process.</li>
-        </ul>
-        <p className="mt-2 font-semibold">Evaluation Criteria</p>
-        <ul className="list-disc list-inside ml-4">
-          <li>Creativity and Innovation</li>
-          <li>Aesthetic Appeal and Presentation</li>
-          <li>Material Utilization</li>
-          <li>Conceptual Clarity</li>
-        </ul>
-      </section>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "Practice sketching daily",
+                        "Build a strong portfolio",
+                        "Stay updated on fashion trends"
+                      ])}
+                    </Col>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "Solve previous years' papers",
+                        "Work on time management",
+                        "Develop material handling skills"
+                      ])}
+                    </Col>
+                  </Row>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">6. Important Dates (Tentative)</h2>
-        <ul className="list-disc list-inside ml-4">
-          <li>Application Start: November</li>
-          <li>Deadline: December</li>
-          <li>Admit Card Release: January</li>
-          <li>Exam Date: February</li>
-          <li>Results: March/April</li>
-          <li>Situation Test: April/May</li>
-          <li>Counselling: May/June</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">7. How to Apply</h2>
-        <ul className="list-disc list-inside ml-4">
-          <li>Visit <a href="https://www.nift.ac.in" className="text-blue-600 underline" target="_blank">nift.ac.in</a> and register</li>
-          <li>Upload documents: photo, signature, certificates</li>
-          <li>Pay application fee online</li>
-          <li>Download admit card in January</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">8. Exam Preparation Tips</h2>
-        <ul className="list-disc list-inside ml-4">
-          <li>Practice sketching and drawing regularly</li>
-          <li>Stay updated with general knowledge and current affairs</li>
-          <li>Solve previous years’ papers and mock tests</li>
-          <li>Focus on time management and problem-solving skills</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">9. Admission & Counselling</h2>
-        <p>
-          Shortlisted candidates proceed to Situation Test / GD & PI. Final selection is based on combined scores from all tests.
-          Qualified candidates attend counselling and seat allotment based on their rank and course preferences.
-        </p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">10. Career Opportunities After NIFT</h2>
-        <ul className="list-disc list-inside ml-4">
-          <li>Fashion Designer</li>
-          <li>Textile Designer</li>
-          <li>Accessory Designer</li>
-          <li>Fashion Stylist</li>
-          <li>Fashion Entrepreneur</li>
-          <li>Fashion Merchandiser</li>
-          <li>Apparel Production Manager</li>
-        </ul>
-      </section>
-    </div>
-
-
-
-        
-
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>How to Apply</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ 
+                    padding: "24px",
+                    background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%)"
+                  }}
+                >
+                  {listItems([
+                    "Visit nift.ac.in and register",
+                    "Upload required documents",
+                    "Pay application fee online",
+                    "Download admit card when released"
+                  ])}
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <a href="https://www.nift.ac.in" target="_blank" rel="noopener noreferrer" style={{ color: "#FF8C00", fontWeight: "bold" }}>
+                      Official Website: www.nift.ac.in
+                    </a>
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };
 
-export default niftpage;
+export default NIFTPage;

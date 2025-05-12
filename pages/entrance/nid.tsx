@@ -1,139 +1,393 @@
-import React from 'react';
+import React from "react";
+import { Typography, Row, Col, Card, Table } from "antd";
+import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
+import Header from "@/components/Header";
 
-const NIDpage = () => {
+
+const { Title, Paragraph } = Typography;
+
+const cardStyle: React.CSSProperties = {
+  borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  overflow: "hidden",
+  marginBottom: 24,
+  backgroundColor: "#ffffff",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+};
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const listItems = (items: string[]) => (
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+    {items.map((item, idx) => (
+      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+    ))}
+  </ul>
+);
+
+const NIDPage = () => {
   return (
     <Layout>
-      <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold">NID Entrance Exam</h1>
-      <p>The National Institute of Design (NID) is one of India's premier institutes for design education, offering undergraduate and postgraduate programs in various design disciplines. The NID Entrance Exam is conducted annually to select students for its design programs. This exam is highly competitive and is considered a gateway to a successful career in the design industry.</p>
+      <header/>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+            National Institute of Design (NID) Entrance Exam
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '20px auto 40px',
+              }}
+            ></div>
+          </Title>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+            NID is India's premier design institute offering undergraduate and postgraduate programs in various design disciplines. 
+            The NID Entrance Exam is highly competitive and considered a gateway to successful careers in the design industry.
+          </Paragraph>
 
-      <h2 className="text-2xl font-semibold">1. About NID</h2>
-      <p>The National Institute of Design was established in 1961 and operates under the Ministry of Commerce and Industry, Government of India. NID has campuses across the country, with the main campus in Ahmedabad. The institute is known for its excellence in design education and innovation.</p>
-      <ul className="list-disc list-inside">
-        <li>NID Ahmedabad (Main Campus)</li>
-        <li>NID Gandhinagar</li>
-        <li>NID Bengaluru</li>
-        <li>NID Andhra Pradesh</li>
-        <li>NID Haryana</li>
-        <li>NID Madhya Pradesh</li>
-        <li>NID Assam</li>
-      </ul>
+          <Row gutter={[32, 32]}>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>About NID</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Paragraph style={{ fontSize: 18, marginBottom: 16 }}>
+                    Established in 1961, NID operates under the Ministry of Commerce and Industry, Government of India.
+                  </Paragraph>
+                  <Title level={4} style={{ color: "#0a2c64" }}>Campuses:</Title>
+                  {listItems([
+                    "NID Ahmedabad (Main Campus)",
+                    "NID Gandhinagar",
+                    "NID Bengaluru",
+                    "NID Andhra Pradesh",
+                    "NID Haryana",
+                    "NID Madhya Pradesh",
+                    "NID Assam"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">2. Courses Offered at NID</h2>
-      <h3 className="text-xl font-semibold">Undergraduate Program (B.Des)</h3>
-      <ul className="list-disc list-inside">
-        <li>Duration: 4 Years</li>
-        <li>Specializations: Industrial Design, Communication Design, Textile & Apparel Design</li>
-        <li>Campus: Ahmedabad and other campuses for specific programs</li>
-      </ul>
-      <h3 className="text-xl font-semibold">Postgraduate Program (M.Des)</h3>
-      <ul className="list-disc list-inside">
-        <li>Duration: 2.5 Years</li>
-        <li>Specializations: Animation Film Design, Graphic Design, Product Design, Interaction Design</li>
-        <li>Campus: Ahmedabad, Gandhinagar, Bengaluru</li>
-      </ul>
-      <h3 className="text-xl font-semibold">Doctoral Program</h3>
-      <p>NID also offers a Ph.D. in Design for research aspirants.</p>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Courses Offered</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Bachelor of Design (B.Des)</Title>
+                  {listItems([
+                    "Duration: 4 Years",
+                    "Specializations: Industrial, Communication, Textile & Apparel Design",
+                    "Campuses: Ahmedabad and other campuses"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Master of Design (M.Des)</Title>
+                  {listItems([
+                    "Duration: 2.5 Years",
+                    "Specializations: Animation, Graphic, Product, Interaction Design",
+                    "Campuses: Ahmedabad, Gandhinagar, Bengaluru"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Doctoral Program</Title>
+                  <Paragraph style={{ fontSize: 18 }}>
+                    Ph.D. in Design for research aspirants
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">3. Eligibility Criteria</h2>
-      <h3 className="text-xl font-semibold">For B.Des</h3>
-      <ul className="list-disc list-inside">
-        <li>Completed Class 12 from any recognized board</li>
-        <li>All streams eligible</li>
-        <li>Age Limit: General - max 20 years, 3-year relaxation for OBC/SC/ST, 5-year for PwD</li>
-      </ul>
-      <h3 className="text-xl font-semibold">For M.Des</h3>
-      <ul className="list-disc list-inside">
-        <li>Bachelor’s degree in design, fine arts, architecture, or related field</li>
-        <li>No specific age limit</li>
-      </ul>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Exam Structure</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>Stage 1: DAT Prelims</Title>
+                  {listItems([
+                    "Objective and Subjective questions",
+                    "Conducted offline",
+                    "Tests design aptitude and creativity"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Stage 2: DAT Mains</Title>
+                  {listItems([
+                    "Studio Test and Personal Interview",
+                    "Assesses practical skills and visualization",
+                    "Portfolio review for M.Des candidates"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">4. NID Entrance Exam Structure</h2>
-      <p>Stage 1: Design Aptitude Test (DAT) Prelims - Objective and Subjective questions, conducted offline.</p>
-      <p>Stage 2: DAT Mains - Studio Test and Personal Interview, assesses practical skills and visualization.</p>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>DAT Prelims</Title>
+                  {listItems([
+                    "Visual Perception and Observation",
+                    "Design Thinking and Problem Solving",
+                    "Drawing and Sketching",
+                    "Creativity and Imagination"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>DAT Mains</Title>
+                  {listItems([
+                    "Material Handling",
+                    "Model Making",
+                    "Storytelling and Visual Narration",
+                    "Design Solution Development"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">5. Exam Pattern</h2>
-      <h3 className="text-xl font-semibold">For B.Des</h3>
-      <ul className="list-disc list-inside">
-        <li>DAT Prelims: 100 Marks, 3 Hours, Objective & Subjective</li>
-        <li>DAT Mains: Studio Test, Personal Interview</li>
-      </ul>
-      <h3 className="text-xl font-semibold">For M.Des</h3>
-      <ul className="list-disc list-inside">
-        <li>DAT Prelims: 100 Marks, Subject-specific</li>
-        <li>DAT Mains: Studio Test, Personal Interview, Portfolio Review</li>
-      </ul>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { event: "Application Form Release", date: "October" },
+                      { event: "Last Date to Apply", date: "December" },
+                      { event: "DAT Prelims Exam", date: "January" },
+                      { event: "Result Declaration", date: "March" },
+                      { event: "DAT Mains Exam", date: "April-May" },
+                      { event: "Final Result", date: "May-June" },
+                    ]} 
+                    columns={[
+                      { title: 'Event', dataIndex: 'event', key: 'event' },
+                      { title: 'Date', dataIndex: 'date', key: 'date' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">6. Syllabus for NID Entrance Exam</h2>
-      <h3 className="text-xl font-semibold">DAT Prelims</h3>
-      <ul className="list-disc list-inside">
-        <li>Visual Perception and Observation</li>
-        <li>Design Thinking and Problem Solving</li>
-        <li>Drawing and Sketching</li>
-        <li>Creativity and Imagination</li>
-        <li>General Awareness and Design Knowledge</li>
-        <li>Logical Reasoning</li>
-      </ul>
-      <h3 className="text-xl font-semibold">DAT Mains</h3>
-      <ul className="list-disc list-inside">
-        <li>Material Handling</li>
-        <li>Model Making</li>
-        <li>Storytelling and Visual Narration</li>
-        <li>Design Solution Development</li>
-        <li>Communication Skills</li>
-      </ul>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Selection Process</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Title level={4} style={{ color: "#0a2c64" }}>B.Des Admission</Title>
+                  {listItems([
+                    "DAT Prelims - 30% weightage",
+                    "DAT Mains - 70% weightage"
+                  ])}
+                  
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>M.Des Admission</Title>
+                  {listItems([
+                    "DAT Prelims - 20% weightage",
+                    "DAT Mains - 80% weightage",
+                    "Portfolio review included"
+                  ])}
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">7. Important Dates for NID Exam (Tentative)</h2>
-      <ul className="list-disc list-inside">
-        <li>Application Form Release: October</li>
-        <li>Last Date to Apply: December</li>
-        <li>DAT Prelims Exam: January</li>
-        <li>Result Declaration: March</li>
-        <li>DAT Mains Exam: April-May</li>
-        <li>Final Result: May-June</li>
-      </ul>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Table 
+                    dataSource={[
+                      { role: "Industrial Designer", description: "Design consumer products and equipment" },
+                      { role: "Graphic Designer", description: "Create visual communications" },
+                      { role: "UX/UI Designer", description: "Design digital interfaces and experiences" },
+                      { role: "Textile Designer", description: "Create fabric designs and patterns" },
+                      { role: "Animator", description: "Create animated content for various media" },
+                    ]} 
+                    columns={[
+                      { title: 'Career Role', dataIndex: 'role', key: 'role' },
+                      { title: 'Description', dataIndex: 'description', key: 'description' },
+                    ]}
+                    pagination={false}
+                    bordered
+                  />
+                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    NID graduates work with top design firms, fashion houses, or start their own studios. Many also pursue careers in academia or research.
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </Col>
 
-      <h2 className="text-2xl font-semibold">8. How to Apply for NID Entrance Exam</h2>
-      <ol className="list-decimal list-inside">
-        <li>Online Registration – Visit www.nid.edu</li>
-        <li>Fill Application Form – Provide personal and academic details</li>
-        <li>Upload Documents – Photo, signature, certificates</li>
-        <li>Pay Application Fee – Online payment</li>
-        <li>Download Admit Card – Before exam date</li>
-      </ol>
-
-      <h2 className="text-2xl font-semibold">9. Tips for NID Entrance Exam Preparation</h2>
-      <ul className="list-disc list-inside">
-        <li>Enhance Drawing Skills</li>
-        <li>Observe and Visualize</li>
-        <li>Improve Creativity</li>
-        <li>Stay Updated on Design Trends</li>
-        <li>Time Management with mock tests</li>
-        <li>Prepare a strong portfolio (for M.Des)</li>
-      </ul>
-
-      <h2 className="text-2xl font-semibold">10. NID Selection Process</h2>
-      <ul className="list-disc list-inside">
-        <li>B.Des Admission: DAT Prelims - 30%, DAT Mains - 70%</li>
-        <li>M.Des Admission: DAT Prelims - 20%, DAT Mains - 80%</li>
-        <li>Final selection is based on overall performance</li>
-      </ul>
-
-      <h2 className="text-2xl font-semibold">11. Career Opportunities After NID</h2>
-      <ul className="list-disc list-inside">
-        <li>Industrial Designer</li>
-        <li>Graphic Designer</li>
-        <li>UX/UI Designer</li>
-        <li>Textile and Fashion Designer</li>
-        <li>Animator</li>
-        <li>Product Designer</li>
-        <li>Design Consultant</li>
-      </ul>
-      <p>NID graduates often work with top design firms, fashion houses, or start their own studios. Some also pursue careers in academia or research.</p>
-    </div>
+            <Col xs={24}>
+              <motion.div
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ scale: 1.03 }}
+                style={{ cursor: "pointer" }}
+              >
+                <Card
+                  title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                  style={cardStyle}
+                  headStyle={{ 
+                    backgroundColor: "#FF8C00", 
+                    color: "#fff",
+                    fontSize: "24px",
+                    padding: "20px 24px",
+                    border: 'none'
+                  }}
+                  bodyStyle={{ padding: "24px" }}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "Enhance Drawing Skills",
+                        "Observe and Visualize",
+                        "Improve Creativity",
+                        "Stay Updated on Design Trends"
+                      ])}
+                    </Col>
+                    <Col xs={24} md={12}>
+                      {listItems([
+                        "Practice Time Management",
+                        "Prepare a strong portfolio (for M.Des)",
+                        "Solve previous years' papers",
+                        "Develop material handling skills"
+                      ])}
+                    </Col>
+                  </Row>
+                </Card>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.div>
+      </div>
     </Layout>
   );
 };
 
-export default NIDpage;
+export default NIDPage;

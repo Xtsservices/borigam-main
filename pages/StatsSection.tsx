@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Row, Col } from 'antd';
 import CountUp from 'react-countup';
+import styled from 'styled-components';
 import {
   FileDoneOutlined,
   HomeOutlined,
@@ -11,6 +12,27 @@ import {
 } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
+
+// Styled component for the stat box with hover effects
+const StatBox = styled.div`
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  height: 100%;
+  transition: all 0.3s ease;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+  }
+`;
 
 const stats = [
   {
@@ -73,7 +95,7 @@ const StatsSection: React.FC = () => {
       }}
     >
       <Title level={2} style={{ color: '#fff', textAlign: 'center', marginBottom: 40 }}>
-        Our Achievements
+        Achievements
       </Title>
 
       <Row gutter={[24, 24]} justify="center">
@@ -86,19 +108,9 @@ const StatsSection: React.FC = () => {
             lg={4}
             style={{
               textAlign: 'center',
-              transition: 'transform 0.3s ease',
             }}
           >
-            <div
-              style={{
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: 12,
-                padding: 24,
-                height: '100%',
-                transition: 'transform 0.3s',
-              }}
-              className="stat-box"
-            >
+            <StatBox>
               <div style={{ marginBottom: 16 }}>{stat.icon}</div>
 
               <Title
@@ -123,7 +135,7 @@ const StatsSection: React.FC = () => {
               </Title>
 
               <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14 }}>{stat.label}</Text>
-            </div>
+            </StatBox>
           </Col>
         ))}
       </Row>

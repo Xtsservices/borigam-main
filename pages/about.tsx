@@ -1,17 +1,100 @@
+import React from "react";
+import { Typography } from "antd";
+import { motion } from "framer-motion";
 import Header from "../components/Header";
+
+const { Paragraph } = Typography;
+
+const leftVariant = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { 
+      duration: 0.8,
+      ease: "easeOut"
+    } 
+  }
+};
+
+const rightVariant = {
+  hidden: { opacity: 0, x: 100 },
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { 
+      duration: 0.8,
+      ease: "easeOut"
+    } 
+  }
+};
+
+const hoverVariant = {
+  hover: {
+    scale: 1.03,
+    boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const topicBoxStyle = {
+  background: 'linear-gradient(135deg, #ff5722, #ff4500, #ff7043)',
+  color: '#fff',
+  padding: '12px 20px',
+  borderRadius: '8px',
+  display: 'inline-block',
+  marginBottom: '20px',
+  fontSize: '20px',
+  fontWeight: 600,
+  boxShadow: '0 4px 12px rgba(255, 69, 0, 0.3)',
+  transition: 'all 0.3s ease'
+};
+
+const contentBoxStyle = {
+  backgroundColor: '#fff',
+  borderRadius: '16px',
+  padding: '40px',
+  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+  height: '100%',
+  transition: 'all 0.3s ease'
+};
+
+const paragraphStyle = {
+  fontSize: '18px',
+  lineHeight: 1.7,
+  color: "#333",
+  textAlign: 'justify' as const,
+  marginBottom: '0',
+  transition: 'all 0.3s ease'
+};
+
+const imageStyle = {
+  width: '100%',
+  borderRadius: '16px',
+  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+  objectFit: 'cover' as const,
+  height: '400px',
+  transition: 'all 0.3s ease'
+};
 
 const AboutPage = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: '#fff' }}>
       <Header />
 
-      {/* HERO SECTION with background image */}
-      <section
+      {/* HERO SECTION */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
         style={{
-          backgroundImage: `url("/images/nata-banner.jpg")`, // Make sure banner.jpg is in /public
+          backgroundImage: `url("/images/aboutus.jpeg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "300px",
+          height: "500px",
           color: "#fff",
           display: "flex",
           alignItems: "center",
@@ -21,170 +104,279 @@ const AboutPage = () => {
           position: "relative",
         }}
       >
-        {/* Optional overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            zIndex: 0,
-          }}
-        />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <p style={{ fontSize: "16px", marginBottom: "10px" }}>
-            
-          </p>
-          <h1 style={{ fontSize: "36px", fontWeight: "bold" }}>
-            About Us
-          </h1>
-        </div>
-      </section>
+       
+      </motion.section>
 
       {/* MAIN CONTENT */}
-      <main
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "20px",
-          backgroundColor: "#fff",
-        }}
-      >
-        {/* Left Column - About Section */}
-        <div style={{ flex: 3, paddingRight: "30px" }}>
-          <h1>Why choose Borigam?</h1>
-
-          <h3>Sculpting Creative Minds Since 2019</h3>
-          <p>
-            Borigam coaching institution is known for its exceptional coaching
-            methods. At Borigam, we are committed to nurturing the creative
-            potential of every student. Our main motto is to sculpture the
-            creative minds by providing high-quality education and expert
-            guidance to excel in design and architecture entrance exams like
-            NIFT, NID, NATA, B.ARCH, UCEED, and CEED.
-          </p>
-
-          <h3>Personalized Learning Experience</h3>
-          <p>
-            We understand that every student is unique. Our experienced faculty
-            members are dedicated to ensure personalized attention through
-            interactive classroom sessions and online courses to cater to the
-            needs of different students. Our small batch sizes enable our
-            faculty members to closely monitor the progress of each student and
-            provide individualized guidance and support as needed.
-          </p>
-
-          <h3>Detailed Study Material</h3>
-          <p>
-            Our students benefit from exceptional coaching methods using
-            extensive study material that covers all the important topics and
-            concepts required for design and architecture entrance exams. Our
-            study material is regularly updated to ensure it aligns with the
-            latest exam patterns and syllabus. We also provide practice
-            worksheets for each subject. Workshops with guest faculties further
-            enhance their knowledge and offer real-world insights.
-          </p>
-
-          <h3>Mastering with Mock Tests</h3>
-          <p>
-            To build confidence and sharpen exam skills, we conduct weekly mock
-            tests and final exam replica tests that simulate the real exam
-            experience. Our continuous evaluation process ensures that students
-            identify their strengths and work on areas that need improvement.
-            For added convenience, mock tests are also accessible online through
-            our dedicated mobile app, allowing students to practice anytime,
-            anywhere. With Borigam’s thorough test series, students gain the
-            confidence and competence needed.
-          </p>
-
-          <h3>Proven Track of Success Record</h3>
-          <p>
-            Borigam takes pride in its proven success record, with many of our
-            students consistently achieving top ranks in design and architecture
-            entrance exams. Our extensive coaching program, experienced faculty,
-            portfolio design classes, step-by-step guidance, and personalized
-            attention have helped numerous students realize their dreams of
-            getting admission into prestigious fashion, design, and architecture
-            colleges. Join us and be a part of our success story!
-          </p>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto" }}>
+        {/* Why Choose Borigam Section - Image from LEFT, Content from RIGHT */}
+        <div style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '60px' }}>
+            {/* Image coming from LEFT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={leftVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.img
+                  src="/images/Sculpting.jpeg"
+                  alt="Sculpting Creative Minds"
+                  style={imageStyle}
+                  whileHover={{ scale: 1.02 }}
+                />
+              </motion.div>
+            </motion.div>
+            
+            {/* Content coming from RIGHT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={rightVariant}
+              style={{ flex: 1 }}
+            >
+              <h2 style={{ color: '#0a2c64', fontSize: '32px', marginBottom: '30px' }}>
+                Why choose Borigam?
+              </h2>
+              <motion.div
+                variants={hoverVariant}
+                whileHover="hover"
+                style={contentBoxStyle}
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  style={topicBoxStyle}
+                >
+                  Sculpting Creative Minds Since 2019
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <Paragraph style={paragraphStyle}>
+                    Borigam coaching institution is known for its exceptional coaching methods. At Borigam, we are committed to nurturing the creative potential of every student. Our main motto is to sculpture the creative minds by providing high-quality education and expert guidance to excel in design and architecture entrance exams like NIFT, NID, NATA, B.ARCH, UCEED, and CEED.
+                  </Paragraph>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Right Column - Latest News */}
-        <aside
-          style={{
-            flex: 1,
-            backgroundColor: "#f9f9f9",
-            borderLeft: "4px solid orange",
-            padding: "20px",
-            borderRadius: "8px",
-            boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-          }}
-        >
-          <div>
-            <h2
-              style={{
-                backgroundColor: "orange",
-                color: "white",
-                padding: "10px",
-                borderRadius: "4px 4px 0 0",
-                marginBottom: "20px",
-              }}
+        {/* Personalized Learning Section - Image from RIGHT, Content from LEFT */}
+        <div style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '60px', flexDirection: 'row-reverse' }}>
+            {/* Image coming from RIGHT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={rightVariant}
+              style={{ flex: 1 }}
             >
-              LATEST NEWS
-            </h2>
-            <ul
-              style={{ listStyleType: "none", padding: 0, lineHeight: "1.8em" }}
-            >
-              <li>
-                <strong>
-                  New Batches For NIFT, NID, U/CEED - 2025-26 Entrance Coaching.
-                  Batches Starting
-                </strong>
-                <br />
-                <small>BY BORIGAM | 21 APR, 2025</small>
-              </li>
-              <hr />
-              <li>
-                <strong>
-                  New Batches For NATA & JEE Architecture - 2025 Is Starting
-                  From 26th & 27th April
-                </strong>
-                <br />
-                <small>BY BORIGAM | 21 APR, 2025</small>
-              </li>
-              <hr />
-              <li>
-                <strong>
-                  NIFT | NID Situation Test - 2025 Batch Starts From 26th & 27th
-                  April, 25
-                </strong>
-                <br />
-                <small>BY BORIGAM | 21 APR, 2025</small>
-              </li>
-              <hr />
-              <li>
-                <strong>NATA 2025 Examination Dates Are Announced</strong>
-                <br />
-                <small>BY BORIGAM | 08 FEB, 2025</small>
-              </li>
-            </ul>
-            <div style={{ marginTop: "20px", textAlign: "right" }}>
-              <a
-                href="#"
-                style={{
-                  color: "orange",
-                  fontWeight: "bold",
-                  textDecoration: "none",
-                }}
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
               >
-                BROWSE ALL &raquo;
-              </a>
-            </div>
+                <motion.img
+                  src="/images/Personalized.jpeg"
+                  alt="Personalized Learning Experience"
+                  style={imageStyle}
+                  whileHover={{ scale: 1.02 }}
+                />
+              </motion.div>
+            </motion.div>
+            
+            {/* Content coming from LEFT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={leftVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                variants={hoverVariant}
+                whileHover="hover"
+                style={contentBoxStyle}
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  style={topicBoxStyle}
+                >
+                  Personalized Learning Experience
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <Paragraph style={paragraphStyle}>
+                    We understand that every student is unique. Our experienced faculty members are dedicated to ensure personalized attention through interactive classroom sessions and online courses to cater to the needs of different students. Our small batch sizes enable our faculty members to closely monitor the progress of each student and provide individualized guidance and support as needed.
+                  </Paragraph>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
-        </aside>
-      </main>
+        </div>
+
+        {/* Study Material Section - Image from LEFT, Content from RIGHT */}
+        <div style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '60px' }}>
+            {/* Image coming from LEFT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={leftVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.img
+                  src="/images/Detailed.jpeg"
+                  alt="Detailed Study Material"
+                  style={imageStyle}
+                  whileHover={{ scale: 1.02 }}
+                />
+              </motion.div>
+            </motion.div>
+            
+            {/* Content coming from RIGHT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={rightVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                variants={hoverVariant}
+                whileHover="hover"
+                style={contentBoxStyle}
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  style={topicBoxStyle}
+                >
+                  Detailed Study Material
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <Paragraph style={paragraphStyle}>
+                    Our students benefit from exceptional coaching methods using extensive study material that covers all the important topics and concepts required for design and architecture entrance exams. Our study material is regularly updated to ensure it aligns with the latest exam patterns and syllabus. We also provide practice worksheets for each subject. Workshops with guest faculties further enhance their knowledge and offer real-world insights.
+                  </Paragraph>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Mock Tests Section - Image from RIGHT, Content from LEFT */}
+        <div style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '60px', flexDirection: 'row-reverse' }}>
+            {/* Image coming from RIGHT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={rightVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.img
+                  src="/images/Mastering.jpeg"
+                  alt="Mastering with Mock Tests"
+                  style={imageStyle}
+                  whileHover={{ scale: 1.02 }}
+                />
+              </motion.div>
+            </motion.div>
+            
+            {/* Content coming from LEFT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={leftVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                variants={hoverVariant}
+                whileHover="hover"
+                style={contentBoxStyle}
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  style={topicBoxStyle}
+                >
+                  Mastering with Mock Tests
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <Paragraph style={paragraphStyle}>
+                    To build confidence and sharpen exam skills, we conduct weekly mock tests and final exam replica tests that simulate the real exam experience. Our continuous evaluation process ensures that students identify their strengths and work on areas that need improvement. For added convenience, mock tests are also accessible online through our dedicated mobile app, allowing students to practice anytime, anywhere. With Borigam's thorough test series, students gain the confidence and competence needed.
+                  </Paragraph>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Success Record Section - Image from LEFT, Content from RIGHT */}
+        <div style={{ marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '60px' }}>
+            {/* Image coming from LEFT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={leftVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.img
+                  src="/images/Proven.jpeg"
+                  alt="Proven Track of Success Record"
+                  style={imageStyle}
+                  whileHover={{ scale: 1.02 }}
+                />
+              </motion.div>
+            </motion.div>
+            
+            {/* Content coming from RIGHT */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={rightVariant}
+              style={{ flex: 1 }}
+            >
+              <motion.div
+                variants={hoverVariant}
+                whileHover="hover"
+                style={contentBoxStyle}
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  style={topicBoxStyle}
+                >
+                  Proven Track of Success Record
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <Paragraph style={paragraphStyle}>
+                    Borigam takes pride in its proven success record, with many of our students consistently achieving top ranks in design and architecture entrance exams. Our extensive coaching program, experienced faculty, portfolio design classes, step-by-step guidance, and personalized attention have helped numerous students realize their dreams of getting admission into prestigious fashion, design, and architecture colleges. Join us and be a part of our success story!
+                  </Paragraph>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
