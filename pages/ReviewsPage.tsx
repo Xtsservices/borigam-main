@@ -44,7 +44,6 @@ const Reviews = [
 ];
 
 const ReviewsPage = () => {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const carouselRef = useRef<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -79,8 +78,22 @@ const ReviewsPage = () => {
     return index === currentSlide % Reviews.length;
   };
 
+  const handleCardClick = (index: number) => {
+    // Calculate how many slides we need to move
+    const slidesToMove = index - currentSlide;
+    if (slidesToMove > 0) {
+      for (let i = 0; i < slidesToMove; i++) {
+        carouselRef.current.next();
+      }
+    } else if (slidesToMove < 0) {
+      for (let i = 0; i < -slidesToMove; i++) {
+        carouselRef.current.prev();
+      }
+    }
+  };
+
   return (
-    <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', padding: '60px 0',marginTop: '-100px' }}>
+    <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', padding: '60px 0', marginTop: '-100px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         <Title level={2} style={{ textAlign: 'center', marginBottom: '50px', color: '#333' }}>
           STUDENT REVIEWS
@@ -128,21 +141,19 @@ const ReviewsPage = () => {
                 }}
               >
                 <div
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
+                  onClick={() => handleCardClick(index)}
                   style={{
                     position: 'relative',
                     height: isMiddleCard(index) ? '480px' : '400px',
                     borderRadius: '15px',
                     overflow: 'hidden',
-                    boxShadow: hoveredCard === index 
+                    boxShadow: isMiddleCard(index) 
                       ? '0 20px 40px rgba(255, 85, 0, 0.3)' 
-                      : isMiddleCard(index) 
-                        ? '0 15px 30px rgba(0, 0, 0, 0.15)'
-                        : '0 10px 20px rgba(0, 0, 0, 0.1)',
+                      : '0 10px 20px rgba(0, 0, 0, 0.1)',
                     transition: 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                    transform: hoveredCard === index ? 'translateY(-20px) scale(1.05)' : 'translateY(0)',
-                    zIndex: hoveredCard === index ? 10 : isMiddleCard(index) ? 5 : 1,
+                    transform: isMiddleCard(index) ? 'translateY(-20px) scale(1.05)' : 'translateY(0)',
+                    zIndex: isMiddleCard(index) ? 10 : 1,
+                    cursor: 'pointer'
                   }}
                 >
                   {/* Top Section - Orange by default */}
@@ -152,7 +163,7 @@ const ReviewsPage = () => {
                     left: 0,
                     width: '100%',
                     height: '40%',
-                    background: hoveredCard === index ? '#fff' : 'linear-gradient(to right, #ff7b25, #ff5500)',
+                    background: isMiddleCard(index) ? '#fff' : 'linear-gradient(to right, #ff7b25, #ff5500)',
                     transition: 'all 0.6s cubic-bezier(0.65, 0, 0.35, 1)',
                     zIndex: 1,
                   }}>
@@ -164,10 +175,10 @@ const ReviewsPage = () => {
                       transform: 'translateX(-50%)',
                       width: '40px',
                       height: '40px',
-                      backgroundColor: hoveredCard === index ? '#fff' : 'linear-gradient(to right, #ff7b25, #ff5500)',
+                      backgroundColor: isMiddleCard(index) ? '#fff' : 'linear-gradient(to right, #ff7b25, #ff5500)',
                       borderRadius: '50%',
                       zIndex: 3,
-                      boxShadow: hoveredCard === index 
+                      boxShadow: isMiddleCard(index) 
                         ? '0 5px 15px rgba(255, 85, 0, 0.4)'
                         : '0 2px 5px rgba(0,0,0,0.1)'
                     }} />
@@ -180,7 +191,7 @@ const ReviewsPage = () => {
                     left: 0,
                     width: '100%',
                     height: '60%',
-                    background: hoveredCard === index ? 'linear-gradient(to right, #ff7b25, #ff5500)' : '#fff',
+                    background: isMiddleCard(index) ? 'linear-gradient(to right, #ff7b25, #ff5500)' : '#fff',
                     transition: 'all 0.6s cubic-bezier(0.65, 0, 0.35, 1)',
                     zIndex: 1,
                   }} />
@@ -194,12 +205,12 @@ const ReviewsPage = () => {
                     width: isMiddleCard(index) ? '140px' : '120px',
                     height: isMiddleCard(index) ? '140px' : '120px',
                     borderRadius: '50%',
-                    border: `5px solid ${hoveredCard === index ? '#ff5500' : '#fff'}`,
+                    border: `5px solid ${isMiddleCard(index) ? '#ff5500' : '#fff'}`,
                     backgroundImage: `url(${review.image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     zIndex: 3,
-                    boxShadow: hoveredCard === index 
+                    boxShadow: isMiddleCard(index) 
                       ? '0 10px 25px rgba(0,0,0,0.3)'
                       : '0 5px 15px rgba(0,0,0,0.2)',
                     transition: 'all 0.4s ease',
@@ -222,7 +233,7 @@ const ReviewsPage = () => {
                       level={4} 
                       style={{ 
                         margin: 0,
-                        color: hoveredCard === index ? '#ff5500' : '#fff',
+                        color: isMiddleCard(index) ? '#ff5500' : '#fff',
                         textAlign: 'center',
                         transition: 'color 0.3s ease',
                         fontSize: isMiddleCard(index) ? '20px' : '18px'
@@ -249,7 +260,7 @@ const ReviewsPage = () => {
                     <Paragraph style={{
                       fontSize: isMiddleCard(index) ? '16px' : '15px',
                       margin: 0,
-                      color: hoveredCard === index ? '#fff' : '#555',
+                      color: isMiddleCard(index) ? '#fff' : '#555',
                       textAlign: 'center',
                       transition: 'all 0.3s ease',
                       lineHeight: '1.6'
@@ -264,7 +275,7 @@ const ReviewsPage = () => {
                         disabled
                         defaultValue={review.rating}
                         style={{
-                          color: hoveredCard === index ? '#fff' : '#ff7b25',
+                          color: isMiddleCard(index) ? '#fff' : '#ff7b25',
                           fontSize: isMiddleCard(index) ? '20px' : '18px',
                           transition: 'all 0.3s ease'
                         }}

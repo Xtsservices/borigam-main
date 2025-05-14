@@ -71,10 +71,13 @@ const Gallery = () => {
       </Title>
       <div style={styles.titleUnderline}></div>
 
-      <Title level={2} style={styles.galleryTitle}>
-        Student Sketches 
-      </Title>
-      <div style={styles.titleUnderline}></div>
+      <div style={styles.subHeadingContainer}>
+        <Title level={3} style={styles.subHeadingTitle}>
+          Student Sketches
+          <div style={styles.titleUnderline}></div>
+        </Title>
+      </div>
+      
 
       <div style={styles.carouselContainer}>
         <Carousel
@@ -199,6 +202,16 @@ const styles = {
     fontSize: "36px",
     letterSpacing: "1px",
   },
+  subHeadingContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginLeft: '20px',
+  },
+  subHeadingTitle: {
+    marginLeft: '4rem',
+    fontSize: '30px',
+    marginBottom: '5px',
+  },
   titleUnderline: {
     height: "4px",
     width: "60px",
@@ -253,7 +266,7 @@ const styles = {
   },
   exploreButton: {
     marginTop: "60px",
-    backgroundColor: "#fbb034",
+    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
     borderColor: "#fbb034",
     padding: "0 40px",
     height: "50px",

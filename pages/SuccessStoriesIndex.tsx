@@ -76,6 +76,11 @@ const TestimonialsIndex = () => {
     ],
   };
 
+/*************  ✨ Windsurf Command ⭐  *************/
+  /**
+   * Handles the "View all" button click by redirecting to the success stories page.
+   */
+/*******  f7ae124e-cc22-48f7-af87-80899e216438  *******/
   const handleViewAll = () => {
     router.push("/success-stories");
   };
@@ -83,7 +88,7 @@ const TestimonialsIndex = () => {
   return (
     <div
       style={{
-        marginTop: "-10rem",
+        marginTop: "7rem",
         backgroundColor: "#f5f5f5",
         padding: "80px 0",
         position: "relative",
@@ -121,7 +126,7 @@ const TestimonialsIndex = () => {
             type="primary"
             onClick={handleViewAll}
             style={{
-              backgroundColor: "#ff6b00",
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
               borderColor: "#ff6b00",
               fontWeight: 500,
               height: "40px",
@@ -171,7 +176,7 @@ const TestimonialsIndex = () => {
             </Title>
             <Paragraph
               style={{
-                fontSize: "14px",
+                fontSize: "18px",
                 color: "rgba(255, 255, 255, 0.9)",
                 marginBottom: 0,
                 lineHeight: 1.6,
@@ -256,7 +261,7 @@ const TestimonialsIndex = () => {
                     <div
                       style={{
                         height: hoveredCard === index ? "40%" : "60%",
-                        backgroundImage: `url(${testimonial.photo})`,
+                        backgroundImage: hoveredCard === index ? 'none': `url(${testimonial.photo})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         transition: "all 0.4s ease",
@@ -295,6 +300,7 @@ const TestimonialsIndex = () => {
                       {/* Student Info - moves up on hover */}
                       <div
                         style={{
+                          marginTop: hoveredCard === index ? "2px" : "70px",
                           position: "absolute",
                           top: hoveredCard === index ? "-60%" : "-40%", // Keep original positioning
                           left: "20px",
@@ -372,7 +378,7 @@ const TestimonialsIndex = () => {
                         <Button
                           type="primary"
                           style={{
-                            backgroundColor: "#ff6b00",
+                          background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                             borderColor: "#ff6b00",
                             fontWeight: 500,
                           }}

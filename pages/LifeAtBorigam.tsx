@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Carousel, Button, Typography, Modal, Row, Col, Image } from "antd";
 import { LeftOutlined, RightOutlined, PlayCircleFilled, CloseOutlined } from "@ant-design/icons";
-import Link from "next/link";
 
 const { Title } = Typography;
 
@@ -61,64 +60,86 @@ const CustomPrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
   </div>
 );
 
+type MediaType = 'image' | 'gif' | 'video';
+
 const LifeAtBorigam = () => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewMedia, setPreviewMedia] = useState("");
-  const [isVideo, setIsVideo] = useState(false);
+  const [mediaType, setMediaType] = useState<MediaType>('image');
   const [fullGalleryVisible, setFullGalleryVisible] = useState(false);
-  const [mediaType, setMediaType] = useState<Record<number, 'image' | 'video'>>({});
+  const [mediaTypes, setMediaTypes] = useState<Record<number, MediaType>>({});
   const [loading, setLoading] = useState(true);
 
-  const mediaItems = Array.from({ length: 32 }, (_, i) => i + 1);
+  // Sample media items - adjust according to your actual files
+  const mediaItems = Array.from({ length: 29 }, (_, i) => i + 1);
 
   useEffect(() => {
-    const checkMediaTypes = async () => {
-      const types: Record<number, 'image' | 'video'> = {};
+    const determineMediaTypes = async () => {
+      const types: Record<number, MediaType> = {};
       
-      for (const item of mediaItems) {
-        try {
-          const img = document.createElement('img');
-          img.src = `/images/lob${item}.jpeg`;
-          await new Promise((resolve, reject) => {
-            img.onload = resolve;
-            img.onerror = reject;
-          });
-          types[item] = 'image';
-        } catch {
-          try {
-            const response = await fetch(`/images/lob${item}.mp4`, { method: 'HEAD' });
-            if (response.ok) {
-              types[item] = 'video';
-            } else {
-              types[item] = 'image';
-            }
-          } catch {
-            types[item] = 'image';
-          }
+      // Create a mapping of file extensions for each item
+      const fileExtensions: Record<number, string> = {};
+      
+      // Based on your file list, we know which items are GIFs (2 and 4)
+      mediaItems.forEach(item => {
+        if (item === 2 || item === 4) {
+          fileExtensions[item] = 'gif';
+        } else if (item === 6 || item >= 9 && item <= 14 || item === 16 || item === 18 || item >= 20) {
+          fileExtensions[item] = 'mp4';
+        } else {
+          fileExtensions[item] = 'jpeg';
         }
-      }
-      
-      setMediaType(types);
+      });
+
+      // Set media types based on the mapping
+      mediaItems.forEach(item => {
+        const ext = fileExtensions[item];
+        if (ext === 'mp4') {
+          types[item] = 'video';
+        } else if (ext === 'gif') {
+          types[item] = 'gif';
+        } else {
+          types[item] = 'image';
+        }
+      });
+
+      setMediaTypes(types);
       setLoading(false);
     };
 
-    checkMediaTypes();
-  }, [mediaItems]);
+    determineMediaTypes();
+  }, []);
 
   const handleMediaClick = (item: number) => {
-    const type = mediaType[item];
-    setPreviewMedia(`/images/lob${item}.${type === 'video' ? 'mp4' : 'jpeg'}`);
-    setIsVideo(type === 'video');
+    const type = mediaTypes[item];
+    let mediaPath = '';
+    
+    switch(type) {
+      case 'video':
+        mediaPath = `/images/lob${item}.mp4`; // Changed from /videos to /images
+        break;
+      case 'gif':
+        mediaPath = `/images/lob${item}.gif`;
+        break;
+      case 'image':
+      default:
+        mediaPath = `/images/lob${item}.jpeg`;
+    }
+    
+    setPreviewMedia(mediaPath);
+    setMediaType(type);
     setPreviewVisible(true);
   };
 
   return (
     <section style={styles.galleryContainer}>
-      <Title level={2} style={styles.galleryTitle}>
-        Life at Borigam
-      </Title>
-      <div style={styles.titleUnderline}></div>
+      <div style={styles.subHeadingContainer}>
+        <Title level={3} style={styles.subHeadingTitle}>
+          Life At Borigam
+          <div style={styles.titleUnderline}></div>
+        </Title>
+      </div>
 
       {!loading && (
         <>
@@ -158,43 +179,67 @@ const LifeAtBorigam = () => {
                     className="media-card"
                     style={{
                       ...styles.imageCard,
-                      transform: hoveredItem === item ? "scale(1.08)" : "scale(1)",
+                      transform: hoveredItem === item ? "scale(1.2)" : "scale(1)",
                       boxShadow: hoveredItem === item
-                        ? "0 15px 30px rgba(0,0,0,0.25)"
+                        ? "0 25px 50px rgba(0,0,0,0.4)"
                         : "0 8px 20px rgba(0,0,0,0.15)",
-                      zIndex: hoveredItem === item ? 2 : 1,
+                      zIndex: hoveredItem === item ? 10 : 1,
                       margin: "0 15px",
                     }}
                     onMouseEnter={() => setHoveredItem(item)}
                     onMouseLeave={() => setHoveredItem(null)}
                     onClick={() => handleMediaClick(item)}
                   >
-                    {mediaType[item] === 'image' ? (
+                    {mediaTypes[item] === 'video' ? (
+                      <div style={styles.videoContainer}>
+                        <video
+                          muted
+                          loop
+                          preload="metadata"
+                          style={{
+                            ...styles.galleryImage,
+                            transform: hoveredItem === item ? "scale(1.1)" : "scale(1)"
+                          }}
+                        >
+                          <source src={`/images/lob${item}.mp4#t=0.1`} type="video/mp4" />
+                        </video>
+                        <div style={styles.playIcon}>
+                          <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
+                        </div>
+                      </div>
+                    ) : mediaTypes[item] === 'gif' ? (
+                      <div style={styles.gifContainer}>
+                        <img
+                          src={`/images/lob${item}.gif`}
+                          alt={`Life at Borigam GIF ${item}`}
+                          style={{
+                            ...styles.galleryImage,
+                            transform: hoveredItem === item ? "scale(1.1)" : "scale(1)"
+                          }}
+                        />
+                        <div style={styles.playIcon}>
+                          <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
+                        </div>
+                      </div>
+                    ) : (
                       <img
                         src={`/images/lob${item}.jpeg`}
                         alt={`Life at Borigam ${item}`}
-                        style={styles.galleryImage}
+                        style={{
+                          ...styles.galleryImage,
+                          transform: hoveredItem === item ? "scale(1.1)" : "scale(1)"
+                        }}
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.onerror = null;
                           target.src = "/images/default-image.jpeg";
                         }}
                       />
-                    ) : (
-                      <div style={styles.videoThumbnail}>
-                        <video
-                          muted
-                          style={styles.galleryImage}
-                          src={`/images/lob${item}.mp4`}
-                        />
-                        <div style={styles.playIcon}>
-                          <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
-                        </div>
-                      </div>
                     )}
                     <div style={{
                       ...styles.imageOverlay,
-                      opacity: hoveredItem === item ? 1 : 0
+                      opacity: hoveredItem === item ? 0.7 : 0,
+                      backgroundColor: hoveredItem === item ? "#0a2c64" : "transparent"
                     }}>
                     </div>
                   </div>
@@ -219,24 +264,41 @@ const LifeAtBorigam = () => {
         visible={previewVisible}
         footer={null}
         onCancel={() => setPreviewVisible(false)}
-        width={isVideo ? 800 : 600}
+        width={mediaType === 'video' ? 800 : 600}
         centered
         destroyOnClose
         closeIcon={<CloseOutlined style={{ color: '#fff', fontSize: '24px' }} />}
         bodyStyle={{ padding: 0 }}
       >
-        {isVideo ? (
+        {mediaType === 'video' ? (
           <video 
-            controls 
-            autoPlay 
-            style={{ width: '100%', outline: 'none' }}
-            src={previewMedia}
-          />
+            controls
+            autoPlay
+            style={{ 
+              width: '100%', 
+              display: 'block',
+              maxHeight: '80vh',
+              outline: 'none'
+            }}
+          >
+            <source src={previewMedia} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         ) : (
           <img 
-            alt="Preview" 
-            style={{ width: '100%' }} 
             src={previewMedia} 
+            alt="Preview" 
+            style={{ 
+              width: '100%', 
+              display: 'block',
+              maxHeight: '80vh',
+              objectFit: 'contain'
+            }} 
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = "/images/default-image.jpeg";
+            }}
           />
         )}
       </Modal>
@@ -264,30 +326,59 @@ const LifeAtBorigam = () => {
                   overflow: 'hidden',
                   cursor: 'pointer',
                   transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.15)'
+                  boxShadow: hoveredItem === item ? '0 25px 50px rgba(0,0,0,0.4)' : '0 8px 20px rgba(0,0,0,0.15)',
+                  transform: hoveredItem === item ? 'scale(1.15)' : 'scale(1)',
+                  position: 'relative',
+                  zIndex: hoveredItem === item ? 10 : 1
                 }}
-                onClick={() => {
-                  const type = mediaType[item];
-                  setPreviewMedia(`/images/lob${item}.${type === 'video' ? 'mp4' : 'jpeg'}`);
-                  setIsVideo(type === 'video');
-                  setPreviewVisible(true);
-                  setFullGalleryVisible(false);
-                }}
+                onMouseEnter={() => setHoveredItem(item)}
+                onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => handleMediaClick(item)}
               >
-                {mediaType[item] === 'image' ? (
-                  <Image
-                    src={`/images/lob${item}.jpeg`}
-                    alt={`Life at Borigam ${item}`}
-                    style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                    preview={false}
-                    fallback="/images/default-image.jpeg"
-                  />
-                ) : (
-                  <div style={{ position: 'relative', height: '250px' }}>
+                {mediaTypes[item] === 'video' ? (
+                  <div style={{ 
+                    position: 'relative', 
+                    height: '250px',
+                    overflow: 'hidden'
+                  }}>
                     <video
                       muted
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      src={`/images/lob${item}.mp4`}
+                      loop
+                      preload="metadata"
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        transform: hoveredItem === item ? 'scale(1.1)' : 'scale(1)',
+                        transition: 'transform 0.4s ease'
+                      }}
+                    >
+                      <source src={`/images/lob${item}.mp4#t=0.1`} type="video/mp4" />
+                    </video>
+                    <div style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)'
+                    }}>
+                      <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
+                    </div>
+                  </div>
+                ) : mediaTypes[item] === 'gif' ? (
+                  <div style={{ 
+                    position: 'relative', 
+                    height: '250px',
+                    overflow: 'hidden'
+                  }}>
+                    <img
+                      src={`/images/lob${item}.gif`}
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        transform: hoveredItem === item ? 'scale(1.1)' : 'scale(1)',
+                        transition: 'transform 0.4s ease'
+                      }}
                     />
                     <div style={{
                       position: 'absolute',
@@ -298,7 +389,30 @@ const LifeAtBorigam = () => {
                       <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
                     </div>
                   </div>
+                ) : (
+                  <Image
+                    src={`/images/lob${item}.jpeg`}
+                    alt={`Life at Borigam ${item}`}
+                    style={{ 
+                      width: '100%', 
+                      height: '250px', 
+                      objectFit: 'cover',
+                      transform: hoveredItem === item ? 'scale(1.1)' : 'scale(1)',
+                      transition: 'transform 0.4s ease'
+                    }}
+                    preview={false}
+                    fallback="/images/default-image.jpeg"
+                  />
                 )}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: hoveredItem === item ? 'rgba(10, 44, 100, 0.5)' : 'transparent',
+                  transition: 'all 0.3s ease'
+                }}></div>
               </div>
             </Col>
           ))}
@@ -330,8 +444,9 @@ const LifeAtBorigam = () => {
           color: white !important;
         }
         .gallery-item:hover {
-          transform: scale(1.05) !important;
-          box-shadow: 0 15px 30px rgba(0,0,0,0.25) !important;
+          transform: scale(1.15) !important;
+          box-shadow: 0 25px 50px rgba(0,0,0,0.4) !important;
+          z-index: 10 !important;
         }
         .ant-modal-close {
           background: rgba(0,0,0,0.5) !important;
@@ -345,11 +460,14 @@ const LifeAtBorigam = () => {
           right: 10px !important;
         }
         .explore-btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(251, 176, 52, 0.3) !important;
+          transform: translateY(-3px) scale(1.05);
+          box-shadow: 0 15px 30px rgba(251, 176, 52, 0.4) !important;
+        }
+        .media-card:hover {
+          transform: scale(1.2) !important;
         }
         .media-card:hover img, .media-card:hover video {
-          transform: scale(1.1);
+          transform: scale(1.1) !important;
         }
       `}</style>
     </section>
@@ -397,7 +515,22 @@ const styles = {
     height: "300px",
     cursor: "pointer",
   },
-  videoThumbnail: {
+  subHeadingContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginLeft: '20px',
+  },
+  subHeadingTitle: {
+    marginLeft: '4rem',
+    fontSize: '30px',
+    marginBottom: '5px',
+  },
+  videoContainer: {
+    position: 'relative' as const,
+    width: '100%',
+    height: '100%'
+  },
+  gifContainer: {
     position: 'relative' as const,
     width: '100%',
     height: '100%'
@@ -422,15 +555,14 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    background: "rgba(10, 44, 100, 0.3)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    transition: "opacity 0.3s ease",
+    transition: "all 0.3s ease",
   },
   exploreButton: {
     marginTop: "60px",
-    backgroundColor: "#fbb034",
+    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
     borderColor: "#fbb034",
     padding: "0 40px",
     height: "50px",

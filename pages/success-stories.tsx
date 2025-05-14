@@ -190,24 +190,31 @@ const Reviews = () => {
                 >
                   {/* Top Image Section */}
                   <div style={{
-                    height: hoveredCard === index ? '40%' : '60%',
-                    backgroundImage: `url(${story.photo})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    transition: 'all 0.4s ease',
-                    position: 'relative'
-                  }}>
-                    {/* Overlay on hover */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      backgroundColor: hoveredCard === index ? 'rgba(255, 107, 0, 0.8)' : 'rgba(0,0,0,0.2)',
-                      transition: 'all 0.4s ease'
-                    }} />
-                  </div>
+  height:hoveredCard === index ? '30%' : '60%',
+  backgroundImage: hoveredCard === index ? 'none' : `url(${story.photo})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  transition: 'all 0.4s ease',
+  position: 'relative'
+}}>
+  {/* Info Box */}
+  <div style={{
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    backgroundColor: hoveredCard === index ? '#ff6b00' : 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: hoveredCard === index ? 1 : 0,
+    transition: 'all 0.4s ease'
+  }}>
+    
+  </div>
+</div>
+
 
                   {/* Bottom Content Section */}
                   <div style={{
@@ -229,6 +236,7 @@ const Reviews = () => {
                       color: hoveredCard === index ? 'white' : '#333',
                     }}>
                       <Text strong style={{ 
+                        marginTop:hoveredCard === index ? '3rem' : '5rem',
                         display: 'block',
                         fontSize: '18px',
                         color: hoveredCard === index ? 'white' : '#ff6b00',

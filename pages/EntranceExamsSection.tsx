@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Card, Button, Typography, Carousel } from 'antd';
 import { RightOutlined, LeftOutlined } from '@ant-design/icons';
@@ -27,7 +27,7 @@ const examCards: ExamCard[] = [
 
 // Styled components
 const SectionContainer = styled.section`
-  margin: 60px auto;
+  margin: 100px auto;
   max-width: 1200px;
   padding: 0 20px;
   font-family: 'Poppins', sans-serif;
@@ -39,7 +39,7 @@ const SectionTitle = styled(Title)`
   color: #0a2c64 !important;
   font-weight: 600 !important;
   font-size: 30px !important;
-  margin-bottom: 0 !important;
+  margin-bottom: 40p !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -177,7 +177,8 @@ const CardTitle = styled(Title)<{ ismiddle: boolean }>`
 `;
 
 const ViewMoreButton = styled(Button)<{ ismiddle: boolean }>`
-  background: linear-gradient(135deg, #fbb034, #ff8c00) !important;
+
+  background: linear-gradient(90deg, #ff5722, #ff9800) !important;
   border: none !important;
   color: white !important;
   border-radius: 20px !important;
@@ -281,6 +282,7 @@ const EntranceExamsSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const carouselRef = useRef<any>(null);
+const autoPlayIntervalRef = useRef<number | null>(null);
 
   const handleCardClick = (examId: string) => {
     router.push(`/entrance/${examId}`);
@@ -289,6 +291,34 @@ const EntranceExamsSection: React.FC = () => {
   const isMiddleCard = (index: number) => {
     return index === currentSlide;
   };
+
+  // Auto-play functionality with faster sliding
+  useEffect(() => {
+    const startAutoPlay = () => {
+      autoPlayIntervalRef.current = setInterval(() => {
+        if (carouselRef.current) {
+          carouselRef.current.next();
+        }
+      }, 2000); // Faster auto-slide (2 seconds)
+    };
+
+    const stopAutoPlay = () => {
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current);
+        autoPlayIntervalRef.current = null;
+      }
+    };
+
+    if (!isHovered) {
+      startAutoPlay();
+    } else {
+      stopAutoPlay();
+    }
+
+    return () => {
+      stopAutoPlay();
+    };
+  }, [isHovered]);
 
   const settings = {
     dots: true,
@@ -300,6 +330,7 @@ const EntranceExamsSection: React.FC = () => {
     centerPadding: '0px',
     beforeChange: (current: number, next: number) => setCurrentSlide(next),
     cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+    autoplaySpeed: 2000, // Faster transition speed
     responsive: [
       {
         breakpoint: 1024,
@@ -335,11 +366,11 @@ const EntranceExamsSection: React.FC = () => {
         <ArrowContainer>
           <ArrowButton 
             icon={<LeftOutlined />} 
-            onClick={() => carouselRef.current.prev()}
+            onClick={() => carouselRef.current?.prev()}
           />
           <ArrowButton 
             icon={<RightOutlined />} 
-            onClick={() => carouselRef.current.next()}
+            onClick={() => carouselRef.current?.next()}
           />
         </ArrowContainer>
 

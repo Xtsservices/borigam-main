@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
-
+import Header from "@/components/Header";
 const { Title, Paragraph } = Typography;
 
 const cardStyle: React.CSSProperties = {
@@ -33,7 +33,9 @@ const listItems = (items: string[]) => (
 
 const ThreeDVisualizer = () => {
   return (
-    <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header/>    
+    <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff",marginTop: "6rem" }}>
       <motion.div 
         initial="hidden" 
         animate="visible" 
@@ -184,7 +186,8 @@ const ThreeDVisualizer = () => {
           </Col>
         </Row>
       </motion.div>
-    </div>
+    </div></>
+    
   );
 };
 

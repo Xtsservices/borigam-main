@@ -41,22 +41,33 @@ const Header: React.FC<HeaderProps> = () => {
     };
   }, [scrolled]);
 
-  const handleContactClick = (e: React.MouseEvent) => {
+  const handleSectionClick = (sectionId: string, e: React.MouseEvent) => {
     e.preventDefault();
+    
+    // Close mobile menu if open
+    setMobileMenuVisible(false);
+    
+    // If not on homepage, navigate first then scroll
     if (router.pathname !== "/") {
-      router.push("/").then(() => {
-        const enquireSection = document.getElementById("enquire-section");
-        if (enquireSection) {
-          enquireSection.scrollIntoView({ behavior: "smooth" });
+      router.push(`/#${sectionId}`).then(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          window.scrollTo({
+            top: section.offsetTop - 100,
+            behavior: "smooth"
+          });
         }
       });
     } else {
-      const enquireSection = document.getElementById("enquire-section");
-      if (enquireSection) {
-        enquireSection.scrollIntoView({ behavior: "smooth" });
+      // If already on homepage, just scroll
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 100,
+          behavior: "smooth"
+        });
       }
     }
-    setMobileMenuVisible(false);
   };
 
   const handlePhoneClick = (phoneNumber: string) => {
@@ -86,7 +97,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   const activeLinkStyle: React.CSSProperties = {
     ...linkStyle,
-    color: "#1890ff",
+    color: "#FF4E18",
   };
 
   const activeLinkUnderline: React.CSSProperties = {
@@ -95,7 +106,7 @@ const Header: React.FC<HeaderProps> = () => {
     left: 0,
     width: "100%",
     height: "2px",
-    backgroundColor: "#1890ff",
+    backgroundColor: "#FF4E18",
     transform: "scaleX(1)",
     transition: "transform 0.3s",
   };
@@ -113,24 +124,29 @@ const Header: React.FC<HeaderProps> = () => {
       key: "barch",
       label: <Link href="/entrance/barch">B.ARCH Entrance</Link>,
     },
-    {
-      key: "design",
-      label: <Link href="/entrance/design">Design Entrance Coaching</Link>,
-    },
   ];
 
   const navLinks = [
     { path: "/", label: "Home" },
-    { path: "/about", label: "About Us" },
+    { 
+      path: "#about-section", 
+      label: "About Us",
+      onClick: (e: React.MouseEvent) => handleSectionClick("about-section", e)
+    },
     {
-      path: "/entrance",
+      path: "#entrance-section",
       label: "Entrance Exam",
       dropdown: true,
       items: entranceMenuItems,
+      onClick: (e: React.MouseEvent) => handleSectionClick("entrance-section", e)
     },
     { path: "/careerOpportunities", label: "Career Opportunities" },
     { path: "/success-stories", label: "Success Stories" },
-    { path: "#enquire", label: "Contact", onClick: handleContactClick },
+    // { 
+    //   path: "#enquire-section", 
+    //   label: "Contact",
+    //   onClick: (e: React.MouseEvent) => handleSectionClick("enquire-section", e)
+    // },
     { path: "/blog", label: "Blog" },
   ];
 
@@ -149,7 +165,10 @@ const Header: React.FC<HeaderProps> = () => {
             placement={isMobileView ? "topLeft" : "bottom"}
             overlayClassName="nav-dropdown"
           >
-            <div style={isActive ? activeLinkStyle : linkStyle}>
+            <div 
+              style={isActive ? activeLinkStyle : linkStyle}
+              onClick={link.onClick}
+            >
               {link.label}{" "}
               <DownOutlined style={{ fontSize: "0.7rem", marginLeft: 4 }} />
               {isActive && <span style={activeLinkUnderline} />}
@@ -189,7 +208,7 @@ const Header: React.FC<HeaderProps> = () => {
 
           <Col xs={0} sm={0} md={18} lg={18} xl={18}>
             <div className="right-section">
-              <div className={`contact-info-container ${scrolled ? "hidden" : ""}`}>
+              <div className={`contact-info-container ${scrolled ? "scrolled" : ""}`}>
                 <div className="contact-info">
                   <Button
                     type="text"
@@ -218,31 +237,31 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
               </div>
 
-              <div className="nav-section">
-                <div className={`top-buttons ${scrolled ? "hidden" : ""}`}>
+              <div className={`nav-section ${scrolled ? "scrolled" : ""}`}>
+                <div className="top-buttons">
                   <Button
                     type={
                       router.pathname === "/borigam-portal"
                         ? "primary"
                         : "default"
                     }
-                    className="header-button"
+                    className="header-button portal-button"
                     size="middle"
                     onClick={handlePortalClick}
                   >
                     Borigam Portal
                   </Button>
-                  <Link href="/admissions">
+                  {/* <Link href="/admissions">
                     <Button
                       type={
                         router.pathname === "/admissions" ? "primary" : "default"
                       }
-                      className="header-button"
+                      className="header-button admission-button"
                       size="middle"
                     >
-                      Admission Form
+                      Application Form
                     </Button>
-                  </Link>
+                  </Link> */}
                 </div>
 
                 <nav className="desktop-nav">{renderNavLinks()}</nav>
@@ -322,23 +341,23 @@ const Header: React.FC<HeaderProps> = () => {
                 type={
                   router.pathname === "/borigam-portal" ? "primary" : "default"
                 }
-                className="mobile-button"
+                className="mobile-button portal-button"
                 onClick={handlePortalClick}
               >
                 Borigam Portal
               </Button>
-              <Link href="/admissions">
+              {/* <Link href="/admissions">
                 <Button
                   block
                   type={
                     router.pathname === "/admissions" ? "primary" : "default"
                   }
-                  className="mobile-button"
+                  className="mobile-button admission-button"
                   onClick={() => setMobileMenuVisible(false)}
                 >
                   Admission Form
                 </Button>
-              </Link>
+              </Link> */}
             </div>
 
             <div className="mobile-nav-links">{renderNavLinks(true)}</div>
@@ -347,6 +366,10 @@ const Header: React.FC<HeaderProps> = () => {
       </div>
 
       <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+        
         .custom-header {
           position: fixed;
           top: 0;
@@ -370,6 +393,10 @@ const Header: React.FC<HeaderProps> = () => {
           transition: all 0.3s ease;
         }
 
+        .custom-header.scrolled {
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        }
+
         .custom-header.scrolled .main-header-row {
           padding: 5px 0;
         }
@@ -386,20 +413,20 @@ const Header: React.FC<HeaderProps> = () => {
           justify-content: flex-end;
           padding: 5px 0;
           transition: all 0.3s ease;
-          max-height: 40px;
-          overflow: hidden;
+          transform: translateX(0);
         }
 
-        .contact-info-container.hidden {
-          opacity: 0;
-          max-height: 0;
-          padding: 0;
+        .contact-info-container.scrolled {
+          justify-content: flex-start;
+          transform: translateX(5rem);
+          // margin-bottom: -5px;
         }
 
         .contact-info {
           display: flex;
           gap: 15px;
           align-items: center;
+          transition: all 0.3s ease;
         }
 
         .contact-button {
@@ -421,6 +448,14 @@ const Header: React.FC<HeaderProps> = () => {
 
         .nav-section {
           transition: all 0.3s ease;
+          transform: translateY(0);
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .nav-section.scrolled {
+          transform: translateY(-30px);
         }
 
         .top-buttons {
@@ -429,38 +464,50 @@ const Header: React.FC<HeaderProps> = () => {
           justify-content: flex-end;
           padding: 5px 0;
           transition: all 0.3s ease;
-          max-height: 40px;
-          overflow: hidden;
         }
 
-        .top-buttons.hidden {
-          opacity: 0;
-          max-height: 0;
-          padding: 0;
-        }
-
-        .header-button {
-          background-color: ${router.pathname === "/borigam-portal" ||
-          router.pathname === "/admissions"
-            ? "#1890ff"
-            : "white"};
-          border-color:hsl(5, 100.00%, 54.70%);
-          color: ${router.pathname === "/borigam-portal" ||
-          router.pathname === "/admissions"
-            ? "white"
-            : "#1890ff"};
+        /* Desktop Button Styles */
+        .header-button.portal-button,
+        .header-button.admission-button {
+          border-color: #FF4E18;
+          color: #FF4E18;
           font-weight: 500;
         }
 
-        .header-button:hover {
-          background-color: ${router.pathname === "/borigam-portal" ||
-          router.pathname === "/admissions"
-            ? "#40a9ff"
-            : "#e6f7ff"};
-          border-color: ${router.pathname === "/borigam-portal" ||
-          router.pathname === "/admissions"
-            ? "#40a9ff"
-            : "#1890ff"};
+        .header-button.portal-button.ant-btn-primary,
+        .header-button.admission-button.ant-btn-primary {
+          background-color: #FF4E18;
+          color: white;
+          border-color: #FF4E18;
+        }
+
+        .header-button.portal-button:not(.ant-btn-primary):hover,
+        .header-button.admission-button:not(.ant-btn-primary):hover {
+          background-color: #FF4E18;
+          color: white;
+          border-color: #FF4E18;
+        }
+
+        /* Mobile Button Styles */
+        .mobile-button.portal-button,
+        .mobile-button.admission-button {
+          border-color: #FF4E18;
+          color: #FF4E18;
+          font-weight: 500;
+        }
+
+        .mobile-button.portal-button.ant-btn-primary,
+        .mobile-button.admission-button.ant-btn-primary {
+          background-color: #FF4E18;
+          color: white;
+          border-color: #FF4E18;
+        }
+
+        .mobile-button.portal-button:not(.ant-btn-primary):hover,
+        .mobile-button.admission-button:not(.ant-btn-primary):hover {
+          background-color: #FF4E18;
+          color: white;
+          border-color: #FF4E18;
         }
 
         .desktop-nav {
@@ -481,9 +528,13 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .logo {
-          height: ${scrolled ? "300px" : "300px"};
+          height: 300px;
           transition: all 0.3s ease;
           object-fit: contain;
+        }
+
+        .custom-header.scrolled .logo {
+          height: 250px;
         }
 
         .mobile-menu-button {
@@ -515,7 +566,7 @@ const Header: React.FC<HeaderProps> = () => {
 
         .mobile-contact-button:hover {
           color: #ff4e18;
-          background: #f0f9ff;
+          background: #FFF0EB;
         }
 
         .mobile-buttons {
@@ -569,7 +620,29 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .nav-dropdown .ant-dropdown-menu-item:hover {
-          background-color: #e6f7ff;
+          background-color: #FFF0EB;
+          color: #FF4E18;
+        }
+
+        .nav-dropdown .ant-dropdown-menu-item a {
+          color: inherit;
+        }
+
+        .nav-dropdown .ant-dropdown-menu-item:hover a {
+          color: #FF4E18;
+        }
+
+        /* Change hover color for all links */
+        a:hover {
+          color: #FF4E18 !important;
+        }
+
+        /* Active dropdown item styling */
+        .nav-dropdown .ant-dropdown-menu-item-selected,
+        .nav-dropdown .ant-dropdown-menu-item-selected a {
+          background-color: #FFF0EB;
+          color: #FF4E18;
+          font-weight: 500;
         }
 
         @media (max-width: 992px) {

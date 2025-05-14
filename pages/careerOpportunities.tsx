@@ -226,69 +226,114 @@ export default function CareerOpportunities() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [visibleRows, setVisibleRows] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     handleResize();
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    cardData.forEach(card => {
+    // Preload images for better hover performance
+    cardData.forEach((card) => {
       const img = new Image();
       img.src = card.image;
     });
   }, []);
 
-  const handleNavigation = useCallback((link: string, index: number) => {
-    setIsLoading(index);
-    setTimeout(() => {
-      router.push(link);
-      setIsLoading(null);
-    }, 0);
-  }, [router]);
-
-  const filteredCards = cardData.filter((card) =>
-    card.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    card.description.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCards = cardData.filter(
+    (card) =>
+      card.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      card.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    // Animate rows one by one
+    const timer = setInterval(() => {
+      setVisibleRows((prev) => {
+        const cardsPerRow = isMobile ? 1 : 3;
+        const maxRows = Math.ceil(filteredCards.length / cardsPerRow);
+        return prev < maxRows ? prev + 1 : prev;
+      });
+    }, 300); // 300ms delay between rows
+
+    return () => clearInterval(timer);
+  }, [isMobile, filteredCards.length]);
+
+  const handleNavigation = useCallback(
+    (link: string, index: number) => {
+      setIsLoading(index);
+      router
+        .push(link)
+        .then(() => setIsLoading(null))
+        .catch(() => setIsLoading(null));
+    },
+    [router]
+  );
+
+  // Group cards into rows for line-by-line animation
+  const cardsPerRow = isMobile ? 1 : 3;
+  const groupedCards = [];
+  for (let i = 0; i < filteredCards.length; i += cardsPerRow) {
+    groupedCards.push(filteredCards.slice(i, i + cardsPerRow));
+  }
 
   return (
     <>
-      <Header/>
-      <section style={{ padding: "60px 20px", backgroundColor: "#f9f9f9" }}>
+      <Header />
+      <section
+        style={{
+          marginTop: "6rem",
+          padding: "60px 20px",
+          backgroundColor: "#f9f9f9",
+          minHeight: "100vh",
+          perspective: "1200px",
+        }}
+      >
         <style jsx global>{`
-          @keyframes fadeInUp {
+          @keyframes cardEntrance {
             0% {
               opacity: 0;
-              transform: translateY(40px);
+              transform: translateY(50px) scale(0.9);
             }
             100% {
               opacity: 1;
-              transform: translateY(0);
+              transform: translateY(0) scale(1);
+            }
+          }
+
+          @keyframes popOut {
+            0% {
+              transform: translateZ(0);
+            }
+            100% {
+              transform: translateZ(50px);
             }
           }
 
           .card-container {
             position: relative;
-            height: 240px;
+            height: 300px;
             width: 100%;
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            animation: fadeInUp 0.6s ease forwards;
-            background-color: #fff;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+            will-change: transform;
+            opacity: 0;
           }
 
-          .card-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+          .card-container.visible {
+            animation: cardEntrance 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)
+              forwards;
           }
 
           .card-bg {
@@ -301,11 +346,19 @@ export default function CareerOpportunities() {
             background-position: center;
             z-index: 1;
             opacity: 0.9;
-            transition: transform 0.4s ease;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+          }
+
+          .card-container:hover {
+            transform: scale(1.15) translateZ(50px) rotateX(-5deg) rotateY(5deg);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            z-index: 100 !important;
           }
 
           .card-container:hover .card-bg {
-            transform: scale(1.1);
+            transform: scale(1.1) translateZ(20px);
+            opacity: 1;
           }
 
           .card-overlay {
@@ -322,12 +375,51 @@ export default function CareerOpportunities() {
             padding: 20px;
             color: white;
             text-align: center;
-            transition: all 0.4s ease;
-            background: rgba(0, 0, 0, 0.4);
+            transition: all 0.5s ease;
+            background: linear-gradient(
+              135deg,
+              rgba(0, 0, 0, 0.4) 0%,
+              rgba(0, 0, 0, 0.7) 100%
+            );
+            transform-style: preserve-3d;
           }
 
           .card-container:hover .card-overlay {
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 0, 0, 0.6) 0%,
+              rgba(0, 0, 0, 0.95) 100%
+            );
+            transform: translateZ(30px);
+          }
+
+          .card-title {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            transform: translateZ(20px);
+          }
+
+          .card-description {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            max-width: 90%;
+            transform: translateZ(15px);
+          }
+
+          .card-container:hover .card-title {
+            transform: translateZ(40px) scale(1.1);
+            font-size: 2rem;
+          }
+
+          .card-container:hover .card-description {
+            transform: translateZ(30px) scale(1.05);
+            opacity: 1;
+            font-size: 1.2rem;
           }
 
           .loading-overlay {
@@ -336,11 +428,14 @@ export default function CareerOpportunities() {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 3;
+            transition: opacity 0.3s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(40px);
           }
 
           .spinner {
@@ -353,8 +448,12 @@ export default function CareerOpportunities() {
           }
 
           @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
           }
 
           .search-container {
@@ -362,11 +461,18 @@ export default function CareerOpportunities() {
             justify-content: center;
             margin-bottom: 40px;
             padding: 1rem 20px;
+            background: linear-gradient(
+              90deg,
+              #ff5722,
+              #ff9800
+            ); /* Gradient Background */
+            border-radius: 8px; /* Optional: Add rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Optional: Add some shadow */
           }
 
           .ant-input-affix-wrapper,
           .ant-input-search-button {
-            border-radius: 8px !important;
+            border-radius: 12px !important;
             height: 48px;
           }
 
@@ -375,52 +481,102 @@ export default function CareerOpportunities() {
             border-color: #fa8c16 !important;
             color: white !important;
             font-weight: 500;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
           }
 
           .ant-input-search-button:hover {
             background-color: #d46b08 !important;
             border-color: #d46b08 !important;
+            transform: translateX(2px);
           }
 
           .ant-input {
             border-color: #fa8c16 !important;
+            font-size: 16px;
           }
 
           .no-results {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 40px;
-            color: #999;
-            font-size: 18px;
+            padding: 60px;
+            color: #666;
+            font-size: 20px;
+            animation: cardEntrance 0.6s ease forwards;
+          }
+
+          @media (max-width: 992px) {
+            .card-container:hover {
+              transform: scale(1.15) translateZ(40px);
+            }
+          }
+
+          @media (max-width: 768px) {
+            .card-container {
+              height: 250px;
+            }
+
+            .card-title {
+              font-size: 1.5rem;
+            }
+
+            .card-container:hover .card-title {
+              font-size: 1.7rem;
+            }
+
+            .card-description {
+              font-size: 1rem;
+            }
+
+            .card-container:hover {
+              transform: scale(1.1) translateZ(30px);
+            }
           }
 
           @media (max-width: 576px) {
             .ant-input-affix-wrapper {
               font-size: 14px;
             }
+
+            .card-container {
+              height: 220px;
+            }
+
+            .card-title {
+              font-size: 1.3rem;
+            }
+
+            .card-container:hover .card-title {
+              font-size: 1.5rem;
+            }
+
+            .card-container:hover {
+              transform: scale(1.08) translateZ(20px);
+            }
           }
         `}</style>
 
         <div style={{ textAlign: "center" }}>
           <Title
-            level={2}
+            level={1}
             style={{
               color: "#0a2c64",
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: isMobile ? "24px" : "30px",
-              fontWeight: 600,
+              fontSize: isMobile ? "28px" : "36px",
+              fontWeight: 700,
               marginBottom: 0,
+              letterSpacing: "-0.5px",
             }}
           >
             Career Opportunities
           </Title>
           <div
             style={{
-              height: "3px",
-              width: "150px",
-              backgroundColor: "#fbb034",
-              margin: "10px auto 30px",
+              height: "4px",
+              width: "180px",
+              background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+              margin: "12px auto 40px",
+              borderRadius: "2px",
+              opacity: 0.8,
             }}
           />
         </div>
@@ -434,63 +590,96 @@ export default function CareerOpportunities() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onSearch={(value) => setSearchTerm(value)}
-            style={{ maxWidth: 500, width: "100%" }}
+            style={{ maxWidth: 600, width: "100%" }}
           />
         </div>
 
-        <Row gutter={[24, 24]} justify="center">
+        <div
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            transformStyle: "preserve-3d",
+          }}
+        >
           {filteredCards.length > 0 ? (
-            filteredCards.map((card, index) => (
-              <Col
-                xs={24}
-                sm={12}
-                md={8}
-                lg={6}
-                key={index}
+            groupedCards.map((row, rowIndex) => (
+              <Row
+                gutter={[24, 24]}
+                justify="center"
+                key={rowIndex}
                 style={{
-                  animation: `fadeInUp 0.6s ease ${index * 0.05}s forwards`,
-                  opacity: 0
+                  display: rowIndex < visibleRows ? "flex" : "none",
+                  marginBottom: 24,
                 }}
               >
-                <div
-                  className="card-container"
-                  onClick={() => handleNavigation(card.link, index)}
-                >
-                  <div
-                    className="card-bg"
-                    style={{ backgroundImage: `url(${card.image})` }}
-                  />
-                  <div className="card-overlay">
-                    <Title
-                      level={4}
-                      style={{ 
-                        marginBottom: 8,
-                        color: 'white',
-                        textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                {row.map((card, cardIndex) => {
+                  const index = rowIndex * cardsPerRow + cardIndex;
+                  return (
+                    <Col
+                      xs={24}
+                      sm={12}
+                      md={8}
+                      lg={8}
+                      xl={8}
+                      key={index}
+                      style={{
+                        padding: "12px",
+                        transformStyle: "preserve-3d",
+                        perspective: "1000px",
                       }}
                     >
-                      {card.title}
-                    </Title>
-                    <Text style={{ fontWeight: 500, color: "white" }}>
-                      {card.description}
-                    </Text>
-                  </div>
-                  {isLoading === index && (
-                    <div className="loading-overlay">
-                      <div className="spinner" />
-                    </div>
-                  )}
-                </div>
-              </Col>
+                      <div
+                        className={`card-container ${
+                          rowIndex < visibleRows ? "visible" : ""
+                        }`}
+                        onClick={() => handleNavigation(card.link, index)}
+                        aria-label={`Explore ${card.title} career`}
+                        style={{ animationDelay: `${cardIndex * 0.1}s` }}
+                      >
+                        <div
+                          className="card-bg"
+                          style={{ backgroundImage: `url(${card.image})` }}
+                        />
+                        <div className="card-overlay">
+                          <Title
+                            level={3}
+                            className="card-title"
+                            style={{
+                              marginBottom: 12,
+                              color: "white",
+                              fontWeight: 600,
+                            }}
+                          >
+                            {card.title}
+                          </Title>
+                          <Text
+                            className="card-description"
+                            style={{ fontWeight: 500 }}
+                          >
+                            {card.description}
+                          </Text>
+                        </div>
+                        {isLoading === index && (
+                          <div className="loading-overlay">
+                            <div className="spinner" />
+                          </div>
+                        )}
+                      </div>
+                    </Col>
+                  );
+                })}
+              </Row>
             ))
           ) : (
-            <Col span={24}>
-              <div className="no-results">
-                <p>No results found for "{searchTerm}"</p>
-              </div>
-            </Col>
+            <Row justify="center">
+              <Col span={24}>
+                <div className="no-results">
+                  <p>No results found for "{searchTerm}"</p>
+                </div>
+              </Col>
+            </Row>
           )}
-        </Row>
+        </div>
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
+import Header from "@/components/Header";
 
 const { Title, Paragraph } = Typography;
 
@@ -33,7 +34,9 @@ const listItems = (items: string[]) => (
 
 const FurnitureDesigner = () => {
   return (
-    <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+    <Header/>
+    <div style={{ padding: "60px 30px",marginTop: "6rem" ,maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
       <motion.div 
         initial="hidden" 
         animate="visible" 
@@ -259,7 +262,8 @@ const FurnitureDesigner = () => {
           </Col>
         </Row>
       </motion.div>
-    </div>
+    </div></>
+    
   );
 };
 

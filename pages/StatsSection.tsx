@@ -36,37 +36,37 @@ const StatBox = styled.div`
 
 const stats = [
   {
-    icon: <FileDoneOutlined style={{ fontSize: 36, color: '#ffcc66' }} />,
+    icon: <FileDoneOutlined style={{ fontSize: 36, color: '#fff' }} />,
     value: 560,
     suffix: '+',
     label: 'Selected in Design Colleges',
   },
   {
-    icon: <HomeOutlined style={{ fontSize: 36, color: '#ffcc66' }} />,
+    icon: <HomeOutlined style={{ fontSize: 36, color: '#fff' }} />,
     value: 670,
     suffix: '+',
     label: 'Selected in Architecture',
   },
   {
-    icon: <UserSwitchOutlined style={{ fontSize: 36, color: '#ffcc66' }} />,
+    icon: <UserSwitchOutlined style={{ fontSize: 36, color: '#fff' }} />,
     value: 14,
     suffix: '',
     label: 'UCEED IIT Qualifiers',
   },
   {
-    icon: <CheckCircleOutlined style={{ fontSize: 36, color: '#ffcc66' }} />,
+    icon: <CheckCircleOutlined style={{ fontSize: 36, color: '#fff' }} />,
     value: 103,
     suffix: '',
     label: 'NIFT Selections',
   },
   {
-    icon: <SafetyCertificateOutlined style={{ fontSize: 36, color: '#ffcc66' }} />,
+    icon: <SafetyCertificateOutlined style={{ fontSize: 36, color: '#fff' }} />,
     value: 24,
     suffix: '',
     label: 'NID Admissions',
   },
   {
-    icon: <ClockCircleOutlined style={{ fontSize: 36, color: '#ffcc66' }} />,
+    icon: <ClockCircleOutlined style={{ fontSize: 36, color: '#fff' }} />,
     value: 6,
     suffix: '+ yrs',
     label: 'Expertise',
@@ -95,7 +95,7 @@ const StatsSection: React.FC = () => {
       }}
     >
       <Title level={2} style={{ color: '#fff', textAlign: 'center', marginBottom: 40 }}>
-        Achievements
+        Our Achievements
       </Title>
 
       <Row gutter={[24, 24]} justify="center">
@@ -118,7 +118,7 @@ const StatsSection: React.FC = () => {
                 style={{
                   color: '#fff',
                   marginBottom: 8,
-                  fontSize: 36,
+                  fontSize: 40,
                 }}
               >
                 {trigger ? (
@@ -134,7 +134,7 @@ const StatsSection: React.FC = () => {
                 )}
               </Title>
 
-              <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14 }}>{stat.label}</Text>
+              <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: 20 }}>{stat.label}</Text>
             </StatBox>
           </Col>
         ))}

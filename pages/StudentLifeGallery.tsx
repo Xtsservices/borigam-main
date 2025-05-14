@@ -13,25 +13,24 @@ const CustomNextArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
     className="custom-arrow next"
     onClick={onClick}
     style={{
-
       position: "absolute",
       right: "-25px",
       top: "50%",
       transform: "translateY(-50%)",
       width: "50px",
       height: "50px",
-      backgroundColor: "rgba(255,255,255,0.8)",
+      backgroundColor: "rgba(255,255,255,0.9)",
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
       cursor: "pointer",
       zIndex: 10,
-      transition: "all 0.3s ease",
+      transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
     }}
   >
-    <RightOutlined style={{ color: "#1890ff", fontSize: "20px" }} />
+    <RightOutlined style={{ color: "#0a2c64", fontSize: "20px" }} />
   </div>
 );
 
@@ -46,18 +45,18 @@ const CustomPrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
       transform: "translateY(-50%)",
       width: "50px",
       height: "50px",
-      backgroundColor: "rgba(255,255,255,0.8)",
+      backgroundColor: "rgba(255,255,255,0.9)",
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
       cursor: "pointer",
       zIndex: 10,
-      transition: "all 0.3s ease",
+      transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
     }}
   >
-    <LeftOutlined style={{ color: "#1890ff", fontSize: "20px" }} />
+    <LeftOutlined style={{ color: "#0a2c64", fontSize: "20px" }} />
   </div>
 );
 
@@ -115,10 +114,12 @@ const StudentLifeGallery = () => {
 
   return (
     <section style={styles.galleryContainer}>
-      <Title level={2} style={styles.galleryTitle}>
-        Student Life
-      </Title>
-      <div style={styles.titleUnderline}></div>
+      <div style={styles.subHeadingContainer}>
+        <Title level={3} style={styles.subHeadingTitle}>
+          Student Studio Test Works
+          <div style={styles.titleUnderline}></div>
+        </Title>
+      </div>
 
       {!loading && (
         <>
@@ -158,12 +159,12 @@ const StudentLifeGallery = () => {
                     className="media-card"
                     style={{
                       ...styles.mediaCard,
-                      transform: hoveredItem === item ? "scale(1.05)" : "scale(1)",
+                      transform: hoveredItem === item ? "scale(1.08)" : "scale(1)",
                       boxShadow: hoveredItem === item
-                        ? "0 10px 25px rgba(0,0,0,0.2)"
-                        : "0 5px 15px rgba(0,0,0,0.1)",
+                        ? "0 15px 30px rgba(0,0,0,0.25)"
+                        : "0 8px 20px rgba(0,0,0,0.15)",
                       zIndex: hoveredItem === item ? 2 : 1,
-                      margin: "0 10px",
+                      margin: "0 15px",
                     }}
                     onMouseEnter={() => setHoveredItem(item)}
                     onMouseLeave={() => setHoveredItem(null)}
@@ -172,7 +173,7 @@ const StudentLifeGallery = () => {
                     {mediaType[item] === 'image' ? (
                       <img
                         src={`/images/ss${item}.jpeg`}
-                        // alt={`Student Life ${item}`}
+                        alt={`Student Life ${item}`}
                         style={styles.galleryImage}
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
@@ -188,10 +189,15 @@ const StudentLifeGallery = () => {
                           src={`/images/ss${item}.mp4`}
                         />
                         <div style={styles.playIcon}>
-                          <PlayCircleFilled style={{ fontSize: '36px', color: 'rgba(255,255,255,0.8)' }} />
+                          <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
                         </div>
                       </div>
                     )}
+                    <div style={{
+                      ...styles.imageOverlay,
+                      opacity: hoveredItem === item ? 1 : 0
+                    }}>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -202,9 +208,10 @@ const StudentLifeGallery = () => {
             type="primary" 
             style={styles.exploreButton}
             size="large"
+            className="explore-btn"
             onClick={() => setFullGalleryVisible(true)}
           >
-            VIEW MORE
+            EXPLORE FULL GALLERY
           </Button>
         </>
       )}
@@ -254,10 +261,11 @@ const StudentLifeGallery = () => {
               <div 
                 className="gallery-item"
                 style={{ 
-                  borderRadius: '8px', 
+                  borderRadius: '12px', 
                   overflow: 'hidden',
                   cursor: 'pointer',
-                  transition: 'all 0.3s',
+                  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.15)'
                 }}
                 onClick={() => {
                   const type = mediaType[item];
@@ -271,16 +279,15 @@ const StudentLifeGallery = () => {
                   <Image
                     src={`/images/ss${item}.jpeg`}
                     alt={`Student Life ${item}`}
-                    style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '250px', objectFit: 'cover' }}
                     preview={false}
                     fallback="/images/default-image.jpeg"
                   />
                 ) : (
-                    
-                  <div style={{ position: 'relative' }}>
+                  <div style={{ position: 'relative', height: '250px' }}>
                     <video
                       muted
-                      style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       src={`/images/ss${item}.mp4`}
                     />
                     <div style={{
@@ -289,17 +296,10 @@ const StudentLifeGallery = () => {
                       left: '50%',
                       transform: 'translate(-50%, -50%)'
                     }}>
-                      <PlayCircleFilled style={{ fontSize: '36px', color: 'rgba(255,255,255,0.8)' }} />
+                      <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
                     </div>
                   </div>
                 )}
-                <div style={{ 
-                  padding: '8px', 
-                  textAlign: 'center',
-                  backgroundColor: '#f0f0f0'
-                }}>
-                  {/* Student Life #{item} */}
-                </div>
               </div>
             </Col>
           ))}
@@ -316,21 +316,23 @@ const StudentLifeGallery = () => {
           border-radius: 50%;
           background: #ccc;
           opacity: 0.7;
+          transition: all 0.3s ease;
         }
         .slick-dots.custom-dots li.slick-active button {
-          background: #1890ff;
+          background: #0a2c64;
           opacity: 1;
+          transform: scale(1.2);
         }
         .custom-arrow:hover {
-          transform: translateY(-50%) scale(1.1);
-          background: #1890ff !important;
+          transform: translateY(-50%) scale(1.15);
+          background: #0a2c64 !important;
         }
         .custom-arrow:hover svg {
           color: white !important;
         }
         .gallery-item:hover {
-          transform: scale(1.03) !important;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+          transform: scale(1.05) !important;
+          box-shadow: 0 15px 30px rgba(0,0,0,0.25) !important;
         }
         .ant-modal-close {
           background: rgba(0,0,0,0.5) !important;
@@ -343,6 +345,13 @@ const StudentLifeGallery = () => {
           top: 10px !important;
           right: 10px !important;
         }
+        .explore-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(251, 176, 52, 0.3) !important;
+        }
+        .media-card:hover img, .media-card:hover video {
+          transform: scale(1.1);
+        }
       `}</style>
     </section>
   );
@@ -350,7 +359,7 @@ const StudentLifeGallery = () => {
 
 const styles = {
   galleryContainer: {
-    padding: "60px 20px",
+    padding: "80px 20px",
     backgroundColor: "#f9f9f9",
     textAlign: "center" as const,
     position: "relative" as const,
@@ -359,20 +368,32 @@ const styles = {
   galleryTitle: {
     color: "#0a2c64",
     marginBottom: "15px",
-    fontWeight: 600 as const,
-    fontSize: "30px",
+    fontWeight: 700 as const,
+    fontSize: "36px",
+    letterSpacing: "1px",
   },
   titleUnderline: {
-    height: "3px",
-    width: "40px",
+    height: "4px",
+    width: "60px",
     background: "#fbb034",
-    margin: "0 auto 30px",
-    borderRadius: "3px",
+    margin: "0 auto 40px",
+    borderRadius: "2px",
+    boxShadow: "0 2px 5px rgba(251, 176, 52, 0.3)",
+  },
+  subHeadingContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginLeft: '20px',
+  },
+  subHeadingTitle: {
+    marginLeft: '4rem',
+    fontSize: '30px',
+    marginBottom: '5px',
   },
   carouselContainer: {
-    maxWidth: "1200px",
+    maxWidth: "1400px",
     margin: "0 auto",
-    padding: "0 40px",
+    padding: "0 60px",
     position: "relative" as const,
   },
   carouselItem: {
@@ -380,11 +401,12 @@ const styles = {
     outline: "none",
   },
   mediaCard: {
-    borderRadius: "8px",
+    borderRadius: "12px",
     overflow: "hidden",
     position: "relative" as const,
-    transition: "all 0.3s ease",
-    height: "250px",
+    transition: "all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)",
+    height: "300px",
+    cursor: "pointer",
   },
   videoThumbnail: {
     position: 'relative' as const,
@@ -403,18 +425,31 @@ const styles = {
     height: "100%",
     objectFit: "cover" as const,
     display: "block",
-    transition: "transform 0.3s ease",
+    transition: "transform 0.4s ease",
+  },
+  imageOverlay: {
+    position: "absolute" as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: "rgba(10, 44, 100, 0.3)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "opacity 0.3s ease",
   },
   exploreButton: {
-    marginTop: "40px",
-    backgroundColor: "#fbb034",
+    marginTop: "60px",
+    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
     borderColor: "#fbb034",
-    padding: "0 30px",
-    height: "40px",
-    fontSize: "16px",
+    padding: "0 40px",
+    height: "50px",
+    fontSize: "18px",
     fontWeight: 600 as const,
-    borderRadius: "20px",
-    transition: "all 0.3s",
+    borderRadius: "25px",
+    transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+    boxShadow: "0 5px 15px rgba(251, 176, 52, 0.3)",
   },
 };
 
