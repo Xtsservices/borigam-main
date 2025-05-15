@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Carousel, Button, Typography, Modal, Row, Col, Image } from "antd";
-import { LeftOutlined, RightOutlined, PlayCircleFilled, CloseOutlined } from "@ant-design/icons";
+import {
+  LeftOutlined,
+  RightOutlined,
+  PlayCircleFilled,
+  CloseOutlined,
+} from "@ant-design/icons";
+import Link from "next/link";
 
 const { Title } = Typography;
 
@@ -66,38 +72,54 @@ const StudentLifeGallery = () => {
   const [previewMedia, setPreviewMedia] = useState("");
   const [isVideo, setIsVideo] = useState(false);
   const [fullGalleryVisible, setFullGalleryVisible] = useState(false);
-  const [mediaType, setMediaType] = useState<Record<number, 'image' | 'video'>>({});
+  const [mediaType, setMediaType] = useState<Record<number, "image" | "video">>(
+    {}
+  );
   const [loading, setLoading] = useState(true);
+  const carouselRef = useRef<any>(null);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const mediaItems = Array.from({ length: 34 }, (_, i) => i + 1);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      if (isAutoPlaying && carouselRef.current) {
+        carouselRef.current.next();
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  useEffect(() => {
     const checkMediaTypes = async () => {
-      const types: Record<number, 'image' | 'video'> = {};
-      
+      const types: Record<number, "image" | "video"> = {};
+
       for (const item of mediaItems) {
         try {
-          const img = document.createElement('img');
+          const img = document.createElement("img");
           img.src = `/images/ss${item}.jpeg`;
           await new Promise((resolve, reject) => {
             img.onload = resolve;
             img.onerror = reject;
           });
-          types[item] = 'image';
+          types[item] = "image";
         } catch {
           try {
-            const response = await fetch(`/images/ss${item}.mp4`, { method: 'HEAD' });
+            const response = await fetch(`/images/ss${item}.mp4`, {
+              method: "HEAD",
+            });
             if (response.ok) {
-              types[item] = 'video';
+              types[item] = "video";
             } else {
-              types[item] = 'image';
+              types[item] = "image";
             }
           } catch {
-            types[item] = 'image';
+            types[item] = "image";
           }
         }
       }
-      
+
       setMediaType(types);
       setLoading(false);
     };
@@ -107,9 +129,19 @@ const StudentLifeGallery = () => {
 
   const handleMediaClick = (item: number) => {
     const type = mediaType[item];
-    setPreviewMedia(`/images/ss${item}.${type === 'video' ? 'mp4' : 'jpeg'}`);
-    setIsVideo(type === 'video');
+    setPreviewMedia(`/images/ss${item}.${type === "video" ? "mp4" : "jpeg"}`);
+    setIsVideo(type === "video");
     setPreviewVisible(true);
+  };
+
+  const handleMouseEnter = (item: number) => {
+    setHoveredItem(item);
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+    setIsAutoPlaying(true);
   };
 
   return (
@@ -125,6 +157,7 @@ const StudentLifeGallery = () => {
         <>
           <div style={styles.carouselContainer}>
             <Carousel
+              ref={carouselRef}
               arrows
               dots={{ className: "custom-dots" }}
               slidesToShow={4}
@@ -159,18 +192,20 @@ const StudentLifeGallery = () => {
                     className="media-card"
                     style={{
                       ...styles.mediaCard,
-                      transform: hoveredItem === item ? "scale(1.08)" : "scale(1)",
-                      boxShadow: hoveredItem === item
-                        ? "0 15px 30px rgba(0,0,0,0.25)"
-                        : "0 8px 20px rgba(0,0,0,0.15)",
-                      zIndex: hoveredItem === item ? 2 : 1,
+                      transform:
+                        hoveredItem === item ? "scale(1.1) translateY(-10px)" : "scale(1)",
+                      boxShadow:
+                        hoveredItem === item
+                          ? "0 25px 50px rgba(0,0,0,0.4)"
+                          : "0 8px 20px rgba(0,0,0,0.15)",
+                      zIndex: hoveredItem === item ? 10 : 1,
                       margin: "0 15px",
                     }}
-                    onMouseEnter={() => setHoveredItem(item)}
-                    onMouseLeave={() => setHoveredItem(null)}
+                    onMouseEnter={() => handleMouseEnter(item)}
+                    onMouseLeave={handleMouseLeave}
                     onClick={() => handleMediaClick(item)}
                   >
-                    {mediaType[item] === 'image' ? (
+                    {mediaType[item] === "image" ? (
                       <img
                         src={`/images/ss${item}.jpeg`}
                         alt={`Student Life ${item}`}
@@ -185,18 +220,32 @@ const StudentLifeGallery = () => {
                       <div style={styles.videoThumbnail}>
                         <video
                           muted
+                          loop
+                          autoPlay
+                          playsInline
                           style={styles.galleryImage}
                           src={`/images/ss${item}.mp4`}
                         />
                         <div style={styles.playIcon}>
-                          <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
+                          <PlayCircleFilled
+                            style={{
+                              fontSize: "48px",
+                              color: "rgba(255,255,255,0.9)",
+                            }}
+                          />
                         </div>
                       </div>
                     )}
-                    <div style={{
-                      ...styles.imageOverlay,
-                      opacity: hoveredItem === item ? 1 : 0
-                    }}>
+                    <div
+                      style={{
+                        ...styles.imageOverlay,
+                        opacity: hoveredItem === item ? 1 : 0,
+                        background: "linear-gradient(to top, rgba(10,44,100,0.8) 0%, rgba(10,44,100,0.3) 50%, transparent 100%)",
+                      }}
+                    >
+                      <span style={styles.overlayText}>
+                        {mediaType[item] === "video" ? "Watch Video" : "View Image"}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -204,15 +253,16 @@ const StudentLifeGallery = () => {
             </Carousel>
           </div>
 
-          <Button 
-            type="primary" 
-            style={styles.exploreButton}
-            size="large"
-            className="explore-btn"
-            onClick={() => setFullGalleryVisible(true)}
-          >
-            EXPLORE FULL GALLERY
-          </Button>
+          <Link href="/exploreGallery#studentWorks" passHref legacyBehavior>
+            <Button
+              type="primary"
+              style={styles.exploreButton}
+              size="large"
+              className="explore-btn"
+            >
+              EXPLORE FULL GALLERY
+            </Button>
+          </Link>
         </>
       )}
 
@@ -223,87 +273,21 @@ const StudentLifeGallery = () => {
         width={isVideo ? 800 : 600}
         centered
         destroyOnClose
-        closeIcon={<CloseOutlined style={{ color: '#fff', fontSize: '24px' }} />}
+        closeIcon={
+          <CloseOutlined style={{ color: "#fff", fontSize: "24px" }} />
+        }
         bodyStyle={{ padding: 0 }}
       >
         {isVideo ? (
-          <video 
-            controls 
-            autoPlay 
-            style={{ width: '100%', outline: 'none' }}
+          <video
+            controls
+            autoPlay
+            style={{ width: "100%", outline: "none" }}
             src={previewMedia}
           />
         ) : (
-          <img 
-            alt="Preview" 
-            style={{ width: '100%' }} 
-            src={previewMedia} 
-          />
+          <img alt="Preview" style={{ width: "100%" }} src={previewMedia} />
         )}
-      </Modal>
-
-      <Modal
-        visible={fullGalleryVisible}
-        footer={null}
-        onCancel={() => setFullGalleryVisible(false)}
-        width="90%"
-        centered
-        destroyOnClose
-        closeIcon={<CloseOutlined style={{ color: '#fff', fontSize: '24px' }} />}
-        bodyStyle={{ padding: '20px', maxHeight: '80vh', overflowY: 'auto' }}
-      >
-        <Title level={3} style={{ textAlign: 'center', marginBottom: '24px', color: '#0a2c64' }}>
-          Student Life Gallery
-        </Title>
-        <Row gutter={[16, 16]}>
-          {mediaItems.map((item) => (
-            <Col key={item} xs={24} sm={12} md={8} lg={6} xl={4}>
-              <div 
-                className="gallery-item"
-                style={{ 
-                  borderRadius: '12px', 
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.15)'
-                }}
-                onClick={() => {
-                  const type = mediaType[item];
-                  setPreviewMedia(`/images/ss${item}.${type === 'video' ? 'mp4' : 'jpeg'}`);
-                  setIsVideo(type === 'video');
-                  setPreviewVisible(true);
-                  setFullGalleryVisible(false);
-                }}
-              >
-                {mediaType[item] === 'image' ? (
-                  <Image
-                    src={`/images/ss${item}.jpeg`}
-                    alt={`Student Life ${item}`}
-                    style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                    preview={false}
-                    fallback="/images/default-image.jpeg"
-                  />
-                ) : (
-                  <div style={{ position: 'relative', height: '250px' }}>
-                    <video
-                      muted
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      src={`/images/ss${item}.mp4`}
-                    />
-                    <div style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)'
-                    }}>
-                      <PlayCircleFilled style={{ fontSize: '48px', color: 'rgba(255,255,255,0.9)' }} />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Col>
-          ))}
-        </Row>
       </Modal>
 
       <style jsx global>{`
@@ -319,38 +303,29 @@ const StudentLifeGallery = () => {
           transition: all 0.3s ease;
         }
         .slick-dots.custom-dots li.slick-active button {
-          background: #0a2c64;
+          background: #ff5722;
           opacity: 1;
           transform: scale(1.2);
         }
         .custom-arrow:hover {
           transform: translateY(-50%) scale(1.15);
-          background: #0a2c64 !important;
+          background:  #ff5722 !important;
         }
         .custom-arrow:hover svg {
           color: white !important;
         }
-        .gallery-item:hover {
-          transform: scale(1.05) !important;
-          box-shadow: 0 15px 30px rgba(0,0,0,0.25) !important;
-        }
-        .ant-modal-close {
-          background: rgba(0,0,0,0.5) !important;
-          border-radius: 50%;
-          width: 40px !important;
-          height: 40px !important;
-          display: flex !important;
-          align-items: center !important;
-          justify-content: center !important;
-          top: 10px !important;
-          right: 10px !important;
-        }
         .explore-btn:hover {
           transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(251, 176, 52, 0.3) !important;
+          // box-shadow: 0 15px 30px rgba(251, 176, 52, 0.4) !important;
         }
-        .media-card:hover img, .media-card:hover video {
-          transform: scale(1.1);
+        .media-card:hover {
+          transform: scale(1.1) translateY(-10px) !important;
+        }
+        .slick-slide {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .slick-active {
+          opacity: 1 !important;
         }
       `}</style>
     </section>
@@ -381,14 +356,14 @@ const styles = {
     boxShadow: "0 2px 5px rgba(251, 176, 52, 0.3)",
   },
   subHeadingContainer: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    marginLeft: '20px',
+    display: "flex",
+    justifyContent: "flex-start",
+    marginLeft: "20px",
   },
   subHeadingTitle: {
-    marginLeft: '4rem',
-    fontSize: '30px',
-    marginBottom: '5px',
+    marginLeft: "4rem",
+    fontSize: "30px",
+    marginBottom: "5px",
   },
   carouselContainer: {
     maxWidth: "1400px",
@@ -405,20 +380,20 @@ const styles = {
     overflow: "hidden",
     position: "relative" as const,
     transition: "all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)",
-    height: "300px",
+    height: "320px",
     cursor: "pointer",
   },
   videoThumbnail: {
-    position: 'relative' as const,
-    width: '100%',
-    height: '100%'
+    position: "relative" as const,
+    width: "100%",
+    height: "100%",
   },
   playIcon: {
-    position: 'absolute' as const,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    zIndex: 2
+    position: "absolute" as const,
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 2,
   },
   galleryImage: {
     width: "100%",
@@ -433,16 +408,24 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    background: "rgba(10, 44, 100, 0.3)",
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "center",
-    transition: "opacity 0.3s ease",
+    paddingBottom: "20px",
+    transition: "all 0.3s ease",
+  },
+  overlayText: {
+    color: "white",
+    fontSize: "18px",
+    fontWeight: 600 as const,
+    textTransform: "uppercase" as const,
+    letterSpacing: "1px",
+    textShadow: "0 2px 4px rgba(0,0,0,0.5)",
   },
   exploreButton: {
     marginTop: "60px",
-    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-    borderColor: "#fbb034",
+    background: "linear-gradient(90deg, #ff5722, #ff9800)",
+    border: "none",
     padding: "0 40px",
     height: "50px",
     fontSize: "18px",

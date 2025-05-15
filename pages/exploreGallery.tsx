@@ -1,485 +1,402 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Typography, Row, Col, Image, Modal } from 'antd';
-import { LeftOutlined, RightOutlined, CloseOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Header from '@/components/Header';
+import React, { useState, useEffect } from "react";
+import { Typography, Button, Row, Col, Image, Card, Modal } from "antd";
+import { PlayCircleFilled, CloseOutlined } from "@ant-design/icons";
+import Head from "next/head";
+import Link from "next/link";
 
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
-const ExploreGallery: React.FC = () => {
-  const router = useRouter();
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [windowSize, setWindowSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
-    height: typeof window !== 'undefined' ? window.innerHeight : 800,
-  });
+type MediaType = 'image' | 'video';
+type MediaSection = 'studentWorks' | 'studentSituation' | 'lifeAtBorigam';
 
-  const images = Array.from({ length: 14 }, (_, i) => i + 8);
+interface MediaItem {
+  id: number;
+  type: MediaType;
+  section: MediaSection;
+  prefix: string;
+}
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+const ExploreGallery = () => {
+  const [activeSection, setActiveSection] = useState<MediaSection>('studentWorks');
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewMedia, setPreviewMedia] = useState("");
+  const [isVideo, setIsVideo] = useState(false);
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Media data configuration
+  const mediaData: MediaItem[] = [
+  // Student Works (8–13)
+  ...Array.from({ length: 6 }, (_, i) => ({
+    id: i + 8,
+    type: 'image' as MediaType,
+    section: 'studentWorks' as MediaSection,
+    prefix: ''
+  })),
+  // Student Situation (1–34)
+  ...Array.from({ length: 34 }, (_, i) => ({
+    id: i + 1,
+    type: ((i === 1 || i === 3) ? 'video' : 'image') as MediaType,
+    section: 'studentSituation' as MediaSection,
+    prefix: 'ss'
+  })),
+  // Life at Borigam (1–29)
+  ...Array.from({ length: 29 }, (_, i) => ({
+    id: i + 1,
+    type: ((i === 5 || (i >= 8 && i <= 13) || i === 15 || i === 17 || i >= 19) ? 'video' : 'image') as MediaType,
+    section: 'lifeAtBorigam' as MediaSection,
+    prefix: 'lob'
+  }))
+];
 
-  useEffect(() => {
-    const preloadImages = () => {
-      const imagePromises = images.map((img) => {
-        return new Promise((resolve) => {
-          const image = new window.Image();
-          image.src = `/images/${img}.jpeg`;
-          image.onload = resolve;
-          image.onerror = resolve;
-        });
-      });
 
-      Promise.all(imagePromises).then(() => {
-        setIsLoading(false);
-      });
-    };
-
-    preloadImages();
-  }, []);
-
-  const handleBack = () => {
-    router.push('/').then(() => window.scrollTo(0, 0));
+  const handleMediaClick = (item: MediaItem) => {
+    setPreviewMedia(`/images/${item.prefix}${item.id}.${item.type === 'video' ? 'mp4' : 'jpeg'}`);
+    setIsVideo(item.type === 'video');
+    setPreviewVisible(true);
   };
 
-  const openImageModal = (index: number) => {
-    setSelectedImage(index);
-    setIsModalVisible(true);
-  };
+  const filteredMedia = (section: MediaSection) => 
+    mediaData.filter(item => item.section === section);
 
-  const handleNext = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((prev) => (prev === images.length - 1 ? 0 : (prev || 0) + 1));
+  const scrollToSection = (sectionId: MediaSection) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveSection(sectionId);
     }
   };
 
-  const handlePrev = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((prev) => (prev === 0 ? images.length - 1 : (prev || 0) - 1));
+  useEffect(() => {
+    const hash = window.location.hash.substring(1) as MediaSection;
+    if (hash && ['studentWorks', 'studentSituation', 'lifeAtBorigam'].includes(hash)) {
+      scrollToSection(hash);
     }
-  };
-
-  const getModalImageDimensions = () => {
-    const maxWidth = windowSize.width * 0.9;
-    const maxHeight = windowSize.height * 0.8;
-    
-    return {
-      width: Math.min(maxWidth, 1000),
-      height: Math.min(maxHeight, 700),
-    };
-  };
+  }, []);
 
   return (
     <>
-      <Header/>
       <Head>
-        <title>Explore Our Gallery</title>
-        <meta name="description" content="Browse our full collection of images" />
+        <title>Explore Gallery | Borigam</title>
+        <meta name="description" content="Explore our student works, situation tests, and life at Borigam" />
       </Head>
-      
-      <div style={styles.container}>
-        <div style={styles.header}>
-          <Title level={1} style={styles.title}>Explore Our Gallery</Title>
-          <div style={styles.underline}></div>
+
+      <div style={{ 
+        padding: '80px 20px', 
+        maxWidth: 1400, 
+        margin: '0 auto',
+        position: 'relative'
+      }}>
+        <Title level={1} style={{ 
+          textAlign: 'center', 
+          marginBottom: '40px',
+          color: '#0a2c64'
+        }}>
+          Our Gallery
+          <div style={{
+            height: '4px',
+            width: '80px',
+            background: '#fbb034',
+            margin: '20px auto 0',
+            borderRadius: '2px'
+          }} />
+        </Title>
+
+        <div style={{ 
+          position: 'sticky',
+          top: '80px',
+          zIndex: 100,
+          background: '#fff', 
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          marginBottom: '40px'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center',
+            gap: '20px',
+            flexWrap: 'wrap' as const
+          }}>
+            <Button 
+              type={activeSection === 'studentWorks' ? 'primary' : 'default'}
+              onClick={() => scrollToSection('studentWorks')}
+              style={{
+                background: activeSection === 'studentWorks' ? '#0a2c64' : '#f0f0f0',
+                color: activeSection === 'studentWorks' ? '#fff' : '#333',
+                border: 'none',
+                borderRadius: '20px',
+                padding: '0 24px',
+                height: '40px',
+                fontWeight: 600
+              }}
+            >
+              Student Works
+            </Button>
+            <Button 
+              type={activeSection === 'studentSituation' ? 'primary' : 'default'}
+              onClick={() => scrollToSection('studentSituation')}
+              style={{
+                background: activeSection === 'studentSituation' ? '#0a2c64' : '#f0f0f0',
+                color: activeSection === 'studentSituation' ? '#fff' : '#333',
+                border: 'none',
+                borderRadius: '20px',
+                padding: '0 24px',
+                height: '40px',
+                fontWeight: 600
+              }}
+            >
+              Student Situation
+            </Button>
+            <Button 
+              type={activeSection === 'lifeAtBorigam' ? 'primary' : 'default'}
+              onClick={() => scrollToSection('lifeAtBorigam')}
+              style={{
+                background: activeSection === 'lifeAtBorigam' ? '#0a2c64' : '#f0f0f0',
+                color: activeSection === 'lifeAtBorigam' ? '#fff' : '#333',
+                border: 'none',
+                borderRadius: '20px',
+                padding: '0 24px',
+                height: '40px',
+                fontWeight: 600
+              }}
+            >
+              Life at Borigam
+            </Button>
+          </div>
         </div>
 
-        {isLoading ? (
-          <div style={styles.loadingContainer}>
-            <div className="loading-spinner"></div>
-          </div>
-        ) : (
-          <Row gutter={[16, 16]} style={styles.galleryGrid}>
-            {images.map((item, index) => (
-              <Col 
-                key={item} 
-                xs={24} sm={12} md={8} lg={6}
-                style={styles.galleryItem}
-              >
-                <div 
-                  style={styles.imageContainer}
-                  onClick={() => openImageModal(index)}
-                  className="gallery-image-container"
+        {/* Student Works Section */}
+        <section id="studentWorks" style={{ marginBottom: '80px' }}>
+          <Title level={2} style={{ 
+            color: '#0a2c64',
+            marginBottom: '30px',
+            paddingBottom: '10px',
+            borderBottom: '2px solid #fbb034',
+            display: 'inline-block'
+          }}>
+            Student Works
+          </Title>
+          
+          <Row gutter={[24, 24]}>
+            {filteredMedia('studentWorks').map((item) => (
+              <Col key={item.id} xs={24} sm={12} md={8} lg={6} xl={4}>
+                <Card
+                  hoverable
+                  style={{ borderRadius: '12px', overflow: 'hidden' }}
+                  cover={
+                    <div style={{ position: 'relative', height: '250px', overflow: 'hidden' }}>
+                      <Image
+                        src={`/images/${item.id}.jpeg`}
+                        alt={`Student Work ${item.id}`}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        preview={false}
+                        fallback="/images/default-image.jpeg"
+                        onClick={() => handleMediaClick(item)}
+                      />
+                    </div>
+                  }
                 >
-                  <Image
-                    src={`/images/${item}.jpeg`}
-                    alt={`Gallery item ${item}`}
-                    style={styles.image}
-                    preview={false}
-                    loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.onerror = null;
-                      target.src = '/images/default-image.jpeg';
-                    }}
-                  />
-                  <div style={styles.imageHover}>
-                    <span style={styles.imageText}>VIEW</span>
-                  </div>
-                </div>
+                  <Paragraph strong style={{ textAlign: 'center', marginBottom: 0 }}>
+                    Student Work #{item.id}
+                  </Paragraph>
+                </Card>
               </Col>
             ))}
           </Row>
-        )}
+        </section>
 
-        <Button 
-          type="primary" 
-          style={styles.backButton} 
-          onClick={handleBack}
-          icon={<LeftOutlined />}
-          className="back-button"
-        >
-          BACK TO GALLERY
-        </Button>
+        {/* Student Situation Section */}
+        <section id="studentSituation" style={{ marginBottom: '80px' }}>
+          <Title level={2} style={{ 
+            color: '#0a2c64',
+            marginBottom: '30px',
+            paddingBottom: '10px',
+            borderBottom: '2px solid #fbb034',
+            display: 'inline-block'
+          }}>
+            Student Situation Tests
+          </Title>
+          
+          <Row gutter={[24, 24]}>
+            {filteredMedia('studentSituation').map((item) => (
+              <Col key={item.id} xs={24} sm={12} md={8} lg={6} xl={4}>
+                <Card
+                  hoverable
+                  style={{ borderRadius: '12px', overflow: 'hidden' }}
+                  cover={
+                    <div style={{ position: 'relative', height: '250px', overflow: 'hidden' }}>
+                      {item.type === 'image' ? (
+                        <Image
+                          src={`/images/ss${item.id}.jpeg`}
+                          alt={`Situation Test ${item.id}`}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          preview={false}
+                          fallback="/images/default-image.jpeg"
+                          onClick={() => handleMediaClick(item)}
+                        />
+                      ) : (
+                        <>
+                          <video
+                            muted
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            src={`/images/ss${item.id}.mp4`}
+                            onClick={() => handleMediaClick(item)}
+                          />
+                          <PlayCircleFilled style={{ 
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            fontSize: '48px', 
+                            color: 'rgba(255,255,255,0.9)' 
+                          }} />
+                        </>
+                      )}
+                    </div>
+                  }
+                >
+                  <Paragraph strong style={{ textAlign: 'center', marginBottom: 0 }}>
+                    Situation Test #{item.id}
+                  </Paragraph>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </section>
 
+        {/* Life at Borigam Section */}
+        <section id="lifeAtBorigam" style={{ marginBottom: '80px' }}>
+          <Title level={2} style={{ 
+            color: '#0a2c64',
+            marginBottom: '30px',
+            paddingBottom: '10px',
+            borderBottom: '2px solid #fbb034',
+            display: 'inline-block'
+          }}>
+            Life at Borigam
+          </Title>
+          
+          <Row gutter={[24, 24]}>
+            {filteredMedia('lifeAtBorigam').map((item) => (
+              <Col key={item.id} xs={24} sm={12} md={8} lg={6} xl={4}>
+                <Card
+                  hoverable
+                  style={{ borderRadius: '12px', overflow: 'hidden' }}
+                  cover={
+                    <div style={{ position: 'relative', height: '250px', overflow: 'hidden' }}>
+                      {item.type === 'image' ? (
+                        <Image
+                          src={`/images/lob${item.id}.jpeg`}
+                          alt={`Life at Borigam ${item.id}`}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          preview={false}
+                          fallback="/images/default-image.jpeg"
+                          onClick={() => handleMediaClick(item)}
+                        />
+                      ) : (
+                        <>
+                          <video
+                            muted
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            src={`/images/lob${item.id}.mp4`}
+                            onClick={() => handleMediaClick(item)}
+                          />
+                          <PlayCircleFilled style={{ 
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            fontSize: '48px', 
+                            color: 'rgba(255,255,255,0.9)' 
+                          }} />
+                        </>
+                      )}
+                    </div>
+                  }
+                >
+                  <Paragraph strong style={{ textAlign: 'center', marginBottom: 0 }}>
+                    Life at Borigam #{item.id}
+                  </Paragraph>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </section>
+
+        {/* Back to Top Button */}
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <Link href="/" passHref>
+            <Button 
+              type="primary" 
+              style={{
+                background: '#0a2c64',
+                border: 'none',
+                borderRadius: '20px',
+                padding: '0 24px',
+                height: '40px',
+                fontWeight: 600,
+                marginRight: '16px'
+              }}
+            >
+              Back to Home
+            </Button>
+          </Link>
+          <Button 
+            type="primary" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{
+              background: '#fbb034',
+              border: 'none',
+              borderRadius: '20px',
+              padding: '0 24px',
+              height: '40px',
+              fontWeight: 600
+            }}
+          >
+            Back to Top
+          </Button>
+        </div>
+
+        {/* Media Preview Modal */}
         <Modal
-          open={isModalVisible}
-          onCancel={() => setIsModalVisible(false)}
+          open={previewVisible}
           footer={null}
-          closeIcon={<CloseOutlined style={styles.modalCloseIcon} />}
-          width="auto"
-          bodyStyle={{
-            ...styles.modalBody,
-            padding: '40px',
-            maxWidth: '95vw',
-            maxHeight: '90vh',
-          }}
+          onCancel={() => setPreviewVisible(false)}
+          width={isVideo ? 800 : 600}
           centered
-          style={styles.modal}
-        >
-          {selectedImage !== null && (
-            <div style={styles.modalContent}>
-              <Button 
-                type="text" 
-                style={styles.modalArrowLeft} 
-                onClick={handlePrev}
-                icon={<LeftOutlined style={styles.modalArrowIcon} />}
-                className="modal-nav-button"
-              />
-              <div style={{
-                ...styles.modalImageContainer,
-                ...getModalImageDimensions(),
-              }}>
-                <Image
-                  src={`/images/${selectedImage + 8}.jpeg`}
-                  alt={`Gallery item ${selectedImage + 1}`}
-                  style={{
-                    ...styles.modalImage,
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    width: 'auto',
-                    height: 'auto',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                  }}
-                  preview={false}
-                />
-              </div>
-              <Button 
-                type="text" 
-                style={styles.modalArrowRight} 
-                onClick={handleNext}
-                icon={<RightOutlined style={styles.modalArrowIcon} />}
-                className="modal-nav-button"
-              />
-              <div style={styles.imageCounter}>
-                {selectedImage + 1} / {images.length}
-              </div>
+          destroyOnClose
+          closeIcon={
+            <div style={{
+              background: 'rgba(0,0,0,0.5)',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <CloseOutlined style={{ color: '#fff', fontSize: '24px' }} />
             </div>
+          }
+          bodyStyle={{ padding: 0 }}
+        >
+          {isVideo ? (
+            <video 
+              controls 
+              autoPlay 
+              style={{ width: '100%', outline: 'none' }}
+              src={previewMedia}
+            />
+          ) : (
+            <img 
+              alt="Preview" 
+              style={{ width: '100%', maxHeight: '80vh', objectFit: 'contain' }} 
+              src={previewMedia} 
+            />
           )}
         </Modal>
-
-        <style jsx global>{`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-
-          .loading-spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #0a2c64;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-          }
-
-          .gallery-image-container {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            overflow: hidden;
-          }
-
-          .gallery-image-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-          }
-
-          .gallery-image-container:hover .ant-image-img {
-            transform: scale(1.03);
-          }
-
-          .gallery-image-container:hover .imageHover {
-            opacity: 1;
-          }
-
-          .gallery-image-container:hover .imageText {
-            transform: translateY(0);
-          }
-
-          .back-button {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-          }
-
-          .back-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(10, 44, 100, 0.3);
-          }
-
-          .modal-nav-button {
-            transition: all 0.3s ease;
-          }
-
-          .modal-nav-button:hover {
-            background: rgba(10, 44, 100, 0.1);
-          }
-
-          .ant-modal-content {
-            border-radius: 16px !important;
-            overflow: hidden;
-          }
-
-          @media (max-width: 768px) {
-            .ant-col {
-              padding: 8px !important;
-            }
-            
-            .gallery-image-container {
-              height: 200px !important;
-            }
-            
-            .modal-nav-button {
-              width: 40px !important;
-              height: 40px !important;
-            }
-            
-            .modal-arrow-icon {
-              font-size: 24px !important;
-            }
-
-            .ant-modal-body {
-              padding: 20px !important;
-            }
-          }
-        `}</style>
       </div>
     </>
   );
-};
-
-const styles = {
-  container: {
-    marginTop: '110px',
-    padding: '40px 20px',
-    backgroundColor: '#f9f9f9',
-    minHeight: '100vh',
-  },
-  header: {
-    textAlign: 'center' as const,
-    marginBottom: '40px',
-    animation: 'fadeIn 0.6s ease-out',
-  },
-  title: {
-    color: '#0a2c64',
-    fontWeight: 700 as const,
-    fontSize: 'clamp(28px, 5vw, 42px)',
-    marginBottom: '10px',
-    letterSpacing: '1px',
-  },
-  underline: {
-    height: '4px',
-    width: '80px',
-    background: 'linear-gradient(90deg, #fbb034, #ffdd59)',
-    margin: '0 auto',
-    borderRadius: '3px',
-  },
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '50vh',
-  },
-  galleryGrid: {
-    maxWidth: '1400px',
-    margin: '0 auto',
-    animation: 'fadeIn 0.6s ease-out',
-  },
-  galleryItem: {
-    display: 'flex',
-    justifyContent: 'center',
-    animation: 'fadeIn 0.6s ease-out',
-    padding: '8px',
-  },
-  imageContainer: {
-    position: 'relative' as const,
-    borderRadius: '12px',
-    overflow: 'hidden',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    height: '250px',
-    width: '100%',
-    backgroundColor: '#fff',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover' as const,
-    display: 'block',
-    transition: 'transform 0.4s ease',
-  },
-  imageHover: {
-    position: 'absolute' as const,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'rgba(10, 44, 100, 0.7)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    opacity: 0,
-    transition: 'opacity 0.3s ease',
-  },
-  imageText: {
-    color: 'white',
-    fontSize: '18px',
-    fontWeight: 600 as const,
-    letterSpacing: '1px',
-    textTransform: 'uppercase' as const,
-    transform: 'translateY(20px)',
-    transition: 'transform 0.3s ease',
-  },
-  backButton: {
-    display: 'block',
-    margin: '40px auto 0',
-    backgroundColor: '#0a2c64',
-    borderColor: '#0a2c64',
-    padding: '0 30px',
-    height: '45px',
-    fontSize: '16px',
-    fontWeight: 600 as const,
-    borderRadius: '25px',
-    boxShadow: '0 5px 15px rgba(10, 44, 100, 0.2)',
-  },
-  modal: {
-    maxWidth: '100vw',
-  },
-  modalBody: {
-    padding: 0,
-    backgroundColor: '#ffffff',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalContent: {
-    position: 'relative' as const,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  modalImageContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 auto',
-    backgroundColor: '#fff',
-    borderRadius: '12px',
-    padding: '10px',
-  },
-  modalImage: {
-    borderRadius: '8px',
-    objectFit: 'contain' as const,
-  },
-  modalArrowLeft: {
-    position: 'absolute' as const,
-    left: '10px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    zIndex: 1,
-    color: '#0a2c64',
-    fontSize: '24px',
-    width: '50px',
-    height: '50px',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'all 0.3s ease',
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-  },
-  modalArrowRight: {
-    position: 'absolute' as const,
-    right: '10px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    zIndex: 1,
-    color: '#0a2c64',
-    fontSize: '24px',
-    width: '50px',
-    height: '50px',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'all 0.3s ease',
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-  },
-  modalArrowIcon: {
-    fontSize: '24px',
-  },
-  modalCloseIcon: {
-    color: '#0a2c64',
-    fontSize: '20px',
-    background: 'rgba(255,255,255,0.9)',
-    borderRadius: '50%',
-    padding: '6px',
-    transition: 'all 0.3s ease',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-  },
-  imageCounter: {
-    position: 'absolute' as const,
-    bottom: '20px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    background: 'rgba(10, 44, 100, 0.9)',
-    color: 'white',
-    padding: '8px 20px',
-    borderRadius: '25px',
-    fontSize: '14px',
-    fontWeight: 500 as const,
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-  },
 };
 
 export default ExploreGallery;

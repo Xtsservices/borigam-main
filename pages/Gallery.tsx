@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Carousel, Button, Typography } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -63,6 +63,28 @@ const CustomPrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
 
 const Gallery = () => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const carouselRef = useRef<any>(null);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isAutoPlaying && carouselRef.current) {
+        carouselRef.current.next();
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  const handleMouseEnter = (item: number) => {
+    setHoveredItem(item);
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+    setIsAutoPlaying(true);
+  };
 
   return (
     <section style={styles.galleryContainer}>
@@ -78,9 +100,9 @@ const Gallery = () => {
         </Title>
       </div>
       
-
       <div style={styles.carouselContainer}>
         <Carousel
+          ref={carouselRef}
           arrows
           dots={{ className: "custom-dots" }}
           slidesToShow={4}
@@ -114,32 +136,36 @@ const Gallery = () => {
               <div
                 style={{
                   ...styles.imageCard,
-                  transform: hoveredItem === item ? "scale(1.08)" : "scale(1)",
+                  transform: hoveredItem === item ? "scale(1.1) translateY(-10px)" : "scale(1)",
                   boxShadow:
                     hoveredItem === item
-                      ? "0 15px 30px rgba(0,0,0,0.25)"
+                      ? "0 20px 40px rgba(0,0,0,0.3)"
                       : "0 8px 20px rgba(0,0,0,0.15)",
-                  zIndex: hoveredItem === item ? 2 : 1,
+                  zIndex: hoveredItem === item ? 10 : 1,
                   margin: "0 15px",
                 }}
-                onMouseEnter={() => setHoveredItem(item)}
-                onMouseLeave={() => setHoveredItem(null)}
+                onMouseEnter={() => handleMouseEnter(item)}
+                onMouseLeave={handleMouseLeave}
               >
-                <img
-                  src={`/images/${item}.jpeg`}
-                  alt="Gallery image"
-                  style={styles.galleryImage}
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "/images/default-image.jpeg";
-                  }}
-                />
+                <div style={styles.imageWrapper}>
+                  <img
+                    src={`/images/${item}.jpeg`}
+                    alt="Gallery image"
+                    style={styles.galleryImage}
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = "/images/default-image.jpeg";
+                    }}
+                  />
+                </div>
                 <div style={{
                   ...styles.imageOverlay,
-                  opacity: hoveredItem === item ? 1 : 0
+                  opacity: hoveredItem === item ? 1 : 0,
+                  background: "linear-gradient(to top, rgba(10,44,100,0.8) 0%, rgba(10,44,100,0.3) 50%, transparent 100%)"
                 }}>
+                  <span style={styles.overlayText}>View Details</span>
                 </div>
               </div>
             </div>
@@ -147,7 +173,7 @@ const Gallery = () => {
         </Carousel>
       </div>
 
-      <Link href="/exploreGallery" passHref legacyBehavior>
+      <Link href="/exploreGallery#studentSituation" passHref legacyBehavior>
         <Button 
           type="primary" 
           style={styles.exploreButton} 
@@ -177,10 +203,20 @@ const Gallery = () => {
         }
         .custom-arrow:hover {
           transform: translateY(-50%) scale(1.15);
+          background: #0a2c64 !important;
+        }
+        .custom-arrow:hover svg {
+          color: white !important;
         }
         .explore-btn:hover {
           transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(251, 176, 52, 0.3);
+          box-shadow: 0 15px 30px rgba(251, 176, 52, 0.4) !important;
+        }
+        .slick-slide {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .slick-active {
+          opacity: 1 !important;
         }
       `}</style>
     </section>
@@ -229,21 +265,28 @@ const styles = {
   carouselItem: {
     padding: "0 5px",
     outline: "none",
+    transition: "all 0.5s ease",
   },
   imageCard: {
     borderRadius: "12px",
     overflow: "hidden",
     position: "relative" as const,
     transition: "all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)",
-    height: "300px",
+    height: "320px",
     cursor: "pointer",
+  },
+  imageWrapper: {
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    borderRadius: "12px",
   },
   galleryImage: {
     width: "100%",
     height: "100%",
     objectFit: "cover" as const,
     display: "block",
-    transition: "transform 0.4s ease",
+    transition: "transform 0.5s ease",
   },
   imageOverlay: {
     position: "absolute" as const,
@@ -251,11 +294,11 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    // background: "rgba(10, 44, 100, 0.7)",
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "center",
-    transition: "opacity 0.3s ease",
+    paddingBottom: "20px",
+    transition: "all 0.3s ease",
   },
   overlayText: {
     color: "white",
@@ -263,11 +306,12 @@ const styles = {
     fontWeight: 600 as const,
     textTransform: "uppercase" as const,
     letterSpacing: "1px",
+    textShadow: "0 2px 4px rgba(0,0,0,0.5)",
   },
   exploreButton: {
     marginTop: "60px",
     background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-    borderColor: "#fbb034",
+    border: "none",
     padding: "0 40px",
     height: "50px",
     fontSize: "18px",

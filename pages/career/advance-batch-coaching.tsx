@@ -1,4 +1,3 @@
-// ./pages/careers/advance-batch-coaching.tsx
 import React from "react";
 import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
@@ -14,6 +13,9 @@ const cardStyle: React.CSSProperties = {
   marginBottom: 24,
   backgroundColor: "#ffffff",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  height: "100%", // Ensure all cards have equal height
+  display: "flex",
+  flexDirection: "column",
 };
 
 const sectionVariant = {
@@ -26,8 +28,13 @@ const cardVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const headingVariant = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "16px", marginBottom: 0 }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -45,7 +52,7 @@ const AdvanceBatchPage = () => {
             <div style={{
               height: 4,
               width: 120,
-              backgroundColor: '#3498db',
+              backgroundColor: '#ff5722',
               margin: '20px auto 40px',
             }} />
           </Title>
@@ -60,7 +67,7 @@ const AdvanceBatchPage = () => {
             <Card
               style={{
                 ...cardStyle,
-                background: 'linear-gradient(135deg, #ff5722, #ff4500, #ff7043)',
+                background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                 color: '#fff',
                 marginBottom: '40px'
               }}
@@ -78,27 +85,50 @@ const AdvanceBatchPage = () => {
             </Card>
           </motion.div>
 
-          {/* Two Main Content Boxes */}
-          <Row gutter={[32, 32]} style={{ marginBottom: '40px' }}>
-            <Col xs={24} md={12}>
+          {/* Why Join Section Heading */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={headingVariant}
+            viewport={{ once: true, margin: "-100px" }}
+            style={{ marginBottom: 30 }}
+          >
+            <div style={{
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              padding: '20px 30px',
+              borderRadius: '12px',
+              color: 'white',
+              textAlign: 'center',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            }}>
+              <Title level={2} style={{ color: 'white', margin: 0 }}>
+                Why Choose Our Advance Batch?
+              </Title>
+            </div>
+          </motion.div>
+
+          {/* Two Main Content Boxes - Equal Height */}
+          <Row gutter={[32, 32]} style={{ marginBottom: '40px', alignItems: 'stretch' }}>
+            <Col xs={24} md={12} style={{ display: 'flex' }}>
               <motion.div
                 variants={cardVariant}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ scale: 1.03 }}
+                style={{ flex: 1 }}
               >
                 <Card
                   title={<span style={{ fontSize: "22px" }}>Why Join the Advance Batch?</span>}
                   style={cardStyle}
                   headStyle={{
-                    background: 'linear-gradient(135deg, #3498db, #2e86de)',
+                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                     color: "#fff",
                     fontSize: "20px",
                     padding: "20px 24px",
                     border: "none",
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: "24px", flex: 1 }}
                 >
                   <Paragraph style={{ fontSize: '16px', marginBottom: '20px' }}>
                     Time is limited, competition is tough, and precision is everything. The Advance Batch focuses on:
@@ -110,46 +140,47 @@ const AdvanceBatchPage = () => {
                     "Smart revision techniques",
                     "Final portfolio & interview polishing"
                   ])}
-                  <Paragraph style={{ fontSize: '16px', marginTop: '20px' }}>
+                  <Paragraph style={{ fontSize: '16px', marginTop: 'auto', paddingTop: '20px' }}>
                     Ideal for students in Class 12, drop-year aspirants, or final-year grads preparing for entrance tests.
                   </Paragraph>
                 </Card>
               </motion.div>
             </Col>
             
-            <Col xs={24} md={12}>
+            <Col xs={24} md={12} style={{ display: 'flex' }}>
               <motion.div
                 variants={cardVariant}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ scale: 1.03 }}
+                style={{ flex: 1 }}
               >
                 <Card
                   title={<span style={{ fontSize: "22px" }}>What Our Advance Coaching Offers</span>}
                   style={cardStyle}
                   headStyle={{
-                    background: 'linear-gradient(135deg, #3498db, #2e86de)',
+                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                     color: "#fff",
                     fontSize: "20px",
                     padding: "20px 24px",
                     border: "none",
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: "24px", flex: 1 }}
                 >
+                  <Paragraph style={{ fontSize: '16px', marginBottom: '20px' }}>
+                    Our comprehensive program includes:
+                  </Paragraph>
                   {listItems([
                     "Intensive Revision of Complete Syllabus",
                     "Topic-Wise Timed Mock Tests & Past Year Paper Solving",
-                    "Portfolio, Studio Test & Situation Test Preparation (NID/NIFT)",
-                    "Drawing Speed & Accuracy Sessions (JJ/NATA/CEED)",
-                    "Design Aptitude, Logical Reasoning & MCQ Practice (UCEED/CEED)",
+                    "Portfolio, Studio Test & Situation Test Preparation",
+                    "Drawing Speed & Accuracy Sessions",
+                    "Design Aptitude, Logical Reasoning & MCQ Practice",
                     "Interview Preparation + Presentation Skills",
-                    "Error Analysis + Personalized Improvement Plans",
-                    "Online & Offline Crash Batch Options",
-                    "Daily Practice Material via App + Full-Length Tests",
-                    "Live Feedback from Experts + Performance Tracking"
+                    "Error Analysis + Personalized Improvement Plans"
                   ])}
-                  <Paragraph style={{ fontSize: '16px', marginTop: '20px' }}>
+                  <Paragraph style={{ fontSize: '16px', marginTop: 'auto', paddingTop: '20px' }}>
                     You'll learn how to stay calm, work smart, and approach each exam with clarity and confidence.
                   </Paragraph>
                 </Card>
@@ -157,7 +188,29 @@ const AdvanceBatchPage = () => {
             </Col>
           </Row>
 
-          {/* Detailed Sections Below */}
+          {/* Focused Coaching Heading */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={headingVariant}
+            viewport={{ once: true, margin: "-100px" }}
+            style={{ marginBottom: 30, marginTop: 60 }}
+          >
+            <div style={{
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              padding: '20px 30px',
+              borderRadius: '12px',
+              color: 'white',
+              textAlign: 'center',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            }}>
+              <Title level={2} style={{ color: 'white', margin: 0 }}>
+                Focused Coaching For
+              </Title>
+            </div>
+          </motion.div>
+
+          {/* Focused Coaching Content Box */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -165,54 +218,93 @@ const AdvanceBatchPage = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <Card
-              title={<span style={{ fontSize: "22px" }}>Focused Coaching For</span>}
-              style={cardStyle}
-              headStyle={{
-                background: 'linear-gradient(135deg, #ff5722, #ff4500, #ff7043)',
-                color: "#fff",
-                fontSize: "20px",
-                padding: "20px 24px",
-                border: "none",
-              }}
-              bodyStyle={{ padding: "24px" }}
+              style={{ ...cardStyle, padding: 0 }}
+              bodyStyle={{ padding: "24px", flex: 1 }}
             >
-              <Row gutter={[24, 24]}>
-                <Col xs={24} md={8}>
-                  <Title level={4} style={{ color: '#ff5722' }}>Design Exams</Title>
-                  <ul style={{ paddingLeft: 20 }}>
-                    <li>NID DAT</li>
-                    <li>NIFT</li>
-                    <li>UCEED</li>
-                    <li>CEED</li>
-                    <li>MITID</li>
-                    <li>UID</li>
-                  </ul>
+              <Row gutter={[24, 24]} style={{ height: '100%' }}>
+                <Col xs={24} md={8} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ 
+                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+                    color: 'white',
+                    padding: '15px',
+                    textAlign: 'center',
+                    margin: '-24px -24px 20px -24px'
+                  }}>
+                    <Title level={4} style={{ color: 'white', margin: 0 }}>Design Exams</Title>
+                  </div>
+                  {listItems([
+                    "NID DAT",
+                    "NIFT",
+                    "UCEED",
+                    "CEED",
+                    "MITID",
+                    "UID"
+                  ])}
                 </Col>
-                <Col xs={24} md={8}>
-                  <Title level={4} style={{ color: '#ff5722' }}>Architecture Exams</Title>
-                  <ul style={{ paddingLeft: 20 }}>
-                    <li>NATA</li>
-                    <li>JEE Paper 2</li>
-                    <li>CEPT</li>
-                  </ul>
+                <Col xs={24} md={8} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ 
+                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+                    color: 'white',
+                    padding: '15px',
+                    textAlign: 'center',
+                    margin: '-24px -24px 20px -24px'
+                  }}>
+                    <Title level={4} style={{ color: 'white', margin: 0 }}>Architecture Exams</Title>
+                  </div>
+                  {listItems([
+                    "NATA",
+                    "JEE Paper 2",
+                    "CEPT"
+                  ])}
                 </Col>
-                <Col xs={24} md={8}>
-                  <Title level={4} style={{ color: '#ff5722' }}>Fine Arts Exams</Title>
-                  <ul style={{ paddingLeft: 20 }}>
-                    <li>JJ School</li>
-                    <li>BHU</li>
-                    <li>MSU</li>
-                    <li>DU College of Art</li>
-                  </ul>
+                <Col xs={24} md={8} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ 
+                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+                    color: 'white',
+                    padding: '15px',
+                    textAlign: 'center',
+                    margin: '-24px -24px 20px -24px'
+                  }}>
+                    <Title level={4} style={{ color: 'white', margin: 0 }}>Fine Arts Exams</Title>
+                  </div>
+                  {listItems([
+                    "JJ School",
+                    "BHU",
+                    "MSU",
+                    "DU College of Art"
+                  ])}
                 </Col>
               </Row>
             </Card>
           </motion.div>
 
-          <Row gutter={[32, 32]} style={{ marginTop: 40 }}>
+          {/* Who Can Join Heading */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={headingVariant}
+            viewport={{ once: true, margin: "-100px" }}
+            style={{ marginBottom: 30, marginTop: 60 }}
+          >
+            <div style={{
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              padding: '20px 30px',
+              borderRadius: '12px',
+              color: 'white',
+              textAlign: 'center',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            }}>
+              <Title level={2} style={{ color: 'white', margin: 0 }}>
+                Who Should Join?
+              </Title>
+            </div>
+          </motion.div>
+
+          {/* Three Column Section - Equal Height */}
+          <Row gutter={[32, 32]} style={{ marginTop: 20, alignItems: 'stretch' }}>
             {[
               {
-                title: "Who Can Join?",
+                title: "Eligibility",
                 items: [
                   "Class 12 students appearing for upcoming entrance exams",
                   "Graduates applying for PG courses (M.Des, MFA, etc.)",
@@ -222,17 +314,18 @@ const AdvanceBatchPage = () => {
                 footer: "Whether you're a first-timer or looking to improve your rank, we'll help you bring your A-game."
               },
               {
-                title: "Our Unique Approach",
+                title: "Our Methodology",
                 items: [
                   "Each batch is exam-specific",
                   "Mentors tailor strategy to your target college and exam date",
                   "Full-length mocks under real exam conditions",
                   "One-on-one feedback sessions",
                   "Performance tracking and analytics",
-                ]
+                ],
+                footer: "We customize our approach to maximize your success."
               },
               {
-                title: "Let's Finish Strong",
+                title: "Final Push to Success",
                 items: [
                   "Join our Advance Batch for focused preparation",
                   "Full-length mocks and expert strategy",
@@ -243,29 +336,30 @@ const AdvanceBatchPage = () => {
                 footer: "It's your last lap—let's sprint towards success!"
               }
             ].map((section, idx) => (
-              <Col xs={24} md={8} key={idx}>
+              <Col xs={24} md={8} key={idx} style={{ display: 'flex' }}>
                 <motion.div
                   variants={cardVariant}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: "-100px" }}
                   whileHover={{ scale: 1.03 }}
+                  style={{ flex: 1 }}
                 >
                   <Card
                     title={<span style={{ fontSize: "22px" }}>{section.title}</span>}
                     style={cardStyle}
                     headStyle={{
-                      background: 'linear-gradient(135deg, #3498db, #2e86de)',
+                      background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                       color: "#fff",
                       fontSize: "20px",
                       padding: "20px 24px",
                       border: "none",
                     }}
-                    bodyStyle={{ padding: "24px" }}
+                    bodyStyle={{ padding: "24px", flex: 1 }}
                   >
                     {listItems(section.items)}
                     {section.footer && (
-                      <Paragraph style={{ fontSize: '16px', marginTop: '20px', fontStyle: 'italic' }}>
+                      <Paragraph style={{ fontSize: '16px', marginTop: 'auto', paddingTop: '20px', fontStyle: 'italic' }}>
                         {section.footer}
                       </Paragraph>
                     )}
