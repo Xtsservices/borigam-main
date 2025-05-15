@@ -87,7 +87,7 @@ const StatsSection: React.FC = () => {
   return (
     <section
       style={{
-        background: 'linear-gradient(135deg, #ff5722, #ff4500, #ff7043)',
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
         color: '#fff',
         padding: '60px 20px',
         borderRadius: 16,

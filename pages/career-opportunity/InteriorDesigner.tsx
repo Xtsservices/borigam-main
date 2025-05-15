@@ -72,8 +72,7 @@ const InteriorDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Key Responsibilities</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
-                  color: "#fff",
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',                  color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
                   border: 'none'
@@ -104,8 +103,7 @@ const InteriorDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Types of Interior Designers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
-                  color: "#fff",
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',                  color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
                   border: 'none'
@@ -136,8 +134,7 @@ const InteriorDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Skills Required</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
-                  color: "#fff",
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',                  color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
                   border: 'none'
@@ -168,8 +165,7 @@ const InteriorDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Legendary Interior Designers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
-                  color: "#fff",
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',                  color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
                   border: 'none'

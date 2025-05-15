@@ -142,11 +142,6 @@ const Header: React.FC<HeaderProps> = () => {
     },
     { path: "/careerOpportunities", label: "Career Opportunities" },
     { path: "/success-stories", label: "Success Stories" },
-    // { 
-    //   path: "#enquire-section", 
-    //   label: "Contact",
-    //   onClick: (e: React.MouseEvent) => handleSectionClick("enquire-section", e)
-    // },
     { path: "/blog", label: "Blog" },
   ];
 
@@ -201,7 +196,11 @@ const Header: React.FC<HeaderProps> = () => {
           <Col xs={12} sm={12} md={6} lg={6} xl={6}>
             <div className="logo-container">
               <Link href="/">
-                <img src="/images/logo.png" alt="Borigam Logo" className="logo" />
+                <img 
+                  src="/images/logo.png" 
+                  alt="Borigam Logo" 
+                  className={`logo ${isMobile ? "mobile-logo" : ""}`} 
+                />
               </Link>
             </div>
           </Col>
@@ -216,7 +215,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="contact-button"
                     onClick={() => handlePhoneClick("9666169555")}
                   >
-                    9666169555
+                    <span className="contact-text">9666169555</span>
                   </Button>
                   <Button
                     type="text"
@@ -224,7 +223,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="contact-button"
                     onClick={() => handlePhoneClick("7995297686")}
                   >
-                    7995297686
+                    <span className="contact-text">7995297686</span>
                   </Button>
                   <Button
                     type="text"
@@ -232,7 +231,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="contact-button"
                     onClick={handleMailClick}
                   >
-                    borigaminstitute@gmail.com
+                    <span className="contact-text">borigaminstitute@gmail.com</span>
                   </Button>
                 </div>
               </div>
@@ -251,17 +250,6 @@ const Header: React.FC<HeaderProps> = () => {
                   >
                     Borigam Portal
                   </Button>
-                  {/* <Link href="/admissions">
-                    <Button
-                      type={
-                        router.pathname === "/admissions" ? "primary" : "default"
-                      }
-                      className="header-button admission-button"
-                      size="middle"
-                    >
-                      Application Form
-                    </Button>
-                  </Link> */}
                 </div>
 
                 <nav className="desktop-nav">{renderNavLinks()}</nav>
@@ -280,89 +268,69 @@ const Header: React.FC<HeaderProps> = () => {
         </Row>
 
         <Drawer
-          title={
-            <div className="drawer-header">
-              <Link href="/">
-                <img
-                  src="/images/logo.png"
-                  alt="Borigam Logo"
-                  className="mobile-logo"
-                />
-              </Link>
-              <Button
-                icon={<CloseOutlined />}
-                type="text"
-                onClick={() => setMobileMenuVisible(false)}
-                className="close-button"
-              />
-            </div>
-          }
-          placement="right"
-          onClose={() => setMobileMenuVisible(false)}
-          open={mobileMenuVisible}
-          width={280}
-          closable={false}
-          className="mobile-drawer"
-        >
-          <Space direction="vertical" className="mobile-nav">
-            <div className="mobile-contact-info">
-              <Button
-                block
-                icon={<PhoneOutlined />}
-                type="text"
-                className="mobile-contact-button"
-                onClick={() => handlePhoneClick("9666169555")}
-              >
-                9666169555
-              </Button>
-              <Button
-                block
-                icon={<PhoneOutlined />}
-                type="text"
-                className="mobile-contact-button"
-                onClick={() => handlePhoneClick("7995297686")}
-              >
-                7995297686
-              </Button>
-              <Button
-                block
-                icon={<MailOutlined />}
-                type="text"
-                className="mobile-contact-button"
-                onClick={handleMailClick}
-              >
-                borigaminstitute@gmail.com
-              </Button>
-            </div>
+  title={
+    <div className="drawer-header">
+      <Button
+        icon={<CloseOutlined />}
+        type="text"
+        onClick={() => setMobileMenuVisible(false)}
+        className="close-button"
+      />
+    </div>
+  }
+  placement="right"
+  onClose={() => setMobileMenuVisible(false)}
+  open={mobileMenuVisible}
+  width={280}
+  closable={false}
+  className="mobile-drawer"
+>
+  <Space direction="vertical" className="mobile-nav">
+    <div className="mobile-contact-info">
+      <Button
+        block
+        icon={<PhoneOutlined />}
+        type="text"
+        className="mobile-contact-button"
+        onClick={() => handlePhoneClick("9666169555")}
+      >
+        9666169555
+      </Button>
+      <Button
+        block
+        icon={<PhoneOutlined />}
+        type="text"
+        className="mobile-contact-button"
+        onClick={() => handlePhoneClick("7995297686")}
+      >
+        7995297686
+      </Button>
+      <Button
+        block
+        icon={<MailOutlined />}
+        type="text"
+        className="mobile-contact-button"
+        onClick={handleMailClick}
+      >
+        borigaminstitute@gmail.com
+      </Button>
+    </div>
 
-            <div className="mobile-buttons">
-              <Button
-                block
-                type={
-                  router.pathname === "/borigam-portal" ? "primary" : "default"
-                }
-                className="mobile-button portal-button"
-                onClick={handlePortalClick}
-              >
-                Borigam Portal
-              </Button>
-              {/* <Link href="/admissions">
-                <Button
-                  block
-                  type={
-                    router.pathname === "/admissions" ? "primary" : "default"
-                  }
-                  className="mobile-button admission-button"
-                  onClick={() => setMobileMenuVisible(false)}
-                >
-                  Admission Form
-                </Button>
-              </Link> */}
-            </div>
+    <div className="mobile-buttons">
+      <Button
+        block
+        type={router.pathname === "/borigam-portal" ? "primary" : "default"}
+        className="mobile-button portal-button"
+        onClick={handlePortalClick}
+      >
+        Borigam Portal
+      </Button>
+    </div>
 
-            <div className="mobile-nav-links">{renderNavLinks(true)}</div>
-          </Space>
-        </Drawer>
+    <div className="mobile-nav-links">{renderNavLinks(true)}</div>
+  </Space>
+</Drawer>
+
       </div>
 
       <style jsx global>{`
@@ -401,8 +369,35 @@ const Header: React.FC<HeaderProps> = () => {
           padding: 5px 0;
         }
 
+        .logo-container {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          cursor: pointer;
+        }
+
+        .logo {
+          height: 17rem;
+          margin-top: -10rem;
+          margin-bottom: -10rem;
+          margin-left: -11rem;
+          transition: all 0.3s ease;
+          object-fit: contain;
+        }
+
+        .logo.mobile-logo {
+          height: 60px;
+        }
+
+        .custom-header.scrolled .logo {
+          height: 15rem;
+        }
+
+        .custom-header.scrolled .logo.mobile-logo {
+          height: 50px;
+        }
+
         .right-section {
-          margin-left: 120px;
           display: flex;
           flex-direction: column;
           width: 100%;
@@ -413,13 +408,14 @@ const Header: React.FC<HeaderProps> = () => {
           justify-content: flex-end;
           padding: 5px 0;
           transition: all 0.3s ease;
-          transform: translateX(0);
         }
 
         .contact-info-container.scrolled {
-          justify-content: flex-start;
-          transform: translateX(5rem);
-          // margin-bottom: -5px;
+          transform: translateY(-10px);
+          opacity: 0;
+          height: 0;
+          padding: 0;
+          overflow: hidden;
         }
 
         .contact-info {
@@ -446,16 +442,15 @@ const Header: React.FC<HeaderProps> = () => {
           background: transparent;
         }
 
+        .contact-text {
+          white-space: nowrap;
+        }
+
         .nav-section {
           transition: all 0.3s ease;
-          transform: translateY(0);
           display: flex;
           flex-direction: column;
           gap: 10px;
-        }
-
-        .nav-section.scrolled {
-          transform: translateY(-30px);
         }
 
         .top-buttons {
@@ -467,44 +462,38 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         /* Desktop Button Styles */
-        .header-button.portal-button,
-        .header-button.admission-button {
+        .header-button.portal-button {
           border-color: #FF4E18;
           color: #FF4E18;
           font-weight: 500;
         }
 
-        .header-button.portal-button.ant-btn-primary,
-        .header-button.admission-button.ant-btn-primary {
+        .header-button.portal-button.ant-btn-primary {
           background-color: #FF4E18;
           color: white;
           border-color: #FF4E18;
         }
 
-        .header-button.portal-button:not(.ant-btn-primary):hover,
-        .header-button.admission-button:not(.ant-btn-primary):hover {
+        .header-button.portal-button:not(.ant-btn-primary):hover {
           background-color: #FF4E18;
           color: white;
           border-color: #FF4E18;
         }
 
         /* Mobile Button Styles */
-        .mobile-button.portal-button,
-        .mobile-button.admission-button {
+        .mobile-button.portal-button {
           border-color: #FF4E18;
           color: #FF4E18;
           font-weight: 500;
         }
 
-        .mobile-button.portal-button.ant-btn-primary,
-        .mobile-button.admission-button.ant-btn-primary {
+        .mobile-button.portal-button.ant-btn-primary {
           background-color: #FF4E18;
           color: white;
           border-color: #FF4E18;
         }
 
-        .mobile-button.portal-button:not(.ant-btn-primary):hover,
-        .mobile-button.admission-button:not(.ant-btn-primary):hover {
+        .mobile-button.portal-button:not(.ant-btn-primary):hover {
           background-color: #FF4E18;
           color: white;
           border-color: #FF4E18;
@@ -515,26 +504,6 @@ const Header: React.FC<HeaderProps> = () => {
           justify-content: flex-end;
           align-items: center;
           padding: 5px 0;
-        }
-
-        .logo-container {
-          display: flex;
-          align-items: center;
-          height: 100%;
-          margin-left: -150px;
-          margin-top: -100px;
-          margin-bottom: -100px;
-          cursor: pointer;
-        }
-
-        .logo {
-          height: 300px;
-          transition: all 0.3s ease;
-          object-fit: contain;
-        }
-
-        .custom-header.scrolled .logo {
-          height: 250px;
         }
 
         .mobile-menu-button {
@@ -586,6 +555,8 @@ const Header: React.FC<HeaderProps> = () => {
           flex-direction: column;
           gap: 16px;
           padding: 8px 0;
+        //    border-bottom: none !important;
+        // text-decoration: none !important;
         }
 
         .drawer-header {
@@ -596,8 +567,8 @@ const Header: React.FC<HeaderProps> = () => {
           border-bottom: 1px solid #f0f0f0;
         }
 
-        .mobile-logo {
-          height: 50px;
+        .drawer-logo {
+          height: 40px;
           width: auto;
           object-fit: contain;
           cursor: pointer;
@@ -645,28 +616,86 @@ const Header: React.FC<HeaderProps> = () => {
           font-weight: 500;
         }
 
-        @media (max-width: 992px) {
-          .contact-info {
-            gap: 10px;
+        @media (max-width: 1200px) {
+          .header-content {
+            padding: 0 15px;
           }
           
-          .contact-button span {
+          .contact-text {
+            font-size: 0.8rem;
+          }
+        }
+
+        @media (max-width: 992px) {
+          .contact-info {
+            gap: 8px;
+          }
+          
+          .contact-button span.anticon {
+            margin-right: 0;
+          }
+          
+          .contact-text {
             display: none;
           }
           
-          .contact-button .anticon {
-            margin-right: 0;
+          .logo {
+            height: 70px;
+          }
+          
+          .logo.mobile-logo {
+            height: 50px;
           }
         }
 
         @media (max-width: 768px) {
           .header-content {
-            padding: 0 16px;
+            padding: 0 10px;
+          }
+          
+          .logo {
+            height: 60px;
+          }
+          
+          .logo.mobile-logo {
+            height: 17rem;
+            margin-top: -6rem;
+            margin-bottom: -6rem;
+          }
+          
+          .custom-header.scrolled .logo {
+            height: 50px;
+          }
+          
+          .custom-header.scrolled .logo.mobile-logo {
+            height: 12rem;
+            margin-top: -4rem;
+            margin-bottom: -4rem;
+            margin-left: -1rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .logo {
+            height: 50px;
+          }
+          
+          .logo.mobile-logo {
+            height: 12rem;
+            margin-left: -1.5rem;
+            margin-top: -4rem;
+            margin-bottom: -4rem;
+          }
+          
+          .mobile-menu-button {
+            width: 30px;
+            height: 30px;
+            font-size: 22px;
+            margin-top: -4rem;
+            margin-right:1rem;
           }
 
-          .logo {
-            height: 40px;
-          }
+          
         }
       `}</style>
     </header>

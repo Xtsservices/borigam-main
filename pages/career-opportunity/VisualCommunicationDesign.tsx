@@ -45,8 +45,7 @@ const VisualCommunicationDesign = () => {
             style={{
               height: 4,
               width: 120,
-              backgroundColor: '#fbb034',
-              margin: '20px auto 40px',
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',              margin: '20px auto 40px',
             }}
           ></div>
         </Title>
@@ -101,8 +100,7 @@ const VisualCommunicationDesign = () => {
                   title={<span style={{ fontSize: "24px" }}>{card.title}</span>}
                   style={cardStyle}
                   headStyle={{ 
-                    backgroundColor: "#FF8C00", 
-                    color: "#fff",
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',                    color: "#fff",
                     fontSize: "24px",
                     padding: "20px 24px",
                     border: 'none'
@@ -128,8 +126,7 @@ const VisualCommunicationDesign = () => {
                 title={<span style={{ fontSize: "24px" }}>Legendary Visual Communication Designers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
-                  color: "#fff",
+background: 'linear-gradient(90deg, #ff5722, #ff9800)',                  color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
                   border: 'none'

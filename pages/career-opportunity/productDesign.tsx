@@ -106,7 +106,7 @@ const ProductDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Skills & Tools</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -138,7 +138,7 @@ const ProductDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Famous Product Designers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",

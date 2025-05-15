@@ -15,23 +15,23 @@ const CustomNextArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
     onClick={onClick}
     style={{
       position: "absolute",
-      right: "-25px",
+      right: "10px",
       top: "50%",
       transform: "translateY(-50%)",
-      width: "50px",
-      height: "50px",
+      width: "40px",
+      height: "40px",
       backgroundColor: "rgba(255,255,255,0.9)",
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
       cursor: "pointer",
       zIndex: 10,
       transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
     }}
   >
-    <RightOutlined style={{ color: "#0a2c64", fontSize: "20px" }} />
+    <RightOutlined style={{ color: "#0a2c64", fontSize: "16px" }} />
   </div>
 );
 
@@ -41,23 +41,23 @@ const CustomPrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
     onClick={onClick}
     style={{
       position: "absolute",
-      left: "-25px",
+      left: "10px",
       top: "50%",
       transform: "translateY(-50%)",
-      width: "50px",
-      height: "50px",
+      width: "40px",
+      height: "40px",
       backgroundColor: "rgba(255,255,255,0.9)",
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
       cursor: "pointer",
       zIndex: 10,
       transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
     }}
   >
-    <LeftOutlined style={{ color: "#0a2c64", fontSize: "20px" }} />
+    <LeftOutlined style={{ color: "#0a2c64", fontSize: "16px" }} />
   </div>
 );
 
@@ -65,25 +65,41 @@ const Gallery = () => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const carouselRef = useRef<any>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
     const interval = setInterval(() => {
       if (isAutoPlaying && carouselRef.current) {
         carouselRef.current.next();
       }
     }, 3000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [isAutoPlaying]);
 
   const handleMouseEnter = (item: number) => {
-    setHoveredItem(item);
-    setIsAutoPlaying(false);
+    if (windowWidth > 768) { // Only apply hover effects on larger screens
+      setHoveredItem(item);
+      setIsAutoPlaying(false);
+    }
   };
 
   const handleMouseLeave = () => {
-    setHoveredItem(null);
-    setIsAutoPlaying(true);
+    if (windowWidth > 768) {
+      setHoveredItem(null);
+      setIsAutoPlaying(true);
+    }
   };
 
   return (
@@ -115,18 +131,22 @@ const Gallery = () => {
               breakpoint: 1200,
               settings: {
                 slidesToShow: 3,
+                arrows: windowWidth > 768, // Show arrows only on larger screens
               },
             },
             {
               breakpoint: 992,
               settings: {
                 slidesToShow: 2,
+                arrows: windowWidth > 768,
               },
             },
             {
-              breakpoint: 576,
+              breakpoint: 768,
               settings: {
                 slidesToShow: 1,
+                arrows: false, // Hide arrows on mobile
+                dots: true,
               },
             },
           ]}
@@ -136,13 +156,14 @@ const Gallery = () => {
               <div
                 style={{
                   ...styles.imageCard,
-                  transform: hoveredItem === item ? "scale(1.1) translateY(-10px)" : "scale(1)",
+                  transform: hoveredItem === item && windowWidth > 768 ? "scale(1.05)" : "scale(1)",
                   boxShadow:
-                    hoveredItem === item
-                      ? "0 20px 40px rgba(0,0,0,0.3)"
-                      : "0 8px 20px rgba(0,0,0,0.15)",
+                    hoveredItem === item && windowWidth > 768
+                      ? "0 15px 30px rgba(0,0,0,0.2)"
+                      : "0 5px 15px rgba(0,0,0,0.1)",
                   zIndex: hoveredItem === item ? 10 : 1,
-                  margin: "0 15px",
+                  margin: windowWidth > 768 ? "0 15px" : "0 5px",
+                  height: windowWidth > 768 ? "320px" : "280px",
                 }}
                 onMouseEnter={() => handleMouseEnter(item)}
                 onMouseLeave={handleMouseLeave}
@@ -162,7 +183,7 @@ const Gallery = () => {
                 </div>
                 <div style={{
                   ...styles.imageOverlay,
-                  opacity: hoveredItem === item ? 1 : 0,
+                  opacity: hoveredItem === item && windowWidth > 768 ? 1 : 0,
                   background: "linear-gradient(to top, rgba(10,44,100,0.8) 0%, rgba(10,44,100,0.3) 50%, transparent 100%)"
                 }}>
                   <span style={styles.overlayText}>View Details</span>
@@ -176,7 +197,12 @@ const Gallery = () => {
       <Link href="/exploreGallery#studentSituation" passHref legacyBehavior>
         <Button 
           type="primary" 
-          style={styles.exploreButton} 
+          style={{
+            ...styles.exploreButton,
+            width: windowWidth <= 576 ? "90%" : "auto",
+            fontSize: windowWidth <= 576 ? "16px" : "18px",
+            padding: windowWidth <= 576 ? "0 20px" : "0 40px",
+          }} 
           size="large"
           className="explore-btn"
         >
@@ -188,9 +214,12 @@ const Gallery = () => {
         .slick-dots.custom-dots {
           bottom: -30px;
         }
+        .slick-dots.custom-dots li {
+          margin: 0 4px;
+        }
         .slick-dots.custom-dots li button {
-          width: 12px;
-          height: 12px;
+          width: 10px;
+          height: 10px;
           border-radius: 50%;
           background: #ccc;
           opacity: 0.7;
@@ -201,15 +230,26 @@ const Gallery = () => {
           opacity: 1;
           transform: scale(1.2);
         }
-        .custom-arrow:hover {
-          transform: translateY(-50%) scale(1.15);
-          background: #0a2c64 !important;
+        .custom-arrow {
+          display: none !important; /* Hide by default */
         }
-        .custom-arrow:hover svg {
-          color: white !important;
+        @media (min-width: 768px) {
+          .custom-arrow {
+            display: flex !important; /* Show on larger screens */
+          }
+          .custom-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: #0a2c64 !important;
+          }
+          .custom-arrow:hover svg {
+            color: white !important;
+          }
+        }
+        .explore-btn {
+          transition: all 0.3s ease !important;
         }
         .explore-btn:hover {
-          transform: translateY(-3px);
+          transform: translateY(-3px) !important;
           box-shadow: 0 15px 30px rgba(251, 176, 52, 0.4) !important;
         }
         .slick-slide {
@@ -225,7 +265,7 @@ const Gallery = () => {
 
 const styles = {
   galleryContainer: {
-    padding: "80px 20px",
+    padding: "60px 20px",
     backgroundColor: "#f9f9f9",
     textAlign: "center" as const,
     position: "relative" as const,
@@ -235,40 +275,40 @@ const styles = {
     color: "#0a2c64",
     marginBottom: "15px",
     fontWeight: 700 as const,
-    fontSize: "36px",
+    fontSize: "32px",
     letterSpacing: "1px",
   },
   subHeadingContainer: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    marginLeft: '20px',
+    justifyContent: 'center',
+    marginLeft: '0',
   },
   subHeadingTitle: {
-    marginLeft: '4rem',
-    fontSize: '30px',
+    marginLeft: '0',
+    fontSize: '26px',
     marginBottom: '5px',
   },
   titleUnderline: {
-    height: "4px",
-    width: "60px",
+    height: "3px",
+    width: "50px",
     background: "#fbb034",
-    margin: "0 auto 40px",
+    margin: "0 auto 30px",
     borderRadius: "2px",
     boxShadow: "0 2px 5px rgba(251, 176, 52, 0.3)",
   },
   carouselContainer: {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "0 60px",
+    padding: "0 20px",
     position: "relative" as const,
   },
   carouselItem: {
-    padding: "0 5px",
+    padding: "10px 5px",
     outline: "none",
     transition: "all 0.5s ease",
   },
   imageCard: {
-    borderRadius: "12px",
+    borderRadius: "10px",
     overflow: "hidden",
     position: "relative" as const,
     transition: "all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)",
@@ -279,7 +319,7 @@ const styles = {
     width: "100%",
     height: "100%",
     overflow: "hidden",
-    borderRadius: "12px",
+    borderRadius: "10px",
   },
   galleryImage: {
     width: "100%",
@@ -302,18 +342,18 @@ const styles = {
   },
   overlayText: {
     color: "white",
-    fontSize: "18px",
+    fontSize: "16px",
     fontWeight: 600 as const,
     textTransform: "uppercase" as const,
     letterSpacing: "1px",
     textShadow: "0 2px 4px rgba(0,0,0,0.5)",
   },
   exploreButton: {
-    marginTop: "60px",
+    marginTop: "40px",
     background: 'linear-gradient(90deg, #ff5722, #ff9800)',
     border: "none",
     padding: "0 40px",
-    height: "50px",
+    height: "48px",
     fontSize: "18px",
     fontWeight: 600 as const,
     borderRadius: "25px",

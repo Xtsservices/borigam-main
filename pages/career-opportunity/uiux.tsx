@@ -155,7 +155,7 @@ const UiUxDesigner = () => {
                   title={<span style={{ fontSize: "24px" }}>{card.title}</span>}
                   style={cardStyle}
                   headStyle={{ 
-                    backgroundColor: "#FF8C00", 
+                    background: 'linear-gradient(90deg, #ff5722, #ff9800)', 
                     color: "#fff",
                     fontSize: "24px",
                     padding: "20px 24px",
@@ -182,7 +182,7 @@ const UiUxDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>UI vs. UX: Key Differences</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)', 
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -221,7 +221,7 @@ const UiUxDesigner = () => {
                 title={<span style={{ fontSize: "24px" }}>Famous UI/UX Designers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)', 
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
