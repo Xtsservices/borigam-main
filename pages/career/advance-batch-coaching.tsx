@@ -1,7 +1,6 @@
 import React from "react";
 import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
-import Layout from '../../components/Layout';
 import Header from "@/components/Header";
 
 const { Title, Paragraph } = Typography;
@@ -13,9 +12,6 @@ const cardStyle: React.CSSProperties = {
   marginBottom: 24,
   backgroundColor: "#ffffff",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  height: "100%", // Ensure all cards have equal height
-  display: "flex",
-  flexDirection: "column",
 };
 
 const sectionVariant = {
@@ -25,353 +21,246 @@ const sectionVariant = {
 
 const cardVariant = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const headingVariant = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "16px", marginBottom: 0 }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
   </ul>
 );
 
-const AdvanceBatchPage = () => {
+const AdvanceBatchCoaching = () => {
   return (
-    <Layout>
+    <>
       <Header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff", marginTop: '5rem' }}>
-        <motion.div initial="hidden" animate="visible" variants={sectionVariant}>
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '', fontSize: '42px' }}>
-            Advance Batch Coaching
-            <div style={{
-              height: 4,
-              width: 120,
-              backgroundColor: '#ff5722',
-              margin: '20px auto 40px',
-            }} />
-          </Title>
-
-          {/* Gradient Header Section */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={cardVariant}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <Card
-              style={{
-                ...cardStyle,
-                background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                color: '#fff',
-                marginBottom: '40px'
-              }}
-              bodyStyle={{ padding: '30px' }}
-            >
-              <Title level={2} style={{ color: '#fff', textAlign: 'center' }}>
-                Final-Step Prep to Crack Top Design, Architecture & Fine Arts Entrance Exams
-              </Title>
-              <Paragraph style={{ fontSize: '18px', color: '#fff', textAlign: 'center' }}>
-                Already familiar with the basics and looking for the final boost? Our Advance Batch Coaching is specifically designed for students in their final stage of preparation for design, architecture, and fine arts entrance exams.
-              </Paragraph>
-              <Paragraph style={{ fontSize: '18px', color: '#fff', textAlign: 'center' }}>
-                Whether you're attempting NID, NIFT, UCEED, CEED, NATA, JEE Paper 2, JJ School of Art, BHU or other leading colleges—our structured and intensive coaching will help you fine-tune your skills and maximize your performance.
-              </Paragraph>
-            </Card>
-          </motion.div>
-
-          {/* Why Join Section Heading */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={headingVariant}
-            viewport={{ once: true, margin: "-100px" }}
-            style={{ marginBottom: 30 }}
-          >
-            <div style={{
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff", marginTop: "6rem" }}>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          {/* Hero Section */}
+          <Card
+            style={{ ...cardStyle, marginBottom: 40 }}
+            headStyle={{ 
               background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-              padding: '20px 30px',
-              borderRadius: '12px',
-              color: 'white',
-              textAlign: 'center',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-            }}>
-              <Title level={2} style={{ color: 'white', margin: 0 }}>
-                Why Choose Our Advance Batch?
-              </Title>
-            </div>
-          </motion.div>
-
-          {/* Two Main Content Boxes - Equal Height */}
-          <Row gutter={[32, 32]} style={{ marginBottom: '40px', alignItems: 'stretch' }}>
-            <Col xs={24} md={12} style={{ display: 'flex' }}>
-              <motion.div
-                variants={cardVariant}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
-                style={{ flex: 1 }}
-              >
-                <Card
-                  title={<span style={{ fontSize: "22px" }}>Why Join the Advance Batch?</span>}
-                  style={cardStyle}
-                  headStyle={{
-                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                    color: "#fff",
-                    fontSize: "20px",
-                    padding: "20px 24px",
-                    border: "none",
-                  }}
-                  bodyStyle={{ padding: "24px", flex: 1 }}
-                >
-                  <Paragraph style={{ fontSize: '16px', marginBottom: '20px' }}>
-                    Time is limited, competition is tough, and precision is everything. The Advance Batch focuses on:
-                  </Paragraph>
-                  {listItems([
-                    "Exam-specific strategies",
-                    "Time-bound mock tests",
-                    "Personalized feedback to overcome weak areas",
-                    "Smart revision techniques",
-                    "Final portfolio & interview polishing"
-                  ])}
-                  <Paragraph style={{ fontSize: '16px', marginTop: 'auto', paddingTop: '20px' }}>
-                    Ideal for students in Class 12, drop-year aspirants, or final-year grads preparing for entrance tests.
-                  </Paragraph>
-                </Card>
-              </motion.div>
-            </Col>
-            
-            <Col xs={24} md={12} style={{ display: 'flex' }}>
-              <motion.div
-                variants={cardVariant}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
-                style={{ flex: 1 }}
-              >
-                <Card
-                  title={<span style={{ fontSize: "22px" }}>What Our Advance Coaching Offers</span>}
-                  style={cardStyle}
-                  headStyle={{
-                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                    color: "#fff",
-                    fontSize: "20px",
-                    padding: "20px 24px",
-                    border: "none",
-                  }}
-                  bodyStyle={{ padding: "24px", flex: 1 }}
-                >
-                  <Paragraph style={{ fontSize: '16px', marginBottom: '20px' }}>
-                    Our comprehensive program includes:
-                  </Paragraph>
-                  {listItems([
-                    "Intensive Revision of Complete Syllabus",
-                    "Topic-Wise Timed Mock Tests & Past Year Paper Solving",
-                    "Portfolio, Studio Test & Situation Test Preparation",
-                    "Drawing Speed & Accuracy Sessions",
-                    "Design Aptitude, Logical Reasoning & MCQ Practice",
-                    "Interview Preparation + Presentation Skills",
-                    "Error Analysis + Personalized Improvement Plans"
-                  ])}
-                  <Paragraph style={{ fontSize: '16px', marginTop: 'auto', paddingTop: '20px' }}>
-                    You'll learn how to stay calm, work smart, and approach each exam with clarity and confidence.
-                  </Paragraph>
-                </Card>
-              </motion.div>
-            </Col>
-          </Row>
-
-          {/* Focused Coaching Heading */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={headingVariant}
-            viewport={{ once: true, margin: "-100px" }}
-            style={{ marginBottom: 30, marginTop: 60 }}
+              color: "#fff",
+              fontSize: "28px",
+              padding: "20px 24px",
+              border: 'none'
+            }}
+            title="Advance Batch Coaching: Final-Step Prep to Crack Top Design, Architecture & Fine Arts Entrance Exams"
+            bodyStyle={{ padding: "24px" }}
           >
-            <div style={{
+            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333" }}>
+              Already familiar with the basics and looking for the final boost? Our Advance Batch Coaching is specifically 
+              designed for students in their final stage of preparation for design, architecture, and fine arts entrance exams.
+              <br /><br />
+              Whether you're attempting NID, NIFT, UCEED, CEED, NATA, JEE Paper 2, JJ School of Art, BHU or other leading 
+              colleges—our structured and intensive coaching will help you fine-tune your skills and maximize your performance.
+            </Paragraph>
+          </Card>
+
+          {/* Why Join Section */}
+          <Card
+            style={{ ...cardStyle, marginBottom: 40 }}
+            headStyle={{ 
               background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-              padding: '20px 30px',
-              borderRadius: '12px',
-              color: 'white',
-              textAlign: 'center',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-            }}>
-              <Title level={2} style={{ color: 'white', margin: 0 }}>
-                Focused Coaching For
-              </Title>
-            </div>
-          </motion.div>
-
-          {/* Focused Coaching Content Box */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={cardVariant}
-            viewport={{ once: true, margin: "-100px" }}
+              color: "#fff",
+              fontSize: "28px",
+              padding: "20px 24px",
+              border: 'none'
+            }}
+            title="Why Join the Advance Batch?"
+            bodyStyle={{ padding: "24px" }}
           >
-            <Card
-              style={{ ...cardStyle, padding: 0 }}
-              bodyStyle={{ padding: "24px", flex: 1 }}
-            >
-              <Row gutter={[24, 24]} style={{ height: '100%' }}>
-                <Col xs={24} md={8} style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ 
-                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                    color: 'white',
-                    padding: '15px',
-                    textAlign: 'center',
-                    margin: '-24px -24px 20px -24px'
-                  }}>
-                    <Title level={4} style={{ color: 'white', margin: 0 }}>Design Exams</Title>
-                  </div>
-                  {listItems([
+            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333", marginBottom: 20 }}>
+              Time is limited, competition is tough, and precision is everything. The Advance Batch focuses on:
+            </Paragraph>
+            {listItems([
+              "Exam-specific strategies",
+              "Time-bound mock tests",
+              "Personalized feedback to overcome weak areas",
+              "Smart revision techniques",
+              "Final portfolio & interview polishing"
+            ])}
+            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333", marginTop: 20 }}>
+              Ideal for students in Class 12, drop-year aspirants, or final-year grads preparing for entrance tests.
+            </Paragraph>
+          </Card>
+
+          {/* What Our Advance Coaching Offers Section */}
+          <Card
+            style={{ ...cardStyle, marginBottom: 40 }}
+            headStyle={{ 
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              color: "#fff",
+              fontSize: "28px",
+              padding: "20px 24px",
+              border: 'none'
+            }}
+            title="What Our Advance Coaching Offers"
+            bodyStyle={{ padding: "24px" }}
+          >
+            {listItems([
+              "Intensive Revision of Complete Syllabus",
+              "Topic-Wise Timed Mock Tests & Past Year Paper Solving",
+              "Portfolio, Studio Test & Situation Test Preparation (NID/NIFT)",
+              "Drawing Speed & Accuracy Sessions (JJ/NATA/CEED)",
+              "Design Aptitude, Logical Reasoning & MCQ Practice (UCEED/CEED)",
+              "Interview Preparation + Presentation Skills",
+              "Error Analysis + Personalized Improvement Plans",
+              "Online & Offline Crash Batch Options",
+              "Daily Practice Material via App + Full-Length Tests",
+              "Live Feedback from Experts + Performance Tracking"
+            ])}
+            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333", marginTop: 20 }}>
+              You'll learn how to stay calm, work smart, and approach each exam with clarity and confidence.
+            </Paragraph>
+          </Card>
+
+          {/* Focused Coaching For Section */}
+          <Card
+            style={{ ...cardStyle, marginBottom: 40 }}
+            headStyle={{ 
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              color: "#fff",
+              fontSize: "28px",
+              padding: "20px 24px",
+              border: 'none'
+            }}
+            title="Focused Coaching For"
+            bodyStyle={{ padding: "24px" }}
+          >
+            <Row gutter={[24, 24]}>
+              {[
+                {
+                  title: "Design Exams",
+                  content: [
                     "NID DAT",
                     "NIFT",
                     "UCEED",
                     "CEED",
                     "MITID",
                     "UID"
-                  ])}
-                </Col>
-                <Col xs={24} md={8} style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ 
-                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                    color: 'white',
-                    padding: '15px',
-                    textAlign: 'center',
-                    margin: '-24px -24px 20px -24px'
-                  }}>
-                    <Title level={4} style={{ color: 'white', margin: 0 }}>Architecture Exams</Title>
-                  </div>
-                  {listItems([
+                  ]
+                },
+                {
+                  title: "Architecture Exams",
+                  content: [
                     "NATA",
                     "JEE Paper 2",
                     "CEPT"
-                  ])}
-                </Col>
-                <Col xs={24} md={8} style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ 
-                    background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                    color: 'white',
-                    padding: '15px',
-                    textAlign: 'center',
-                    margin: '-24px -24px 20px -24px'
-                  }}>
-                    <Title level={4} style={{ color: 'white', margin: 0 }}>Fine Arts Exams</Title>
-                  </div>
-                  {listItems([
+                  ]
+                },
+                {
+                  title: "Fine Arts Exams",
+                  content: [
                     "JJ School",
                     "BHU",
                     "MSU",
                     "DU College of Art"
-                  ])}
-                </Col>
-              </Row>
-            </Card>
-          </motion.div>
-
-          {/* Who Can Join Heading */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={headingVariant}
-            viewport={{ once: true, margin: "-100px" }}
-            style={{ marginBottom: 30, marginTop: 60 }}
-          >
-            <div style={{
-              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-              padding: '20px 30px',
-              borderRadius: '12px',
-              color: 'white',
-              textAlign: 'center',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-            }}>
-              <Title level={2} style={{ color: 'white', margin: 0 }}>
-                Who Should Join?
-              </Title>
-            </div>
-          </motion.div>
-
-          {/* Three Column Section - Equal Height */}
-          <Row gutter={[32, 32]} style={{ marginTop: 20, alignItems: 'stretch' }}>
-            {[
-              {
-                title: "Eligibility",
-                items: [
-                  "Class 12 students appearing for upcoming entrance exams",
-                  "Graduates applying for PG courses (M.Des, MFA, etc.)",
-                  "Students who've already done basic or foundation training",
-                  "Reattempt students needing strategic revision",
-                ],
-                footer: "Whether you're a first-timer or looking to improve your rank, we'll help you bring your A-game."
-              },
-              {
-                title: "Our Methodology",
-                items: [
-                  "Each batch is exam-specific",
-                  "Mentors tailor strategy to your target college and exam date",
-                  "Full-length mocks under real exam conditions",
-                  "One-on-one feedback sessions",
-                  "Performance tracking and analytics",
-                ],
-                footer: "We customize our approach to maximize your success."
-              },
-              {
-                title: "Final Push to Success",
-                items: [
-                  "Join our Advance Batch for focused preparation",
-                  "Full-length mocks and expert strategy",
-                  "Demo sessions available",
-                  "Flexible crash batch options",
-                  "One-on-one feedback available",
-                ],
-                footer: "It's your last lap—let's sprint towards success!"
-              }
-            ].map((section, idx) => (
-              <Col xs={24} md={8} key={idx} style={{ display: 'flex' }}>
-                <motion.div
-                  variants={cardVariant}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
-                  whileHover={{ scale: 1.03 }}
-                  style={{ flex: 1 }}
-                >
-                  <Card
-                    title={<span style={{ fontSize: "22px" }}>{section.title}</span>}
-                    style={cardStyle}
-                    headStyle={{
-                      background: 'linear-gradient(90deg, #ff5722, #ff9800)',
-                      color: "#fff",
-                      fontSize: "20px",
-                      padding: "20px 24px",
-                      border: "none",
-                    }}
-                    bodyStyle={{ padding: "24px", flex: 1 }}
+                  ]
+                }
+              ].map((item, index) => (
+                <Col xs={24} sm={8} key={index}>
+                  <motion.div
+                    variants={cardVariant}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    whileHover={{ scale: 1.03 }}
                   >
-                    {listItems(section.items)}
-                    {section.footer && (
-                      <Paragraph style={{ fontSize: '16px', marginTop: 'auto', paddingTop: '20px', fontStyle: 'italic' }}>
-                        {section.footer}
-                      </Paragraph>
-                    )}
-                  </Card>
-                </motion.div>
-              </Col>
-            ))}
-          </Row>
+                    <Card
+                      style={{ borderRadius: 12, boxShadow: "0 5px 15px rgba(0,0,0,0.1)", height: "100%" }}
+                      headStyle={{ 
+                        background: '#f5f5f5',
+                        color: "#ff5722",
+                        fontSize: "20px",
+                        padding: "16px",
+                        border: 'none',
+                        fontWeight: 'bold'
+                      }}
+                      title={item.title}
+                      bodyStyle={{ padding: "16px" }}
+                    >
+                      {listItems(item.content)}
+                    </Card>
+                  </motion.div>
+                </Col>
+              ))}
+            </Row>
+          </Card>
+
+          {/* Who Can Join Section */}
+          <Card
+            style={{ ...cardStyle, marginBottom: 40 }}
+            headStyle={{ 
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              color: "#fff",
+              fontSize: "28px",
+              padding: "20px 24px",
+              border: 'none'
+            }}
+            title="Who Can Join?"
+            bodyStyle={{ padding: "24px" }}
+          >
+            {listItems([
+              "Class 12 students appearing for upcoming entrance exams",
+              "Graduates applying for PG courses (M.Des, MFA, etc.)",
+              "Students who've already done basic or foundation training",
+              "Reattempt students needing strategic revision"
+            ])}
+            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333", marginTop: 20 }}>
+              Whether you're a first-timer or looking to improve your rank, we'll help you bring your A-game.
+              <br /><br />
+              Each batch is exam-specific, with mentors tailoring the strategy to your target college and exam date.
+            </Paragraph>
+          </Card>
+
+          {/* Let's Finish Strong Section */}
+          <Card
+            style={{ ...cardStyle, textAlign: "center" }}
+            headStyle={{ 
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+              color: "#fff",
+              fontSize: "28px",
+              padding: "20px 24px",
+              border: 'none'
+            }}
+            title="Let's Finish Strong"
+            bodyStyle={{ padding: "40px 24px" }}
+          >
+            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333", marginBottom: 30 }}>
+              Join our Advance Batch for focused preparation, full-length mocks, and expert strategy. Demo sessions, 
+              flexible crash batch options, and one-on-one feedback available.
+              <br /><br />
+              It's your last lap—let's sprint towards success!
+            </Paragraph>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+                color: 'white',
+                border: 'none',
+                padding: '15px 40px',
+                fontSize: '18px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              Enroll Now
+            </motion.button>
+          </Card>
         </motion.div>
       </div>
-    </Layout>
+    </>
   );
 };
 
-export default AdvanceBatchPage;
+export default AdvanceBatchCoaching;

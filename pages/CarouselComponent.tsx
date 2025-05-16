@@ -101,7 +101,7 @@ const CarouselComponent: React.FC = () => {
       }}>
         <div
           style={{
-            background: 'linear-gradient(135deg, #ff5722, #ff4500, #ff7043)',
+      background: 'linear-gradient(90deg, #ff5722, #ff9800)',
             color: '#fffefc',
             marginTop: '30px',
             padding: '15px 0',
@@ -116,12 +116,8 @@ const CarouselComponent: React.FC = () => {
           }}
         >
           <div className="scrolling-text">
-            <span>
-              At Borigam, we blend culinary heritage with creative expression to deliver unforgettable experiences. Our ingredients are locally sourced and our recipes are crafted to nourish both body and soul. Whether you're enjoying a meal or learning a craft, Borigam is your destination for inspiration that delights.
-            </span>
-            <span>
-              At Borigam, we blend culinary heritage with creative expression to deliver unforgettable experiences. Our ingredients are locally sourced and our recipes are crafted to nourish both body and soul. Whether you're enjoying a meal or learning a craft, Borigam is your destination for inspiration that delights.
-            </span>
+            <span>Important Dates — Sessions for NID NIFT UCEED CEED NATA B.ARCH BFA Starts from April 2026— Situation test for NIFT NID and other college exams  will start from March</span>
+            <span>Important Dates — Sessions for NID NIFT UCEED CEED NATA B.ARCH BFA Starts from April 2026— Situation test for NIFT NID and other college exams  will start from March</span>
           </div>
         </div>
       </div>
@@ -132,6 +128,7 @@ const CarouselComponent: React.FC = () => {
           .scrolling-text {
             display: inline-block;
             white-space: nowrap;
+            
             animation: scroll-left-loop 60s linear infinite;
           }
 
