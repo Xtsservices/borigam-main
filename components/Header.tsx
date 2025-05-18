@@ -198,7 +198,7 @@ const Header: React.FC<HeaderProps> = () => {
     //   label: "Contact",
     //   onClick: (e: React.MouseEvent) => handleSectionClick("enquire-section", e)
     // },
-    { path: "/blog", label: "Blog" },
+    { path: "/blog", label: "Blogs" },
   ];
 
   const renderNavLinks = (isMobileView = false) => {
@@ -264,7 +264,7 @@ const Header: React.FC<HeaderProps> = () => {
             <div 
               className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
               style={{ 
-                marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-150px',
+                marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
                 marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
                 marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
               }}
@@ -283,7 +283,7 @@ const Header: React.FC<HeaderProps> = () => {
           <Col xs={0} sm={0} md={19} lg={19} xl={18}>
             <div 
               className="right-section"
-              style={{ marginLeft: isTablet ? '60px' : isMedium ? '80px' : '120px' }}
+              style={{ marginLeft: isTablet ? '60px' : isMedium ? '80px' : '50px' }}
             >
               <div className={`contact-info-container ${scrolled ? "scrolled" : ""}`}>
                 <div className="contact-info">

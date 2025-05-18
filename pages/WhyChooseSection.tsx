@@ -13,13 +13,6 @@ const WhyChooseSection = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const isMobile = isMounted ? windowWidth < 768 : false;
 
@@ -75,6 +68,10 @@ const WhyChooseSection = () => {
                 fill
                 style={{ 
                   objectFit: 'cover',
+                  borderRadius: '12px',
+                  transition: 'all 0.2s ease',
+                  transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                  marginTop: isMobile ? '0px' : '0px',
                   filter: isHovered ? 'brightness(0.85)' : 'brightness(1)'
                 }}
               />
@@ -115,6 +112,8 @@ const WhyChooseSection = () => {
                 fill
                 style={{
                   objectFit: 'contain',
+                  marginLeft: isMobile ? '0px' : '-100px',
+                  marginTop: isMobile ? '0px' : '-20px',
                 }}
               />
             </div>

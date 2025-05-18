@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Card, Row, Col, Typography, Button } from 'antd';
+import { Card, Row, Col, Typography, Button, Modal } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Header from '@/components/Header';
 
@@ -72,13 +72,15 @@ const successStories = [
     name: 'Anagha',
     exam: 'NATA',
     rank: '143',
-    content: "This number carries the weight of every sunrise I spent perfecting perspective sketches, every critique that sharpened my vision, and every moment I chose to see the world differently. At BORIGAM, they didn't just teach me how to draw buildings—they taught me how to think in structures and dream in blueprints",
+    content: "This number carries the weight of every sunrise I spent perfecting perspective sketches, every critique that sharpened my vision, and every moment I chose to see the world differently. At BORIGAM, they didn't just teach me how to draw buildings—they taught me how to think in structures and dream in blueprints.",
     photo: '/images/Anagha.jpeg'
   }
 ];
 
 const Reviews = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [selectedStory, setSelectedStory] = useState<any>(null);
+  const [modalVisible, setModalVisible] = useState(false);
   const storiesRef = useRef<HTMLDivElement>(null);
 
   const scrollToStories = () => {
@@ -88,22 +90,8 @@ const Reviews = () => {
   return (
     <div style={{ backgroundColor: '#f5f5f5' }}>
       <Header />
-      <div style={{ 
-
-        maxWidth: '1200px', 
-        margin: '0 auto',
-        padding: '40px 20px',
-        marginTop: '13rem',
-
-      }}>
-        {/* Header Section */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          marginBottom: '40px',
-          flexWrap: 'wrap'
-        }}>
-          {/* Left Box */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', marginTop: '13rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '40px', flexWrap: 'wrap' }}>
           <div style={{
             flex: '1',
             minWidth: '300px',
@@ -117,12 +105,7 @@ const Reviews = () => {
             flexDirection: 'column',
             justifyContent: 'center'
           }}>
-            <Title level={2} style={{ 
-              color: 'white',
-              fontSize: '2.5rem',
-              fontWeight: 700,
-              marginBottom: '20px'
-            }}>
+            <Title level={2} style={{ color: 'white', fontSize: '2.5rem', fontWeight: 700, marginBottom: '20px' }}>
               DESIGN SUCCESS STORIES
             </Title>
             <Paragraph style={{
@@ -135,7 +118,6 @@ const Reviews = () => {
             </Paragraph>
           </div>
 
-          {/* Right Content */}
           <div style={{
             flex: '1',
             minWidth: '300px',
@@ -144,11 +126,7 @@ const Reviews = () => {
             justifyContent: 'center',
             padding: '20px'
           }}>
-            <Paragraph style={{
-              fontSize: '16px',
-              color: '#555',
-              lineHeight: 1.8
-            }}>
+            <Paragraph style={{ fontSize: '16px', color: '#555', lineHeight: 1.8 }}>
               Every year, our students achieve remarkable success in prestigious design entrance exams. Their stories inspire new generations of creative minds to pursue their dreams.
             </Paragraph>
             <Button 
@@ -169,11 +147,10 @@ const Reviews = () => {
           </div>
         </div>
 
-        {/* Success Stories Grid - with ref for scrolling */}
         <div ref={storiesRef}>
           <Row gutter={[24, 24]}>
             {successStories.map((story, index) => (
-              <Col xs={24} sm={12} md={12} lg={6} key={index}>
+              <Col xs={24} sm={12} md={12} lg={8} key={index}>
                 <div
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
@@ -183,40 +160,35 @@ const Reviews = () => {
                     overflow: 'hidden',
                     boxShadow: '0 8px 25px rgba(0, 0, 0, 0.08)',
                     transition: 'all 0.4s ease',
-                    height: '400px',
+                    height: '415px',
                     position: 'relative',
                     transform: hoveredCard === index ? 'translateY(-10px)' : 'none'
                   }}
                 >
-                  {/* Top Image Section */}
                   <div style={{
-  height:hoveredCard === index ? '30%' : '60%',
-  backgroundImage: hoveredCard === index ? 'none' : `url(${story.photo})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  transition: 'all 0.4s ease',
-  position: 'relative'
-}}>
-  {/* Info Box */}
-  <div style={{
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    backgroundColor: hoveredCard === index ? '#ff6b00' : 'transparent',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: hoveredCard === index ? 1 : 0,
-    transition: 'all 0.4s ease'
-  }}>
-    
-  </div>
-</div>
+                    height: hoveredCard === index ? '30%' : '60%',
+                    backgroundImage: hoveredCard === index ? 'none' : `url(${story.photo})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    transition: 'all 0.4s ease',
+                    position: 'relative',
+                    height: '60%',
+                  }}>
+                    <div style={{
+                      position: 'absolute',
+                      top: '0',
+                      left: '0',
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: hoveredCard === index ? '#ff6b00' : 'transparent',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      opacity: hoveredCard === index ? 1 : 0,
+                      transition: 'all 0.4s ease'
+                    }} />
+                  </div>
 
-
-                  {/* Bottom Content Section */}
                   <div style={{
                     height: hoveredCard === index ? '60%' : '40%',
                     padding: '20px',
@@ -226,7 +198,6 @@ const Reviews = () => {
                     transition: 'all 0.4s ease',
                     position: 'relative'
                   }}>
-                    {/* Student Info - moves up on hover */}
                     <div style={{
                       position: 'absolute',
                       top: hoveredCard === index ? '-60%' : '-40%',
@@ -236,7 +207,7 @@ const Reviews = () => {
                       color: hoveredCard === index ? 'white' : '#333',
                     }}>
                       <Text strong style={{ 
-                        marginTop:hoveredCard === index ? '3rem' : '5rem',
+                        marginTop: hoveredCard === index ? '3rem' : '5rem',
                         display: 'block',
                         fontSize: '18px',
                         color: hoveredCard === index ? 'white' : '#ff6b00',
@@ -257,11 +228,10 @@ const Reviews = () => {
                         marginBottom: 0,
                         fontWeight: 500
                       }}>
-                        Rank: {story.rank}
+                        {story.rank && `Rank: ${story.rank}`}
                       </Paragraph>
                     </div>
 
-                    {/* Content - appears on hover */}
                     <Paragraph style={{
                       fontSize: '14px',
                       color: '#555',
@@ -276,7 +246,6 @@ const Reviews = () => {
                       {story.content}
                     </Paragraph>
 
-                    {/* Static content when not hovered */}
                     <div style={{
                       opacity: hoveredCard === index ? 0 : 1,
                       height: hoveredCard === index ? 0 : 'auto',
@@ -287,6 +256,10 @@ const Reviews = () => {
                     }}>
                       <Button 
                         type="primary" 
+                        onClick={() => {
+                          setSelectedStory(story);
+                          setModalVisible(true);
+                        }}
                         style={{ 
                           backgroundColor: '#ff6b00',
                           borderColor: '#ff6b00',
@@ -303,6 +276,24 @@ const Reviews = () => {
           </Row>
         </div>
       </div>
+
+      {/* Modal to show full story */}
+      <Modal
+        visible={modalVisible}
+        title={selectedStory?.name}
+        footer={null}
+        onCancel={() => setModalVisible(false)}
+      >
+        <Paragraph style={{ fontSize: '16px', lineHeight: 1.8 }}>
+          <strong>Exam:</strong> {selectedStory?.exam}
+        </Paragraph>
+        {selectedStory?.rank && (
+          <Paragraph>
+            <strong>Rank:</strong> {selectedStory.rank}
+          </Paragraph>
+        )}
+        <Paragraph>{selectedStory?.content}</Paragraph>
+      </Modal>
     </div>
   );
 };

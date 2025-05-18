@@ -28,6 +28,7 @@ const examCards: ExamCard[] = [
 // Styled components
 const SectionContainer = styled.section`
   margin: 100px auto;
+  height: 100%;
   max-width: 1200px;
   padding: 0 20px;
   font-family: 'Poppins', sans-serif;
@@ -149,7 +150,8 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
 
   .card-image {
     width: 100%;
-    height: 100%;
+    height: 120%;
+    padding: 0px;
     object-fit: cover;
     transition: all 0.5s ease;
     

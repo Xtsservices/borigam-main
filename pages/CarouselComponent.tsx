@@ -35,10 +35,11 @@ const CarouselComponent: React.FC = () => {
       position: 'relative',
       marginTop: '50px',
       width: '100%',
-      maxWidth: '1200px',
+      maxWidth: '100%',
       marginLeft: 'auto',
       marginRight: 'auto',
-      paddingLeft: '20px'
+      paddingLeft: '0px',
+      paddingRight: '0px'
     }}>
       {/* Spacer div to push content down */}
       <div style={{ height: '50px' }}></div>
@@ -64,19 +65,17 @@ const CarouselComponent: React.FC = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: '#f5f5f5',
-                minHeight: '300px'
+                minHeight: '300px',
               }}>
                 <img
                   src={`/images/${name}`}
                   alt={`Slide ${index + 1}`}
                   style={{
-                    width: 'auto',
-                    maxWidth: '100%',
+                    width: '100%',
                     height: 'auto',
-                    maxHeight: '70vh',
-                    objectFit: 'contain',
+                    maxHeight: '80vh',
+                    objectFit: 'cover',
                     display: 'block',
-                    margin: '0 auto'
                   }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -97,18 +96,16 @@ const CarouselComponent: React.FC = () => {
         right: '50%',
         marginLeft: '-50vw',
         marginRight: '-50vw',
-        marginTop: '-20px' // Bring it closer to the carousel
+        marginTop: '-20px'
       }}>
         <div
           style={{
-      background: 'linear-gradient(90deg, #ff5722, #ff9800)',
+            background: 'linear-gradient(90deg, #ff5722, #ff9800)',
             color: '#fffefc',
             marginTop: '30px',
             padding: '15px 0',
-            marginLeft: '20px',
-            marginRight: '20px',
             overflow: 'hidden',
-            fontFamily: '"Pldayfair Display", serif',
+            fontFamily: '"Playfair Display", serif',
             fontSize: '18px',
             fontWeight: 400,
             letterSpacing: '0.3px',
@@ -116,8 +113,8 @@ const CarouselComponent: React.FC = () => {
           }}
         >
           <div className="scrolling-text">
-            <span>Important Dates — Sessions for NID NIFT UCEED CEED NATA B.ARCH BFA Starts from April 2026— Situation test for NIFT NID and other college exams  will start from March</span>
-            <span>Important Dates — Sessions for NID NIFT UCEED CEED NATA B.ARCH BFA Starts from April 2026— Situation test for NIFT NID and other college exams  will start from March</span>
+            <span>Important Dates — Sessions for NID NIFT UCEED CEED NATA B.ARCH BFA Starts from April 2026— Situation test for NIFT NID and other college exams will start from March</span>
+            <span>Important Dates — Sessions for NID NIFT UCEED CEED NATA B.ARCH BFA Starts from April 2026— Situation test for NIFT NID and other college exams will start from March</span>
           </div>
         </div>
       </div>
@@ -128,13 +125,12 @@ const CarouselComponent: React.FC = () => {
           .scrolling-text {
             display: inline-block;
             white-space: nowrap;
-            
             animation: scroll-left-loop 60s linear infinite;
           }
 
           .scrolling-text span {
             display: inline-block;
-            margin-Top: 10px;
+            margin-top: 10px;
             padding-right: 80px;
           }
 

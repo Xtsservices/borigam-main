@@ -1,5 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
 
 interface College {
   name: string;
@@ -300,7 +300,6 @@ const AnimatedBoxesPage: React.FC = () => {
           style={{
             height: "3px",
             width: "80px",
-            background: "linear-gradient(90deg, #fbb034, #ff5722)",
             margin: "0 auto 30px",
             borderRadius: "3px",
           }}
@@ -383,11 +382,11 @@ const AnimatedBoxesPage: React.FC = () => {
         }
 
         .design-scroll {
-          animation: scroll 40s linear infinite;
+          animation: scroll 70s linear infinite;
         }
 
         .arch-scroll {
-          animation: scroll 35s linear infinite reverse;
+          animation: scroll 40s linear infinite reverse;
         }
 
         @keyframes scroll {
@@ -417,15 +416,6 @@ const AnimatedBoxesPage: React.FC = () => {
           .scroll-container::after {
             width: 50px;
           }
-
-          .design-scroll {
-            animation: scroll 30s linear infinite;
-          }
-
-          .arch-scroll {
-            animation: scroll 25s linear infinite reverse;
-          }
-
           h1 {
             font-size: 2rem !important;
           }
@@ -434,11 +424,6 @@ const AnimatedBoxesPage: React.FC = () => {
         @media (max-width: 480px) {
           .scroll-container {
             height: 180px;
-          }
-
-          .design-scroll,
-          .arch-scroll {
-            animation-duration: 20s;
           }
 
           h1 {

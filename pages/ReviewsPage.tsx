@@ -55,6 +55,8 @@ const ReviewsPage = () => {
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: '0px',
+    autoplay: true,
+    autoplaySpeed: 3000,
     beforeChange: (current: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
@@ -79,7 +81,6 @@ const ReviewsPage = () => {
   };
 
   const handleCardClick = (index: number) => {
-    // Calculate how many slides we need to move
     const slidesToMove = index - currentSlide;
     if (slidesToMove > 0) {
       for (let i = 0; i < slidesToMove; i++) {
@@ -98,8 +99,7 @@ const ReviewsPage = () => {
         <Title level={2} style={{ textAlign: 'center', marginBottom: '50px', color: '#333' }}>
           STUDENT REVIEWS
         </Title>
-        
-        {/* Arrows */}
+
         <div style={{ position: 'relative' }}>
           <Button
             shape="circle"
@@ -130,7 +130,6 @@ const ReviewsPage = () => {
             }}
           />
 
-          {/* Carousel */}
           <Carousel ref={carouselRef} {...settings}>
             {Reviews.map((review, index) => (
               <div 
@@ -156,7 +155,6 @@ const ReviewsPage = () => {
                     cursor: 'pointer'
                   }}
                 >
-                  {/* Top Section - Orange by default */}
                   <div style={{
                     position: 'absolute',
                     top: 0,
@@ -167,7 +165,6 @@ const ReviewsPage = () => {
                     transition: 'all 0.6s cubic-bezier(0.65, 0, 0.35, 1)',
                     zIndex: 1,
                   }}>
-                    {/* Notch between sections */}
                     <div style={{
                       position: 'absolute',
                       bottom: '-20px',
@@ -184,7 +181,6 @@ const ReviewsPage = () => {
                     }} />
                   </div>
 
-                  {/* Bottom Section - White by default */}
                   <div style={{
                     position: 'absolute',
                     bottom: 0,
@@ -196,7 +192,6 @@ const ReviewsPage = () => {
                     zIndex: 1,
                   }} />
 
-                  {/* Profile Image */}
                   <div style={{
                     position: 'absolute',
                     top: '40%',
@@ -216,7 +211,6 @@ const ReviewsPage = () => {
                     transition: 'all 0.4s ease',
                   }} />
 
-                  {/* Name Section (in top part) */}
                   <div style={{
                     position: 'absolute',
                     top: 0,
@@ -243,7 +237,6 @@ const ReviewsPage = () => {
                     </Title>
                   </div>
 
-                  {/* Review Section (in bottom part) */}
                   <div style={{
                     position: 'absolute',
                     bottom: 0,
@@ -268,9 +261,7 @@ const ReviewsPage = () => {
                       "{review.review}"
                     </Paragraph>
 
-                    <div style={{
-                      marginTop: '25px'
-                    }}>
+                    <div style={{ marginTop: '25px' }}>
                       <Rate
                         disabled
                         defaultValue={review.rating}

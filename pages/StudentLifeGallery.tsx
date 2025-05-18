@@ -143,10 +143,6 @@ const StudentLifeGallery = () => {
 
   return (
     <section style={styles.galleryContainer}>
-      <Title level={2} style={styles.galleryTitle}>
-        Our Gallery
-      </Title>
-      <div style={styles.titleUnderline}></div>
 
       <div style={styles.subHeadingContainer}>
         <Title level={3} style={styles.subHeadingTitle}>
@@ -308,7 +304,6 @@ const StudentLifeGallery = () => {
 
 const styles = {
   galleryContainer: {
-    padding: "60px 20px",
     backgroundColor: "#f9f9f9",
     textAlign: "center" as const,
     position: "relative" as const,
