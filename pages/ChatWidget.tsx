@@ -66,8 +66,8 @@ const ChatWidget: React.FC = () => {
         size="large"
         onClick={toggleChat}
         style={{ 
-          backgroundColor: '#0a2c64', 
-          borderColor: '#0a2c64',
+          backgroundColor: 'rgb(255, 87, 34)', 
+          borderColor: 'rgb(255, 87, 34)',
           boxShadow: '0 4px 12px rgba(10, 44, 100, 0.3)',
           transition: 'all 0.3s'
         }}
@@ -92,7 +92,7 @@ const ChatWidget: React.FC = () => {
         >
           <div style={{
             padding: '12px 16px',
-            backgroundColor: '#0a2c64',
+            backgroundColor: 'rgb(255, 87, 34)',
             color: 'white',
             fontWeight: '600',
             textAlign: 'center'
@@ -130,7 +130,7 @@ const ChatWidget: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
                   style={{
-                    backgroundColor: msg.sender === 'user' ? '#0a2c64' : '#e8e8e8',
+                    backgroundColor: msg.sender === 'user' ? 'rgb(255, 87, 34)' : '#e8e8e8',
                     color: msg.sender === 'user' ? '#fff' : '#000',
                     padding: '10px 15px',
                     borderRadius: msg.sender === 'user' ? '12px 12px 0 12px' : '12px 12px 12px 0',
@@ -167,8 +167,8 @@ const ChatWidget: React.FC = () => {
               icon={<SendOutlined />}
               onClick={sendMessage}
               style={{ 
-                backgroundColor: '#0a2c64', 
-                borderColor: '#0a2c64',
+                backgroundColor: 'rgb(255, 87, 34)', 
+                borderColor: 'rgb(255, 87, 34)',
                 borderRadius: '50%',
                 width: '40px',
                 height: '40px'
