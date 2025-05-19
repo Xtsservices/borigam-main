@@ -108,7 +108,7 @@ const ProductManager = () => {
                 title={<span style={{ fontSize: "24px" }}>Key Responsibilities of a Product Manager</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -163,7 +163,7 @@ const ProductManager = () => {
                 title={<span style={{ fontSize: "24px" }}>Skills Needed</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -195,7 +195,7 @@ const ProductManager = () => {
                 title={<span style={{ fontSize: "24px" }}>Types of Product Managers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -226,7 +226,7 @@ const ProductManager = () => {
                 title={<span style={{ fontSize: "24px" }}>Famous Product Managers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",

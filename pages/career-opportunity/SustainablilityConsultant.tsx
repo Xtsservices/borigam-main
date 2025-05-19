@@ -45,7 +45,7 @@ const SustainabilityConsultant = () => {
             style={{
               height: 4,
               width: 120,
-              backgroundColor: '#fbb034',
+              background: 'linear-gradient(90deg, #ff5722, #ff9800)',
               margin: '20px auto 40px',
             }}
           ></div>
@@ -127,7 +127,7 @@ const SustainabilityConsultant = () => {
                 title={<span style={{ fontSize: "24px" }}>Leading Sustainability Experts</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",

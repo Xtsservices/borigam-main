@@ -72,7 +72,7 @@ const Freelancer = () => {
                 title={<span style={{ fontSize: "24px" }}>Key Characteristics</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -103,7 +103,7 @@ const Freelancer = () => {
                 title={<span style={{ fontSize: "24px" }}>Common Freelance Professions</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -165,7 +165,7 @@ const Freelancer = () => {
                 title={<span style={{ fontSize: "24px" }}>Historical Freelancers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",

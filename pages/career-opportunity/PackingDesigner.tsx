@@ -72,7 +72,7 @@ const PackagingDesign = () => {
                 title={<span style={{ fontSize: "24px" }}>Key Elements of Packaging Design</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -128,7 +128,7 @@ const PackagingDesign = () => {
                 title={<span style={{ fontSize: "24px" }}>Types of Packaging Design</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -158,7 +158,7 @@ const PackagingDesign = () => {
                 title={<span style={{ fontSize: "24px" }}>Skills Needed</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
@@ -189,7 +189,7 @@ const PackagingDesign = () => {
                 title={<span style={{ fontSize: "24px" }}>Iconic Packaging Designers</span>}
                 style={cardStyle}
                 headStyle={{ 
-                  backgroundColor: "#FF8C00", 
+                  background: 'linear-gradient(90deg, #ff5722, #ff9800)',
                   color: "#fff",
                   fontSize: "24px",
                   padding: "20px 24px",
