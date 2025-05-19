@@ -25,7 +25,6 @@ const examCards: ExamCard[] = [
   { id: 'barch', title: 'B.ARCH Entrance', image: '/images/barch.jpeg' },
 ];
 
-// Styled components
 const SectionContainer = styled.section`
   margin: 100px auto;
   height: 100%;
@@ -179,7 +178,6 @@ const CardTitle = styled(Title)<{ ismiddle: boolean }>`
 `;
 
 const ViewMoreButton = styled(Button)<{ ismiddle: boolean }>`
-
   background: linear-gradient(90deg, #ff5722, #ff9800) !important;
   border: none !important;
   color: white !important;
@@ -284,7 +282,7 @@ const EntranceExamsSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const carouselRef = useRef<any>(null);
-const autoPlayIntervalRef = useRef<number | null>(null);
+  const autoPlayIntervalRef = useRef<number | null>(null);
 
   const handleCardClick = (examId: string) => {
     router.push(`/entrance/${examId}`);
@@ -294,14 +292,13 @@ const autoPlayIntervalRef = useRef<number | null>(null);
     return index === currentSlide;
   };
 
-  // Auto-play functionality with faster sliding
   useEffect(() => {
     const startAutoPlay = () => {
       autoPlayIntervalRef.current = setInterval(() => {
         if (carouselRef.current) {
           carouselRef.current.next();
         }
-      }, 2000); // Faster auto-slide (2 seconds)
+      }, 2000);
     };
 
     const stopAutoPlay = () => {
@@ -332,7 +329,7 @@ const autoPlayIntervalRef = useRef<number | null>(null);
     centerPadding: '0px',
     beforeChange: (current: number, next: number) => setCurrentSlide(next),
     cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
-    autoplaySpeed: 2000, // Faster transition speed
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1024,
@@ -376,10 +373,7 @@ const autoPlayIntervalRef = useRef<number | null>(null);
           />
         </ArrowContainer>
 
-        <StyledCarousel 
-          ref={carouselRef} 
-          {...settings}
-        >
+        <StyledCarousel ref={carouselRef} {...settings}>
           {examCards.map((exam, index) => (
             <div key={exam.id}>
               <StyledCard
@@ -395,7 +389,7 @@ const autoPlayIntervalRef = useRef<number | null>(null);
                   ismiddle={isMiddleCard(index)}
                   icon={<RightOutlined />}
                   onClick={(e) => {
-                    e.stopPropagation();
+                    e.preventDefault();
                     handleCardClick(exam.id);
                   }}
                 >
