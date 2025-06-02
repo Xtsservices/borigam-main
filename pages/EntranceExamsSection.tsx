@@ -18,7 +18,7 @@ const examCards: ExamCard[] = [
   { id: 'bfa', title: 'BFA Entrance', image: '/images/bfa.jpeg' },
   { id: 'nid', title: 'NID Entrance', image: '/images/nid.jpeg' },
   { id: 'fddi', title: 'FDDI Entrance', image: '/images/fddi.jpeg' },
-  { id: 'ceed', title: 'CEED Entrance', image: '/images/ceed.jpeg' },
+  { id: 'ceed', title: 'CEED Entrance', image: '/images/ceed.jpg' },
   { id: 'aat', title: 'AAT Entrance', image: '/images/AAT.jpeg' },
   { id: 'uceed', title: 'UCEED Entrance', image: '/images/uceed.jpeg' },
   { id: 'nata', title: 'NATA Entrance', image: '/images/nata.jpeg' },
@@ -71,26 +71,26 @@ const StyledCarousel = styled(Carousel)`
     }
   }
 
-  .slick-dots {
-    bottom: 0 !important;
+  // .slick-dots {
+  //   bottom: 0 !important;
     
-    li {
-      margin: 0 4px !important;
+  //   li {
+  //     margin: 0 4px !important;
       
-      button {
-        width: 10px !important;
-        height: 10px !important;
-        border-radius: 50% !important;
-        background: #0a2c64 !important;
-        opacity: 0.4;
-        transition: all 0.3s ease;
-      }
+  //     button {
+  //       width: 10px !important;
+  //       height: 10px !important;
+  //       border-radius: 50% !important;
+  //       background: #0a2c64 !important;
+  //       opacity: 0.4;
+  //       transition: all 0.3s ease;
+  //     }
       
-      &.slick-active button {
-        opacity: 1;
-        width: 20px !important;
-        border-radius: 5px !important;
-      }
+  //     &.slick-active button {
+  //       opacity: 1;
+  //       width: 20px !important;
+  //       border-radius: 5px !important;
+  //     }
     }
   }
 
@@ -135,7 +135,7 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
   }
 
   .ant-card-body {
-    padding: 20px !important;
+    padding: 40px !important;
     display: flex;
     flex-direction: column;
     height: calc(100% - ${props => props.ismiddle ? '220px' : '200px'});
@@ -149,9 +149,11 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
 
   .card-image {
     width: 100%;
-    height: 120%;
+    height: 100%;
     padding: 0px;
-    object-fit: cover;
+    //object-fit: cover;
+    object-position: center;
+    display: block;
     transition: all 0.5s ease;
     
     &:hover {
@@ -320,7 +322,7 @@ const EntranceExamsSection: React.FC = () => {
   }, [isHovered]);
 
   const settings = {
-    dots: true,
+    // dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,

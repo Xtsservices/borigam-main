@@ -120,7 +120,8 @@ const Gallery = () => {
         <Carousel
           ref={carouselRef}
           arrows
-          dots={{ className: "custom-dots" }}
+          // dots={{ className: "custom-dots" }}
+          dots={false}
           slidesToShow={4}
           infinite
           draggable
@@ -146,7 +147,7 @@ const Gallery = () => {
               settings: {
                 slidesToShow: 1,
                 arrows: false, // Hide arrows on mobile
-                dots: true,
+                // dots: true,
               },
             },
           ]}
@@ -194,7 +195,7 @@ const Gallery = () => {
         </Carousel>
       </div>
 
-      <Link href="/exploreGallery#studentSituation" passHref legacyBehavior>
+      <Link href="/exploreGallery#studentWorks" passHref legacyBehavior>
         <Button 
           type="primary" 
           style={{
@@ -212,7 +213,7 @@ const Gallery = () => {
 
       <style jsx global>{`
         .slick-dots.custom-dots {
-          bottom: -30px;
+          bottom: -25px;
         }
         .slick-dots.custom-dots li {
           margin: 0 4px;

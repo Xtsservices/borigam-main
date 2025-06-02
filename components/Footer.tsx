@@ -196,6 +196,15 @@ const AppFooter = () => {
         }}
       >
         © 2024-2025 Borigam Institute. All Rights Reserved
+        <a
+          href="https://www.xtsservices.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#fff', textDecoration: '' }}
+        >
+          <br />
+          xtsservices.com
+        </a>
       </div>
     </Footer>
   );

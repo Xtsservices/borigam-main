@@ -40,6 +40,18 @@ const Reviews = [
     review: 'Borigam institute has very good learning environment. Faculty are really awesome in teaching with good examples.',
     rating: 5,
     image: '/images/review6.jpeg'
+  },
+  {
+    name: 'Sathwik',
+    review: 'I joined for nid coaching in borigam , borigam coaching institute have very good faculty and good materials every week they conduct the 2 mocks and they talks about students results I prefer borigam institute is good for all designing entrance exams.',
+    rating: 5,
+    image: '/images/review7.jpeg'
+  },
+  {
+    name: 'Anuhya',
+    review:'I came to Borigam institution for UCEED entrance exam coaching and i have cracked it with the decent marks . I am extremely satisfied with the faculties teaching and the support provided by the Sachin Sir.',
+    rating: 5,
+    image: '/images/review8.jpeg'
   }
 ];
 
@@ -55,8 +67,6 @@ const ReviewsPage = () => {
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: '0px',
-    autoplay: true,
-    autoplaySpeed: 3000,
     beforeChange: (current: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
@@ -81,6 +91,7 @@ const ReviewsPage = () => {
   };
 
   const handleCardClick = (index: number) => {
+    // Calculate how many slides we need to move
     const slidesToMove = index - currentSlide;
     if (slidesToMove > 0) {
       for (let i = 0; i < slidesToMove; i++) {
@@ -97,9 +108,10 @@ const ReviewsPage = () => {
     <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', padding: '60px 0', marginTop: '-100px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         <Title level={2} style={{ textAlign: 'center', marginBottom: '50px', color: '#333' }}>
-          STUDENT REVIEWS
+          Student Reviews
         </Title>
-
+        
+        {/* Arrows */}
         <div style={{ position: 'relative' }}>
           <Button
             shape="circle"
@@ -130,6 +142,7 @@ const ReviewsPage = () => {
             }}
           />
 
+          {/* Carousel */}
           <Carousel ref={carouselRef} {...settings}>
             {Reviews.map((review, index) => (
               <div 
@@ -155,6 +168,7 @@ const ReviewsPage = () => {
                     cursor: 'pointer'
                   }}
                 >
+                  {/* Top Section - Orange by default */}
                   <div style={{
                     position: 'absolute',
                     top: 0,
@@ -165,6 +179,7 @@ const ReviewsPage = () => {
                     transition: 'all 0.6s cubic-bezier(0.65, 0, 0.35, 1)',
                     zIndex: 1,
                   }}>
+                    {/* Notch between sections */}
                     <div style={{
                       position: 'absolute',
                       bottom: '-20px',
@@ -181,6 +196,7 @@ const ReviewsPage = () => {
                     }} />
                   </div>
 
+                  {/* Bottom Section - White by default */}
                   <div style={{
                     position: 'absolute',
                     bottom: 0,
@@ -192,6 +208,7 @@ const ReviewsPage = () => {
                     zIndex: 1,
                   }} />
 
+                  {/* Profile Image */}
                   <div style={{
                     position: 'absolute',
                     top: '40%',
@@ -211,6 +228,7 @@ const ReviewsPage = () => {
                     transition: 'all 0.4s ease',
                   }} />
 
+                  {/* Name Section (in top part) */}
                   <div style={{
                     position: 'absolute',
                     top: 0,
@@ -237,6 +255,7 @@ const ReviewsPage = () => {
                     </Title>
                   </div>
 
+                  {/* Review Section (in bottom part) */}
                   <div style={{
                     position: 'absolute',
                     bottom: 0,
@@ -261,7 +280,9 @@ const ReviewsPage = () => {
                       "{review.review}"
                     </Paragraph>
 
-                    <div style={{ marginTop: '25px' }}>
+                    <div style={{
+                      marginTop: '25px'
+                    }}>
                       <Rate
                         disabled
                         defaultValue={review.rating}
