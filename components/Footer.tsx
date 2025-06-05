@@ -21,8 +21,8 @@ const AppFooter = () => {
 
   const renderContent = () => (
     <>
-      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: '26px', paddingTop: '20px' }}>BORIGAM</h2>
-      <h4 style={{ fontSize: '16px', color: '#fff' }}>Design | Architecture</h4>
+      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: '26px', paddingTop: '20px', margin: 0, marginBottom: '8px' }}>BORIGAM</h2>
+      <h4 style={{ fontSize: '16px', color: '#fff', margin: 0, marginBottom: '16px' }}>Design | Architecture</h4>
       <p style={styles.text}>
         <EnvironmentOutlined /> #1-11-206/A,<br />
         Opposite Seasons Florists,<br />
@@ -118,11 +118,26 @@ const AppFooter = () => {
         padding: '20px 0',
         fontFamily: '"Open Sans", sans-serif',
         color: '#fff',
+        minHeight: 'auto', // Prevent height jumping
+        position: 'relative', // Ensure proper positioning
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
+      <div style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        padding: '0 15px',
+        minHeight: '300px', // Set minimum height to prevent jumping
+      }}>
         {isMobile ? (
-          <Collapse accordion bordered={false} style={{ backgroundColor: 'transparent' }}>
+          <Collapse 
+            accordion 
+            bordered={false} 
+            style={{ 
+              backgroundColor: 'transparent',
+              // Removed invalid nested selector
+            }}
+            ghost // Use ghost mode to remove borders and background
+          >
             <Panel header="BORIGAM Info" key="borigam" style={styles.panel}>
               {renderContent()}
             </Panel>
@@ -137,7 +152,7 @@ const AppFooter = () => {
             ))}
           </Collapse>
         ) : (
-          <Row gutter={[32, 32]}>
+          <Row gutter={[32, 32]} style={{ minHeight: '300px' }}> {/* Set minimum height */}
             <Col xs={24} sm={12} md={6}>{renderContent()}</Col>
             <Col xs={24} sm={12} md={6}>
               <h3 style={styles.heading}>ENTRANCE EXAM COACHING</h3>
@@ -193,6 +208,7 @@ const AppFooter = () => {
           fontSize: '15px',
           fontWeight: 'bold',
           marginTop: '40px',
+          width: '100%', // Ensure full width
         }}
       >
         © 2024-2025 Borigam Institute. All Rights Reserved
@@ -200,7 +216,7 @@ const AppFooter = () => {
           href="https://www.xtsservices.com/"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: '#fff', textDecoration: '' }}
+          style={{ color: '#fff', textDecoration: 'none' }}
         >
           <br />
           xtsservices.com
@@ -229,11 +245,14 @@ const styles = {
     paddingLeft: '0',
     fontSize: '14px',
     lineHeight: '1.9',
+    margin: 0, // Remove default margin
   },
   link: {
     color: '#fff',
     textDecoration: 'none',
-    transition: 'color 0.3s',
+    transition: 'color 0.3s ease', // Smooth transition
+    display: 'block', // Ensure consistent layout
+    padding: '2px 0', // Add slight padding for better click area
   },
   iconContainer: {
     display: 'flex',
@@ -243,12 +262,12 @@ const styles = {
   icon: {
     fontSize: '18px',
     color: '#fff',
-    transition: 'color 0.3s',
+    transition: 'color 0.3s ease, transform 0.2s ease', // Smooth transitions
     cursor: 'pointer',
   },
   panel: {
-    backgroundColor: 'transparent',
-    border: 'none',
+    backgroundColor: 'transparent !important',
+    border: 'none !important',
     color: '#fff',
   },
 };
