@@ -12,7 +12,7 @@ import WhyChooseSection from './WhyChooseSection';
 import CarouselComponent from './CarouselComponent';
 import SuccessStoriesIndex from './SuccessStoriesIndex';
 import ReviewsPage from './ReviewsPage';
-import ChatWidget from './ChatWidget';
+// import ChatWidget from './ChatWidget';
 import LifeAtBorigam from './LifeAtBorigam';
 import StudentLifeGallery from './StudentLifeGallery';
 import EnquireIndex from './EnquireIndex';
@@ -120,7 +120,7 @@ const HomePage: React.FC = () => {
     { id: 'life-at-borigam', component: <LifeAtBorigam /> },
     { id: 'success-stories', component: <SuccessStoriesIndex /> },
     { id: 'reviews', component: <ReviewsPage /> },
-    { id: 'chat', component: <ChatWidget /> },
+    // { id: 'chat', component: <ChatWidget /> },
   ];
 
   return (

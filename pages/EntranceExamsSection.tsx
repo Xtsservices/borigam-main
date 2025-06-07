@@ -32,6 +32,21 @@ const SectionContainer = styled.section`
   padding: 0 20px;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
+
+  @media (max-width: 1024px) {
+    margin: 80px auto;
+    padding: 0 15px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 60px auto;
+    padding: 0 10px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 40px auto;
+    padding: 0 5px;
+  }
 `;
 
 const SectionTitle = styled(Title)`
@@ -39,8 +54,18 @@ const SectionTitle = styled(Title)`
   color: #0a2c64 !important;
   font-weight: 600 !important;
   font-size: 30px !important;
-  margin-bottom: 40p !important;
+  margin-bottom: 40px !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    font-size: 24px !important;
+    margin-bottom: 30px !important;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px !important;
+    margin-bottom: 20px !important;
+  }
 `;
 
 const TitleUnderline = styled.div`
@@ -50,6 +75,12 @@ const TitleUnderline = styled.div`
   margin: 10px auto 30px;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(251, 176, 52, 0.3);
+
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 2px;
+    margin: 8px auto 20px;
+  }
 `;
 
 const StyledCarousel = styled(Carousel)`
@@ -71,34 +102,46 @@ const StyledCarousel = styled(Carousel)`
     }
   }
 
-  // .slick-dots {
-  //   bottom: 0 !important;
+  @media (max-width: 1024px) {
+    padding: 0 60px;
     
-  //   li {
-  //     margin: 0 4px !important;
-      
-  //     button {
-  //       width: 10px !important;
-  //       height: 10px !important;
-  //       border-radius: 50% !important;
-  //       background: #0a2c64 !important;
-  //       opacity: 0.4;
-  //       transition: all 0.3s ease;
-  //     }
-      
-  //     &.slick-active button {
-  //       opacity: 1;
-  //       width: 20px !important;
-  //       border-radius: 5px !important;
-  //     }
+    .slick-list {
+      padding: 30px 0;
+      margin: 0 -20px;
+    }
+
+    .slick-slide {
+      padding: 0 20px;
     }
   }
 
   @media (max-width: 768px) {
-    padding: 0 40px;
+    padding: 0 50px;
+    
+    .slick-list {
+      padding: 20px 0;
+      margin: 0 -15px;
+    }
     
     .slick-slide {
       padding: 0 15px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 30px;
+    
+    .slick-list {
+      padding: 15px 0;
+      margin: 0 -10px;
+    }
+    
+    .slick-slide {
+      padding: 0 10px;
     }
   }
 `;
@@ -151,7 +194,7 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
     width: 100%;
     height: 100%;
     padding: 0px;
-    //object-fit: cover;
+    object-fit: cover;
     object-position: center;
     display: block;
     transition: all 0.5s ease;
@@ -161,11 +204,53 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
     }
   }
 
+  @media (max-width: 1024px) {
+    height: ${props => props.ismiddle ? '380px' : '340px'} !important;
+    
+    .ant-card-body {
+      padding: 30px !important;
+      height: calc(100% - ${props => props.ismiddle ? '200px' : '180px'});
+    }
+
+    .ant-card-cover {
+      height: ${props => props.ismiddle ? '200px' : '180px'} !important;
+    }
+
+    &:hover {
+      transform: ${props => props.ismiddle ? 
+        'scale(1.06) translateY(-8px)' : 
+        'scale(1) translateY(-4px)'};
+    }
+  }
+
   @media (max-width: 768px) {
-    height: auto !important;
+    height: 320px !important;
+    transform: scale(1) !important;
+    
+    .ant-card-body {
+      padding: 20px !important;
+      height: calc(100% - 180px);
+    }
     
     .ant-card-cover {
-      height: 200px !important;
+      height: 180px !important;
+    }
+
+    &:hover {
+      transform: scale(1.02) translateY(-3px) !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    height: 280px !important;
+    
+    .ant-card-body {
+      padding: 15px !important;
+      height: calc(100% - 160px);
+    }
+    
+    .ant-card-cover {
+      height: 160px !important;
     }
   }
 `;
@@ -177,6 +262,21 @@ const CardTitle = styled(Title)<{ ismiddle: boolean }>`
   text-align: center;
   transition: all 0.3s ease;
   font-weight: ${props => props.ismiddle ? '600' : '500'} !important;
+
+  @media (max-width: 1024px) {
+    font-size: ${props => props.ismiddle ? '18px' : '16px'} !important;
+    margin-bottom: 12px !important;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
 `;
 
 const ViewMoreButton = styled(Button)<{ ismiddle: boolean }>`
@@ -223,6 +323,25 @@ const ViewMoreButton = styled(Button)<{ ismiddle: boolean }>`
   &:active {
     transform: translateY(0);
   }
+
+  @media (max-width: 1024px) {
+    font-size: ${props => props.ismiddle ? '14px' : '13px'};
+    height: ${props => props.ismiddle ? '38px' : '35px'};
+    padding: ${props => props.ismiddle ? '0 20px' : '0 16px'};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    height: 35px;
+    padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 16px !important;
+  }
 `;
 
 const ArrowContainer = styled.div`
@@ -234,6 +353,10 @@ const ArrowContainer = styled.div`
   justify-content: space-between;
   pointer-events: none;
   z-index: 10;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const ArrowButton = styled(Button)`
@@ -273,9 +396,19 @@ const ArrowButton = styled(Button)`
     }
   }
 
+  @media (max-width: 1024px) {
+    width: 45px;
+    height: 45px;
+  }
+
   @media (max-width: 768px) {
     width: 40px;
     height: 40px;
+  }
+
+  @media (max-width: 640px) {
+    width: 35px;
+    height: 35px;
   }
 `;
 
@@ -322,7 +455,6 @@ const EntranceExamsSection: React.FC = () => {
   }, [isHovered]);
 
   const settings = {
-    // dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -332,19 +464,46 @@ const EntranceExamsSection: React.FC = () => {
     beforeChange: (current: number, next: number) => setCurrentSlide(next),
     cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
     autoplaySpeed: 2000,
+    swipeToSlide: true,
+    touchThreshold: 10,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          centerMode: true
+        }
+      },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          centerMode: false
+          centerMode: true,
+          centerPadding: '20px'
         }
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-          centerMode: false
+          centerMode: true,
+          centerPadding: '40px'
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '20px'
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false,
+          arrows: false
         }
       }
     ]
@@ -354,6 +513,32 @@ const EntranceExamsSection: React.FC = () => {
     <SectionContainer>
       <Global styles={css`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        /* Custom scrollbar for better mobile experience */
+        ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: #ff5722;
+          border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: #0a2c64;
+        }
+
+        /* Improve touch targets for mobile */
+        @media (max-width: 768px) {
+          .slick-slider {
+            touch-action: pan-y pinch-zoom;
+          }
+        }
       `} />
 
       <SectionTitle level={2}>Entrance Exams</SectionTitle>
