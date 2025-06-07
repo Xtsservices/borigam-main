@@ -16,17 +16,31 @@ import ChatWidget from './ChatWidget';
 import LifeAtBorigam from './LifeAtBorigam';
 import StudentLifeGallery from './StudentLifeGallery';
 import EnquireIndex from './EnquireIndex';
+import Footer from '../components/Footer';
 
 const { Title } = Typography;
 
-const AnimatedSection = styled.section<{ $visible: boolean; $delay: number }>`
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const MainContent = styled.main`
+  flex: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+`;
+
+const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $minHeight?: number }>`
   margin: 40px 0;
   padding: 0 20px;
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: translateY(${({ $visible }) => ($visible ? 0 : '20px')});
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   transition-delay: ${({ $delay }) => `${$delay * 0.1}s`};
-  min-height: 50px;
+  min-height: ${({ $minHeight }) => ($minHeight ? `${$minHeight}px` : '45px')};
   scroll-margin-top: 100px;
 
   @media (max-width: 768px) {
@@ -42,20 +56,22 @@ const AnimatedSection = styled.section<{ $visible: boolean; $delay: number }>`
   }
 `;
 
-// ...all imports remain the same
+const HideScrollbarContainer = styled.div`
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 const HomePage: React.FC = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [showChatPopup, setShowChatPopup] = useState(true);
-  const [messages, setMessages] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState('');
   const [visibleSections, setVisibleSections] = useState<number[]>([]);
-  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     setVisibleSections([0]);
-
     if (window.location.hash) {
       const sectionId = window.location.hash.substring(1);
       setTimeout(() => {
@@ -65,40 +81,7 @@ const HomePage: React.FC = () => {
         }
       }, 100);
     }
-
-    const timer = setTimeout(() => {
-      setShowEnquiryModal(true);
-    }, 5000);
-
-    return () => clearTimeout(timer);
   }, []);
-
-  const toggleChat = () => {
-    if (isChatOpen) {
-      setIsChatOpen(false);
-      setShowChatPopup(true);
-      setMessages([]);
-      setInputValue('');
-    } else {
-      setIsChatOpen(true);
-      setShowChatPopup(false);
-      setMessages([]);
-      setInputValue('');
-    }
-  };
-
-  const sendMessage = () => {
-    if (inputValue.trim()) {
-      setMessages((prev) => [...prev, inputValue]);
-      setInputValue('');
-    }
-  };
-
-  const handleQuickReply = (message: string) => {
-    setMessages((prev) => [...prev, message]);
-    setIsChatOpen(true);
-    setShowChatPopup(false);
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -141,233 +124,31 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', overflowX: 'hidden' }}>
-      <Header />
-
-      <main style={{ maxWidth: 1440, margin: '0 auto', padding: '0 20px' }}>
-        {sections.map((section, index) => (
-          <AnimatedSection
-            key={section.id}
-            id={section.id}
-            ref={(el) => {
-              if (el) {
-                sectionRefs.current[index] = el;
-              }
-            }}
-            $visible={visibleSections.includes(index)}
-            $delay={index % 3}
-          >
-            {section.component}
-          </AnimatedSection>
-        ))}
-      </main>
-
-      {/* Chat Toggle Button */}
-      <Button
-        shape="circle"
-        icon={isChatOpen ? <CloseOutlined /> : <MessageOutlined />}
-        onClick={toggleChat}
-        style={{
-          position: 'fixed',
-          bottom: 24,
-          right: 24,
-          width: 64,
-          height: 64,
-          fontSize: 24,
-          backgroundColor: '#fa8c16',
-          borderColor: '#fa8c16',
-          color: '#fff',
-          zIndex: 1000,
-        }}
-      />
-
-      {/* Separate Popup Boxes */}
-      {showChatPopup && !isChatOpen && (
-        <>
-          <div
-            style={{
-              position: 'fixed',
-              bottom: 180,
-              right: 24,
-              backgroundColor: '#fff',
-              border: '1px solid #fa8c16',
-              borderRadius: 20,
-              padding: '10px 10px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-              zIndex: 999,
-              fontWeight: 500,
-              color: '#333',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              minWidth: 180,
-              maxWidth: 250,
-            }}
-          >
-            <span>👋 Hi! How can we help?</span>
-            <Button
-              type="text"
-              icon={<CloseOutlined />}
-              onClick={() => setShowChatPopup(false)}
-              style={{ color: '#fa8c16', fontSize: 16, padding: 0, lineHeight: 1 }}
-              aria-label="Close greeting"
-            />
-          </div>
-
-          <div style={{ position: 'fixed', bottom: 130, right: 24, zIndex: 999 }}>
-            <button
-              onClick={() => handleQuickReply('I have a question')}
-              style={{
-                backgroundColor: '#fff',
-                color: '#fa8c16',
-                border: '1px solid #fa8c16',
-                borderRadius: 20,
-                padding: '8px 14px',
-                fontWeight: 500,
-                cursor: 'pointer',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-              }}
-            >
-              I have a question
-            </button>
-          </div>
-
-          <div style={{ position: 'fixed', bottom: 90, right: 24, zIndex: 999 }}>
-            <button
-              onClick={() => handleQuickReply('Tell me more about your institution')}
-              style={{
-                backgroundColor: '#fff',
-                color: '#fa8c16',
-                border: '1px solid #fa8c16',
-                borderRadius: 20,
-                padding: '8px 14px',
-                fontWeight: 500,
-                cursor: 'pointer',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-              }}
-            >
-              Tell me more
-            </button>
-          </div>
-        </>
-      )}
-
-      {/* Chat Box */}
-      {isChatOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 100,
-            right: 24,
-            width: 320,
-            height: 420,
-            backgroundColor: '#fff',
-            borderRadius: 12,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
-            display: 'flex',
-            flexDirection: 'column',
-            zIndex: 1000,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: '#fa8c16',
-              padding: '12px 16px',
-              borderTopLeftRadius: 12,
-              borderTopRightRadius: 12,
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: 16,
-            }}
-          >
-            Chat Support
-          </div>
-          <div style={{ flex: 1, padding: '8px 12px', overflowY: 'auto' }}>
-            {messages.length === 0 ? (
-              <div>
-                <div
-                  style={{
-                    backgroundColor: '#fff',
-                    borderRadius: 8,
-                    padding: '10px',
-                    fontWeight: 500,
-                    color: '#555',
-                    marginBottom: 12,
-                  }}
-                >
-                  👋 Hi! I am Mansi. How can I assist you?
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <button
-                    onClick={() => handleQuickReply('I have a question')}
-                    style={{
-                      backgroundColor: '#fff',
-                      color: '#fa8c16',
-                      border: '1px solid #fa8c16',
-                      borderRadius: 20,
-                      padding: '6px 12px',
-                      fontWeight: 500,
-                      cursor: 'pointer',
-                      alignSelf: 'flex-start',
-                    }}
-                  >
-                    I have a question
-                  </button>
-                  <button
-                    onClick={() => handleQuickReply('Tell me more about your institution')}
-                    style={{
-                      backgroundColor: '#fff',
-                      color: '#fa8c16',
-                      border: '1px solid #fa8c16',
-                      borderRadius: 20,
-                      padding: '6px 12px',
-                      fontWeight: 500,
-                      cursor: 'pointer',
-                      alignSelf: 'flex-start',
-                    }}
-                  >
-                    Tell me more
-                  </button>
-                </div>
-              </div>
-            ) : (
-              messages.map((msg, index) => (
-                <div
-                  key={index}
-                  style={{
-                    backgroundColor: '#dcf8c6',
-                    padding: '8px 12px',
-                    borderRadius: 16,
-                    margin: '6px 0',
-                    alignSelf: 'flex-end',
-                    maxWidth: '80%',
-                    marginLeft: 'auto',
-                  }}
-                >
-                  {msg}
-                </div>
-              ))
-            )}
-          </div>
-          <div style={{ display: 'flex', padding: 8, borderTop: '1px solid #eee' }}>
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onPressEnter={sendMessage}
-              placeholder="Type your message..."
-              style={{ flex: 1, borderRadius: 20 }}
-            />
-            <Button
-              type="primary"
-              icon={<SendOutlined />}
-              onClick={sendMessage}
-              style={{ marginLeft: 8, backgroundColor: '#fa8c16', borderColor: '#fa8c16' }}
-            />
-          </div>
-        </div>
-      )}
-    </div>
+    <PageWrapper>
+      <HideScrollbarContainer>
+        <Header />
+        <MainContent>
+          {sections.map((section, index) => {
+            const isHeavySection =
+              section.id === 'success-stories' || section.id === 'reviews';
+            return (
+              <AnimatedSection
+                key={section.id}
+                id={section.id}
+                ref={(el) => {
+                  if (el) sectionRefs.current[index] = el;
+                }}
+                $visible={visibleSections.includes(index)}
+                $delay={index % 3}
+                $minHeight={isHeavySection ? 600 : undefined}
+              >
+                {section.component}
+              </AnimatedSection>
+            );
+          })}
+        </MainContent>
+      </HideScrollbarContainer>
+    </PageWrapper>
   );
 };
 

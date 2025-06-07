@@ -66,7 +66,6 @@ const Blog = () => {
           </div>
         </div>
       </div>
-      <AppFooter />
       <style jsx>{`
         .main-container {
           width: 100%;

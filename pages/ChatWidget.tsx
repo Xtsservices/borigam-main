@@ -58,7 +58,7 @@ const ChatWidget: React.FC = () => {
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: 30, right: 30, zIndex: 1000 }}>
+    <div style={{ position: 'fixed', right: 30, zIndex: 1000 }}>
       <Button
         type="primary"
         shape="circle"

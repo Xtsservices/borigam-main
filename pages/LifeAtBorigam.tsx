@@ -89,14 +89,24 @@ const MediaCarousel: React.FC = () => {
         `}
       </style>
       <div style={{ padding: '2rem', backgroundColor: '#f9fafb' }}>
-        <h2 style={{
-          fontSize: '1.5rem',
-          fontWeight: 500,
-          marginBottom: '1.5rem',
-          textAlign: 'center'
-        }}>
-          Life at Borigam
-        </h2>
+      <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+  <h2 style={{
+    fontSize: '26px',
+    fontWeight: 500,
+    marginBottom: '5px',
+  }}>
+    Life at Borigam
+  </h2>
+  <div style={{
+    width: '40px',
+    height: '4px',
+    backgroundColor: '#fbb034',
+    margin: '0 auto 0px',
+    borderRadius: '2px',
+    boxShadow: 'rgba(251, 176, 52, 0.3) 0px 2px',
+  }} />
+</div>
+
 
         <Slider {...settings}>
           {mediaItems.map((item, index) => (
