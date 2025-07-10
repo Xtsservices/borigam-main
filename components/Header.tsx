@@ -261,23 +261,26 @@ const Header: React.FC<HeaderProps> = () => {
       <div className="header-content">
         <Row justify="space-between" align="middle" className="main-header-row">
           <Col xs={12} sm={12} md={5} lg={5} xl={6}>
-            <div 
-              className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
-              style={{ 
-                marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
-                marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
-                marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
-              }}
-            >
-              <Link href="/">
-                <img 
-                  src="/images/logo.png" 
-                  alt="Borigam Logo" 
-                  className="logo" 
-                  style={{ height: `${getLogoSize()}px` }}
-                />
-              </Link>
-            </div>
+<div 
+  className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
+  style={{ 
+    marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
+    marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
+    marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
+  }}
+>
+  <Link href="/">
+    <img 
+      src="/images/logo.png" 
+      alt="Borigam Logo" 
+      className="logo" 
+      style={{ 
+        height: isMobile ? '50px' : `${getLogoSize()}px`,
+        width: isMobile ? 'auto' : undefined
+      }}
+    />
+  </Link>
+</div>
           </Col>
 
           <Col xs={0} sm={0} md={19} lg={19} xl={18}>
@@ -804,6 +807,15 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         @media (max-width: 576px) {
+
+           .logo {
+    height: 12rem !important;
+    width: auto;
+    margin-top:-60px;
+        margin-bottom:-60px;
+        margin-left:-20px
+
+  }
           .header-content {
             padding: 0 10px;
           }
@@ -822,6 +834,8 @@ const Header: React.FC<HeaderProps> = () => {
           .mobile-drawer .ant-drawer-body {
             padding-top: 10px;
           }
+
+          
           
           .mobile-nav {
             gap: 5px;
