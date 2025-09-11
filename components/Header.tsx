@@ -16,6 +16,7 @@ interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const router = useRouter();
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [screenSize, setScreenSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
     height: typeof window !== 'undefined' ? window.innerHeight : 800
@@ -69,15 +70,42 @@ const Header: React.FC<HeaderProps> = () => {
       // Set initial values
       handleResize();
       handleScroll();
-      
-      // Add event listeners
+
+      // Section scroll spy logic
+      const sectionLinkMap = {
+        "about-section": "About Us",
+        "entrance-section": "Entrance Exam"
+      };
+      const sectionIds = Object.keys(sectionLinkMap);
+
+      const onScroll = () => {
+        let foundSection: string | null = null;
+        for (let i = 0; i < sectionIds.length; i++) {
+          const id = sectionIds[i];
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 120 && rect.bottom > 120) {
+              foundSection = id;
+              break;
+            }
+          }
+        }
+        setActiveSection(foundSection);
+      };
+
       window.addEventListener("resize", handleResize);
       window.addEventListener("scroll", handleScroll, { passive: true });
-      
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // Initial check
+      onScroll();
+
       // Cleanup
       return () => {
         window.removeEventListener("resize", handleResize);
         window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("scroll", onScroll);
       };
     }
   }, [handleResize, handleScroll]);
@@ -197,10 +225,30 @@ const Header: React.FC<HeaderProps> = () => {
   ];
 
   const renderNavLinks = (isMobileView = false) => {
+    // Map section labels to their section IDs
+    const sectionLinkMap: Record<string, string> = {
+      "About Us": "about-section",
+      "Entrance Exam": "entrance-section",
+    };
     return navLinks.map((link) => {
-      const isActive =
-        router.pathname === link.path ||
-        (link.path !== "/" && router.pathname.startsWith(link.path));
+      const sectionId = sectionLinkMap[link.label];
+      const isSectionLink = !!sectionId;
+      // Fix: Home should not be highlighted if a section is active
+      let isActive = false;
+      if (isSectionLink) {
+        isActive = activeSection === sectionId;
+      } else if (link.path === "/") {
+        isActive = router.pathname === "/" && !activeSection;
+      } else {
+        isActive = router.pathname === link.path || (link.path !== "/" && router.pathname.startsWith(link.path));
+      }
+
+      // For section links, update handleSectionClick to set activeSection
+      const handleClick = link.onClick
+        ? (e: React.MouseEvent) => {
+            link.onClick && link.onClick(e);
+          }
+        : (() => isMobileView && setMobileMenuVisible(false));
 
       if (link.dropdown) {
         return (
@@ -213,7 +261,7 @@ const Header: React.FC<HeaderProps> = () => {
           >
             <div 
               style={isActive ? activeLinkStyle : linkStyle}
-              onClick={link.onClick}
+              onClick={handleClick}
               className={isMobileView ? "mobile-dropdown-trigger" : ""}
             >
               {link.label}{" "}
@@ -228,9 +276,7 @@ const Header: React.FC<HeaderProps> = () => {
           key={link.path}
           href={link.path}
           style={isActive ? activeLinkStyle : linkStyle}
-          onClick={
-            link.onClick || (() => isMobileView && setMobileMenuVisible(false))
-          }
+          onClick={handleClick}
         >
           <div style={{ position: "relative" }} className={isMobileView ? "mobile-nav-item" : ""}>
             {link.label}

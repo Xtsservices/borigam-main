@@ -6,6 +6,7 @@ import {
   MailOutlined,
   PhoneOutlined,
   TwitterOutlined,
+  WhatsAppOutlined,
   YoutubeOutlined,
 } from '@ant-design/icons';
 import { Col, Layout, Row, Collapse, Grid } from 'antd';
@@ -25,56 +26,47 @@ const AppFooter = () => {
       <h4 style={{ fontSize: '1.3rem', color: '#fff', margin: 0, marginBottom: '18px', fontWeight: 600 }}>Design | Architecture</h4>
       <div style={{ fontSize: '1.1rem', marginBottom: 18 }}>
         <strong style={{ color: '#fff', fontSize: '1.1rem' }}>Branches:</strong>
+        <div style={{ borderBottom: '4px solid #fff', width: '10%', margin: '1.5px 0', borderRadius: '2px' }} /><br/>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 10, marginBottom: 10 }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-            <a href="https://maps.app.goo.gl/1BegumpetLocation" target="_blank" rel="noopener noreferrer" style={{ marginTop: 4 }}>
-              <img src="/images/" alt="Begumpet Location" style={{ width: 32, height: 32, borderRadius: 6, border: '2px solid #fff' }} />
-            </a>
             <div>
               <EnvironmentOutlined style={{ color: '#fff', fontSize: '1.2rem', marginRight: 6 }} />
-              <span style={{ fontWeight: 500 }}>Begumpet:</span><br />
-              <span style={{ marginLeft: 28 }}>
-                #1-11-206/A, Opposite Seasons Florists,<br />
-                Begumpet, Hyderabad - 500016,<br />
-                Telangana, India.
-              </span>
+              <span style={{ fontWeight: 500 }}>Begumpet:</span><br/>
+              #1-11-206/A, Opposite Seasons Florists,
+              Begumpet, Hyderabad,
+              Telangana, <br/>India - 500016.
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-            <a href="https://maps.app.goo.gl/ZVCPFXB7GNi5U6qB6" target="_blank" rel="noopener noreferrer" style={{ marginTop: 4 }}>
-              <img src="/images/location.png" alt="Madhapur Location" style={{ width: 32, height: 32, borderRadius: 6, border: '2px solid #fff' }} />
-            </a>
             <div>
               <EnvironmentOutlined style={{ color: '#fff', fontSize: '1.2rem', marginRight: 6 }} />
-              <span style={{ fontWeight: 500 }}>Madhapur:</span><br />
-              <span style={{ marginLeft: 28 }}>
-                2nd Floor, Above SBI Bank,<br />
-                Kavuri Hills, Madhapur, Hyderabad - 500081,<br />
-                Telangana, India.
-              </span>
+              <span style={{ fontWeight: 500 }}>Madhapur:</span><br/>
+              2nd Floor, Above SBI Bank,
+              Kavuri Hills, Madhapur, Hyderabad ,
+              Telangana, <br/>India- 500081.
             </div>
           </div>
         </div>
       </div>
       <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
         <PhoneOutlined style={{ marginRight: 6 }} />
-        <span style={{ fontWeight: 500 }}>Contact Us:</span> 96661 69555, 93905 35851, 79952 97686
+        <span style={{ fontWeight: 500 }}>Contact Us:</span> <br/>96661 69555, 93905 35851, 79952 97686
       </div>
       <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
         <MailOutlined style={{ marginRight: 6 }} />
         <span style={{ fontWeight: 500 }}>Email Us:</span> borigaminstitute@gmail.com
       </div>
       <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
-        <img src="/images/whatsapp.png" alt="WhatsApp" style={{ width: 22, height: 22, marginRight: 6, verticalAlign: 'middle' }} />
+        <WhatsAppOutlined style={{ marginRight: 6 }} />
         <span style={{ fontWeight: 500 }}>WhatsApp:</span> 79952 97686
       </div>
       <h3 style={{ ...styles.heading, fontSize: '1.2rem' }}>SOCIAL LINKS</h3>
       <div style={styles.iconContainer}>
-        <a href="#"><FacebookOutlined style={styles.icon} /></a>
-        <a href="https://x.com/Borigam_NIFTNID"><TwitterOutlined style={styles.icon} /></a>
-        <a href="#"><LinkedinOutlined style={styles.icon} /></a>
-        <a href="https://www.instagram.com/borigam_nift_nid_uceed_barch?igsh=Y2c0bDJkdWxvejE="><InstagramOutlined style={styles.icon} /></a>
-        <a href="https://www.youtube.com/@BorigamDesignEntranceExam"><YoutubeOutlined style={styles.icon} /></a>
+        <a href="#"><FacebookOutlined className="footer-social-icon" /></a>
+        <a href="https://x.com/Borigam_NIFTNID"><TwitterOutlined className="footer-social-icon" /></a>
+        <a href="#"><LinkedinOutlined className="footer-social-icon" /></a>
+        <a href="https://www.instagram.com/borigam_nift_nid_uceed_barch?igsh=Y2c0bDJkdWxvejE="><InstagramOutlined className="footer-social-icon" /></a>
+        <a href="https://www.youtube.com/@BorigamDesignEntranceExam"><YoutubeOutlined className="footer-social-icon" /></a>
       </div>
     </>
   );
@@ -145,93 +137,157 @@ const AppFooter = () => {
   ];
 
   return (
-    <Footer
+    <>
+      <style>{`
+        .footer-link {
+          color: #fff !important;
+          text-decoration: none;
+          font-size: 1rem;
+          transition: color 0.3s ease, font-size 0.2s cubic-bezier(0.4,0,0.2,1);
+        }
+        .footer-link:hover {
+          color: #fff !important;
+          font-size: 1.02rem;
+        }
+        .footer-social-icon {
+          font-size: 22px;
+          color: #fff;
+          transition: color 0.3s ease, font-size 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
+          cursor: pointer;
+        }
+        .footer-social-icon:hover {
+          color: #fff;
+          font-size: 28px;
+          transform: scale(1.18);
+        }
+        .footer-location-img {
+          transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s cubic-bezier(0.4,0,0.2,1);
+        }
+        .footer-location-img:hover {
+          transform: scale(1.02);
+          box-shadow: 0 6px 24px 0 rgba(0,0,0,0.18);
+        }
+      `}</style>
+      <Footer
       style={{
         backgroundColor: '#ff6600',
-        padding: '20px 0',
+        paddingTop: '20px',
+        paddingBottom: '20px',
+       
         fontFamily: '"Open Sans", sans-serif',
         color: '#fff',
-        minHeight: 'auto', // Prevent height jumping
-        position: 'relative', // Ensure proper positioning
+        minHeight: 'auto',
+        position: 'relative',
       }}
     >
-      <div style={{ 
-        maxWidth: '1200px', 
-        margin: '0 auto', 
-        padding: '0 15px',
-        minHeight: '420px', // Increased minimum height to prevent bouncing
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}>
+      <div
+        style={{
+          maxWidth: '10000px',
+          marginLeft: '100px',
+          minHeight: '420px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center', // Center horizontally
+        }}
+      >
         {isMobile ? (
-          <Collapse 
-            accordion 
-            bordered={false} 
-            style={{ 
-              backgroundColor: 'transparent',
-              // Removed invalid nested selector
-            }}
-            ghost // Use ghost mode to remove borders and background
+          <Collapse
+        accordion
+        bordered={false}
+        style={{
+          backgroundColor: 'transparent',
+        }}
+        ghost
           >
-            <Panel header="BORIGAM Info" key="borigam" style={styles.panel}>
-              {renderContent()}
-            </Panel>
-            {sections.map((section, idx) => (
-              <Panel header={section.title} key={idx} style={styles.panel}>
-                <ul style={styles.list}>
-                  {section.items.map((item, i) => (
-                    <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                  ))}
-                </ul>
-              </Panel>
-            ))}
+        <Panel header="BORIGAM Info" key="borigam" style={styles.panel}>
+          {renderContent()}
+        </Panel>
+        {sections.map((section, idx) => (
+          <Panel header={section.title} key={idx} style={styles.panel}>
+            <ul style={styles.list}>
+          {section.items.map((item, i) => (
+            <li key={i}><a href="#" className="footer-link">{item}</a></li>
+          ))}
+            </ul>
+          </Panel>
+        ))}
           </Collapse>
         ) : (
-          <Row gutter={[32, 32]}> {/* Removed minHeight from Row to avoid double minHeight and bounce */}
-            <Col xs={24} sm={12} md={6}>{renderContent()}</Col>
-            <Col xs={24} sm={12} md={6}>
-              <h3 style={styles.heading}>ENTRANCE EXAM COACHING</h3>
-              <ul style={styles.list}>
-                {sections[0].items.map((item, i) => (
-                  <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                ))}
-              </ul>
-              <h3 style={styles.heading}>OUR CENTRES</h3>
-              <ul style={styles.list}>
-                {sections[1].items.map((item, i) => (
-                  <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                ))}
-              </ul>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <h3 style={styles.heading}>STUDY MATERIAL</h3>
-              <ul style={styles.list}>
-                {sections[2].items.map((item, i) => (
-                  <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                ))}
-              </ul>
-              <h3 style={styles.heading}>PAST YEAR PAPERS</h3>
-              <ul style={styles.list}>
-                {sections[3].items.map((item, i) => (
-                  <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                ))}
-              </ul>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <h3 style={styles.heading}>MOCK TESTS</h3>
-              <ul style={styles.list}>
-                {sections[4].items.map((item, i) => (
-                  <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                ))}
-              </ul>
-              <h3 style={styles.heading}>DESIGN RESOURCES</h3>
-              <ul style={styles.list}>
-                {sections[5].items.map((item, i) => (
-                  <li key={i}><a href="#" style={styles.link}>{item}</a></li>
-                ))}
-              </ul>
-            </Col>
+          <Row gutter={[56, 32]} style={{ width: '100%', justifyContent: 'center', alignItems: 'flex-start' }}>
+        <Col xs={24} sm={12} md={6}>{renderContent()}</Col>
+        <Col xs={24} sm={12} md={4}>
+          <h3 style={styles.heading}>ENTRANCE EXAM COACHING</h3>
+          <div style={styles.underline} />
+          <ul style={styles.list}>
+            {sections[0].items.map((item, i) => (
+              <li key={i}><a href="#" className="footer-link">{item}</a></li>
+            ))}
+          </ul>
+          <h3 style={styles.heading}>OUR CENTRES</h3>
+          <div style={styles.underline} />
+          <ul style={styles.list}>
+            {sections[1].items.map((item, i) => (
+              <li key={i}><a href="#" className="footer-link">{item}</a></li>
+            ))}
+          </ul>
+        </Col>
+        <Col xs={24} sm={12} md={4}>
+          <h3 style={styles.heading}>STUDY MATERIAL</h3>
+          <div style={styles.underline} />
+          <ul style={styles.list}>
+            {sections[2].items.map((item, i) => (
+              <li key={i}><a href="#" className="footer-link">{item}</a></li>
+            ))}
+          </ul>
+          <h3 style={styles.heading}>PAST YEAR PAPERS</h3>
+          <div style={styles.underline} />
+          <ul style={styles.list}>
+            {sections[3].items.map((item, i) => (
+              <li key={i}><a href="#" className="footer-link">{item}</a></li>
+            ))}
+          </ul>
+        </Col>
+        <Col xs={24} sm={12} md={4}>
+          <h3 style={styles.heading}>MOCK TESTS</h3>
+          <div style={styles.underline} />
+          <ul style={styles.list}>
+            {sections[4].items.map((item, i) => (
+              <li key={i}><a href="#" className="footer-link">{item}</a></li>
+            ))}
+          </ul>
+          <h3 style={styles.heading}>DESIGN RESOURCES</h3>
+          <div style={styles.underline} />
+          <ul style={styles.list}>
+            {sections[5].items.map((item, i) => (
+              <li key={i}><a href="#" className="footer-link">{item}</a></li>
+            ))}
+          </ul>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <h3 style={{ ...styles.heading, textAlign: 'left' }}>LOCATION</h3>
+          <div style={{ ...styles.underline, marginLeft: 0 }} />
+          <div style={{ fontSize: '1.05rem', lineHeight: '2.1', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <a href="https://maps.app.goo.gl/rXJwi3SfrX7UVS7m8" target="_blank" rel="noopener noreferrer" style={{ display: 'block', textAlign: 'left' }}>
+              <img
+                src="/images/madhapur-map.jpg"
+                alt="Madhapur BORIGAM Location Map"
+                className="footer-location-img"
+                style={{ width: '200px', height: '200px', border: '2px solid #fff', borderRadius: '6px', marginBottom: '4px' }}
+              />
+              <div style={{ color: '#fff', fontWeight: 500, marginBottom: '10px', fontSize: '1.05rem', textAlign: 'left' }}>Madhapur</div>
+            </a>
+            <a href="https://maps.app.goo.gl/Y6S88VjfoQbXEEvc7" target="_blank" rel="noopener noreferrer" style={{ display: 'block', textAlign: 'left' }}>
+              <img
+                src="/images/begumpet-map.jpg"
+                alt="Begumpet BORIGAM Location Map"
+                className="footer-location-img"
+                style={{ width: '200px', height: '200px', border: '2px solid #fff', borderRadius: '6px', marginBottom: '4px' }}
+              />
+              <div style={{ color: '#fff', fontWeight: 500, marginBottom: '10px', fontSize: '1.05rem', textAlign: 'left' }}>Begumpet</div>
+            </a>
+          </div>
+        </Col>
           </Row>
         )}
       </div>
@@ -244,7 +300,7 @@ const AppFooter = () => {
           fontSize: '15px',
           fontWeight: 'bold',
           marginTop: '40px',
-          width: '100%', // Ensure full width
+          width: '100%',
         }}
       >
         © 2024-2025 Borigam Institute. All Rights Reserved
@@ -258,16 +314,24 @@ const AppFooter = () => {
           xtsservices.com
         </a>
       </div>
-    </Footer>
+      </Footer>
+    </>
   );
 };
 
 const styles = {
+  underline: {
+    width: '40px',
+    height: '3px',
+    backgroundColor: '#fff',
+    margin: '0 0 4px 0',
+    borderRadius: '2px',
+  },
   heading: {
     fontSize: '1.2rem',
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: '18px',
+    marginBottom: '6px',
     marginTop: '22px',
     letterSpacing: '1px',
   },
@@ -282,14 +346,14 @@ const styles = {
     paddingLeft: '0',
     fontSize: '1.05rem',
     lineHeight: '2.1',
-    margin: 0, 
+    margin: 0,
   },
   link: {
     color: '#fff',
     textDecoration: 'none',
-    transition: 'color 0.3s ease', 
-    display: 'block', 
-    padding: '2px 0', 
+    transition: 'color 0.3s ease',
+    display: 'block',
+    padding: '0px 0',
     fontSize: '1.05rem',
   },
   iconContainer: {

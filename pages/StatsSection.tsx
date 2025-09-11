@@ -64,113 +64,105 @@ const StatsSection: React.FC = () => {
   ];
 
   return (
-    <section
-      style={{
-        position: 'relative',
-        color: '#fff',
-        padding: '60px 20px',
-        borderRadius: 16,
-        marginBottom: 60,
-        overflow: 'hidden',
-      }}
-    >
-      {/* Background image */}
-      <img
-        src="/images/Our Achievements.jpeg"
-        alt="Background"
+    <>
+      <div style={{ textAlign: 'center', marginTop: -170, marginBottom: 20 }}>
+        <Title level={2} style={{ color: '#000000ff', marginBottom: 10 }}>
+          Our Achievements
+        </Title>
+        <div
+          style={{
+        display: 'inline-block',
+        height: 4,
+        width: 64,
+        background: 'orange',
+        borderRadius: 2,
+        marginBottom: 20,
+        animation: 'slideInLine 1s cubic-bezier(0.4,0,0.2,1)'
+          }}
+        />
+      </div>
+      <section
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 0,
-          opacity: 0.25,
-          pointerEvents: 'none',
+          position: 'relative',
+          color: '#fff',
+          padding: '60px 20px',
+          borderRadius: 16,
+          marginBottom: 60,
+          overflow: 'hidden',
+          backgroundImage: `url('/images/Our Achievements.jpeg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
-      />
-      {/* Light black overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: 'rgba(0, 0, 0, 0.71)', // Light black overlay
-          zIndex: 1,
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Black gradient overlay at the top */}
-      <div/>
+      >
+        {/* Light black overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.71)', // Light black overlay
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+        />
 
-      <div style={{ position: 'relative', zIndex: 3 }}>
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <Title level={2} style={{ color: '#fff', marginBottom: 12 }}>
-            Our Achievements
-          </Title>
-          <span
-            style={{
-              display: 'inline-block',
-              height: 4,
-              width: 64,
-              background: 'orange',
-              borderRadius: 2,
-              animation: 'slideInLine 1s cubic-bezier(0.4,0,0.2,1)'
-            }}
-          />
-          <style>
-            {`
-              @keyframes slideInLine {
-          0% { width: 0; opacity: 0.2; }
-          70% { width: 80px; opacity: 1; }
-          100% { width: 64px; opacity: 1; }
-              }
-            `}
-          </style>
-        </div>
+        <div style={{ position: 'relative', zIndex: 3 }}>
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            
+            <style>
+              {`
+                @keyframes slideInLine {
+            0% { width: 0; opacity: 0.2; }
+            70% { width: 80px; opacity: 1; }
+            100% { width: 64px; opacity: 1; }
+                }
+              `}
+            </style>
+          </div>
 
-        <Row gutter={[24, 24]} justify="center">
-          {stats.map((stat, index) => (
-            <Col
-              key={index}
-              xs={24}
-              sm={12}
-              md={8}
-              lg={4}
-              style={{
-                textAlign: 'center',
-              }}
-            >
-              <div style={{ marginBottom: 16 }}>{stat.icon}</div>
-              <Title
-                level={2}
+          <Row gutter={[24, 24]} justify="center">
+            {stats.map((stat, index) => (
+              <Col
+                key={index}
+                xs={24}
+                sm={12}
+                md={8}
+                lg={4}
                 style={{
-                  color: '#fff',
-                  marginBottom: 8,
-                  fontSize: 40,
+                  textAlign: 'center',
                 }}
               >
-                {trigger ? (
-                  <CountUp
-                    key={index + '-' + trigger}
-                    start={0}
-                    end={stat.value}
-                    duration={5}
-                    suffix={stat.suffix}
-                  />
-                ) : (
-                  <span>0{stat.suffix}</span>
-                )}
-              </Title>
-              <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: 20 }}>{stat.label}</Text>
-            </Col>
-          ))}
-        </Row>
-      </div>
-    </section>
+                <div style={{ marginBottom: 16 }}>{stat.icon}</div>
+                <Title
+                  level={2}
+                  style={{
+                    color: '#fff',
+                    marginBottom: 8,
+                    fontSize: 40,
+                  }}
+                >
+                  {trigger ? (
+                    <CountUp
+                      key={index + '-' + trigger}
+                      start={0}
+                      end={stat.value}
+                      duration={5}
+                      suffix={stat.suffix}
+                    />
+                  ) : (
+                    <span>0{stat.suffix}</span>
+                  )}
+                </Title>
+                <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: 20 }}>{stat.label}</Text>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </section>
+    </>
   );
 };
 

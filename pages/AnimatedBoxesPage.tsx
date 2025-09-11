@@ -300,6 +300,16 @@ const AnimatedBoxesPage: React.FC = () => {
           style={{
             height: "3px",
             width: "80px",
+            background: "linear-gradient(90deg, #fbb034, #ff5722)",
+            margin: "0 auto 30px",
+            borderRadius: "3px",
+            marginBottom: "-30px",
+          }}
+        ></div>
+        <div
+          style={{
+            height: "3px",
+            width: "80px",
             margin: "0 auto 30px",
             borderRadius: "3px",
           }}
