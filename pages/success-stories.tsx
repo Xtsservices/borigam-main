@@ -172,7 +172,6 @@ const Reviews = () => {
                     backgroundPosition: 'center',
                     transition: 'all 0.4s ease',
                     position: 'relative',
-                    height: '60%',
                   }}>
                     <div style={{
                       position: 'absolute',

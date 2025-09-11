@@ -21,27 +21,60 @@ const AppFooter = () => {
 
   const renderContent = () => (
     <>
-      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: '26px', paddingTop: '20px', margin: 0, marginBottom: '8px' }}>BORIGAM</h2>
-      <h4 style={{ fontSize: '16px', color: '#fff', margin: 0, marginBottom: '16px' }}>Design | Architecture</h4>
-      <p style={styles.text}>
-        <EnvironmentOutlined /> #1-11-206/A,<br />
-        Opposite Seasons Florists,<br />
-        Begumpet, Hyderabad - 500016,<br />
-        Telangana, India.
-      </p>
-      <p style={styles.text}>
-        <PhoneOutlined /> 96661 69555,<br />
-        93905 35851,<br />
-        79952 97686
-      </p>
-      <p style={styles.text}><MailOutlined /> borigaminstitute@gmail.com</p>
-      <h3 style={styles.heading}>SOCIAL LINKS</h3>
+      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: '2.3rem', paddingTop: '20px', margin: 0, marginBottom: '8px', letterSpacing: '2px' }}>BORIGAM</h2>
+      <h4 style={{ fontSize: '1.3rem', color: '#fff', margin: 0, marginBottom: '18px', fontWeight: 600 }}>Design | Architecture</h4>
+      <div style={{ fontSize: '1.1rem', marginBottom: 18 }}>
+        <strong style={{ color: '#fff', fontSize: '1.1rem' }}>Branches:</strong>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 10, marginBottom: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+            <a href="https://maps.app.goo.gl/1BegumpetLocation" target="_blank" rel="noopener noreferrer" style={{ marginTop: 4 }}>
+              <img src="/images/" alt="Begumpet Location" style={{ width: 32, height: 32, borderRadius: 6, border: '2px solid #fff' }} />
+            </a>
+            <div>
+              <EnvironmentOutlined style={{ color: '#fff', fontSize: '1.2rem', marginRight: 6 }} />
+              <span style={{ fontWeight: 500 }}>Begumpet:</span><br />
+              <span style={{ marginLeft: 28 }}>
+                #1-11-206/A, Opposite Seasons Florists,<br />
+                Begumpet, Hyderabad - 500016,<br />
+                Telangana, India.
+              </span>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+            <a href="https://maps.app.goo.gl/ZVCPFXB7GNi5U6qB6" target="_blank" rel="noopener noreferrer" style={{ marginTop: 4 }}>
+              <img src="/images/location.png" alt="Madhapur Location" style={{ width: 32, height: 32, borderRadius: 6, border: '2px solid #fff' }} />
+            </a>
+            <div>
+              <EnvironmentOutlined style={{ color: '#fff', fontSize: '1.2rem', marginRight: 6 }} />
+              <span style={{ fontWeight: 500 }}>Madhapur:</span><br />
+              <span style={{ marginLeft: 28 }}>
+                2nd Floor, Above SBI Bank,<br />
+                Kavuri Hills, Madhapur, Hyderabad - 500081,<br />
+                Telangana, India.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
+        <PhoneOutlined style={{ marginRight: 6 }} />
+        <span style={{ fontWeight: 500 }}>Contact Us:</span> 96661 69555, 93905 35851, 79952 97686
+      </div>
+      <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
+        <MailOutlined style={{ marginRight: 6 }} />
+        <span style={{ fontWeight: 500 }}>Email Us:</span> borigaminstitute@gmail.com
+      </div>
+      <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
+        <img src="/images/whatsapp.png" alt="WhatsApp" style={{ width: 22, height: 22, marginRight: 6, verticalAlign: 'middle' }} />
+        <span style={{ fontWeight: 500 }}>WhatsApp:</span> 79952 97686
+      </div>
+      <h3 style={{ ...styles.heading, fontSize: '1.2rem' }}>SOCIAL LINKS</h3>
       <div style={styles.iconContainer}>
         <a href="#"><FacebookOutlined style={styles.icon} /></a>
-        <a href="#"><TwitterOutlined style={styles.icon} /></a>
+        <a href="https://x.com/Borigam_NIFTNID"><TwitterOutlined style={styles.icon} /></a>
         <a href="#"><LinkedinOutlined style={styles.icon} /></a>
-        <a href="#"><InstagramOutlined style={styles.icon} /></a>
-        <a href="#"><YoutubeOutlined style={styles.icon} /></a>
+        <a href="https://www.instagram.com/borigam_nift_nid_uceed_barch?igsh=Y2c0bDJkdWxvejE="><InstagramOutlined style={styles.icon} /></a>
+        <a href="https://www.youtube.com/@BorigamDesignEntranceExam"><YoutubeOutlined style={styles.icon} /></a>
       </div>
     </>
   );
@@ -126,7 +159,10 @@ const AppFooter = () => {
         maxWidth: '1200px', 
         margin: '0 auto', 
         padding: '0 15px',
-        minHeight: '300px', // Set minimum height to prevent jumping
+        minHeight: '420px', // Increased minimum height to prevent bouncing
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}>
         {isMobile ? (
           <Collapse 
@@ -152,7 +188,7 @@ const AppFooter = () => {
             ))}
           </Collapse>
         ) : (
-          <Row gutter={[32, 32]} style={{ minHeight: '300px' }}> {/* Set minimum height */}
+          <Row gutter={[32, 32]}> {/* Removed minHeight from Row to avoid double minHeight and bounce */}
             <Col xs={24} sm={12} md={6}>{renderContent()}</Col>
             <Col xs={24} sm={12} md={6}>
               <h3 style={styles.heading}>ENTRANCE EXAM COACHING</h3>
@@ -228,41 +264,43 @@ const AppFooter = () => {
 
 const styles = {
   heading: {
-    fontSize: '16px',
+    fontSize: '1.2rem',
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: '16px',
-    marginTop: '20px',
+    marginBottom: '18px',
+    marginTop: '22px',
+    letterSpacing: '1px',
   },
   text: {
-    fontSize: '14px',
+    fontSize: '1.1rem',
     lineHeight: '1.8',
     color: 'white',
-    marginBottom: '12px',
+    marginBottom: '14px',
   },
   list: {
     listStyle: 'none',
     paddingLeft: '0',
-    fontSize: '14px',
-    lineHeight: '1.9',
-    margin: 0, // Remove default margin
+    fontSize: '1.05rem',
+    lineHeight: '2.1',
+    margin: 0, 
   },
   link: {
     color: '#fff',
     textDecoration: 'none',
-    transition: 'color 0.3s ease', // Smooth transition
-    display: 'block', // Ensure consistent layout
-    padding: '2px 0', // Add slight padding for better click area
+    transition: 'color 0.3s ease', 
+    display: 'block', 
+    padding: '2px 0', 
+    fontSize: '1.05rem',
   },
   iconContainer: {
     display: 'flex',
-    gap: '12px',
-    marginTop: '10px',
+    gap: '16px',
+    marginTop: '12px',
   },
   icon: {
-    fontSize: '18px',
+    fontSize: '22px',
     color: '#fff',
-    transition: 'color 0.3s ease, transform 0.2s ease', // Smooth transitions
+    transition: 'color 0.3s ease, transform 0.2s ease',
     cursor: 'pointer',
   },
   panel: {

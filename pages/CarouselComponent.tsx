@@ -28,7 +28,7 @@ const CarouselComponent: React.FC = () => {
     dotsClass: 'slick-dots slick-thumb',
   };
 
-  const imageNames = ['top1.jpeg', 'top2.jpeg', 'top3.jpeg', 'top4.jpeg', 'top5.jpeg'];
+  const imageNames = ['top6.jpeg', 'top7.jpeg', 'top8.jpeg', 'top9.jpeg', 'top10.jpeg'];
 
   return (
     <div style={{ 

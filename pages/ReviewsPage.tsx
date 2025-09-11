@@ -105,11 +105,22 @@ const ReviewsPage = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', padding: '60px 0', marginTop: '-100px' }}>
+    <div style={{ backgroundColor: '#f9f9f9', paddingTop: '50px', paddingBottom: '50px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-        <Title level={2} style={{ textAlign: 'center', marginBottom: '50px', color: '#333' }}>
-          Student Reviews
+      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+        <Title level={2} style={{ color: '#333', marginBottom: 0 }}>
+        Student Reviews
         </Title>
+        <div
+        style={{
+          width: 80,
+          height: 4,
+          background: 'linear-gradient(90deg, #ff7b25 0%, #ff5500 100%)',
+          margin: '16px auto 0',
+          borderRadius: 2,
+        }}
+        />
+      </div>
         
         {/* Arrows */}
         <div style={{ position: 'relative' }}>

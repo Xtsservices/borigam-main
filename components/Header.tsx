@@ -193,11 +193,6 @@ const Header: React.FC<HeaderProps> = () => {
     },
     { path: "/careerOpportunities", label: "Career Opportunities" },
     { path: "/success-stories", label: "Success Stories" },
-    // { 
-    //   path: "#enquire-section", 
-    //   label: "Contact",
-    //   onClick: (e: React.MouseEvent) => handleSectionClick("enquire-section", e)
-    // },
     { path: "/blog", label: "Blogs" },
   ];
 
@@ -248,7 +243,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   // Logo sizing based on screen size and scroll state
   const getLogoSize = () => {
-    if (isExtraSmall) return scrolled ? 30 : 40;
+    if (isExtraSmall) return scrolled ? 90 : 120;
     if (isSmall) return scrolled ? 35 : 45;
     if (isMedium) return scrolled ? 40 : 50;
     if (isLarge) return scrolled ? 45 : 55;
@@ -261,26 +256,26 @@ const Header: React.FC<HeaderProps> = () => {
       <div className="header-content">
         <Row justify="space-between" align="middle" className="main-header-row">
           <Col xs={12} sm={12} md={5} lg={5} xl={6}>
-<div 
-  className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
-  style={{ 
-    marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
-    marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
-    marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
-  }}
->
-  <Link href="/">
-    <img 
-      src="/images/logo.png" 
-      alt="Borigam Logo" 
-      className="logo" 
-      style={{ 
-        height: isMobile ? '50px' : `${getLogoSize()}px`,
-        width: isMobile ? 'auto' : undefined
-      }}
-    />
-  </Link>
-</div>
+            <div 
+              className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
+              style={{ 
+                marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
+                marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
+                marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
+              }}
+            >
+              <Link href="/">
+                <img 
+                  src="/images/logo.png" 
+                  alt="Borigam Logo" 
+                  className="logo" 
+                  style={{ 
+                    height: isMobile ? '50px' : `${getLogoSize()}px`,
+                    width: isMobile ? 'auto' : undefined
+                  }}
+                />
+              </Link>
+            </div>
           </Col>
 
           <Col xs={0} sm={0} md={19} lg={19} xl={18}>
@@ -288,7 +283,7 @@ const Header: React.FC<HeaderProps> = () => {
               className="right-section"
               style={{ marginLeft: isTablet ? '60px' : isMedium ? '80px' : '50px' }}
             >
-              <div className={`contact-info-container ${scrolled ? "scrolled" : ""}`}>
+              <div className={`contact-info-container ${scrolled ? "scrolled" : ""}`}> 
                 <div className="contact-info">
                   <Button
                     type="text"
@@ -314,11 +309,6 @@ const Header: React.FC<HeaderProps> = () => {
                   >
                     {!isTablet && <span>borigaminstitute@gmail.com</span>}
                   </Button>
-                </div>
-              </div>
-
-              <div className={`nav-section ${scrolled ? "scrolled" : ""}`}>
-                <div className="top-buttons">
                   <Button
                     type={
                       router.pathname === "/borigam-portal"
@@ -328,22 +318,14 @@ const Header: React.FC<HeaderProps> = () => {
                     className="header-button portal-button"
                     size={isTablet ? "small" : "middle"}
                     onClick={handlePortalClick}
+                    style={{ marginLeft: isTablet ? 4 : 12 }}
                   >
                     Borigam Portal
                   </Button>
-                  {/* <Link href="/admissions">
-                    <Button
-                      type={
-                        router.pathname === "/admissions" ? "primary" : "default"
-                      }
-                      className="header-button admission-button"
-                      size={isTablet ? "small" : "middle"}
-                    >
-                      Application Form
-                    </Button>
-                  </Link> */}
                 </div>
+              </div>
 
+              <div className={`nav-section ${scrolled ? "scrolled" : ""}`}> 
                 <nav className="desktop-nav">{renderNavLinks()}</nav>
               </div>
             </div>
@@ -426,18 +408,6 @@ const Header: React.FC<HeaderProps> = () => {
               >
                 Borigam Portal
               </Button>
-              {/* <Link href="/admissions">
-                <Button
-                  block
-                  type={
-                    router.pathname === "/admissions" ? "primary" : "default"
-                  }
-                  className="mobile-button admission-button"
-                  onClick={() => setMobileMenuVisible(false)}
-                >
-                  Admission Form
-                </Button>
-              </Link> */}
             </div>
 
             <div className="mobile-nav-links">{renderNavLinks(true)}</div>
@@ -478,7 +448,7 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .custom-header.scrolled .main-header-row {
-          padding: 5px 0;
+          padding: 8px 0;
         }
 
         .right-section {
@@ -488,17 +458,19 @@ const Header: React.FC<HeaderProps> = () => {
           transition: all 0.3s ease;
         }
 
+        /* Fixed: Contact info and nav move together, no overlapping */
         .contact-info-container {
           display: flex;
           justify-content: flex-end;
           padding: 5px 0;
           transition: all 0.3s ease;
-          transform: translateX(0);
+          margin-bottom: 8px;
         }
 
         .contact-info-container.scrolled {
-          justify-content: flex-start;
-          transform: translateX(5rem);
+          justify-content: flex-end;
+          margin-bottom: 0;
+          padding: 2px 0;
         }
 
         .contact-info {
@@ -506,6 +478,16 @@ const Header: React.FC<HeaderProps> = () => {
           gap: 15px;
           align-items: center;
           transition: all 0.3s ease;
+        }
+
+        .nav-section {
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .nav-section.scrolled {
+          margin-top: -5px;
         }
 
         .contact-button {
@@ -531,26 +513,6 @@ const Header: React.FC<HeaderProps> = () => {
           width: auto;
           display: flex;
           justify-content: center;
-        }
-
-        .nav-section {
-          transition: all 0.3s ease;
-          transform: translateY(0);
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .nav-section.scrolled {
-          transform: translateY(-30px);
-        }
-
-        .top-buttons {
-          display: flex;
-          gap: 12px;
-          justify-content: flex-end;
-          padding: 5px 0;
-          transition: all 0.3s ease;
         }
 
         /* Desktop Button Styles */
@@ -764,10 +726,6 @@ const Header: React.FC<HeaderProps> = () => {
           .right-section {
             margin-left: 90px;
           }
-
-          .contact-info-container.scrolled {
-            transform: translateX(3rem);
-          }
         }
 
         @media (max-width: 992px) {
@@ -786,10 +744,6 @@ const Header: React.FC<HeaderProps> = () => {
           .desktop-nav {
             gap: 5px;
           }
-          
-          .contact-info-container.scrolled {
-            transform: translateX(2rem);
-          }
         }
 
         @media (max-width: 768px) {
@@ -807,15 +761,14 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         @media (max-width: 576px) {
-
-           .logo {
-    height: 12rem !important;
-    width: auto;
-    margin-top:-60px;
-        margin-bottom:-60px;
-        margin-left:-20px
-
-  }
+          .logo {
+            height: 12rem !important;
+            width: auto;
+            margin-top: -60px;
+            margin-bottom: -60px;
+            margin-left: -20px;
+          }
+          
           .header-content {
             padding: 0 10px;
           }
@@ -835,8 +788,6 @@ const Header: React.FC<HeaderProps> = () => {
             padding-top: 10px;
           }
 
-          
-          
           .mobile-nav {
             gap: 5px;
           }
@@ -860,14 +811,9 @@ const Header: React.FC<HeaderProps> = () => {
 
         /* Fix for Safari */
         @supports (-webkit-touch-callout: none) {
-          .contact-info-container.scrolled {
-            -webkit-transform: translateX(5rem);
-            transform: translateX(5rem);
-          }
-          
           .nav-section.scrolled {
-            -webkit-transform: translateY(-30px);
-            transform: translateY(-30px);
+            -webkit-transform: none;
+            transform: none;
           }
         }
       `}</style>

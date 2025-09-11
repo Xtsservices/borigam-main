@@ -10,7 +10,7 @@ import EntranceExamsSection from './EntranceExamsSection';
 import Gallery from './Gallery';
 import WhyChooseSection from './WhyChooseSection';
 import CarouselComponent from './CarouselComponent';
-import SuccessStoriesIndex from './SuccessStoriesIndex';
+// import SuccessStoriesIndex from './SuccessStoriesIndex';
 import ReviewsPage from './ReviewsPage';
 // import ChatWidget from './ChatWidget';
 import LifeAtBorigam from './LifeAtBorigam';
@@ -34,7 +34,7 @@ const MainContent = styled.main`
 `;
 
 const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $minHeight?: number }>`
-  margin: 40px 0;
+  margin: 20px 0;
   padding: 0 20px;
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: translateY(${({ $visible }) => ($visible ? 0 : '20px')});
@@ -44,13 +44,13 @@ const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $min
   scroll-margin-top: 100px;
 
   @media (max-width: 768px) {
-    margin: 30px 0;
+    margin: 14px 0;
     padding: 0 15px;
     scroll-margin-top: 80px;
   }
 
   @media (max-width: 480px) {
-    margin: 20px 0;
+    margin: 8px 0;
     padding: 0 10px;
     scroll-margin-top: 60px;
   }
@@ -118,7 +118,7 @@ const HomePage: React.FC = () => {
     { id: 'gallery', component: <Gallery /> },
     { id: 'student-life', component: <StudentLifeGallery /> },
     { id: 'life-at-borigam', component: <LifeAtBorigam /> },
-    { id: 'success-stories', component: <SuccessStoriesIndex /> },
+  // { id: 'success-stories', component: <SuccessStoriesIndex /> },
     { id: 'reviews', component: <ReviewsPage /> },
     // { id: 'chat', component: <ChatWidget /> },
   ];
@@ -129,8 +129,9 @@ const HomePage: React.FC = () => {
         <Header />
         <MainContent>
           {sections.map((section, index) => {
-            const isHeavySection =
-              section.id === 'success-stories' || section.id === 'reviews';
+            // Remove minHeight for reviews section
+            const isReviews = section.id === 'reviews';
+            const extraStyle = section.id === 'life-at-borigam' ? { marginBottom: 80 } : {};
             return (
               <AnimatedSection
                 key={section.id}
@@ -140,7 +141,8 @@ const HomePage: React.FC = () => {
                 }}
                 $visible={visibleSections.includes(index)}
                 $delay={index % 3}
-                $minHeight={isHeavySection ? 600 : undefined}
+                $minHeight={isReviews ? undefined : undefined}
+                style={extraStyle}
               >
                 {section.component}
               </AnimatedSection>
