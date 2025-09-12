@@ -62,9 +62,9 @@ const AppFooter = () => {
       </div>
       <h3 style={{ ...styles.heading, fontSize: '1.2rem' }}>SOCIAL LINKS</h3>
       <div style={styles.iconContainer}>
-        <a href="#"><FacebookOutlined className="footer-social-icon" /></a>
+        {/* <a href="#"><FacebookOutlined className="footer-social-icon" /></a> */}
         <a href="https://x.com/Borigam_NIFTNID"><TwitterOutlined className="footer-social-icon" /></a>
-        <a href="#"><LinkedinOutlined className="footer-social-icon" /></a>
+        {/* <a href="#"><LinkedinOutlined className="footer-social-icon" /></a> */}
         <a href="https://www.instagram.com/borigam_nift_nid_uceed_barch?igsh=Y2c0bDJkdWxvejE="><InstagramOutlined className="footer-social-icon" /></a>
         <a href="https://www.youtube.com/@BorigamDesignEntranceExam"><YoutubeOutlined className="footer-social-icon" /></a>
       </div>
@@ -300,10 +300,16 @@ const AppFooter = () => {
           fontSize: '15px',
           fontWeight: 'bold',
           marginTop: '40px',
-          width: '100%',
+          width: '100vw',
+          position: 'relative',
+          left: '50%',
+          right: '50%',
+          marginLeft: '-50vw',
+          marginRight: '-50vw',
+          marginBottom: '-24px',
         }}
       >
-        © 2024-2025 Borigam Institute. All Rights Reserved
+        © 2025 Borigam Institute. All Rights Reserved
         <a
           href="https://www.xtsservices.com/"
           target="_blank"

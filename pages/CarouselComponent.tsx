@@ -21,7 +21,7 @@ const CarouselComponent: React.FC = () => {
         borderRadius: '50%',
         backgroundColor: '#fff',
         opacity: 0.5,
-        transition: 'all 0.3s',
+        transition: 'all 0.2s',
         margin: '0 4px'
       }} />
     ),

@@ -93,8 +93,17 @@ const StatsSection: React.FC = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
+          animation: 'moveBg 30s linear infinite',
         }}
       >
+      <style>
+        {`
+          @keyframes moveBg {
+        0% { background-position: left center; }
+        100% { background-position: right center; }
+          }
+        `}
+      </style>
         {/* Light black overlay */}
         <div
           style={{
