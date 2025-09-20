@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Card, Row, Col, Typography, Button, Modal } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Header from '@/components/Header';
+import Head from 'next/head';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -90,7 +91,27 @@ const Reviews = () => {
   return (
     <div style={{ backgroundColor: '#f5f5f5' }}>
       <Header />
+      <Head>
+        <title>Success Stories – Borigam | NID, NATA, UCEED, CEED, BFA & NIFT Coaching Results</title>
+        <meta name="description" content="Read inspiring success stories of Borigam students who cracked NID, NATA, UCEED, CEED, BFA & NIFT entrance exams. Proven results, top ranks & dream college admissions."></meta>
+        <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+        <link rel="canonical" href="https://borigaminstitute.in/success-stories/" />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', marginTop: '13rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h1 style={{
+            color: '#0a2c64',
+            fontFamily: "'Open Sans', sans-serif",
+            fontSize: '2.6rem',
+            fontWeight: 800,
+            marginBottom: '18px',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2,
+          }}>
+            Success Stories of Borigam Students – From Aspirations to Achievements
+          </h1>
+        </div>
         <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '40px', flexWrap: 'wrap' }}>
           <div style={{
             flex: '1',
@@ -129,10 +150,10 @@ const Reviews = () => {
             <Paragraph style={{ fontSize: '16px', color: '#555', lineHeight: 1.8 }}>
               Every year, our students achieve remarkable success in prestigious design entrance exams. Their stories inspire new generations of creative minds to pursue their dreams.
             </Paragraph>
-            <Button 
-              type="primary" 
+            <Button
+              type="primary"
               onClick={scrollToStories}
-              style={{ 
+              style={{
                 backgroundColor: '#ff6b00',
                 borderColor: '#ff6b00',
                 fontWeight: 500,
@@ -205,7 +226,7 @@ const Reviews = () => {
                       transition: 'all 0.4s ease',
                       color: hoveredCard === index ? 'white' : '#333',
                     }}>
-                      <Text strong style={{ 
+                      <Text strong style={{
                         marginTop: hoveredCard === index ? '3rem' : '5rem',
                         display: 'block',
                         fontSize: '18px',
@@ -214,14 +235,14 @@ const Reviews = () => {
                       }}>
                         {story.name}
                       </Text>
-                      <Paragraph style={{ 
+                      <Paragraph style={{
                         fontSize: '14px',
                         color: hoveredCard === index ? 'rgba(255, 255, 255, 0.9)' : '#ff6b00',
                         marginBottom: '4px'
                       }}>
                         {story.exam}
                       </Paragraph>
-                      <Paragraph style={{ 
+                      <Paragraph style={{
                         fontSize: '14px',
                         color: hoveredCard === index ? 'rgba(255, 255, 255, 0.9)' : '#ff6b00',
                         marginBottom: 0,
@@ -253,17 +274,18 @@ const Reviews = () => {
                       textAlign: 'center',
                       paddingTop: '10px'
                     }}>
-                      <Button 
-                        type="primary" 
+                      <Button
+                        type="primary"
                         onClick={() => {
                           setSelectedStory(story);
                           setModalVisible(true);
                         }}
-                        style={{ 
+                        style={{
                           backgroundColor: '#ff6b00',
                           borderColor: '#ff6b00',
                           fontWeight: 500
                         }}
+
                       >
                         Read Full Story
                       </Button>

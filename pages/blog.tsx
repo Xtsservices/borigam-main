@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Head from 'next/head';
 import AppFooter from '../components/Footer';
 import { motion } from 'framer-motion';
 
@@ -24,9 +25,29 @@ const Blog = () => {
   return (
     <>
       <Header />
+      <Head>
+        <title>Blog – Borigam | Tips & Insights for NID, NATA, UCEED, CEED, BFA & NIFT Entrance Exams</title>
+        <meta name="description" content="Read the Borigam Blog for expert tips, preparation strategies, study guides & insights on NID, NATA, UCEED, CEED, BFA & NIFT entrance exams. Stay updated & boost your success."></meta>
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+        <link rel="canonical" href="https://borigaminstitute.in/blog/" />
+          <meta name="robots" content="index, follow" />
+      </Head>
       <div className="main-container">
         <div className="content-wrapper">
           <div className="left-column">
+            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+              <h1 style={{
+                color: '#0a2c64',
+                fontFamily: "'Open Sans', sans-serif",
+                fontSize: '2.4rem',
+                fontWeight: 800,
+                marginBottom: '18px',
+                letterSpacing: '-0.5px',
+                lineHeight: 1.2,
+              }}>
+                Borigam Blog – Your Guide to Design & Architecture Entrance Success
+              </h1>
+            </div>
             <h1>Blogs</h1>
             <div className="videos-grid">
               {videoLinks.map((link, index) => (

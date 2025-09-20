@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
 
+import Head from 'next/head';
+
 const { Title, Paragraph } = Typography;
 
 const cardStyle: React.CSSProperties = {
@@ -35,16 +37,24 @@ const listItems = (items: string[]) => (
 
 const UCEEDPage = () => {
   return (
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>UCEED Coaching in Hyderabad – Borigam | Best Design Entrance Exam Preparation</title>
+          <meta name="description" content="Prepare for the UCEED (Undergraduate Common Entrance Exam for Design) with Borigam’s expert coaching in Hyderabad. Learn from experienced mentors, practice updated syllabus, build creative skills & crack UCEED with confidence." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/uceed/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
           <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            UCEED Entrance Exam
+            Best UCEED Entrance Exam Coaching in Hyderabad – Borigam
             <div
               style={{
                 height: 4,
@@ -381,7 +391,8 @@ const UCEEDPage = () => {
         </motion.div>
       </div>
     </Layout>
+  </>
   );
-};
+}
 
 export default UCEEDPage;

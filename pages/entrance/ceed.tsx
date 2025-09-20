@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
 
+import Head from 'next/head';
+
 
 const { Title, Paragraph } = Typography;
 
@@ -36,16 +38,24 @@ const listItems = (items: string[]) => (
 
 const CEEDPage = () => {
   return (
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>CEED Coaching in Hyderabad – Borigam | M.Des Entrance Preparation</title>
+          <meta name="description" content="Prepare for the CEED (Common Entrance Exam for Design) with Borigam’s expert coaching in Hyderabad. Get proven strategies, study material, and personalized mentoring for success in CEED." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/ceed/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
           <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            Common Entrance Exam for Design (CEED)
+            Best CEED (M.Des) Entrance Exam Coaching in Hyderabad – Borigam
             <div
               style={{
                 height: 4,
@@ -335,8 +345,9 @@ const CEEDPage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
-};
+}
 
 export default CEEDPage;

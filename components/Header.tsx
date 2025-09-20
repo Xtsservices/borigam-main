@@ -16,7 +16,6 @@ interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const router = useRouter();
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [screenSize, setScreenSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
     height: typeof window !== 'undefined' ? window.innerHeight : 800
@@ -70,42 +69,15 @@ const Header: React.FC<HeaderProps> = () => {
       // Set initial values
       handleResize();
       handleScroll();
-
-      // Section scroll spy logic
-      const sectionLinkMap = {
-        "about-section": "About Us",
-        "entrance-section": "Entrance Exam"
-      };
-      const sectionIds = Object.keys(sectionLinkMap);
-
-      const onScroll = () => {
-        let foundSection: string | null = null;
-        for (let i = 0; i < sectionIds.length; i++) {
-          const id = sectionIds[i];
-          const el = document.getElementById(id);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= 120 && rect.bottom > 120) {
-              foundSection = id;
-              break;
-            }
-          }
-        }
-        setActiveSection(foundSection);
-      };
-
+      
+      // Add event listeners
       window.addEventListener("resize", handleResize);
       window.addEventListener("scroll", handleScroll, { passive: true });
-      window.addEventListener("scroll", onScroll, { passive: true });
-
-      // Initial check
-      onScroll();
-
+      
       // Cleanup
       return () => {
         window.removeEventListener("resize", handleResize);
         window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("scroll", onScroll);
       };
     }
   }, [handleResize, handleScroll]);
@@ -221,34 +193,19 @@ const Header: React.FC<HeaderProps> = () => {
     },
     { path: "/careerOpportunities", label: "Career Opportunities" },
     { path: "/success-stories", label: "Success Stories" },
+    // { 
+    //   path: "#enquire-section", 
+    //   label: "Contact",
+    //   onClick: (e: React.MouseEvent) => handleSectionClick("enquire-section", e)
+    // },
     { path: "/blog", label: "Blogs" },
   ];
 
   const renderNavLinks = (isMobileView = false) => {
-    // Map section labels to their section IDs
-    const sectionLinkMap: Record<string, string> = {
-      "About Us": "about-section",
-      "Entrance Exam": "entrance-section",
-    };
     return navLinks.map((link) => {
-      const sectionId = sectionLinkMap[link.label];
-      const isSectionLink = !!sectionId;
-      // Fix: Home should not be highlighted if a section is active
-      let isActive = false;
-      if (isSectionLink) {
-        isActive = activeSection === sectionId;
-      } else if (link.path === "/") {
-        isActive = router.pathname === "/" && !activeSection;
-      } else {
-        isActive = router.pathname === link.path || (link.path !== "/" && router.pathname.startsWith(link.path));
-      }
-
-      // For section links, update handleSectionClick to set activeSection
-      const handleClick = link.onClick
-        ? (e: React.MouseEvent) => {
-            link.onClick && link.onClick(e);
-          }
-        : (() => isMobileView && setMobileMenuVisible(false));
+      const isActive =
+        router.pathname === link.path ||
+        (link.path !== "/" && router.pathname.startsWith(link.path));
 
       if (link.dropdown) {
         return (
@@ -261,7 +218,7 @@ const Header: React.FC<HeaderProps> = () => {
           >
             <div 
               style={isActive ? activeLinkStyle : linkStyle}
-              onClick={handleClick}
+              onClick={link.onClick}
               className={isMobileView ? "mobile-dropdown-trigger" : ""}
             >
               {link.label}{" "}
@@ -276,7 +233,9 @@ const Header: React.FC<HeaderProps> = () => {
           key={link.path}
           href={link.path}
           style={isActive ? activeLinkStyle : linkStyle}
-          onClick={handleClick}
+          onClick={
+            link.onClick || (() => isMobileView && setMobileMenuVisible(false))
+          }
         >
           <div style={{ position: "relative" }} className={isMobileView ? "mobile-nav-item" : ""}>
             {link.label}
@@ -289,7 +248,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   // Logo sizing based on screen size and scroll state
   const getLogoSize = () => {
-    if (isExtraSmall) return scrolled ? 90 : 120;
+    if (isExtraSmall) return scrolled ? 30 : 40;
     if (isSmall) return scrolled ? 35 : 45;
     if (isMedium) return scrolled ? 40 : 50;
     if (isLarge) return scrolled ? 45 : 55;
@@ -302,26 +261,26 @@ const Header: React.FC<HeaderProps> = () => {
       <div className="header-content">
         <Row justify="space-between" align="middle" className="main-header-row">
           <Col xs={12} sm={12} md={5} lg={5} xl={6}>
-            <div 
-              className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
-              style={{ 
-                marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
-                marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
-                marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
-              }}
-            >
-              <Link href="/">
-                <img 
-                  src="/images/logo.png" 
-                  alt="Borigam Logo" 
-                  className="logo" 
-                  style={{ 
-                    height: isMobile ? '50px' : `${getLogoSize()}px`,
-                    width: isMobile ? 'auto' : undefined
-                  }}
-                />
-              </Link>
-            </div>
+<div 
+  className={`logo-container ${isMobile ? 'mobile-logo-container' : ''} ${isTablet ? 'tablet-logo-container' : ''}`}
+  style={{ 
+    marginLeft: isMobile ? '0' : isTablet ? '-70px' : '-70px',
+    marginTop: isMobile ? '0' : isTablet ? '-50px' : '-100px',
+    marginBottom: isMobile ? '0' : isTablet ? '-50px' : '-100px',
+  }}
+>
+  <Link href="/">
+    <img 
+      src="/images/logo.png" 
+      alt="Borigam Logo" 
+      className="logo" 
+      style={{ 
+        height: isMobile ? '50px' : `${getLogoSize()}px`,
+        width: isMobile ? 'auto' : undefined
+      }}
+    />
+  </Link>
+</div>
           </Col>
 
           <Col xs={0} sm={0} md={19} lg={19} xl={18}>
@@ -329,7 +288,7 @@ const Header: React.FC<HeaderProps> = () => {
               className="right-section"
               style={{ marginLeft: isTablet ? '60px' : isMedium ? '80px' : '50px' }}
             >
-              <div className={`contact-info-container ${scrolled ? "scrolled" : ""}`}> 
+              <div className={`contact-info-container ${scrolled ? "scrolled" : ""}`}>
                 <div className="contact-info">
                   <Button
                     type="text"
@@ -355,7 +314,24 @@ const Header: React.FC<HeaderProps> = () => {
                   >
                     {!isTablet && <span>borigaminstitute@gmail.com</span>}
                   </Button>
-                  <Button
+                </div>
+              </div>
+
+              <div className={`nav-section ${scrolled ? "scrolled" : ""}`}>
+                <div className="top-buttons">
+                 
+                    <Link href="/ApplicationForm">
+                    <Button
+                      type={
+                        router.pathname === "/ApplicationForm" ? "primary" : "default"
+                      }
+                      className="header-button admission-button"
+                      size={isTablet ? "small" : "middle"}
+                    >
+                      Application Form
+                    </Button>
+                  </Link>
+                   <Button
                     type={
                       router.pathname === "/borigam-portal"
                         ? "primary"
@@ -364,14 +340,11 @@ const Header: React.FC<HeaderProps> = () => {
                     className="header-button portal-button"
                     size={isTablet ? "small" : "middle"}
                     onClick={handlePortalClick}
-                    style={{ marginLeft: isTablet ? 4 : 12 }}
                   >
                     Borigam Portal
                   </Button>
                 </div>
-              </div>
 
-              <div className={`nav-section ${scrolled ? "scrolled" : ""}`}> 
                 <nav className="desktop-nav">{renderNavLinks()}</nav>
               </div>
             </div>
@@ -454,6 +427,18 @@ const Header: React.FC<HeaderProps> = () => {
               >
                 Borigam Portal
               </Button>
+              {/* <Link href="/admissions">
+                <Button
+                  block
+                  type={
+                    router.pathname === "/admissions" ? "primary" : "default"
+                  }
+                  className="mobile-button admission-button"
+                  onClick={() => setMobileMenuVisible(false)}
+                >
+                  Admission Form
+                </Button>
+              </Link> */}
             </div>
 
             <div className="mobile-nav-links">{renderNavLinks(true)}</div>
@@ -494,7 +479,7 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .custom-header.scrolled .main-header-row {
-          padding: 8px 0;
+          padding: 5px 0;
         }
 
         .right-section {
@@ -504,19 +489,17 @@ const Header: React.FC<HeaderProps> = () => {
           transition: all 0.3s ease;
         }
 
-        /* Fixed: Contact info and nav move together, no overlapping */
         .contact-info-container {
           display: flex;
           justify-content: flex-end;
           padding: 5px 0;
           transition: all 0.3s ease;
-          margin-bottom: 8px;
+          transform: translateX(0);
         }
 
         .contact-info-container.scrolled {
-          justify-content: flex-end;
-          margin-bottom: 0;
-          padding: 2px 0;
+          justify-content: flex-start;
+          transform: translateX(5rem);
         }
 
         .contact-info {
@@ -524,16 +507,6 @@ const Header: React.FC<HeaderProps> = () => {
           gap: 15px;
           align-items: center;
           transition: all 0.3s ease;
-        }
-
-        .nav-section {
-          transition: all 0.3s ease;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .nav-section.scrolled {
-          margin-top: -5px;
         }
 
         .contact-button {
@@ -559,6 +532,26 @@ const Header: React.FC<HeaderProps> = () => {
           width: auto;
           display: flex;
           justify-content: center;
+        }
+
+        .nav-section {
+          transition: all 0.3s ease;
+          transform: translateY(0);
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .nav-section.scrolled {
+          transform: translateY(-30px);
+        }
+
+        .top-buttons {
+          display: flex;
+          gap: 12px;
+          justify-content: flex-end;
+          padding: 5px 0;
+          transition: all 0.3s ease;
         }
 
         /* Desktop Button Styles */
@@ -772,6 +765,10 @@ const Header: React.FC<HeaderProps> = () => {
           .right-section {
             margin-left: 90px;
           }
+
+          .contact-info-container.scrolled {
+            transform: translateX(3rem);
+          }
         }
 
         @media (max-width: 992px) {
@@ -790,6 +787,10 @@ const Header: React.FC<HeaderProps> = () => {
           .desktop-nav {
             gap: 5px;
           }
+          
+          .contact-info-container.scrolled {
+            transform: translateX(2rem);
+          }
         }
 
         @media (max-width: 768px) {
@@ -807,14 +808,15 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         @media (max-width: 576px) {
-          .logo {
-            height: 12rem !important;
-            width: auto;
-            margin-top: -60px;
-            margin-bottom: -60px;
-            margin-left: -20px;
-          }
-          
+
+           .logo {
+    height: 12rem !important;
+    width: auto;
+    margin-top:-60px;
+        margin-bottom:-60px;
+        margin-left:-20px
+
+  }
           .header-content {
             padding: 0 10px;
           }
@@ -834,6 +836,8 @@ const Header: React.FC<HeaderProps> = () => {
             padding-top: 10px;
           }
 
+          
+          
           .mobile-nav {
             gap: 5px;
           }
@@ -857,9 +861,14 @@ const Header: React.FC<HeaderProps> = () => {
 
         /* Fix for Safari */
         @supports (-webkit-touch-callout: none) {
+          .contact-info-container.scrolled {
+            -webkit-transform: translateX(5rem);
+            transform: translateX(5rem);
+          }
+          
           .nav-section.scrolled {
-            -webkit-transform: none;
-            transform: none;
+            -webkit-transform: translateY(-30px);
+            transform: translateY(-30px);
           }
         }
       `}</style>

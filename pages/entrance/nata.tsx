@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
@@ -41,7 +41,11 @@ const NataPage = () => {
     <Layout>
       <header/>
       <Head>
-        <title>NATA Entrance Exam - Complete Guide</title>
+  <title>NATA Coaching in Hyderabad – Borigam | Best B.Arch Entrance Exam Preparation</title>
+  <meta name="description" content="Crack the NATA (National Aptitude Test in Architecture) with expert coaching at Borigam Hyderabad. Learn architectural drawing, 3D visualization, mathematics, and design aptitude with proven guidance & results." />
+  <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+  <link rel="canonical" href="https://borigaminstitute.in/entrance/nata/" />
+  <meta name="robots" content="index, follow" />
       </Head>
       <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
         <motion.div 
@@ -50,7 +54,7 @@ const NataPage = () => {
           variants={sectionVariant}
         >
           <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            National Aptitude Test in Architecture (NATA)
+            Best NATA Entrance Exam Coaching in Hyderabad – Borigam
             <div
               style={{
                 height: 4,

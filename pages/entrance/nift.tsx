@@ -1,8 +1,10 @@
+
 import React from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
+import Head from 'next/head';
 
 
 const { Title, Paragraph } = Typography;
@@ -36,9 +38,30 @@ const listItems = (items: string[]) => (
 
 const NIFTPage = () => {
   return (
-    <Layout>
-      <header />
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>NIFT Coaching in Hyderabad – Borigam | Best Entrance Exam Preparation</title>
+          <meta name="description" content="Join Borigam’s NIFT Coaching in Hyderabad for expert guidance, updated study material & proven results. Learn from NIFT alumni & crack the entrance exam with confidence." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/nift/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h1 style={{
+              color: '#0a2c64',
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: '2.4rem',
+              fontWeight: 800,
+              marginBottom: '18px',
+              letterSpacing: '-0.5px',
+              lineHeight: 1.2,
+            }}>
+              Best NIFT Entrance Exam Coaching in Hyderabad – Borigam
+            </h1>
+          </div>
         <motion.div 
           initial="hidden" 
           animate="visible" 
@@ -341,7 +364,8 @@ const NIFTPage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 
