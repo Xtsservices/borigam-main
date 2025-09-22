@@ -3,6 +3,7 @@ import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
+import Head from 'next/head';
 
 
 const { Title, Paragraph } = Typography;
@@ -36,15 +37,24 @@ const listItems = (items: string[]) => (
 
 const NIDPage = () => {
   return (
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>NID Coaching in Hyderabad – Borigam | Best Design Entrance Exam Preparation</title>
+          <meta name="description" content="Join Borigam’s NID Coaching in Hyderabad for expert guidance, updated study material & creative mentoring. Learn from NID alumni and crack the NID entrance exam with confidence." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/nid/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+         
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
             National Institute of Design (NID) Entrance Exam
             <div
               style={{
@@ -55,6 +65,20 @@ const NIDPage = () => {
               }}
             ></div>
           </Title>
+           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h1 style={{
+              color: '#ff4e18',
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              marginBottom: '18px',
+              marginTop: '-40px',
+              letterSpacing: '-0.5px',
+              lineHeight: 1.2,
+            }}>
+              Best NID Entrance Exam Coaching in Hyderabad – Borigam
+            </h1>
+          </div>
           <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
             NID is India's premier design institute offering undergraduate and postgraduate programs in various design disciplines. 
             The NID Entrance Exam is highly competitive and considered a gateway to successful careers in the design industry.
@@ -386,7 +410,8 @@ const NIDPage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

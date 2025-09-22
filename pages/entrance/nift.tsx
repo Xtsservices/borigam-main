@@ -1,8 +1,10 @@
+
 import React from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
+import Head from 'next/head';
 
 
 const { Title, Paragraph } = Typography;
@@ -36,25 +38,48 @@ const listItems = (items: string[]) => (
 
 const NIFTPage = () => {
   return (
-    <Layout>
-      <header />
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>NIFT Coaching in Hyderabad – Borigam | Best Entrance Exam Preparation</title>
+          <meta name="description" content="Join Borigam’s NIFT Coaching in Hyderabad for expert guidance, updated study material & proven results. Learn from NIFT alumni & crack the entrance exam with confidence." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/nift/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+         
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+          <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
             NIFT Entrance Exam
             <div
               style={{
                 height: 4,
                 width: 120,
                 backgroundColor: '#fbb034',
-                margin: '20px auto 40px',
+                margin: '10px auto 40px',
               }}
             ></div>
           </Title>
+           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h1 style={{
+              color: '#ff4e18',
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              
+              marginBottom: '18px',
+              letterSpacing: '-0.5px',
+              lineHeight: 1.2,
+            }}>
+              Best NIFT Entrance Exam Coaching in Hyderabad – Borigam
+            </h1>
+          </div>
           <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
             The National Institute of Fashion Technology (NIFT) is India's premier institution for fashion education, offering undergraduate and postgraduate programs in design, technology, and management across 18 campuses.
           </Paragraph>
@@ -341,7 +366,8 @@ const NIFTPage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

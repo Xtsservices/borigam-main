@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import Head from 'next/head';
 import { Row, Col, Typography, Input } from "antd";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
@@ -287,6 +288,212 @@ export default function CareerOpportunities() {
   return (
     <>
       <Header />
+      <Head>
+        <title>Career Opportunities at Borigam | Join Our NID, NATA, UCEED, CEED & NIFT Coaching Team</title>
+        <meta name="description" content="Explore career opportunities at Borigam Coaching. Join our team of expert faculty & mentors guiding students in NID, NATA, UCEED, CEED, BFA & NIFT entrance exams."></meta>
+        <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+        <link rel="canonical" href="https://borigaminstitute.in/careerOpportunities/" />
+        <meta name="robots" content="index, follow" />
+      </Head>
+    
+      <style jsx global>{`
+        @keyframes cardEntrance {
+          0% {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          } ̰
+        }
+        .search-container {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 40px;
+          padding: 1rem 20px;
+          background: linear-gradient(
+            90deg,
+            #ff5722,
+            #ff9800
+          ); /* Gradient Background */
+          border-radius: 8px; /* Optional: Add rounded corners */
+          box-shadow: 0 4px 10px rgba(255, 255, 255, 1); /* Optional: Add some shadow */
+        }
+        .ant-input-affix-wrapper,
+        .ant-input-search-button {
+          border-radius: 12px !important;
+          height: 48px;
+        }
+        .card-container {
+          position: relative;
+          height: 320px;
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 8px 32px rgba(10, 44, 100, 0.12), 0 1.5px 6px rgba(0,0,0,0.08);
+          cursor: pointer;
+          transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+          background: #fff;
+          animation: cardEntrance 0.6s ease forwards;
+          will-change: transform;
+          margin-bottom: 0;
+        }
+        .card-container.visible {
+          opacity: 1;
+        }
+        .card-container:hover {
+          transform: scale(1.08) translateZ(60px) rotateY(2deg);
+          box-shadow: 0 12px 40px rgba(10, 44, 100, 0.18), 0 2px 8px rgba(0,0,0,0.10);
+          z-index: 2;
+        }
+        .card-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          filter: brightness(0.7) blur(0.5px);
+          z-index: 1;
+          transition: filter 0.3s;
+        }
+        .card-container:hover .card-bg {
+          filter: brightness(0.85) blur(0px);
+        }
+        .card-overlay {
+          position: relative;
+          z-index: 2;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(180deg, rgba(10,44,100,0.55) 0%, rgba(10,44,100,0.15) 100%);
+          padding: 32px 18px;
+          text-align: center;
+        }
+        <section
+          style={{
+            marginTop: "6rem",
+            padding: "60px 20px",
+            backgroundColor: "#f9f9f9",
+            minHeight: "100vh",
+            perspective: "1200px",
+          }}
+        >
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+          
+            <Title
+              level={1}
+              style={{
+                color: "#ffffffff",
+                fontFamily: "'Open Sans', sans-serif",
+                fontSize: isMobile ? "28px" : "36px",
+                fontWeight: 700,
+                marginBottom: 0,
+                letterSpacing: "-0.5px",
+              }}
+            >
+              Career Opportunities
+            </Title>
+            <div
+              style={{
+                height: "4px",
+                width: "180px",
+                background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+                margin: "12px auto 40px",
+                borderRadius: "2px",
+                opacity: 0.8,
+              }}
+            />
+          </div>
+          border-top: 6px solid #fff;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .search-container {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 40px;
+          padding: 1rem 20px;
+          // background: linear-gradient(90deg, #ff5722, #ff9800);
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .ant-input-affix-wrapper,
+        .ant-input-search-button {
+          border-radius: 12px !important;
+          height: 48px;
+        }
+        .ant-input-search-button {
+          background-color: #fa8c16 !important;
+          border-color: #fa8c16 !important;
+          color: white !important;
+          font-weight: 500;
+          transition: all 0.3s ease;
+        }
+        .ant-input-search-button:hover {
+          background-color: #d46b08 !important;
+          border-color: #d46b08 !important;
+          transform: translateX(2px);
+        }
+        .ant-input {
+          border-color: #fa8c16 !important;
+          font-size: 16px;
+        }
+        .no-results {
+          grid-column: 1 / -1;
+          text-align: center;
+          padding: 60px;
+          color: #666;
+          font-size: 20px;
+          animation: cardEntrance 0.6s ease forwards;
+        }
+        @media (max-width: 992px) {
+        .card-container:hover {
+          transform: scale(1.15) translateZ(40px);
+        }
+        }
+        @media (max-width: 768px) {
+        .card-container {
+          height: 250px;
+        }
+        .card-title {
+          font-size: 1.5rem;
+        }
+        .card-container:hover .card-title {
+          font-size: 1.7rem;
+        }
+        .card-description {
+          font-size: 1rem;
+        }
+        .card-container:hover {
+          transform: scale(1.1) translateZ(30px);
+        }
+        }
+        @media (max-width: 576px) {
+        .ant-input-affix-wrapper {
+          font-size: 14px;
+        }
+        .card-container {
+          height: 220px;
+        }
+        .card-title {
+          font-size: 1.3rem;
+        }
+        .card-container:hover .card-title {
+          font-size: 1.5rem;
+        }
+        .card-container:hover {
+          transform: scale(1.08) translateZ(20px);
+        }
+        }
+      `}</style>
       <section
         style={{
           marginTop: "6rem",
@@ -296,290 +503,46 @@ export default function CareerOpportunities() {
           perspective: "1200px",
         }}
       >
-        <style jsx global>{`
-          @keyframes cardEntrance {
-            0% {
-              opacity: 0;
-              transform: translateY(50px) scale(0.9);
-            }
-            100% {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
-
-          @keyframes popOut {
-            0% {
-              transform: translateZ(0);
-            }
-            100% {
-              transform: translateZ(50px);
-            }
-          }
-
-          .card-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            transform-style: preserve-3d;
-            will-change: transform;
-            opacity: 0;
-          }
-
-          .card-container.visible {
-            animation: cardEntrance 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)
-              forwards;
-          }
-
-          .card-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-            opacity: 0.9;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            transform-style: preserve-3d;
-          }
-
-          .card-container:hover {
-            transform: scale(1.15) translateZ(50px) rotateX(-5deg) rotateY(5deg);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
-            z-index: 100 !important;
-          }
-
-          .card-container:hover .card-bg {
-            transform: scale(1.1) translateZ(20px);
-            opacity: 1;
-          }
-
-          .card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            transition: all 0.5s ease;
-            background: linear-gradient(
-              135deg,
-              rgba(0, 0, 0, 0.4) 0%,
-              rgba(0, 0, 0, 0.7) 100%
-            );
-            transform-style: preserve-3d;
-          }
-
-          .card-container:hover .card-overlay {
-            background: linear-gradient(
-              135deg,
-              rgba(0, 0, 0, 0.6) 0%,
-              rgba(0, 0, 0, 0.95) 100%
-            );
-            transform: translateZ(30px);
-          }
-
-          .card-title {
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-            transform: translateZ(20px);
-          }
-
-          .card-description {
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-size: 1.1rem;
-            opacity: 0.9;
-            color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-            max-width: 90%;
-            transform: translateZ(15px);
-          }
-
-          .card-container:hover .card-title {
-            transform: translateZ(40px) scale(1.1);
-            font-size: 2rem;
-          }
-
-          .card-container:hover .card-description {
-            transform: translateZ(30px) scale(1.05);
-            opacity: 1;
-            font-size: 1.2rem;
-          }
-
-          .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 3;
-            transition: opacity 0.3s ease;
-            transform-style: preserve-3d;
-            transform: translateZ(40px);
-          }
-
-          .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid #fff;
-            animation: spin 1s linear infinite;
-          }
-
-          @keyframes spin {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-
-          .search-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-            padding: 1rem 20px;
-            background: linear-gradient(
-              90deg,
-              #ff5722,
-              #ff9800
-            ); /* Gradient Background */
-            border-radius: 8px; /* Optional: Add rounded corners */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Optional: Add some shadow */
-          }
-
-          .ant-input-affix-wrapper,
-          .ant-input-search-button {
-            border-radius: 12px !important;
-            height: 48px;
-          }
-
-          .ant-input-search-button {
-            background-color: #fa8c16 !important;
-            border-color: #fa8c16 !important;
-            color: white !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-          }
-
-          .ant-input-search-button:hover {
-            background-color: #d46b08 !important;
-            border-color: #d46b08 !important;
-            transform: translateX(2px);
-          }
-
-          .ant-input {
-            border-color: #fa8c16 !important;
-            font-size: 16px;
-          }
-
-          .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px;
-            color: #666;
-            font-size: 20px;
-            animation: cardEntrance 0.6s ease forwards;
-          }
-
-          @media (max-width: 992px) {
-            .card-container:hover {
-              transform: scale(1.15) translateZ(40px);
-            }
-          }
-
-          @media (max-width: 768px) {
-            .card-container {
-              height: 250px;
-            }
-
-            .card-title {
-              font-size: 1.5rem;
-            }
-
-            .card-container:hover .card-title {
-              font-size: 1.7rem;
-            }
-
-            .card-description {
-              font-size: 1rem;
-            }
-
-            .card-container:hover {
-              transform: scale(1.1) translateZ(30px);
-            }
-          }
-
-          @media (max-width: 576px) {
-            .ant-input-affix-wrapper {
-              font-size: 14px;
-            }
-
-            .card-container {
-              height: 220px;
-            }
-
-            .card-title {
-              font-size: 1.3rem;
-            }
-
-            .card-container:hover .card-title {
-              font-size: 1.5rem;
-            }
-
-            .card-container:hover {
-              transform: scale(1.08) translateZ(20px);
-            }
-          }
-        `}</style>
-
-        <div style={{ textAlign: "center" }}>
-          <Title
-            level={1}
-            style={{
-              color: "#0a2c64",
-              fontFamily: "'Open Sans', sans-serif",
-              fontSize: isMobile ? "28px" : "36px",
-              fontWeight: 700,
-              marginBottom: 0,
-              letterSpacing: "-0.5px",
-            }}
-          >
-            Career Opportunities
-          </Title>
-          <div
-            style={{
-              height: "4px",
-              width: "180px",
-              background: "linear-gradient(90deg, #fbb034, #ff6b00)",
-              margin: "12px auto 40px",
-              borderRadius: "2px",
-              opacity: 0.8,
-            }}
-          />
-        </div>
+<div style={{ textAlign: "center" }}>
+  <Title
+    level={1}
+    style={{
+      color: "#0a2c64",
+      fontFamily: "'Open Sans', sans-serif",
+      fontSize: isMobile ? "28px" : "36px",
+      fontWeight: 700,
+      marginBottom: 0,
+      letterSpacing: "-0.5px",
+    }}
+  >
+    Career Opportunities
+  </Title>
+  <div
+    style={{
+      height: "4px",
+      width: "180px",
+      background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+      margin: "12px auto 16px", // reduced bottom space from 40px to 16px
+      borderRadius: "2px",
+      opacity: 0.8,
+    }}
+  />
+</div>
+          <h1
+          style={{
+            color: "#ff4e18", // primary color
+            fontFamily: "'Open Sans', sans-serif",
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            letterSpacing: "-0.5px",
+            lineHeight: 1.2,
+            textAlign: "center",
+            marginBottom: "2.5rem",
+          }}
+        >
+          Career Opportunities at Borigam – Join Our Growing Team
+        </h1>
+      
 
         <div className="search-container">
           <Search
@@ -593,6 +556,7 @@ export default function CareerOpportunities() {
             style={{ maxWidth: 600, width: "100%" }}
           />
         </div>
+         
 
         <div
           style={{
@@ -629,9 +593,8 @@ export default function CareerOpportunities() {
                       }}
                     >
                       <div
-                        className={`card-container ${
-                          rowIndex < visibleRows ? "visible" : ""
-                        }`}
+                        className={`card-container ${rowIndex < visibleRows ? "visible" : ""
+                          }`}
                         onClick={() => handleNavigation(card.link, index)}
                         aria-label={`Explore ${card.title} career`}
                         style={{ animationDelay: `${cardIndex * 0.1}s` }}
@@ -654,7 +617,7 @@ export default function CareerOpportunities() {
                           </Title>
                           <Text
                             className="card-description"
-                            style={{ fontWeight: 500 }}
+                            style={{ fontWeight: 500, color: 'white' }}
                           >
                             {card.description}
                           </Text>

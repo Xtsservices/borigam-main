@@ -3,6 +3,7 @@ import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
+import Head from 'next/head';
 
 
 const { Title, Paragraph } = Typography;
@@ -36,26 +37,49 @@ const listItems = (items: string[]) => (
 
 const FDDIPage = () => {
   return (
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
-        <motion.div 
-          initial="hidden" 
-          animate="visible" 
-          variants={sectionVariant}
-        >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            FDDI AIST Entrance Exam
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>FDDI Coaching in Hyderabad – Borigam | Best Footwear & Fashion Design Entrance Preparation</title>
+          <meta name="description" content="Crack the FDDI entrance exam with expert coaching at Borigam Hyderabad. Learn from experienced mentors, access updated study material & build a strong foundation in footwear and fashion design." />
+            <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/fddi/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+           <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+            FDDI AIST Entrance Exam 
             <div
               style={{
                 height: 4,
                 width: 120,
                 backgroundColor: '#fbb034',
-                margin: '20px auto 40px',
+                margin: '10px auto 40px',
               }}
             ></div>
           </Title>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+         
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+          
+          <h1 style={{
+            textAlign: 'center',
+            color: '#ff4e18',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            margin: '-80px 0 40px 0',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2,
+          }}>
+            Best FDDI Entrance Exam Coaching in Hyderabad – Borigam
+          </h1>
+           </div>
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
             Footwear Design and Development Institute All India Selection Test (FDDI AIST) is the gateway to premier 
             design and business programs in footwear, fashion, and retail management.
           </Paragraph>
@@ -352,7 +376,8 @@ const FDDIPage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

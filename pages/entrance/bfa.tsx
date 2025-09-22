@@ -3,6 +3,7 @@ import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
+import Head from 'next/head';
 
 const { Title, Paragraph } = Typography;
 
@@ -35,19 +36,41 @@ const listItems = (items: string[]) => (
 
 const BFAPage = () => {
   return (
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>BFA Coaching in Hyderabad – Borigam | Best Fine Arts Entrance Preparation</title>
+          <meta name="description" content="Crack the BFA entrance exam with expert coaching at Borigam Hyderabad. Get guidance from experienced faculty, updated study material & a creative learning environment for Fine Arts success." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/bfa/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+         
         <motion.div initial="hidden" animate="visible" variants={sectionVariant}>
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
             Bachelor of Fine Arts (BFA) Entrance Exam Guide
             <div style={{
               height: 4,
               width: 120,
               backgroundColor: '#fbb034',
-              margin: '20px auto 40px',
+              margin: '10px auto 40px',
             }} />
           </Title>
+           <div style={{ textAlign: 'center', marginBottom: '32px', marginTop: '-30px' }}>
+            <h1 style={{
+              color: '#ff4e18',
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              marginBottom: '18px',
+              letterSpacing: '-0.5px',
+              lineHeight: 1.2,
+            }}>
+              Best BFA Entrance Exam Coaching in Hyderabad – Borigam
+            </h1>
+          </div>
 
           <Row gutter={[32, 32]}>
             {[
@@ -181,7 +204,8 @@ const BFAPage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

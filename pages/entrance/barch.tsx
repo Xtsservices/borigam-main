@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
 
+import Head from 'next/head';
+
 
 const { Title, Paragraph } = Typography;
 
@@ -36,16 +38,24 @@ const listItems = (items: string[]) => (
 
 const BArchPage = () => {
   return (
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>B.Arch Coaching in Hyderabad – Borigam | Best Architecture Entrance Preparation</title>
+          <meta name="description" content="Join Borigam’s B.Arch Coaching in Hyderabad and prepare for top architecture entrance exams like NATA & JEE Paper." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/barch" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            Bachelor of Architecture (B.Arch)
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+            Bachelor of Architecture (B.Arch) 
             <div
               style={{
                 height: 4,
@@ -55,7 +65,20 @@ const BArchPage = () => {
               }}
             ></div>
           </Title>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+           <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+          
+          <h1 style={{
+            textAlign: 'center',
+            color: '#ff4e18',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            margin: '-80px 0 40px 0',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2,
+          }}>
+Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
+           </div>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
             B.Arch is a 5-year professional undergraduate degree that prepares students for careers in architecture, 
             combining artistic vision with technical knowledge of building design and construction.
           </Paragraph>
@@ -365,7 +388,8 @@ const BArchPage = () => {
         </motion.div>
       </div>
     </Layout>
+  </>
   );
-};
+}
 
 export default BArchPage;

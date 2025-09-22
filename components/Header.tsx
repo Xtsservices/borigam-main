@@ -179,11 +179,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   const navLinks = [
     { path: "/", label: "Home" },
-    { 
-      path: "#about-section", 
-      label: "About Us",
-      onClick: (e: React.MouseEvent) => handleSectionClick("about-section", e)
-    },
+    { path: "/about", label: "About Us" },
     {
       path: "#entrance-section",
       label: "Entrance Exam",
@@ -319,7 +315,19 @@ const Header: React.FC<HeaderProps> = () => {
 
               <div className={`nav-section ${scrolled ? "scrolled" : ""}`}>
                 <div className="top-buttons">
-                  <Button
+                 
+                    <Link href="/ApplicationForm">
+                    {/* <Button
+                      type={
+                        router.pathname === "/ApplicationForm" ? "primary" : "default"
+                      }
+                      className="header-button admission-button"
+                      size={isTablet ? "small" : "middle"}
+                    >
+                      Application Form
+                    </Button> */}
+                  </Link>
+                   <Button
                     type={
                       router.pathname === "/borigam-portal"
                         ? "primary"
@@ -331,17 +339,6 @@ const Header: React.FC<HeaderProps> = () => {
                   >
                     Borigam Portal
                   </Button>
-                  {/* <Link href="/admissions">
-                    <Button
-                      type={
-                        router.pathname === "/admissions" ? "primary" : "default"
-                      }
-                      className="header-button admission-button"
-                      size={isTablet ? "small" : "middle"}
-                    >
-                      Application Form
-                    </Button>
-                  </Link> */}
                 </div>
 
                 <nav className="desktop-nav">{renderNavLinks()}</nav>

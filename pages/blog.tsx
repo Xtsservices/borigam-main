@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Head from 'next/head';
 import AppFooter from '../components/Footer';
 import { motion } from 'framer-motion';
 
@@ -24,10 +25,31 @@ const Blog = () => {
   return (
     <>
       <Header />
+      <Head>
+        <title>Blog – Borigam | Tips & Insights for NID, NATA, UCEED, CEED, BFA & NIFT Entrance Exams</title>
+        <meta name="description" content="Read the Borigam Blog for expert tips, preparation strategies, study guides & insights on NID, NATA, UCEED, CEED, BFA & NIFT entrance exams. Stay updated & boost your success."></meta>
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+        <link rel="canonical" href="https://borigaminstitute.in/blog/" />
+          <meta name="robots" content="index, follow" />
+      </Head>
       <div className="main-container">
         <div className="content-wrapper">
           <div className="left-column">
+          
             <h1>Blogs</h1>
+              <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+              <h1 style={{
+                color: '#ff4e18',
+                fontFamily: "'Open Sans', sans-serif",
+                fontSize: '1.5rem',
+                fontWeight: 700,
+                marginBottom: '18px',
+                // letterSpacing: '-0.5px',
+                lineHeight: 1.2,
+              }}>
+                Borigam Blog – Your Guide to Design & Architecture Entrance Success
+              </h1>
+            </div>
             <div className="videos-grid">
               {videoLinks.map((link, index) => (
                 <motion.div
@@ -45,6 +67,7 @@ const Blog = () => {
                   }}
                   transition={{ duration: 0.3 }}
                 >
+                  
                   <div className="video">
                     <iframe
                       src={getEmbedUrl(link)}
@@ -52,13 +75,6 @@ const Blog = () => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     ></iframe>
-                  </div>
-                  <div className="video-overlay">
-                    <div className="play-icon">
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 5V19L19 12L8 5Z" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
                   </div>
                 </motion.div>
               ))}

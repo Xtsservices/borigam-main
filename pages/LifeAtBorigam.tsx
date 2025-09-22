@@ -89,24 +89,23 @@ const MediaCarousel: React.FC = () => {
         `}
       </style>
       <div style={{ padding: '2rem', backgroundColor: '#f9fafb' }}>
-      <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-  <h2 style={{
-    fontSize: '26px',
-    fontWeight: 500,
-    marginBottom: '5px',
-  }}>
-    Life at Borigam
-  </h2>
-  <div style={{
-    width: '40px',
-    height: '4px',
-    backgroundColor: '#fbb034',
-    margin: '0 auto 0px',
-    borderRadius: '2px',
-    boxShadow: 'rgba(251, 176, 52, 0.3) 0px 2px',
-  }} />
-</div>
-
+        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+          <h2 style={{
+            fontSize: '26px',
+            fontWeight: 500,
+            marginBottom: '5px',
+          }}>
+            Life at Borigam
+          </h2>
+          <div style={{
+            width: '40px',
+            height: '4px',
+            backgroundColor: '#fbb034',
+            margin: '0 auto 0px',
+            borderRadius: '2px',
+            boxShadow: 'rgba(251, 176, 52, 0.3) 0px 2px',
+          }} />
+        </div>
 
         <Slider {...settings}>
           {mediaItems.map((item, index) => (
@@ -129,11 +128,12 @@ const MediaCarousel: React.FC = () => {
                 ) : (
                   <video
                     src={item.src}
-                    autoPlay
                     muted
                     loop
                     playsInline
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => e.currentTarget.pause()}
                   />
                 )}
               </div>

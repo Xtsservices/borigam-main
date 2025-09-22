@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
 
+import Head from 'next/head';
+
 const { Title, Paragraph } = Typography;
 
 const cardStyle: React.CSSProperties = {
@@ -35,17 +37,24 @@ const listItems = (items: string[]) => (
 
 const AATpage = () => {
   return (
-    
-    <Layout>
-      <header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <>
+      <Header />
+      <Layout>
+        <Head>
+          <title>AAT Coaching in Hyderabad – Borigam | Best Architecture Aptitude Test Preparation</title>
+          <meta name="description" content="Crack the Architecture Aptitude Test (AAT) with expert coaching at Borigam Hyderabad. Learn freehand & geometrical drawing, 3D perception, creativity, and architectural awareness to secure B.Arch admission in IITs." />
+          <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+          <link rel="canonical" href="https://borigaminstitute.in/entrance/aat/" />
+          <meta name="robots" content="index, follow" />
+        </Head>
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            Architecture Aptitude Test (AAT)
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+            Architecture Aptitude  Test
             <div
               style={{
                 height: 4,
@@ -55,7 +64,20 @@ const AATpage = () => {
               }}
             ></div>
           </Title>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+           <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+          
+          <h1 style={{
+            textAlign: 'center',
+            color: '#ff4e18',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            margin: '-80px 0 40px 0',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2,
+          }}>
+Best AAT (Architecture Aptitude Test) Coaching in Hyderabad – Borigam          </h1>
+           </div>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
             The Architecture Aptitude Test (AAT) is conducted by IITs for admission to their B.Arch programs. 
             Only candidates who qualify JEE Advanced are eligible to appear for AAT.
           </Paragraph>
@@ -284,8 +306,9 @@ const AATpage = () => {
           </Row>
         </motion.div>
       </div>
-    </Layout>
+      </Layout>
+    </>
   );
-};
+}
 
 export default AATpage;

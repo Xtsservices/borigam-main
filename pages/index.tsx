@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Head from 'next/head';
 import { MessageOutlined, CloseOutlined, SendOutlined } from '@ant-design/icons';
 import { Button, Input, Typography } from 'antd';
 import styled from 'styled-components';
@@ -10,13 +11,14 @@ import EntranceExamsSection from './EntranceExamsSection';
 import Gallery from './Gallery';
 import WhyChooseSection from './WhyChooseSection';
 import CarouselComponent from './CarouselComponent';
-import SuccessStoriesIndex from './SuccessStoriesIndex';
+// import SuccessStoriesIndex from './SuccessStoriesIndex';
 import ReviewsPage from './ReviewsPage';
 // import ChatWidget from './ChatWidget';
 import LifeAtBorigam from './LifeAtBorigam';
 import StudentLifeGallery from './StudentLifeGallery';
 import EnquireIndex from './EnquireIndex';
 import Footer from '../components/Footer';
+import AboutPage from './about';
 
 const { Title } = Typography;
 
@@ -34,7 +36,7 @@ const MainContent = styled.main`
 `;
 
 const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $minHeight?: number }>`
-  margin: 40px 0;
+  margin: 20px 0;
   padding: 0 20px;
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: translateY(${({ $visible }) => ($visible ? 0 : '20px')});
@@ -44,13 +46,13 @@ const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $min
   scroll-margin-top: 100px;
 
   @media (max-width: 768px) {
-    margin: 30px 0;
+    margin: 14px 0;
     padding: 0 15px;
     scroll-margin-top: 80px;
   }
 
   @media (max-width: 480px) {
-    margin: 20px 0;
+    margin: 8px 0;
     padding: 0 10px;
     scroll-margin-top: 60px;
   }
@@ -110,7 +112,7 @@ const HomePage: React.FC = () => {
 
   const sections = [
     { id: 'carousel', component: <CarouselComponent /> },
-    { id: 'about-section', component: <WhyChooseSection /> },
+    { id: 'about-section', component: <AboutPage/> },
     { id: 'career-guide', component: <CareerGuideSection /> },
     { id: 'entrance-section', component: <EntranceExamsSection /> },
     { id: 'animated-boxes', component: <AnimatedBoxesPage /> },
@@ -118,37 +120,59 @@ const HomePage: React.FC = () => {
     { id: 'gallery', component: <Gallery /> },
     { id: 'student-life', component: <StudentLifeGallery /> },
     { id: 'life-at-borigam', component: <LifeAtBorigam /> },
-    { id: 'success-stories', component: <SuccessStoriesIndex /> },
+    // { id: 'success-stories', component: <SuccessStoriesIndex /> },
     { id: 'reviews', component: <ReviewsPage /> },
     // { id: 'chat', component: <ChatWidget /> },
   ];
 
   return (
-    <PageWrapper>
-      <HideScrollbarContainer>
-        <Header />
-        <MainContent>
-          {sections.map((section, index) => {
-            const isHeavySection =
-              section.id === 'success-stories' || section.id === 'reviews';
-            return (
-              <AnimatedSection
-                key={section.id}
-                id={section.id}
-                ref={(el) => {
-                  if (el) sectionRefs.current[index] = el;
-                }}
-                $visible={visibleSections.includes(index)}
-                $delay={index % 3}
-                $minHeight={isHeavySection ? 600 : undefined}
-              >
-                {section.component}
-              </AnimatedSection>
-            );
-          })}
-        </MainContent>
-      </HideScrollbarContainer>
-    </PageWrapper>
+    <>
+      <Head>
+        <title>Top Coaching for NIFT, NATA, NID, UCEED & B.Arch Entrance Exams in Hyderabad – Borigam</title>
+        <meta name="description" content="Crack NIFT, NID, NATA, CEED, UCEED & B.Arch entrance exams with Borigam Coaching in Hyderabad. Expert faculty from top institutes, updated study material, mock tests & proven results." />
+        <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+        <link rel="canonical" href="https://borigaminstitute.in/" />
+        <meta name="robots" content="index, follow" />
+      </Head>
+      <PageWrapper>
+        <HideScrollbarContainer>
+          <Header />
+          <MainContent>
+            <h1
+              style={{
+                textAlign: 'center',
+                color: '#ff4e18',
+                fontWeight: 700,
+                fontSize: '1.5rem',
+                margin: '160px 0 -100px 0'
+              }}
+            >
+              Best Coaching for NIFT, NID, NATA, CEED, UCEED & B.Arch Entrance Exams in Hyderabad
+            </h1>
+            {sections.map((section, index) => {
+              // Remove minHeight for reviews section
+              const isReviews = section.id === 'reviews';
+              const extraStyle = section.id === 'life-at-borigam' ? { marginBottom: 80 } : {};
+              return (
+                <AnimatedSection
+                  key={section.id}
+                  id={section.id}
+                  ref={(el) => {
+                    if (el) sectionRefs.current[index] = el;
+                  }}
+                  $visible={visibleSections.includes(index)}
+                  $delay={index % 3}
+                  $minHeight={isReviews ? undefined : undefined}
+                  style={extraStyle}
+                >
+                  {section.component}
+                </AnimatedSection>
+              );
+            })}
+          </MainContent>
+        </HideScrollbarContainer>
+      </PageWrapper>
+    </>
   );
 };
 

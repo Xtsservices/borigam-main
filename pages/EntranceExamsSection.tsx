@@ -154,26 +154,19 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   cursor: pointer;
   margin: 0 auto;
-  box-shadow: ${props => props.ismiddle ? 
-    '0 15px 30px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(251, 176, 52, 0.3)' : 
-    '0 8px 15px rgba(0, 0, 0, 0.1)'} !important;
-  height: ${props => props.ismiddle ? '420px' : '380px'};
-  transform: ${props => props.ismiddle ? 'scale(1.05)' : 'scale(0.95)'};
-  z-index: ${props => props.ismiddle ? 5 : 1};
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
+  height: 380px;
+  transform: scale(1);
+  z-index: 1;
   background: white;
 
   &:hover {
-    transform: ${props => props.ismiddle ? 
-      'scale(1.08) translateY(-10px)' : 
-      'scale(1) translateY(-5px)'};
-    box-shadow: ${props => props.ismiddle ? 
-      '0 25px 50px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(251, 176, 52, 0.4)' : 
-      '0 15px 30px rgba(0, 0, 0, 0.2)'} !important;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
     z-index: 10;
-    
     .card-title {
-      color: ${props => props.ismiddle ? '#ff5722' : '#0a2c64'} !important;
-      text-shadow: ${props => props.ismiddle ? '0 2px 4px rgba(255, 87, 34, 0.3)' : 'none'};
+      color: #0a2c64 !important;
+      text-shadow: none;
     }
   }
 
@@ -181,11 +174,11 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
     padding: 40px !important;
     display: flex;
     flex-direction: column;
-    height: calc(100% - ${props => props.ismiddle ? '220px' : '200px'});
+    height: calc(100% - 200px);
   }
 
   .ant-card-cover {
-    height: ${props => props.ismiddle ? '220px' : '200px'};
+    height: 200px;
     overflow: hidden;
     transition: all 0.5s ease;
   }
@@ -198,57 +191,46 @@ const StyledCard = styled(Card)<{ ismiddle: boolean }>`
     object-position: center;
     display: block;
     transition: all 0.5s ease;
-    
     &:hover {
       transform: scale(1.05);
     }
   }
 
   @media (max-width: 1024px) {
-    height: ${props => props.ismiddle ? '380px' : '340px'} !important;
-    
+    height: 340px !important;
     .ant-card-body {
       padding: 30px !important;
-      height: calc(100% - ${props => props.ismiddle ? '200px' : '180px'});
+      height: calc(100% - 180px);
     }
-
     .ant-card-cover {
-      height: ${props => props.ismiddle ? '200px' : '180px'} !important;
+      height: 180px !important;
     }
-
     &:hover {
-      transform: ${props => props.ismiddle ? 
-        'scale(1.06) translateY(-8px)' : 
-        'scale(1) translateY(-4px)'};
+      transform: translateY(-4px);
     }
   }
 
   @media (max-width: 768px) {
     height: 320px !important;
     transform: scale(1) !important;
-    
     .ant-card-body {
       padding: 20px !important;
       height: calc(100% - 180px);
     }
-    
     .ant-card-cover {
       height: 180px !important;
     }
-
     &:hover {
-      transform: scale(1.02) translateY(-3px) !important;
+      transform: translateY(-3px) !important;
     }
   }
 
   @media (max-width: 480px) {
     height: 280px !important;
-    
     .ant-card-body {
       padding: 15px !important;
       height: calc(100% - 160px);
     }
-    
     .ant-card-cover {
       height: 160px !important;
     }

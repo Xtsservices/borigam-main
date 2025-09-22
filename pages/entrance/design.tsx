@@ -198,7 +198,7 @@ const DesignPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Student Success Stories</span>}
+                  title={<span style={{ fontSize: "24px" }}>ccess Stories</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 

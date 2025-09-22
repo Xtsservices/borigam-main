@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
@@ -41,7 +41,11 @@ const NataPage = () => {
     <Layout>
       <header/>
       <Head>
-        <title>NATA Entrance Exam - Complete Guide</title>
+  <title>NATA Coaching in Hyderabad – Borigam | Best B.Arch Entrance Exam Preparation</title>
+  <meta name="description" content="Crack the NATA (National Aptitude Test in Architecture) with expert coaching at Borigam Hyderabad. Learn architectural drawing, 3D visualization, mathematics, and design aptitude with proven guidance & results." />
+  <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+  <link rel="canonical" href="https://borigaminstitute.in/entrance/nata/" />
+  <meta name="robots" content="index, follow" />
       </Head>
       <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
         <motion.div 
@@ -49,7 +53,7 @@ const NataPage = () => {
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
             National Aptitude Test in Architecture (NATA)
             <div
               style={{
@@ -60,8 +64,21 @@ const NataPage = () => {
               }}
             ></div>
           </Title>
+          <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
           
-          <div style={{ marginBottom: 40, borderRadius: 16, overflow: 'hidden' }}>
+          <h1 style={{
+            textAlign: 'center',
+            color: '#ff4e18',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            margin: '-80px 0 40px 0',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2,
+          }}>
+Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
+           </div>
+          
+          <div style={{ marginBottom: 40, borderRadius: 16, overflow: 'hidden', marginTop: -60 }}>
             <Image 
               src="/images/nata-banner.jpg" 
               alt="NATA Overview" 
@@ -72,7 +89,7 @@ const NataPage = () => {
             />
           </div>
 
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40,  }}>
             NATA is the national level entrance exam for admission to 5-year B.Arch programs at most architecture colleges across India, 
             conducted by the Council of Architecture (CoA).
           </Paragraph>
