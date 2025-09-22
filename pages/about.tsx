@@ -4,30 +4,30 @@ import { Typography } from "antd";
 import { motion } from "framer-motion";
 import Header from "../components/Header";
 
-const { Paragraph } = Typography;
+const { Paragraph, Title } = Typography;
 
 // Animation variants
 const leftVariant = {
   hidden: { opacity: 0, x: -100 },
-  visible: { 
-    opacity: 1, 
-    x: 0, 
-    transition: { 
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
       duration: 0.8,
       ease: "easeOut"
-    } 
+    }
   }
 };
 
 const rightVariant = {
   hidden: { opacity: 0, x: 100 },
-  visible: { 
-    opacity: 1, 
-    x: 0, 
-    transition: { 
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
       duration: 0.8,
       ease: "easeOut"
-    } 
+    }
   }
 };
 
@@ -128,15 +128,15 @@ const AboutPage: React.FC = () => {
     reverse?: boolean;
   }) => (
     <div style={{ marginBottom: '80px' }}>
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'stretch', 
+      <div style={{
+        display: 'flex',
+        alignItems: 'stretch',
         gap: isTablet ? '40px' : '60px',
         flexDirection: isTablet ? 'column' : (reverse ? 'row-reverse' : 'row')
       }}>
         {/* Image Box */}
-        <motion.div 
-          initial="hidden" 
+        <motion.div
+          initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={reverse ? rightVariant : leftVariant}
@@ -155,10 +155,10 @@ const AboutPage: React.FC = () => {
             />
           </motion.div>
         </motion.div>
-        
+
         {/* Content Box */}
-        <motion.div 
-          initial="hidden" 
+        <motion.div
+          initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={reverse ? leftVariant : rightVariant}
@@ -172,7 +172,7 @@ const AboutPage: React.FC = () => {
               padding: boxPadding
             }}
           >
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               style={{
                 ...topicBoxStyle,
@@ -200,71 +200,76 @@ const AboutPage: React.FC = () => {
   return (
     <>
       <Head>
-  <title>About Us – Borigam | Best Coaching for NID, NATA, UCEED, CEED, BFA & NIFT Entrance Exams</title>
-  <meta name="description" content="Learn about Borigam, a leading coaching institute for NID, NATA, UCEED, CEED, BFA & NIFT entrance exams. Discover our vision, mission, expert faculty & creative learning environment." />
-  <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
-  <link rel="canonical" href="https://borigaminstitute.in/" />
-  <meta name="robots" content="index, follow" />
+        <title>About Us – Borigam | Best Coaching for NID, NATA, UCEED, CEED, BFA & NIFT Entrance Exams</title>
+        <meta name="description" content="Learn about Borigam, a leading coaching institute for NID, NATA, UCEED, CEED, BFA & NIFT entrance exams. Discover our vision, mission, expert faculty & creative learning environment." />
+        <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
+        <link rel="canonical" href="https://borigaminstitute.in/" />
+        <meta name="robots" content="index, follow" />
       </Head>
-      <div style={{ backgroundColor: '#fff' }}>
-        <Header />
-
-        {/* HERO SECTION */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+      <Header />
+     <div style={{ textAlign: "center" }}>
+  <Title
+    level={1}
+    style={{
+      color: "#0a2c64",
+      fontFamily: "'Open Sans', sans-serif",
+      fontSize: isMobile ? "28px" : "36px",
+      fontWeight: 700,
+      marginBottom: 0,
+      letterSpacing: "-0.5px",
+      marginTop: isMobile ? "4.5rem" : "9.5rem",
+    }}
+  >
+    About Us
+  </Title>
+  <div
+    style={{
+      height: "4px",
+      width: "180px",
+      background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+      margin: "12px auto 16px", // reduced bottom space from 40px to 16px
+      borderRadius: "2px",
+      opacity: 0.8,
+    }}
+  />
+</div>
+          <h1
           style={{
-            backgroundImage: `url("/images/aboutus.jpeg")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            marginTop: '10rem',
-            height: "500px",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
+            color: "#ff4e18", // primary color
+            fontFamily: "'Open Sans', sans-serif",
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            letterSpacing: "-0.5px",
+            lineHeight: 1.2,
             textAlign: "center",
-            position: "relative",
+            marginBottom: "2.5rem",
           }}
         >
-          <h1 style={{
-            textAlign: 'center',
-            color: '#ff4e18',
-            fontWeight: 700,
-            fontSize: '2rem',
-            margin: '160px 0 -100px 0',
-            background: 'rgba(255,255,255,0.85)',
-            borderRadius: '8px',
-            padding: '16px 32px',
-            display: 'inline-block'
-          }}>
-            About Borigam – Your Trusted Partner for Design & Architecture Entrance Coaching
-          </h1>
-        </motion.section>
+         Why choose Borigam?
+        </h1>
+      <div style={{ backgroundColor: '#fff' }}>
+        <div style={{
+          padding: isMobile ? "40px 5%" : "60px 5%",
+          maxWidth: 1400,
+          margin: "auto"
+        }}></div>
+       
 
         {/* MAIN CONTENT */}
-        <div style={{ 
-          padding: isMobile ? "40px 5%" : "60px 5%", 
-          maxWidth: 1400, 
-          margin: "auto"
+        <div style={{
+          padding: isMobile ? "40px 5%" : "60px 5%",
+          maxWidth: 1400,
+          margin: "auto",
+          marginTop: "-12rem"
         }}>
- ̰          <motion.div 
-            initial="hidden" 
+          ̰          <motion.div
+            initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={leftVariant}
             style={{ textAlign: 'center', marginBottom: '40px' }}
           >
-            <h2 style={{ 
-              color: '#0a2c64', 
-              fontSize: 'clamp(28px, 3vw, 42px)', 
-              marginBottom: '20px',
-              lineHeight: 1.3
-            }}>
-              Why choose Borigam?
-            </h2>
+          
           </motion.div>
           <Section
             title="Sculpting Creative Minds Since 2019"

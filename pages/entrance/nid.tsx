@@ -48,25 +48,13 @@ const NIDPage = () => {
           <meta name="robots" content="index, follow" />
         </Head>
         <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <h1 style={{
-              color: '#0a2c64',
-              fontFamily: "'Open Sans', sans-serif",
-              fontSize: '2.4rem',
-              fontWeight: 800,
-              marginBottom: '18px',
-              letterSpacing: '-0.5px',
-              lineHeight: 1.2,
-            }}>
-              Best NID Entrance Exam Coaching in Hyderabad – Borigam
-            </h1>
-          </div>
+         
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
             National Institute of Design (NID) Entrance Exam
             <div
               style={{
@@ -77,6 +65,20 @@ const NIDPage = () => {
               }}
             ></div>
           </Title>
+           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h1 style={{
+              color: '#ff4e18',
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              marginBottom: '18px',
+              marginTop: '-40px',
+              letterSpacing: '-0.5px',
+              lineHeight: 1.2,
+            }}>
+              Best NID Entrance Exam Coaching in Hyderabad – Borigam
+            </h1>
+          </div>
           <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
             NID is India's premier design institute offering undergraduate and postgraduate programs in various design disciplines. 
             The NID Entrance Exam is highly competitive and considered a gateway to successful careers in the design industry.

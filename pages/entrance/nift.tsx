@@ -49,12 +49,30 @@ const NIFTPage = () => {
           <meta name="robots" content="index, follow" />
         </Head>
         <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+         
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={sectionVariant}
+        >
+          <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+            NIFT Entrance Exam
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '10px auto 40px',
+              }}
+            ></div>
+          </Title>
+           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h1 style={{
-              color: '#0a2c64',
+              color: '#ff4e18',
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: '2.4rem',
-              fontWeight: 800,
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              
               marginBottom: '18px',
               letterSpacing: '-0.5px',
               lineHeight: 1.2,
@@ -62,22 +80,6 @@ const NIFTPage = () => {
               Best NIFT Entrance Exam Coaching in Hyderabad – Borigam
             </h1>
           </div>
-        <motion.div 
-          initial="hidden" 
-          animate="visible" 
-          variants={sectionVariant}
-        >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-            NIFT Entrance Exam
-            <div
-              style={{
-                height: 4,
-                width: 120,
-                backgroundColor: '#fbb034',
-                margin: '20px auto 40px',
-              }}
-            ></div>
-          </Title>
           <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
             The National Institute of Fashion Technology (NIFT) is India's premier institution for fashion education, offering undergraduate and postgraduate programs in design, technology, and management across 18 campuses.
           </Paragraph>

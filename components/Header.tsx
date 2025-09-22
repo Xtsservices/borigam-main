@@ -179,11 +179,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   const navLinks = [
     { path: "/", label: "Home" },
-    { 
-      path: "#about-section", 
-      label: "About Us",
-      onClick: (e: React.MouseEvent) => handleSectionClick("about-section", e)
-    },
+    { path: "/about", label: "About Us" },
     {
       path: "#entrance-section",
       label: "Entrance Exam",
@@ -321,7 +317,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <div className="top-buttons">
                  
                     <Link href="/ApplicationForm">
-                    <Button
+                    {/* <Button
                       type={
                         router.pathname === "/ApplicationForm" ? "primary" : "default"
                       }
@@ -329,7 +325,7 @@ const Header: React.FC<HeaderProps> = () => {
                       size={isTablet ? "small" : "middle"}
                     >
                       Application Form
-                    </Button>
+                    </Button> */}
                   </Link>
                    <Button
                     type={

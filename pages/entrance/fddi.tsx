@@ -48,23 +48,38 @@ const FDDIPage = () => {
           <meta name="robots" content="index, follow" />
         </Head>
         <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+           <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+            FDDI AIST Entrance Exam 
+            <div
+              style={{
+                height: 4,
+                width: 120,
+                backgroundColor: '#fbb034',
+                margin: '10px auto 40px',
+              }}
+            ></div>
+          </Title>
+         
+        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+          
+          <h1 style={{
+            textAlign: 'center',
+            color: '#ff4e18',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            margin: '-80px 0 40px 0',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2,
+          }}>
+            Best FDDI Entrance Exam Coaching in Hyderabad – Borigam
+          </h1>
+           </div>
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-            <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
-              Best FDDI Entrance Exam Coaching in Hyderabad – Borigam
-              <div
-                style={{
-                  height: 4,
-                  width: 120,
-                  backgroundColor: '#fbb034',
-                  margin: '20px auto 40px',
-                }}
-              ></div>
-            </Title>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
             Footwear Design and Development Institute All India Selection Test (FDDI AIST) is the gateway to premier 
             design and business programs in footwear, fashion, and retail management.
           </Paragraph>

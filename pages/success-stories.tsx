@@ -84,6 +84,9 @@ const Reviews = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const storiesRef = useRef<HTMLDivElement>(null);
 
+  // Responsive check for mobile devices
+  const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false;
+
   const scrollToStories = () => {
     storiesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -98,13 +101,38 @@ const Reviews = () => {
         <link rel="canonical" href="https://borigaminstitute.in/success-stories/" />
         <meta name="robots" content="index, follow" />
       </Head>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', marginTop: '13rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', marginTop: '8rem' }}>
+        <div style={{ textAlign: "center" }}>
+  <Title
+    level={1}
+    style={{
+      color: "#0a2c64",
+      fontFamily: "'Open Sans', sans-serif",
+      fontSize: isMobile ? "28px" : "36px",
+      fontWeight: 700,
+      marginBottom: 0,
+      letterSpacing: "-0.5px",
+    }}
+  >
+   Success Stories
+  </Title>
+  <div
+    style={{
+      height: "4px",
+      width: "180px",
+      background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+      margin: "12px auto 16px", // reduced bottom space from 40px to 16px
+      borderRadius: "2px",
+      opacity: 0.8,
+    }}
+  />
+</div>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <h1 style={{
-            color: '#0a2c64',
+            color: '#ff4e18',
             fontFamily: "'Open Sans', sans-serif",
-            fontSize: '2.6rem',
-            fontWeight: 800,
+            fontSize: '1.5rem',
+            fontWeight: 700,
             marginBottom: '18px',
             letterSpacing: '-0.5px',
             lineHeight: 1.2,

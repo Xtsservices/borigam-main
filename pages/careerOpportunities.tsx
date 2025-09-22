@@ -295,6 +295,7 @@ export default function CareerOpportunities() {
         <link rel="canonical" href="https://borigaminstitute.in/careerOpportunities/" />
         <meta name="robots" content="index, follow" />
       </Head>
+    
       <style jsx global>{`
         @keyframes cardEntrance {
           0% {
@@ -317,7 +318,7 @@ export default function CareerOpportunities() {
             #ff9800
           ); /* Gradient Background */
           border-radius: 8px; /* Optional: Add rounded corners */
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Optional: Add some shadow */
+          box-shadow: 0 4px 10px rgba(255, 255, 255, 1); /* Optional: Add some shadow */
         }
         .ant-input-affix-wrapper,
         .ant-input-search-button {
@@ -382,21 +383,11 @@ export default function CareerOpportunities() {
           }}
         >
           <div style={{ textAlign: "center", marginBottom: "32px" }}>
-            <h1 style={{
-              color: "#0a2c64",
-              fontFamily: "'Open Sans', sans-serif",
-              fontSize: isMobile ? "32px" : "44px",
-              fontWeight: 800,
-              margin: '160px 0 -100px 0',
-              letterSpacing: "-0.5px",
-              lineHeight: 1.2,
-            }}>
-              Career Opportunities at Borigam – Join Our Growing Team
-            </h1>
+          
             <Title
               level={1}
               style={{
-                color: "#0a2c64",
+                color: "#ffffffff",
                 fontFamily: "'Open Sans', sans-serif",
                 fontSize: isMobile ? "28px" : "36px",
                 fontWeight: 700,
@@ -430,7 +421,7 @@ export default function CareerOpportunities() {
           justify-content: center;
           margin-bottom: 40px;
           padding: 1rem 20px;
-          background: linear-gradient(90deg, #ff5722, #ff9800);
+          // background: linear-gradient(90deg, #ff5722, #ff9800);
           border-radius: 8px;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
@@ -512,32 +503,46 @@ export default function CareerOpportunities() {
           perspective: "1200px",
         }}
       >
-
-        <div style={{ textAlign: "center" }}>
-          <Title
-            level={1}
-            style={{
-              color: "#0a2c64",
-              fontFamily: "'Open Sans', sans-serif",
-              fontSize: isMobile ? "28px" : "36px",
-              fontWeight: 700,
-              marginBottom: 0,
-              letterSpacing: "-0.5px",
-            }}
-          >
-            Career Opportunities
-          </Title>
-          <div
-            style={{
-              height: "4px",
-              width: "180px",
-              background: "linear-gradient(90deg, #fbb034, #ff6b00)",
-              margin: "12px auto 40px",
-              borderRadius: "2px",
-              opacity: 0.8,
-            }}
-          />
-        </div>
+<div style={{ textAlign: "center" }}>
+  <Title
+    level={1}
+    style={{
+      color: "#0a2c64",
+      fontFamily: "'Open Sans', sans-serif",
+      fontSize: isMobile ? "28px" : "36px",
+      fontWeight: 700,
+      marginBottom: 0,
+      letterSpacing: "-0.5px",
+    }}
+  >
+    Career Opportunities
+  </Title>
+  <div
+    style={{
+      height: "4px",
+      width: "180px",
+      background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+      margin: "12px auto 16px", // reduced bottom space from 40px to 16px
+      borderRadius: "2px",
+      opacity: 0.8,
+    }}
+  />
+</div>
+          <h1
+          style={{
+            color: "#ff4e18", // primary color
+            fontFamily: "'Open Sans', sans-serif",
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            letterSpacing: "-0.5px",
+            lineHeight: 1.2,
+            textAlign: "center",
+            marginBottom: "2.5rem",
+          }}
+        >
+          Career Opportunities at Borigam – Join Our Growing Team
+        </h1>
+      
 
         <div className="search-container">
           <Search
@@ -551,6 +556,7 @@ export default function CareerOpportunities() {
             style={{ maxWidth: 600, width: "100%" }}
           />
         </div>
+         
 
         <div
           style={{
@@ -611,7 +617,7 @@ export default function CareerOpportunities() {
                           </Title>
                           <Text
                             className="card-description"
-                            style={{ fontWeight: 500 }}
+                            style={{ fontWeight: 500, color: 'white' }}
                           >
                             {card.description}
                           </Text>
