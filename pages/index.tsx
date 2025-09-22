@@ -18,7 +18,7 @@ import LifeAtBorigam from './LifeAtBorigam';
 import StudentLifeGallery from './StudentLifeGallery';
 import EnquireIndex from './EnquireIndex';
 import Footer from '../components/Footer';
-import AboutPage from './about';
+// import AboutPage from './about';
 
 const { Title } = Typography;
 
@@ -112,7 +112,7 @@ const HomePage: React.FC = () => {
 
   const sections = [
     { id: 'carousel', component: <CarouselComponent /> },
-    { id: 'about-section', component: <AboutPage/> },
+    { id: 'about-section', component: <WhyChooseSection /> },
     { id: 'career-guide', component: <CareerGuideSection /> },
     { id: 'entrance-section', component: <EntranceExamsSection /> },
     { id: 'animated-boxes', component: <AnimatedBoxesPage /> },
