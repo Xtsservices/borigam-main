@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
@@ -24,38 +24,76 @@ const cardVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+const listItems = (items: string[], isMobile = false) => (
+  <ul style={{ 
+    paddingLeft: isMobile ? 16 : 24, 
+    color: "#333", 
+    fontSize: isMobile ? "16px" : "18px" 
+  }}>
     {items.map((item, idx) => (
-      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+      <li key={idx} style={{ 
+        marginBottom: isMobile ? 8 : 12,
+        lineHeight: 1.6 
+      }}>{item}</li>
     ))}
   </ul>
 );
 
 const AdvanceBatchCoaching = () => {
+  // Responsive breakpoint hooks
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff", marginTop: "6rem" }}>
+      <div style={{ 
+        padding: isMobile ? "30px 15px" : isTablet ? "45px 20px" : "60px 30px", 
+        maxWidth: 1200, 
+        margin: "auto", 
+        backgroundColor: "#fff", 
+        marginTop: isMobile ? "6rem" : "6rem" 
+      }}>
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          {/* Hero Section */}
+          {/* Hero Section - RESPONSIVE */}
           <Card
-            style={{ ...cardStyle, marginBottom: 40 }}
+            style={{ 
+              ...cardStyle, 
+              marginBottom: isMobile ? 25 : 40 
+            }}
             headStyle={{ 
               background: 'linear-gradient(90deg, #ff5722, #ff9800)',
               color: "#fff",
-              fontSize: "28px",
-              padding: "20px 24px",
-              border: 'none'
+              fontSize: isMobile ? "20px" : isTablet ? "24px" : "28px",
+              padding: isMobile ? "15px 16px" : "20px 24px",
+              border: 'none',
+              textAlign: isMobile ? "center" : "left",
+              lineHeight: 1.3,
             }}
             title="Advance Batch Coaching: Final-Step Prep to Crack Top Design, Architecture & Fine Arts Entrance Exams"
-            bodyStyle={{ padding: "24px" }}
+            bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
           >
-            <Paragraph style={{ fontSize: 18, lineHeight: 1.8, color: "#333" }}>
+            <Paragraph style={{ 
+              fontSize: isMobile ? 16 : 18, 
+              lineHeight: 1.8, 
+              color: "#333",
+              textAlign: isMobile ? "center" : "left" 
+            }}>
               Already familiar with the basics and looking for the final boost? Our Advance Batch Coaching is specifically 
               designed for students in their final stage of preparation for design, architecture, and fine arts entrance exams.
               <br /><br />

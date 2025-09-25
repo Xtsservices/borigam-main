@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
@@ -36,6 +36,21 @@ const listItems = (items: string[]) => (
 );
 
 const FDDIPage = () => {
+  // Mobile responsive hooks
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Header />
@@ -91,7 +106,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
@@ -130,7 +145,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
@@ -173,7 +188,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
@@ -209,7 +224,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
@@ -254,7 +269,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
@@ -294,7 +309,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
@@ -337,7 +352,7 @@ const FDDIPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card

@@ -150,7 +150,7 @@ const WhyChooseSection = () => {
             <Title
               level={2}
               style={{
-                marginTop: isMobile ? '20px' : '55px',
+                marginTop: isMobile ? '40px' : '55px',
                 color: '#0a2c64',
                 fontFamily: "'Open Sans', sans-serif",
                 fontSize: isMobile ? '22px' : '30px',

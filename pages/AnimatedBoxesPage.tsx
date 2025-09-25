@@ -207,7 +207,7 @@ const AnimatedBoxesPage: React.FC = () => {
         padding: "40px 0",
         marginLeft:'-50px' ,
         marginRight:'-50px',
-        minHeight: "100vh",
+        minHeight: "10vh",
         maxWidth: "120%",
         margin: "0 auto",
         overflow: "hidden",

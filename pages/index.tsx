@@ -33,6 +33,16 @@ const MainContent = styled.main`
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
+  
+  /* RESPONSIVE: Enhanced mobile-first approach */
+  @media (max-width: 768px) {
+    padding: 0 16px; /* Reduced padding for mobile */
+    max-width: 100%; /* Full width on mobile */
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 12px; /* Even smaller padding on very small screens */
+  }
 `;
 
 const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $minHeight?: number }>`
@@ -45,17 +55,22 @@ const AnimatedSection = styled.section<{ $visible: boolean; $delay: number; $min
   min-height: ${({ $minHeight }) => ($minHeight ? `${$minHeight}px` : '45px')};
   scroll-margin-top: 100px;
 
+  /* RESPONSIVE: Improved mobile spacing and scroll behavior */
   @media (max-width: 768px) {
     margin: 14px 0;
-    padding: 0 15px;
+    padding: 0 10px; /* Reduced horizontal padding */
     scroll-margin-top: 80px;
   }
 
   @media (max-width: 480px) {
     margin: 8px 0;
-    padding: 0 10px;
+    padding: 0 5px; /* Further reduced padding for small screens */
     scroll-margin-top: 60px;
   }
+  
+  /* RESPONSIVE: Ensure sections don't overflow on mobile */
+  overflow-x: hidden;
+  width: 100%;
 `;
 
 const HideScrollbarContainer = styled.div`
@@ -66,6 +81,9 @@ const HideScrollbarContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  
+  /* RESPONSIVE: Prevent horizontal scrolling */
+  overflow-x: hidden;
 `;
 
 const HomePage: React.FC = () => {
@@ -143,8 +161,12 @@ const HomePage: React.FC = () => {
                 textAlign: 'center',
                 color: '#ff4e18',
                 fontWeight: 700,
-                fontSize: '1.5rem',
-                margin: '160px 0 -100px 0'
+                fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', /* RESPONSIVE: Fluid typography */
+                margin: 'clamp(100px, 15vw, 160px) 0 clamp(-80px, -10vw, -100px) 0', /* RESPONSIVE: Fluid margins */
+                padding: '0 20px', /* RESPONSIVE: Add padding for mobile */
+                lineHeight: 1.3, /* RESPONSIVE: Better line height */
+                maxWidth: '100%', /* RESPONSIVE: Prevent overflow */
+                wordWrap: 'break-word' /* RESPONSIVE: Handle long words */
               }}
             >
               Best Coaching for NIFT, NID, NATA, CEED, UCEED & B.Arch Entrance Exams in Hyderabad
