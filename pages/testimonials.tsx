@@ -104,7 +104,7 @@ const TestimonialsIndex = () => {
   return (
     <div
       style={{
-        marginTop: isMobile ? "-5rem" : isTablet ? "-7rem" : "-10rem",
+        marginTop: isMobile ? "-5rem" : isTablet ? "-7rem" : "-12rem",
         backgroundColor: "#f5f5f5",
         padding: isMobile ? "40px 0" : isTablet ? "60px 0" : "80px 0",
         position: "relative",
@@ -133,7 +133,7 @@ const TestimonialsIndex = () => {
             level={2}
             style={{
               color: "#333",
-              fontSize: isMobile ? "1.5rem" : isTablet ? "1.75rem" : "2rem",
+              fontSize: 'clamp(0.75rem, 2.5vw, 1.75rem)', /* Responsive: 12px to 28px */
               fontWeight: 700,
               margin: 0,
               textAlign: isMobile ? "center" : "left",
@@ -154,7 +154,7 @@ const TestimonialsIndex = () => {
               borderRadius: "4px",
               boxShadow: "0 2px 8px rgba(255, 107, 0, 0.2)",
               width: isMobile ? "100%" : "auto",
-              fontSize: isMobile ? "16px" : "14px",
+              fontSize: 'clamp(0.625rem, 1.5vw, 0.8125rem)', /* Responsive: 10px to 13px */
             }}
           >
             View All Reviews
@@ -191,7 +191,7 @@ const TestimonialsIndex = () => {
               level={2}
               style={{
                 color: "white",
-                fontSize: isMobile ? "1.75rem" : isTablet ? "2rem" : "2.5rem",
+                fontSize: 'clamp(1rem, 3vw, 2.25rem)', /* Responsive: 16px to 36px */
                 fontWeight: 700,
                 marginBottom: "20px",
                 lineHeight: 1.2,
@@ -201,7 +201,7 @@ const TestimonialsIndex = () => {
             </Title>
             <Paragraph
               style={{
-                fontSize: isMobile ? "13px" : "14px",
+                fontSize: 'clamp(0.625rem, 1.5vw, 0.8125rem)', /* Responsive: 10px to 13px */
                 color: "rgba(255, 255, 255, 0.9)",
                 marginBottom: 0,
                 lineHeight: 1.6,

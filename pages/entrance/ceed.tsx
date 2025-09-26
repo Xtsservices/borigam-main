@@ -29,7 +29,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -69,7 +69,7 @@ const CEEDPage = () => {
             animate="visible"
             variants={sectionVariant}
           >
-            <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+            <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */, marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */, }}>
               Common  Entrance Exam for Design (CEED)
               <div
                 style={{
@@ -86,14 +86,14 @@ const CEEDPage = () => {
                 textAlign: 'center',
                 color: '#ff4e18',
                 fontWeight: 700,
-                fontSize: '1.5rem',
+                fontSize: "clamp(1rem, 3vw, 1.25rem)" /* Responsive: 16px to 20px */,
                 margin: '-80px 0 40px 0',
                 letterSpacing: '-0.5px',
                 lineHeight: 1.2,
               }}>
                 Best CEED (M.Des) Entrance Exam Coaching in Hyderabad – Borigam          </h1>
             </div>
-            <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
+            <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
               CEED is a national-level entrance exam conducted by IIT Bombay for admission to Master of Design (M.Des)
               and Ph.D. programs at premier design institutes in India.
             </Paragraph>
@@ -109,12 +109,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>About CEED</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>About CEED</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -147,12 +147,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Exam Pattern</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -171,7 +171,7 @@ const CEEDPage = () => {
                       "Tasks: Sketching, Product Conceptualization, Storytelling",
                       "Evaluates design and problem-solving skills"
                     ])}
-                    <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                       <strong>Final Score:</strong> Part A (25%) + Part B (75%)
                     </Paragraph>
                   </Card>
@@ -188,12 +188,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Eligibility Criteria</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -219,12 +219,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Syllabus</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -260,12 +260,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Important Dates (Tentative)</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -286,7 +286,7 @@ const CEEDPage = () => {
                       pagination={false}
                       bordered
                     />
-                    <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                       Official Website: <a href="https://ceed.iitb.ac.in" target="_blank" rel="noopener noreferrer" style={{ color: "#FF8C00" }}>www.ceed.iitb.ac.in</a>
                     </Paragraph>
                   </Card>
@@ -303,12 +303,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Preparation Tips</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -336,12 +336,12 @@ const CEEDPage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Career Opportunities</span>}
                     style={cardStyle}
                     headStyle={{
                       backgroundColor: "#FF8C00",
                       color: "#fff",
-                      fontSize: "24px",
+                      fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                       padding: "20px 24px",
                       border: 'none'
                     }}
@@ -364,7 +364,7 @@ const CEEDPage = () => {
                       pagination={false}
                       bordered
                     />
-                    <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                    <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                       Graduates can also pursue Ph.D. in specialized fields like Sustainable Design or Human-Computer Interaction.
                     </Paragraph>
                   </Card>

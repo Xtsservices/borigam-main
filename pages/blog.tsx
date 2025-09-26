@@ -36,12 +36,12 @@ const Blog = () => {
         <div className="content-wrapper">
           <div className="left-column">
           
-            <h1>Blogs</h1>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' /* Responsive H1: 24px to 36px */ }}>Blogs</h1>
               <div style={{ textAlign: 'center', marginBottom: '32px' }}>
               <h1 style={{
                 color: '#ff4e18',
                 fontFamily: "'Open Sans', sans-serif",
-                fontSize: '1.5rem',
+                fontSize: 'clamp(1.125rem, 3vw, 1.5rem)', /* Responsive H1: 18px to 24px */
                 fontWeight: 700,
                 marginBottom: '18px',
                 // letterSpacing: '-0.5px',

@@ -33,13 +33,13 @@ const listItems = (items: string[]) => (
 
 const VisualMerchandiser = () => {
   return (
-    <><Header /><div style={{marginTop: "6rem", padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+    <><Header /><div style={{marginTop: "8rem", padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
       <motion.div 
         initial="hidden" 
         animate="visible" 
         variants={sectionVariant}
       >
-        <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+        <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.625rem)" /* Responsive H1: 24px to 42px */ }}>
           Visual Merchandiser
           <div
             style={{

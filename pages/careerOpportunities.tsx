@@ -389,7 +389,7 @@ export default function CareerOpportunities() {
               style={{
                 color: "#ffffffff",
                 fontFamily: "'Open Sans', sans-serif",
-                fontSize: isMobile ? "28px" : "36px",
+                fontSize: 'clamp(1.25rem, 4vw, 2.25rem)', /* Responsive: 20px to 36px */
                 fontWeight: 700,
                 marginBottom: 0,
                 letterSpacing: "-0.5px",
@@ -530,7 +530,7 @@ export default function CareerOpportunities() {
       `}</style>
       <section
         style={{
-          marginTop: "6rem",
+          marginTop: "8rem",
           padding: "60px 20px",
           backgroundColor: "#f9f9f9",
           minHeight: "100vh",
@@ -551,7 +551,7 @@ export default function CareerOpportunities() {
     style={{
       color: "#0a2c64",
       fontFamily: "'Open Sans', sans-serif",
-      fontSize: isMobile ? "28px" : "36px",
+      fontSize: 'clamp(1.25rem, 4vw, 2rem)', /* Responsive: 20px to 32px */
       fontWeight: 700,
       marginBottom: 0,
       letterSpacing: "-0.5px",
@@ -574,7 +574,7 @@ export default function CareerOpportunities() {
           style={{
             color: "#ff4e18", // primary color
             fontFamily: "'Open Sans', sans-serif",
-            fontSize: isMobile ? '1.25rem' : '1.5rem', /* RESPONSIVE: Smaller on mobile */
+            fontSize: 'clamp(0.75rem, 2.5vw, 1.5rem)', /* Responsive: 12px to 24px */
             fontWeight: 700,
             letterSpacing: "-0.5px",
             lineHeight: 1.2,

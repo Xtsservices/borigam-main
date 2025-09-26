@@ -29,7 +29,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -68,7 +68,7 @@ const NataPage = () => {
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */, marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */, }}>
             National Aptitude Test in Architecture (NATA)
             <div
               style={{
@@ -85,7 +85,7 @@ const NataPage = () => {
             textAlign: 'center',
             color: '#ff4e18',
             fontWeight: 700,
-            fontSize: '1.5rem',
+            fontSize: "clamp(1rem, 3vw, 1.25rem)" /* Responsive: 16px to 20px */,
             margin: '-80px 0 40px 0',
             letterSpacing: '-0.5px',
             lineHeight: 1.2,
@@ -104,7 +104,7 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
             />
           </div>
 
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40,  }}>
+          <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, lineHeight: 1.8, color: "#333", marginBottom: 40,  }}>
             NATA is the national level entrance exam for admission to 5-year B.Arch programs at most architecture colleges across India, 
             conducted by the Council of Architecture (CoA).
           </Paragraph>
@@ -120,12 +120,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>About NATA</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>About NATA</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -138,7 +138,7 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                     "Frequency: Conducted multiple times a year",
                     "Score Validity: 1 Year"
                   ])}
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     <strong>Note:</strong> IITs, NITs, and SPAs accept JEE Main Paper 2 scores instead of NATA.
                   </Paragraph>
                 </Card>
@@ -155,12 +155,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Exam Pattern</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -179,7 +179,7 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                     "Duration: 72 Minutes",
                     "Tasks: Freehand Sketching, Perspective Drawing, Visual Composition"
                   ])}
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     <strong>Total Duration:</strong> 3 Hours | <strong>Total Marks:</strong> 200
                   </Paragraph>
                 </Card>
@@ -196,12 +196,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Eligibility Criteria</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -227,12 +227,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Syllabus</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -267,12 +267,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Exam Fees</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Exam Fees</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -306,12 +306,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Important Dates (Tentative)</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -346,12 +346,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Top Colleges Accepting NATA</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Top Colleges Accepting NATA</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -387,12 +387,12 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Career Opportunities</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -413,7 +413,7 @@ Best NATA Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                     pagination={false}
                     bordered
                   />
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     Graduates may pursue higher studies like M.Arch, Urban Design, or Landscape Architecture.
                   </Paragraph>
                 </Card>

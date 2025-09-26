@@ -22,8 +22,8 @@ const AppFooter = () => {
 
   const renderContent = () => (
     <>
-      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: '2.3rem', paddingTop: '20px', margin: 0, marginBottom: '8px', letterSpacing: '2px' }}>BORIGAM</h2>
-      <h4 style={{ fontSize: '1.3rem', color: '#fff', margin: 0, marginBottom: '18px', fontWeight: 600 }}>Design | Architecture</h4>
+      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: 'clamp(1.25rem, 4vw, 2.3rem)', paddingTop: '20px', margin: 0, marginBottom: '8px', letterSpacing: '2px' }}>BORIGAM</h2>
+      <h4 style={{ fontSize: 'clamp(0.75rem, 2.5vw, 1.3rem)', color: '#fff', margin: 0, marginBottom: '18px', fontWeight: 600 }}>Design | Architecture</h4>
       <div style={{ fontSize: '1.1rem', marginBottom: 18, color: '#fff' }}>
         <strong style={{ color: '#fff', fontSize: '1.1rem' }}>Branches:</strong>
         <div style={{ borderBottom: '4px solid #fff', width: '10%', margin: '1.5px 0', borderRadius: '2px' }} /><br/>

@@ -88,7 +88,7 @@ const TestimonialsIndex = () => {
   return (
     <div
       style={{
-        marginTop: "7rem",
+        marginTop: "9rem",
         backgroundColor: "#f5f5f5",
         padding: "80px 0",
         position: "relative",

@@ -140,7 +140,7 @@ const Header: React.FC<HeaderProps> = () => {
     margin: isMobile ? "8px 0" : isTablet ? "0 8px" : "0 12px",
     textDecoration: "none",
     color: "black",
-    fontSize: isTablet ? "0.9rem" : "0.95rem",
+    fontSize: 'clamp(0.625rem, 1.5vw, 0.95rem)', /* Responsive: 10px to 15px */
     transition: "all 0.3s",
     cursor: "pointer",
     padding: "6px 0",
@@ -223,7 +223,7 @@ const Header: React.FC<HeaderProps> = () => {
                   <span>{link.label}</span>
                   <DownOutlined 
                     style={{ 
-                      fontSize: "0.7rem", 
+                      fontSize: 'clamp(0.625rem, 1.2vw, 0.7rem)', /* Responsive: 10px to 11px */ 
                       marginLeft: 4, 
                       transform: entranceDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                       transition: 'transform 0.3s ease'
@@ -245,7 +245,7 @@ const Header: React.FC<HeaderProps> = () => {
                 }}>
                   {link.items?.map((item: any) => (
                     <div key={item.key} style={{
-                      fontSize: '0.85rem',
+                      fontSize: 'clamp(0.75rem, 1.5vw, 0.85rem)', /* Responsive: 12px to 14px */
                       color: 'rgba(0, 0, 0, 0.7)',
                       margin: '8px 0',
                       paddingLeft: '12px',
@@ -288,7 +288,7 @@ const Header: React.FC<HeaderProps> = () => {
                 onClick={link.onClick}
               >
                 {link.label}{" "}
-                <DownOutlined style={{ fontSize: "0.7rem", marginLeft: 4 }} />
+                <DownOutlined style={{ fontSize: 'clamp(0.625rem, 1.2vw, 0.7rem)', marginLeft: 4 }} />
                 {isActive && <span style={activeLinkUnderline} />}
               </div>
             </Dropdown>
@@ -347,7 +347,7 @@ const Header: React.FC<HeaderProps> = () => {
       alt="Borigam Logo" 
       className="logo" 
       style={{ 
-        height: isMobile ? '50px' : `${getLogoSize()}px`,
+        height: isMobile ? '60px' : `${getLogoSize()}px`, /* Increased mobile logo size */
         width: isMobile ? 'auto' : undefined
       }}
     />
@@ -393,7 +393,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <div className="top-buttons">
                  
                     <Link href="/ApplicationForm">
-                    {/* <Button
+                    <Button
                       type={
                         router.pathname === "/ApplicationForm" ? "primary" : "default"
                       }
@@ -401,7 +401,7 @@ const Header: React.FC<HeaderProps> = () => {
                       size={isTablet ? "small" : "middle"}
                     >
                       Application Form
-                    </Button> */}
+                    </Button>
                   </Link>
                    <Button
                     type={
@@ -495,6 +495,18 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
 
             <div className="mobile-buttons">
+              <Link href="/ApplicationForm">
+                <Button
+                  block
+                  type={
+                    router.pathname === "/ApplicationForm" ? "primary" : "default"
+                  }
+                  className="mobile-button admission-button"
+                  onClick={() => setMobileMenuVisible(false)}
+                >
+                  Application Form
+                </Button>
+              </Link>
               <Button
                 block
                 type={
@@ -505,18 +517,6 @@ const Header: React.FC<HeaderProps> = () => {
               >
                 Borigam Portal
               </Button>
-              {/* <Link href="/admissions">
-                <Button
-                  block
-                  type={
-                    router.pathname === "/admissions" ? "primary" : "default"
-                  }
-                  className="mobile-button admission-button"
-                  onClick={() => setMobileMenuVisible(false)}
-                >
-                  Admission Form
-                </Button>
-              </Link> */}
             </div>
 
             <div className="mobile-nav-links">{renderNavLinks(true)}</div>
@@ -589,6 +589,7 @@ const Header: React.FC<HeaderProps> = () => {
           padding: 4px 8px;
           background: transparent;
           border: none;
+          font-size: clamp(0.75rem, 1.5vw, 0.875rem); /* Responsive text sizing */
         }
 
         .contact-button:hover {
@@ -674,7 +675,7 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .mobile-menu-button {
-          font-size: 18px;
+          font-size: 16px;
           width: 40px;
           height: 40px;
           color: #ff4e18;
@@ -693,10 +694,11 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .mobile-contact-button {
-          padding: 10px;
+          padding: 8px; /* Reduced padding */
           color: #ff4e18;
           border: none;
           text-align: left;
+          font-size: clamp(0.75rem, 2vw, 0.875rem); /* Responsive smaller text */
         }
 
         .mobile-contact-button:hover {
@@ -712,7 +714,9 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .mobile-button {
-          height: 40px;
+          height: 36px; /* Reduced button height */
+          font-size: clamp(0.75rem, 2vw, 0.875rem); /* Responsive smaller text */
+        }
           font-weight: 500;
         }
 
@@ -748,6 +752,7 @@ const Header: React.FC<HeaderProps> = () => {
           cursor: pointer;
           color: #666;
           border-left: 3px solid #eee;
+          font-size: 0.75rem;
         }
         
         .mobile-dropdown-items div:hover {
@@ -772,7 +777,7 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .close-button {
-          font-size: 18px;
+          font-size: 16px;
           color: #ff4e18;
         }
 

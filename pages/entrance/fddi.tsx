@@ -28,7 +28,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -63,7 +63,7 @@ const FDDIPage = () => {
           <meta name="robots" content="index, follow" />
         </Head>
         <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
-           <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+           <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */, marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */, }}>
             FDDI AIST Entrance Exam 
             <div
               style={{
@@ -81,7 +81,7 @@ const FDDIPage = () => {
             textAlign: 'center',
             color: '#ff4e18',
             fontWeight: 700,
-            fontSize: '1.5rem',
+            fontSize: "clamp(1rem, 3vw, 1.25rem)" /* Responsive: 16px to 20px */,
             margin: '-80px 0 40px 0',
             letterSpacing: '-0.5px',
             lineHeight: 1.2,
@@ -94,7 +94,7 @@ const FDDIPage = () => {
           animate="visible" 
           variants={sectionVariant}
         >
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
+          <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
             Footwear Design and Development Institute All India Selection Test (FDDI AIST) is the gateway to premier 
             design and business programs in footwear, fashion, and retail management.
           </Paragraph>
@@ -110,12 +110,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>About FDDI AIST</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>About FDDI AIST</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -149,12 +149,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Exam Pattern</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Exam Pattern</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -175,7 +175,7 @@ const FDDIPage = () => {
                     pagination={false}
                     bordered
                   />
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     <strong>Total Duration:</strong> 2 Hours 30 Minutes | <strong>No Negative Marking</strong>
                   </Paragraph>
                 </Card>
@@ -192,12 +192,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Eligibility Criteria</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -228,12 +228,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Syllabus</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -273,12 +273,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Important Dates (Tentative)</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -313,12 +313,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Top FDDI Campuses</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Top FDDI Campuses</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -356,12 +356,12 @@ const FDDIPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Career Opportunities</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -382,7 +382,7 @@ const FDDIPage = () => {
                     pagination={false}
                     bordered
                   />
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     <strong>Top Recruiters:</strong> Adidas, Bata, Nike, Puma, Reliance Retail
                   </Paragraph>
                 </Card>

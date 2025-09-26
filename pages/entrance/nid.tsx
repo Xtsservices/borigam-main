@@ -28,7 +28,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -69,7 +69,7 @@ const NIDPage = () => {
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */, marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */, }}>
             National Institute of Design (NID) Entrance Exam
             <div
               style={{
@@ -84,7 +84,7 @@ const NIDPage = () => {
             <h1 style={{
               color: '#ff4e18',
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: '1.5rem',
+              fontSize: "clamp(1rem, 3vw, 1.25rem)" /* Responsive: 16px to 20px */,
               fontWeight: 700,
               marginBottom: '18px',
               marginTop: '-40px',
@@ -94,7 +94,7 @@ const NIDPage = () => {
               Best NID Entrance Exam Coaching in Hyderabad – Borigam
             </h1>
           </div>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+          <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
             NID is India's premier design institute offering undergraduate and postgraduate programs in various design disciplines. 
             The NID Entrance Exam is highly competitive and considered a gateway to successful careers in the design industry.
           </Paragraph>
@@ -110,18 +110,18 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>About NID</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>About NID</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
                   bodyStyle={{ padding: "24px" }}
                 >
-                  <Paragraph style={{ fontSize: 18, marginBottom: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginBottom: 16 }}>
                     Established in 1961, NID operates under the Ministry of Commerce and Industry, Government of India.
                   </Paragraph>
                   <Title level={4} style={{ color: "#0a2c64" }}>Campuses:</Title>
@@ -148,12 +148,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Courses Offered</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Courses Offered</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -174,7 +174,7 @@ const NIDPage = () => {
                   ])}
                   
                   <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Doctoral Program</Title>
-                  <Paragraph style={{ fontSize: 18 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
                     Ph.D. in Design for research aspirants
                   </Paragraph>
                 </Card>
@@ -191,12 +191,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Exam Structure</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Exam Structure</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -229,12 +229,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Syllabus</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -269,12 +269,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Important Dates (Tentative)</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -310,12 +310,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Selection Process</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Selection Process</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -347,12 +347,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Career Opportunities</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -373,7 +373,7 @@ const NIDPage = () => {
                     pagination={false}
                     bordered
                   />
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     NID graduates work with top design firms, fashion houses, or start their own studios. Many also pursue careers in academia or research.
                   </Paragraph>
                 </Card>
@@ -390,12 +390,12 @@ const NIDPage = () => {
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Preparation Tips</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}

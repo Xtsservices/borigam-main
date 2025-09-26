@@ -79,7 +79,7 @@ const StatsSection: React.FC = () => {
     <>
       <div style={{ 
         textAlign: 'center', 
-        marginTop: isMobile ? 30 : 0, 
+        marginTop: isMobile ? 30 : 40, 
         marginBottom: isMobile ? 20 : 30, 
         position: 'relative', 
         zIndex: 10,
@@ -88,7 +88,7 @@ const StatsSection: React.FC = () => {
         <Title level={2} style={{ 
           color: '#0a2c64', 
           marginBottom: 10, 
-          fontSize: isMobile ? '2rem' : '2.5rem', 
+          fontSize: 'clamp(1.25rem, 5vw, 2.5rem)', /* Responsive: 20px to 40px */ 
           fontWeight: 'bold',
           textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
         }}>
@@ -172,7 +172,7 @@ const StatsSection: React.FC = () => {
                 <div style={{ marginBottom: isMobile ? 12 : 16 }}>
                   {React.cloneElement(stat.icon, { 
                     style: { 
-                      fontSize: isMobile ? 28 : 36, 
+                      fontSize: 'clamp(1.25rem, 4vw, 2.25rem)', /* Responsive: 20px to 36px */ 
                       color: '#fff' 
                     } 
                   })}
@@ -182,7 +182,7 @@ const StatsSection: React.FC = () => {
                   style={{
                     color: '#fff',
                     marginBottom: 8,
-                    fontSize: isMobile ? 32 : 40,
+                    fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', /* Responsive: 28px to 40px */
                   }}
                 >
                   {trigger ? (
@@ -199,7 +199,7 @@ const StatsSection: React.FC = () => {
                 </Title>
                 <Text style={{ 
                   color: 'rgba(255,255,255,0.9)', 
-                  fontSize: isMobile ? 16 : 20,
+                  fontSize: 'clamp(0.75rem, 2.5vw, 1.25rem)', /* Responsive: 12px to 20px */
                   display: 'block',
                   lineHeight: 1.4
                 }}>

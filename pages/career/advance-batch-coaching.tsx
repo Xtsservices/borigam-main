@@ -28,7 +28,7 @@ const listItems = (items: string[], isMobile = false) => (
   <ul style={{ 
     paddingLeft: isMobile ? 16 : 24, 
     color: "#333", 
-    fontSize: isMobile ? "16px" : "18px" 
+    fontSize: "clamp(0.75rem, 2.5vw, 1.125rem)" /* Responsive: 12px to 18px */ 
   }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ 
@@ -63,7 +63,7 @@ const AdvanceBatchCoaching = () => {
         maxWidth: 1200, 
         margin: "auto", 
         backgroundColor: "#fff", 
-        marginTop: isMobile ? "6rem" : "6rem" 
+        marginTop: 'clamp(4rem, 8vw, 8rem)' /* Responsive top margin */ 
       }}>
         <motion.div 
           initial="hidden" 
@@ -79,7 +79,7 @@ const AdvanceBatchCoaching = () => {
             headStyle={{ 
               background: 'linear-gradient(90deg, #ff5722, #ff9800)',
               color: "#fff",
-              fontSize: isMobile ? "20px" : isTablet ? "24px" : "28px",
+              fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', /* Responsive: 20px to 28px */
               padding: isMobile ? "15px 16px" : "20px 24px",
               border: 'none',
               textAlign: isMobile ? "center" : "left",
@@ -89,7 +89,7 @@ const AdvanceBatchCoaching = () => {
             bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
           >
             <Paragraph style={{ 
-              fontSize: isMobile ? 16 : 18, 
+              fontSize: "clamp(0.75rem, 2.5vw, 1.125rem)" /* Responsive: 12px to 18px */, 
               lineHeight: 1.8, 
               color: "#333",
               textAlign: isMobile ? "center" : "left" 

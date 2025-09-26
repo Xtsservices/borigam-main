@@ -29,7 +29,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -69,7 +69,7 @@ const BArchPage = () => {
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */, marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */, }}>
             Bachelor of Architecture (B.Arch) 
             <div
               style={{
@@ -86,14 +86,14 @@ const BArchPage = () => {
             textAlign: 'center',
             color: '#ff4e18',
             fontWeight: 700,
-            fontSize: '1.5rem',
+            fontSize: "clamp(1rem, 3vw, 1.25rem)" /* Responsive: 16px to 20px */,
             margin: '-80px 0 40px 0',
             letterSpacing: '-0.5px',
             lineHeight: 1.2,
           }}>
 Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
            </div>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
+          <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, lineHeight: 1.8, color: "#333", marginBottom: 40, marginTop: -60 }}>
             B.Arch is a 5-year professional undergraduate degree that prepares students for careers in architecture, 
             combining artistic vision with technical knowledge of building design and construction.
           </Paragraph>
@@ -109,12 +109,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>About B.Arch Course</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>About B.Arch Course</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -140,12 +140,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Popular Entrance Exams</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Popular Entrance Exams</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -177,12 +177,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Eligibility Criteria</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Eligibility Criteria</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -209,12 +209,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Exam Structure</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Exam Structure</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -249,12 +249,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Syllabus</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -294,12 +294,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Important Dates (Tentative)</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -334,12 +334,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Top Architecture Colleges</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Top Architecture Colleges</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -366,12 +366,12 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Career Opportunities</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -393,7 +393,7 @@ Best B.Arch Entrance Exam Coaching in Hyderabad – Borigam          </h1>
                     pagination={false}
                     bordered
                   />
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     Graduates can also pursue higher education in Urban Design, Sustainable Architecture, or Construction Management.
                   </Paragraph>
                 </Card>

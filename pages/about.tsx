@@ -50,7 +50,7 @@ const topicBoxStyle: React.CSSProperties = {
   borderRadius: '8px',
   display: 'inline-block',
   marginBottom: '20px',
-  fontSize: '20px',
+  fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', /* Responsive: 16px to 18px */
   fontWeight: 600,
   boxShadow: '0 4px 12px rgba(255, 69, 0, 0.3)',
   transition: 'all 0.3s ease'
@@ -68,7 +68,7 @@ const contentBoxStyle: React.CSSProperties = {
 };
 
 const paragraphStyle: React.CSSProperties = {
-  fontSize: '18px',
+  fontSize: 'clamp(0.875rem, 2vw, 1rem)', /* Responsive: 14px to 16px */
   lineHeight: 1.7,
   color: "#333",
   textAlign: 'justify',
@@ -225,7 +225,7 @@ const AboutPage: React.FC = () => {
               whileHover={{ scale: isMobile ? 1.01 : 1.02 }} /* Less scaling on mobile */
               style={{
                 ...topicBoxStyle,
-                fontSize: isMobile ? '16px' : isTablet ? '18px' : '20px', /* More granular sizing */
+                fontSize: 'clamp(0.75rem, 2.5vw, 1.125rem)', /* Responsive: 12px to 18px */
                 padding: isMobile ? '8px 12px' : '10px 16px',
                 /* RESPONSIVE: Center topic box on mobile */
                 margin: isMobile ? '0 auto 20px auto' : '0 0 20px 0',
@@ -249,7 +249,7 @@ const AboutPage: React.FC = () => {
             }}>
               <Paragraph style={{
                 ...paragraphStyle,
-                fontSize: isMobile ? '14px' : isTablet ? '16px' : '18px', /* More granular sizing */
+                fontSize: 'clamp(0.625rem, 2vw, 1rem)', /* Responsive: 10px to 16px */
                 lineHeight: 1.6,
                 /* RESPONSIVE: Better mobile text padding and centering */
                 paddingLeft: isMobile ? '15px' : isTablet ? '20px' : '40px',
@@ -290,11 +290,11 @@ const AboutPage: React.FC = () => {
     style={{
       color: "#0a2c64",
       fontFamily: "'Open Sans', sans-serif",
-      fontSize: isMobile ? "28px" : "36px",
+      fontSize: 'clamp(1.25rem, 4vw, 2rem)', /* Responsive: 20px to 32px */
       fontWeight: 700,
       marginBottom: 0,
       letterSpacing: "-0.5px",
-      marginTop: isMobile ? "6rem" : "9.5rem",
+      marginTop: 'clamp(6rem, 10vw, 11rem)', /* Responsive top margin */
     }}
   >
     About Us
