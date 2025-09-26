@@ -274,7 +274,7 @@ export default function CareerOpportunities() {
             color: "#0a2c64",
             marginTop: "8rem",
             fontFamily: "'Open Sans', sans-serif",
-            fontSize: isMobile ? "24px" : "30px",
+            fontSize: 'clamp(1.25rem, 4vw, 1.875rem)', /* Responsive: 20px to 30px */
             fontWeight: 600,
             marginBottom: 0,
           }}

@@ -22,25 +22,25 @@ const AppFooter = () => {
 
   const renderContent = () => (
     <>
-      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: '2.3rem', paddingTop: '20px', margin: 0, marginBottom: '8px', letterSpacing: '2px' }}>BORIGAM</h2>
-      <h4 style={{ fontSize: '1.3rem', color: '#fff', margin: 0, marginBottom: '18px', fontWeight: 600 }}>Design | Architecture</h4>
-      <div style={{ fontSize: '1.1rem', marginBottom: 18 }}>
+      <h2 style={{ fontWeight: 'bold', color: '#fff', fontSize: 'clamp(1.25rem, 4vw, 2.3rem)', paddingTop: '20px', margin: 0, marginBottom: '8px', letterSpacing: '2px' }}>BORIGAM</h2>
+      <h4 style={{ fontSize: 'clamp(0.75rem, 2.5vw, 1.3rem)', color: '#fff', margin: 0, marginBottom: '18px', fontWeight: 600 }}>Design | Architecture</h4>
+      <div style={{ fontSize: '1.1rem', marginBottom: 18, color: '#fff' }}>
         <strong style={{ color: '#fff', fontSize: '1.1rem' }}>Branches:</strong>
         <div style={{ borderBottom: '4px solid #fff', width: '10%', margin: '1.5px 0', borderRadius: '2px' }} /><br/>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 10, marginBottom: 10 }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-            <div>
+            <div style={{ color: '#fff' }}>
               <EnvironmentOutlined style={{ color: '#fff', fontSize: '1.2rem', marginRight: 6 }} />
-              <span style={{ fontWeight: 500 }}>Begumpet:</span><br/>
+              <span style={{ fontWeight: 500, color: '#fff' }}>Begumpet:</span><br/>
               #1-11-206/A, Opposite Seasons Florists,
               Begumpet, Hyderabad,
               Telangana, <br/>India - 500016.
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-            <div>
+            <div style={{ color: '#fff' }}>
               <EnvironmentOutlined style={{ color: '#fff', fontSize: '1.2rem', marginRight: 6 }} />
-              <span style={{ fontWeight: 500 }}>Madhapur:</span><br/>
+              <span style={{ fontWeight: 500, color: '#fff' }}>Madhapur:</span><br/>
               2nd Floor, Above SBI Bank,
               Kavuri Hills, Madhapur, Hyderabad ,
               Telangana, <br/>India- 500081.
@@ -48,17 +48,17 @@ const AppFooter = () => {
           </div>
         </div>
       </div>
-      <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
-        <PhoneOutlined style={{ marginRight: 6 }} />
-        <span style={{ fontWeight: 500 }}>Contact Us:</span> <br/>96661 69555, 93905 35851, 79952 97686
+      <div style={{ fontSize: '1.1rem', marginBottom: 10, color: '#fff' }}>
+        <PhoneOutlined style={{ marginRight: 6, color: '#fff' }} />
+        <span style={{ fontWeight: 500, color: '#fff' }}>Contact Us:</span> <br/>96661 69555, 93905 35851, 79952 97686
       </div>
-      <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
-        <MailOutlined style={{ marginRight: 6 }} />
-        <span style={{ fontWeight: 500 }}>Email Us:</span> borigaminstitute@gmail.com
+      <div style={{ fontSize: '1.1rem', marginBottom: 10, color: '#fff' }}>
+        <MailOutlined style={{ marginRight: 6, color: '#fff' }} />
+        <span style={{ fontWeight: 500, color: '#fff' }}>Email Us:</span> borigaminstitute@gmail.com
       </div>
-      <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>
-        <WhatsAppOutlined style={{ marginRight: 6 }} />
-        <span style={{ fontWeight: 500 }}>WhatsApp:</span> 79952 97686
+      <div style={{ fontSize: '1.1rem', marginBottom: 10, color: '#fff' }}>
+        <WhatsAppOutlined style={{ marginRight: 6, color: '#fff' }} />
+        <span style={{ fontWeight: 500, color: '#fff' }}>WhatsApp:</span> 79952 97686
       </div>
       <h3 style={{ ...styles.heading, fontSize: '1.2rem' }}>SOCIAL LINKS</h3>
       <div style={styles.iconContainer}>
@@ -167,6 +167,74 @@ const AppFooter = () => {
           transform: scale(1.02);
           box-shadow: 0 6px 24px 0 rgba(0,0,0,0.18);
         }
+        /* Force all text in footer to be white - Mobile & Desktop */
+        .ant-layout-footer * {
+          color: #fff !important;
+        }
+        .ant-collapse {
+          background-color: transparent !important;
+        }
+        .ant-collapse > .ant-collapse-item {
+          background-color: transparent !important;
+          border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+        }
+        .ant-collapse-header {
+          background-color: transparent !important;
+          color: #fff !important;
+          padding: 12px 0 !important;
+        }
+        .ant-collapse-header * {
+          color: #fff !important;
+        }
+        .ant-collapse-content {
+          background-color: transparent !important;
+        }
+        .ant-collapse-content-box {
+          background-color: transparent !important;
+          padding: 16px 0 !important;
+        }
+        .ant-collapse-content-box * {
+          color: #fff !important;
+        }
+        /* Ensure all text elements are white */
+        footer h1, footer h2, footer h3, footer h4, footer h5, footer h6,
+        footer p, footer span, footer div, footer li, footer a {
+          color: #fff !important;
+        }
+        /* Override any inherited styles */
+        .ant-layout-footer {
+          color: #fff !important;
+        }
+        .ant-layout-footer .ant-collapse-item-active .ant-collapse-header {
+          color: #fff !important;
+        }
+        /* Mobile responsive text fixes */
+        @media (max-width: 768px) {
+          .ant-layout-footer * {
+            color: #fff !important;
+          }
+          .ant-collapse-header-text {
+            color: #fff !important;
+          }
+          .footer-link {
+            color: #fff !important;
+          }
+          /* Ensure mobile collapse panels stay transparent/orange background */
+          .ant-collapse {
+            background-color: transparent !important;
+          }
+          .ant-collapse-item {
+            background-color: transparent !important;
+            border: none !important;
+          }
+          .ant-collapse-content {
+            background-color: transparent !important;
+          }
+        }
+        /* Force white text on all footer elements regardless of screen size */
+        .ant-layout-footer * {
+          color: #fff !important;
+        }
       `}</style>
       <Footer
       style={{
@@ -182,8 +250,9 @@ const AppFooter = () => {
     >
       <div
         style={{
-          maxWidth: '10000px',
-          marginLeft: '100px',
+          maxWidth: isMobile ? '100%' : '10000px',
+          marginLeft: isMobile ? '0' : '100px',
+          padding: isMobile ? '0 20px' : '0',
           minHeight: '420px',
           display: 'flex',
           flexDirection: 'column',

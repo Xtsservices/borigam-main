@@ -16,6 +16,7 @@ interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const router = useRouter();
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [entranceDropdownOpen, setEntranceDropdownOpen] = useState(false);
   const [screenSize, setScreenSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
     height: typeof window !== 'undefined' ? window.innerHeight : 800
@@ -86,6 +87,7 @@ const Header: React.FC<HeaderProps> = () => {
   useEffect(() => {
     if (!isMobile && mobileMenuVisible) {
       setMobileMenuVisible(false);
+      setEntranceDropdownOpen(false);
     }
   }, [isMobile, mobileMenuVisible]);
 
@@ -94,6 +96,7 @@ const Header: React.FC<HeaderProps> = () => {
     
     // Close mobile menu if open
     setMobileMenuVisible(false);
+    setEntranceDropdownOpen(false);
     
     // If not on homepage, navigate first then scroll
     if (router.pathname !== "/") {
@@ -137,7 +140,7 @@ const Header: React.FC<HeaderProps> = () => {
     margin: isMobile ? "8px 0" : isTablet ? "0 8px" : "0 12px",
     textDecoration: "none",
     color: "black",
-    fontSize: isTablet ? "0.9rem" : "0.95rem",
+    fontSize: 'clamp(0.625rem, 1.5vw, 0.95rem)', /* Responsive: 10px to 15px */
     transition: "all 0.3s",
     cursor: "pointer",
     padding: "6px 0",
@@ -204,25 +207,93 @@ const Header: React.FC<HeaderProps> = () => {
         (link.path !== "/" && router.pathname.startsWith(link.path));
 
       if (link.dropdown) {
-        return (
-          <Dropdown
-            key={link.path}
-            menu={{ items: link.items }}
-            trigger={isMobileView ? ["click"] : ["hover"]}
-            placement={isMobileView ? "bottomLeft" : "bottom"}
-            overlayClassName={`nav-dropdown ${isMobileView ? 'mobile-dropdown' : ''}`}
-          >
-            <div 
-              style={isActive ? activeLinkStyle : linkStyle}
-              onClick={link.onClick}
-              className={isMobileView ? "mobile-dropdown-trigger" : ""}
-            >
-              {link.label}{" "}
-              <DownOutlined style={{ fontSize: "0.7rem", marginLeft: 4 }} />
-              {isActive && <span style={activeLinkUnderline} />}
+        if (isMobileView) {
+          // For mobile view, render collapsible dropdown
+          return (
+            <div key={link.path}>
+              <div 
+                style={isActive ? activeLinkStyle : linkStyle}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setEntranceDropdownOpen(!entranceDropdownOpen);
+                }}
+                className="mobile-dropdown-trigger"
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                  <span>{link.label}</span>
+                  <DownOutlined 
+                    style={{ 
+                      fontSize: 'clamp(0.625rem, 1.2vw, 0.7rem)', /* Responsive: 10px to 11px */ 
+                      marginLeft: 4, 
+                      transform: entranceDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s ease'
+                    }} 
+                  />
+                </div>
+                {isActive && <span style={activeLinkUnderline} />}
+              </div>
+              
+              {/* Collapsible dropdown items for mobile */}
+              {entranceDropdownOpen && (
+                <div className="mobile-dropdown-items" style={{
+                  paddingLeft: '20px',
+                  marginTop: '8px',
+                  marginBottom: '8px',
+                  maxHeight: entranceDropdownOpen ? '400px' : '0px',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s ease-in-out'
+                }}>
+                  {link.items?.map((item: any) => (
+                    <div key={item.key} style={{
+                      fontSize: 'clamp(0.75rem, 1.5vw, 0.85rem)', /* Responsive: 12px to 14px */
+                      color: 'rgba(0, 0, 0, 0.7)',
+                      margin: '8px 0',
+                      paddingLeft: '12px',
+                      borderLeft: '2px solid #f0f0f0',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      borderRadius: '4px',
+                      padding: '8px 12px'
+                    }} 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Extract the href from the Link component
+                      const linkElement = item.label?.props?.href;
+                      if (linkElement) {
+                        router.push(linkElement);
+                        setMobileMenuVisible(false);
+                        setEntranceDropdownOpen(false);
+                      }
+                    }}>
+                      {/* Extract the text content from the Link */}
+                      {item.label?.props?.children || item.label}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </Dropdown>
-        );
+          );
+        } else {
+          // For desktop view, use regular dropdown
+          return (
+            <Dropdown
+              key={link.path}
+              menu={{ items: link.items }}
+              trigger={["hover"]}
+              placement="bottom"
+              overlayClassName="nav-dropdown"
+            >
+              <div 
+                style={isActive ? activeLinkStyle : linkStyle}
+                onClick={link.onClick}
+              >
+                {link.label}{" "}
+                <DownOutlined style={{ fontSize: 'clamp(0.625rem, 1.2vw, 0.7rem)', marginLeft: 4 }} />
+                {isActive && <span style={activeLinkUnderline} />}
+              </div>
+            </Dropdown>
+          );
+        }
       }
       return (
         <Link
@@ -230,7 +301,12 @@ const Header: React.FC<HeaderProps> = () => {
           href={link.path}
           style={isActive ? activeLinkStyle : linkStyle}
           onClick={
-            link.onClick || (() => isMobileView && setMobileMenuVisible(false))
+            link.onClick || (() => {
+              if (isMobileView) {
+                setMobileMenuVisible(false);
+                setEntranceDropdownOpen(false);
+              }
+            })
           }
         >
           <div style={{ position: "relative" }} className={isMobileView ? "mobile-nav-item" : ""}>
@@ -271,7 +347,7 @@ const Header: React.FC<HeaderProps> = () => {
       alt="Borigam Logo" 
       className="logo" 
       style={{ 
-        height: isMobile ? '50px' : `${getLogoSize()}px`,
+        height: isMobile ? '60px' : `${getLogoSize()}px`, /* Increased mobile logo size */
         width: isMobile ? 'auto' : undefined
       }}
     />
@@ -317,7 +393,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <div className="top-buttons">
                  
                     <Link href="/ApplicationForm">
-                    {/* <Button
+                    <Button
                       type={
                         router.pathname === "/ApplicationForm" ? "primary" : "default"
                       }
@@ -325,7 +401,7 @@ const Header: React.FC<HeaderProps> = () => {
                       size={isTablet ? "small" : "middle"}
                     >
                       Application Form
-                    </Button> */}
+                    </Button>
                   </Link>
                    <Button
                     type={
@@ -369,13 +445,19 @@ const Header: React.FC<HeaderProps> = () => {
               <Button
                 icon={<CloseOutlined />}
                 type="text"
-                onClick={() => setMobileMenuVisible(false)}
+                onClick={() => {
+                  setMobileMenuVisible(false);
+                  setEntranceDropdownOpen(false);
+                }}
                 className="close-button"
               />
             </div>
           }
           placement="right"
-          onClose={() => setMobileMenuVisible(false)}
+          onClose={() => {
+            setMobileMenuVisible(false);
+            setEntranceDropdownOpen(false);
+          }}
           open={mobileMenuVisible}
           width={isExtraSmall ? "80%" : 280}
           closable={false}
@@ -413,6 +495,18 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
 
             <div className="mobile-buttons">
+              <Link href="/ApplicationForm">
+                <Button
+                  block
+                  type={
+                    router.pathname === "/ApplicationForm" ? "primary" : "default"
+                  }
+                  className="mobile-button admission-button"
+                  onClick={() => setMobileMenuVisible(false)}
+                >
+                  Application Form
+                </Button>
+              </Link>
               <Button
                 block
                 type={
@@ -423,18 +517,6 @@ const Header: React.FC<HeaderProps> = () => {
               >
                 Borigam Portal
               </Button>
-              {/* <Link href="/admissions">
-                <Button
-                  block
-                  type={
-                    router.pathname === "/admissions" ? "primary" : "default"
-                  }
-                  className="mobile-button admission-button"
-                  onClick={() => setMobileMenuVisible(false)}
-                >
-                  Admission Form
-                </Button>
-              </Link> */}
             </div>
 
             <div className="mobile-nav-links">{renderNavLinks(true)}</div>
@@ -489,37 +571,30 @@ const Header: React.FC<HeaderProps> = () => {
           display: flex;
           justify-content: flex-end;
           padding: 5px 0;
-          transition: all 0.3s ease;
-          transform: translateX(0);
         }
 
         .contact-info-container.scrolled {
           justify-content: flex-start;
-          transform: translateX(5rem);
+          margin-left: 5rem;
         }
 
         .contact-info {
           display: flex;
           gap: 15px;
           align-items: center;
-          transition: all 0.3s ease;
         }
 
         .contact-button {
-          display: flex;
-          align-items: center;
-          gap: 6px;
           color: #ff4e18;
-          padding: 0 8px;
-          font-size: 0.9rem;
-          height: auto;
-          border: none;
+          padding: 4px 8px;
           background: transparent;
+          border: none;
+          font-size: clamp(0.75rem, 1.5vw, 0.875rem); /* Responsive text sizing */
         }
 
         .contact-button:hover {
           color: #ff4e18;
-          background: transparent;
+          background: #f8f8f8;
         }
 
         .tablet-contact {
@@ -531,15 +606,13 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .nav-section {
-          transition: all 0.3s ease;
-          transform: translateY(0);
           display: flex;
           flex-direction: column;
           gap: 10px;
         }
 
         .nav-section.scrolled {
-          transform: translateY(-30px);
+          margin-top: -30px;
         }
 
         .top-buttons {
@@ -550,48 +623,22 @@ const Header: React.FC<HeaderProps> = () => {
           transition: all 0.3s ease;
         }
 
-        /* Desktop Button Styles */
-        .header-button.portal-button,
-        .header-button.admission-button {
+        /* Button Styles */
+        .header-button, .mobile-button {
           border-color: #FF4E18;
           color: #FF4E18;
           font-weight: 500;
         }
 
-        .header-button.portal-button.ant-btn-primary,
-        .header-button.admission-button.ant-btn-primary {
+        .header-button:hover, .mobile-button:hover {
           background-color: #FF4E18;
           color: white;
           border-color: #FF4E18;
         }
 
-        .header-button.portal-button:not(.ant-btn-primary):hover,
-        .header-button.admission-button:not(.ant-btn-primary):hover {
+        .ant-btn-primary.header-button, .ant-btn-primary.mobile-button {
           background-color: #FF4E18;
           color: white;
-          border-color: #FF4E18;
-        }
-
-        /* Mobile Button Styles */
-        .mobile-button.portal-button,
-        .mobile-button.admission-button {
-          border-color: #FF4E18;
-          color: #FF4E18;
-          font-weight: 500;
-        }
-
-        .mobile-button.portal-button.ant-btn-primary,
-        .mobile-button.admission-button.ant-btn-primary {
-          background-color: #FF4E18;
-          color: white;
-          border-color: #FF4E18;
-        }
-
-        .mobile-button.portal-button:not(.ant-btn-primary):hover,
-        .mobile-button.admission-button:not(.ant-btn-primary):hover {
-          background-color: #FF4E18;
-          color: white;
-          border-color: #FF4E18;
         }
 
         .desktop-nav {
@@ -628,7 +675,7 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .mobile-menu-button {
-          font-size: 18px;
+          font-size: 16px;
           width: 40px;
           height: 40px;
           color: #ff4e18;
@@ -647,17 +694,16 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .mobile-contact-button {
-          text-align: left;
-          padding: 8px 16px;
-          height: auto;
+          padding: 8px; /* Reduced padding */
           color: #ff4e18;
           border: none;
-          box-shadow: none;
+          text-align: left;
+          font-size: clamp(0.75rem, 2vw, 0.875rem); /* Responsive smaller text */
         }
 
         .mobile-contact-button:hover {
           color: #ff4e18;
-          background: #FFF0EB;
+          background: #fff8f6;
         }
 
         .mobile-buttons {
@@ -668,25 +714,51 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .mobile-button {
-          height: 40px;
+          height: 36px; /* Reduced button height */
+          font-size: clamp(0.75rem, 2vw, 0.875rem); /* Responsive smaller text */
+        }
           font-weight: 500;
         }
 
         .mobile-nav-links {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 8px;
           padding: 8px 0;
         }
 
         .mobile-nav-item {
-          padding: 8px 0;
-          border-bottom: 1px solid #f0f0f0;
+          padding: 10px;
+          border-bottom: 1px solid #eee;
         }
 
         .mobile-dropdown-trigger {
-          padding: 8px 0;
-          border-bottom: 1px solid #f0f0f0;
+          padding: 10px;
+          cursor: pointer;
+          border-bottom: 1px solid #eee;
+        }
+
+        .mobile-dropdown-trigger:hover {
+          background: #f8f8f8;
+        }
+
+        .mobile-dropdown-items {
+          padding: 0;
+          margin: 0;
+        }
+
+        .mobile-dropdown-items div {
+          padding: 8px 20px;
+          cursor: pointer;
+          color: #666;
+          border-left: 3px solid #eee;
+          font-size: 0.75rem;
+        }
+        
+        .mobile-dropdown-items div:hover {
+          color: #FF4E18;
+          background: #fff8f6;
+          border-left-color: #FF4E18;
         }
 
         .drawer-header {
@@ -705,7 +777,7 @@ const Header: React.FC<HeaderProps> = () => {
         }
 
         .close-button {
-          font-size: 18px;
+          font-size: 16px;
           color: #ff4e18;
         }
 

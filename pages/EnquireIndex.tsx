@@ -130,7 +130,7 @@ const Enquire = () => {
               icon={<CalendarOutlined />}
               onClick={handleAppointmentBooking}
               style={{
-                marginTop: '30px',
+                marginTop: '50px',
                 background: 'rgba(255,255,255,0.2)',
                 border: '2px solid white',
                 borderRadius: '8px',

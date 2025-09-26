@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Card } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
@@ -27,7 +27,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -35,6 +35,20 @@ const listItems = (items: string[]) => (
 );
 
 const BFAPage = () => {
+  // Mobile responsive hooks
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <>
       <Header />
@@ -49,7 +63,7 @@ const BFAPage = () => {
         <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
          
         <motion.div initial="hidden" animate="visible" variants={sectionVariant}>
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */, marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */, }}>
             Bachelor of Fine Arts (BFA) Entrance Exam Guide
             <div style={{
               height: 4,
@@ -62,7 +76,7 @@ const BFAPage = () => {
             <h1 style={{
               color: '#ff4e18',
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: '1.5rem',
+              fontSize: "clamp(1rem, 3vw, 1.25rem)" /* Responsive: 16px to 20px */,
               fontWeight: 700,
               marginBottom: '18px',
               letterSpacing: '-0.5px',
@@ -181,11 +195,11 @@ const BFAPage = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: "-100px" }}
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={isMobile ? {} : { scale: 1.03 }}
                   style={{ cursor: "pointer" }}
                 >
                   <Card
-                    title={<span style={{ fontSize: "22px" }}>{section.title}</span>}
+                    title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>{section.title}</span>}
                     style={cardStyle}
                     headStyle={{
                       background: 'linear-gradient(135deg, #ff5722, #ff4500, #ff7043)',

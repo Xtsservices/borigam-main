@@ -84,16 +84,17 @@ const Reviews = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const storiesRef = useRef<HTMLDivElement>(null);
 
-  // Responsive check for mobile devices
+  // Responsive check for mobile and tablet devices
   const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false;
+  const isTablet = typeof window !== "undefined" ? window.innerWidth >= 768 && window.innerWidth < 992 : false;
 
   const scrollToStories = () => {
     storiesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div style={{ backgroundColor: '#f5f5f5' }}>
-      <Header />
+    <>
+
       <Head>
         <title>Success Stories – Borigam | NID, NATA, UCEED, CEED, BFA & NIFT Coaching Results</title>
         <meta name="description" content="Read inspiring success stories of Borigam students who cracked NID, NATA, UCEED, CEED, BFA & NIFT entrance exams. Proven results, top ranks & dream college admissions."></meta>
@@ -101,45 +102,58 @@ const Reviews = () => {
         <link rel="canonical" href="https://borigaminstitute.in/success-stories/" />
         <meta name="robots" content="index, follow" />
       </Head>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', marginTop: '8rem' }}>
+      <Header />
+      <div style={{ 
+        paddingLeft: isMobile ? '10rem' : isTablet ? '11rem' : '12rem', /* Fixed responsive padding */
+        paddingRight: isMobile ? '10rem' : isTablet ? '11rem' : '12rem' /* Fixed responsive padding */
+      }}>
         <div style={{ textAlign: "center" }}>
-  <Title
-    level={1}
-    style={{
-      color: "#0a2c64",
-      fontFamily: "'Open Sans', sans-serif",
-      fontSize: isMobile ? "28px" : "36px",
-      fontWeight: 700,
-      marginBottom: 0,
-      letterSpacing: "-0.5px",
-    }}
-  >
-   Success Stories
-  </Title>
-  <div
-    style={{
-      height: "4px",
-      width: "180px",
-      background: "linear-gradient(90deg, #fbb034, #ff6b00)",
-      margin: "12px auto 16px", // reduced bottom space from 40px to 16px
-      borderRadius: "2px",
-      opacity: 0.8,
-    }}
-  />
-</div>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <h1 style={{
-            color: '#ff4e18',
+          <Title
+            level={1}
+            style={{
+              color: "#0a2c64",
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: 'clamp(1.25rem, 4vw, 2.25rem)', /* Responsive: 20px to 36px */
+              fontWeight: 700,
+              marginBottom: 0,
+              marginTop: 'clamp(6.5rem, 17vw, 10rem)', /* Responsive top margin - increased */
+              letterSpacing: "-0.5px",
+            }}
+          >
+            Success Stories
+          </Title>
+          <div
+            style={{
+              height: "4px",
+              width: "180px",
+              background: "linear-gradient(90deg, #fbb034, #ff6b00)",
+              margin: "12px auto 16px", // reduced bottom space from 40px to 16px
+              borderRadius: "2px",
+              opacity: 0.8,
+            }}
+          />
+        </div>
+       
+          <h1  style={{
+            color: "#ff4e18", // primary color
             fontFamily: "'Open Sans', sans-serif",
-            fontSize: '1.5rem',
+            // Responsive font sizing using clamp for smooth scaling
+            fontSize: 'clamp(1rem, 3vw, 2rem)', /* Decreased mobile font size */
             fontWeight: 700,
-            marginBottom: '18px',
-            letterSpacing: '-0.5px',
+            letterSpacing: "-0.5px",
             lineHeight: 1.2,
+            textAlign: "center",
+            marginBottom: isMobile ? "1.5rem" : isTablet ? "2rem" : "2.5rem",
+            // Additional mobile styling
+            ...isMobile && {
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem'
+            }
           }}>
             Success Stories of Borigam Students – From Aspirations to Achievements
           </h1>
-        </div>
+          
+        
         <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '40px', flexWrap: 'wrap' }}>
           <div style={{
             flex: '1',
@@ -154,7 +168,7 @@ const Reviews = () => {
             flexDirection: 'column',
             justifyContent: 'center'
           }}>
-            <Title level={2} style={{ color: 'white', fontSize: '2.5rem', fontWeight: 700, marginBottom: '20px' }}>
+            <Title level={2} style={{ color: 'white', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)' /* Responsive: 24px to 40px */, fontWeight: 700, marginBottom: '20px' }}>
               DESIGN SUCCESS STORIES
             </Title>
             <Paragraph style={{
@@ -253,6 +267,7 @@ const Reviews = () => {
                       right: '20px',
                       transition: 'all 0.4s ease',
                       color: hoveredCard === index ? 'white' : '#333',
+                      textAlign: isMobile ? 'center' : 'left', /* Center text on mobile */
                     }}>
                       <Text strong style={{
                         marginTop: hoveredCard === index ? '3rem' : '5rem',
@@ -324,7 +339,8 @@ const Reviews = () => {
             ))}
           </Row>
         </div>
-      </div>
+      </div> {/* Closing div for padding container */}
+      
 
       {/* Modal to show full story */}
       <Modal
@@ -343,7 +359,7 @@ const Reviews = () => {
         )}
         <Paragraph>{selectedStory?.content}</Paragraph>
       </Modal>
-    </div>
+    </>
   );
 };
 

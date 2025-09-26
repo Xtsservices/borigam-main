@@ -1,11 +1,9 @@
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
 import Header from "@/components/Header";
 import Head from 'next/head';
-
 
 const { Title, Paragraph } = Typography;
 
@@ -28,34 +26,66 @@ const cardVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+const listItems = (items: string[], isMobile = false) => (
+  <ul style={{ 
+    paddingLeft: isMobile ? 16 : 24, 
+    color: "#333", 
+    fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ 
+  }}>
     {items.map((item, idx) => (
-      <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
+      <li key={idx} style={{ 
+        marginBottom: isMobile ? 8 : 12,
+        lineHeight: 1.6 
+      }}>{item}</li>
     ))}
   </ul>
 );
 
 const NIFTPage = () => {
+  // Responsive breakpoint hooks
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Header />
       <Layout>
         <Head>
           <title>NIFT Coaching in Hyderabad – Borigam | Best Entrance Exam Preparation</title>
-          <meta name="description" content="Join Borigam’s NIFT Coaching in Hyderabad for expert guidance, updated study material & proven results. Learn from NIFT alumni & crack the entrance exam with confidence." />
+          <meta name="description" content="Join Borigam's NIFT Coaching in Hyderabad for expert guidance, updated study material & proven results. Learn from NIFT alumni & crack the entrance exam with confidence." />
           <meta name="keywords" content="Borigam, Nift Coaching, NID coaching, Nata coaching, Ceed Coaching, Uceed coaching, Nift coaching near me, NID coaching near me, Nata coaching centres" />
           <link rel="canonical" href="https://borigaminstitute.in/entrance/nift/" />
           <meta name="robots" content="index, follow" />
         </Head>
-        <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff" }}>
+        <div style={{ 
+          padding: isMobile ? "30px 15px" : isTablet ? "45px 20px" : "60px 30px", 
+          maxWidth: 1200, 
+          margin: "auto", 
+          backgroundColor: "#fff" 
+        }}>
          
         <motion.div 
           initial="hidden" 
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center',  color: '#0a2c64', fontSize: '42px', marginTop: '4.5rem', }}>
+          <Title level={1} style={{ 
+            textAlign: 'center',  
+            color: '#0a2c64', 
+            fontSize: 'clamp(1.5rem, 5vw, 2.375rem)', /* Responsive: 24px to 38px */ 
+            marginTop: 'clamp(4rem, 8vw, 8rem)', /* Responsive top margin */
+          }}>
             NIFT Entrance Exam
             <div
               style={{
@@ -66,21 +96,28 @@ const NIFTPage = () => {
               }}
             ></div>
           </Title>
-           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+           <div style={{ textAlign: 'center', marginBottom: isMobile ? '20px' : '32px' }}>
             <h1 style={{
               color: '#ff4e18',
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: '1.5rem',
+              fontSize: 'clamp(1.125rem, 2.5vw, 1.25rem)', /* Responsive: 18px to 20px */
               fontWeight: 700,
-              
               marginBottom: '18px',
               letterSpacing: '-0.5px',
               lineHeight: 1.2,
+              padding: isMobile ? '0 10px' : '0',
             }}>
               Best NIFT Entrance Exam Coaching in Hyderabad – Borigam
             </h1>
           </div>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+          <Paragraph style={{ 
+            fontSize: "clamp(0.625rem, 2.5vw, 1.125rem)" /* Responsive: 10px to 18px */, 
+            lineHeight: 1.8, 
+            color: "#333", 
+            marginBottom: isMobile ? 25 : 40,
+            textAlign: isMobile ? 'center' : 'left',
+            padding: isMobile ? '0 10px' : '0'
+          }}>
             The National Institute of Fashion Technology (NIFT) is India's premier institution for fashion education, offering undergraduate and postgraduate programs in design, technology, and management across 18 campuses.
           </Paragraph>
 
@@ -91,33 +128,34 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Courses Offered</span>}
+                  title={<span style={{ fontSize: 'clamp(0.75rem, 3vw, 1.375rem)' /* Responsive: 12px to 22px */ }}>Courses Offered</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
                 >
-                  <Title level={4} style={{ color: "#0a2c64" }}>Undergraduate Programs (4 Years)</Title>
+                  <Title level={4} style={{ color: "#0a2c64", fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>Undergraduate Programs (4 Years)</Title>
                   {listItems([
                     "B.Des: Fashion, Leather, Accessory, Textile, Knitwear Design",
                     "B.FTech: Apparel Production"
-                  ])}
+                  ], isMobile)}
                   
-                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Postgraduate Programs (2 Years)</Title>
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16, fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>Postgraduate Programs (2 Years)</Title>
                   {listItems([
                     "M.Des: Master of Design",
                     "M.FTech: Master of Fashion Technology",
                     "MFM: Master of Fashion Management"
-                  ])}
+                  ], isMobile)}
                 </Card>
               </motion.div>
             </Col>
@@ -128,38 +166,39 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Exam Structure</span>}
+                  title={<span style={{ fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */ }}>Exam Structure</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
                 >
-                  <Title level={4} style={{ color: "#0a2c64" }}>For B.Des Applicants</Title>
+                  <Title level={4} style={{ color: "#0a2c64", fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>For B.Des Applicants</Title>
                   {listItems([
                     "General Ability Test (GAT)",
                     "Creative Ability Test (CAT)",
                     "Situation Test"
-                  ])}
+                  ], isMobile)}
                   
-                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>For B.FTech Applicants</Title>
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16, fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>For B.FTech Applicants</Title>
                   {listItems([
                     "Only General Ability Test (GAT)"
-                  ])}
+                  ], isMobile)}
                   
-                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>For M.Des Applicants</Title>
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16, fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>For M.Des Applicants</Title>
                   {listItems([
                     "GAT + CAT",
                     "Group Discussion & Personal Interview"
-                  ])}
+                  ], isMobile)}
                 </Card>
               </motion.div>
             </Col>
@@ -170,35 +209,36 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Syllabus</span>}
+                  title={<span style={{ fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */ }}>Syllabus</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
                 >
-                  <Title level={4} style={{ color: "#0a2c64" }}>General Ability Test (GAT)</Title>
+                  <Title level={4} style={{ color: "#0a2c64", fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>General Ability Test (GAT)</Title>
                   {listItems([
                     "Quantitative Ability (Class 10 Math)",
                     "Communication Ability & English",
                     "Analytical & Logical Reasoning",
                     "General Knowledge & Current Affairs"
-                  ])}
+                  ], isMobile)}
                   
-                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16 }}>Creative Ability Test (CAT)</Title>
+                  <Title level={4} style={{ color: "#0a2c64", marginTop: 16, fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */ }}>Creative Ability Test (CAT)</Title>
                   {listItems([
                     "Drawing skills assessment",
                     "Creativity & innovation evaluation",
                     "Visual perception testing"
-                  ])}
+                  ], isMobile)}
                 </Card>
               </motion.div>
             </Col>
@@ -209,20 +249,21 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Important Dates (Tentative)</span>}
+                  title={<span style={{ fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */ }}>Important Dates (Tentative)</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
                 >
                   <Table 
                     dataSource={[
@@ -239,6 +280,8 @@ const NIFTPage = () => {
                     ]}
                     pagination={false}
                     bordered
+                    size={isMobile ? "small" : "middle"}
+                    scroll={isMobile ? { x: 300 } : undefined}
                   />
                 </Card>
               </motion.div>
@@ -250,20 +293,21 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Career Opportunities</span>}
+                  title={<span style={{ fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */ }}>Career Opportunities</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
                 >
                   <Table 
                     dataSource={[
@@ -279,6 +323,8 @@ const NIFTPage = () => {
                     ]}
                     pagination={false}
                     bordered
+                    size={isMobile ? "small" : "middle"}
+                    scroll={isMobile ? { x: 400 } : undefined}
                   />
                 </Card>
               </motion.div>
@@ -290,20 +336,21 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Preparation Tips</span>}
+                  title={<span style={{ fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */ }}>Preparation Tips</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
-                  bodyStyle={{ padding: "24px" }}
+                  bodyStyle={{ padding: isMobile ? "16px" : "24px" }}
                 >
                   <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
@@ -311,14 +358,14 @@ const NIFTPage = () => {
                         "Practice sketching daily",
                         "Build a strong portfolio",
                         "Stay updated on fashion trends"
-                      ])}
+                      ], isMobile)}
                     </Col>
                     <Col xs={24} md={12}>
                       {listItems([
                         "Solve previous years' papers",
                         "Work on time management",
                         "Develop material handling skills"
-                      ])}
+                      ], isMobile)}
                     </Col>
                   </Row>
                 </Card>
@@ -331,21 +378,22 @@ const NIFTPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>How to Apply</span>}
+                  title={<span style={{ fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */ }}>How to Apply</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
-                    padding: "20px 24px",
-                    border: 'none'
+                    fontSize: "clamp(0.75rem, 3vw, 1.375rem)" /* Responsive: 12px to 22px */,
+                    padding: isMobile ? "15px 16px" : "20px 24px",
+                    border: 'none',
+                    textAlign: isMobile ? "center" : "left"
                   }}
                   bodyStyle={{ 
-                    padding: "24px",
+                    padding: isMobile ? "16px" : "24px",
                     background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%)"
                   }}
                 >
@@ -354,8 +402,8 @@ const NIFTPage = () => {
                     "Upload required documents",
                     "Pay application fee online",
                     "Download admit card when released"
-                  ])}
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  ], isMobile)}
+                  <Paragraph style={{ fontSize: "clamp(0.625rem, 2vw, 1rem)" /* Responsive: 10px to 16px */, marginTop: 16, textAlign: isMobile ? "center" : "left" }}>
                     <a href="https://www.nift.ac.in" target="_blank" rel="noopener noreferrer" style={{ color: "#FF8C00", fontWeight: "bold" }}>
                       Official Website: www.nift.ac.in
                     </a>
@@ -365,7 +413,7 @@ const NIFTPage = () => {
             </Col>
           </Row>
         </motion.div>
-      </div>
+        </div>
       </Layout>
     </>
   );

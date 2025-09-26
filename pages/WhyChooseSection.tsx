@@ -150,10 +150,10 @@ const WhyChooseSection = () => {
             <Title
               level={2}
               style={{
-                marginTop: isMobile ? '20px' : '55px',
+                marginTop: isMobile ? '40px' : '70px',
                 color: '#0a2c64',
                 fontFamily: "'Open Sans', sans-serif",
-                fontSize: isMobile ? '22px' : '30px',
+                fontSize: 'clamp(0.75rem, 4vw, 1.875rem)', /* Responsive: 12px to 30px */
                 fontWeight: 600,
                 marginBottom: 0,
                 textAlign: isMobile ? 'center' : 'left',
@@ -171,7 +171,7 @@ const WhyChooseSection = () => {
 
             <Text
               style={{
-                fontSize: isMobile ? 16 : 20,
+                fontSize: 'clamp(0.75rem, 2.5vw, 1.25rem)', /* Responsive: 12px to 20px */
                 lineHeight: isMobile ? 1.6 : 1.8,
                 color: '#444',
                 fontFamily: "'Open Sans', sans-serif",
@@ -182,7 +182,7 @@ const WhyChooseSection = () => {
               <br />{fullText}
             </Text>
 
-            <div style={{ textAlign: isMobile ? 'center' : 'left', marginTop: isMobile ? 16 : 24 }}>
+            <div style={{ textAlign: isMobile ? 'center' : 'left', marginTop: isMobile ? 16 : 32 }}>
               <Button
                 type="primary"
                 size={isMobile ? 'middle' : 'large'}
@@ -194,7 +194,7 @@ const WhyChooseSection = () => {
                   borderColor: '#f97316',
                   fontFamily: "'Open Sans', sans-serif'",
                   padding: isMobile ? '8px 16px' : '12px 24px',
-                  fontSize: isMobile ? 14 : undefined,
+                  fontSize: 'clamp(0.625rem, 1.5vw, 1rem)', /* Responsive: 10px to 16px */
                   transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                   transform: isContentHovered && !isMobile ? 'scale(1.05)' : 'scale(1)',
                 }}

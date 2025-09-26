@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Card, Table } from "antd";
 import { motion } from "framer-motion";
 import Layout from '../../components/Layout';
@@ -27,7 +27,7 @@ const cardVariant = {
 };
 
 const listItems = (items: string[]) => (
-  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "18px" }}>
+  <ul style={{ paddingLeft: 24, color: "#333", fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
     {items.map((item, idx) => (
       <li key={idx} style={{ marginBottom: 12 }}>{item}</li>
     ))}
@@ -35,6 +35,21 @@ const listItems = (items: string[]) => (
 );
 
 const DesignPage = () => {
+  // Mobile responsive hooks
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <Layout>
       <header/>
@@ -44,7 +59,7 @@ const DesignPage = () => {
           animate="visible" 
           variants={sectionVariant}
         >
-          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: '42px' }}>
+          <Title level={1} style={{ textAlign: 'center', marginBottom: 50, color: '#0a2c64', fontSize: "clamp(1.5rem, 5vw, 2.375rem)" /* Responsive H1: 24px to 38px */ }}>
             Design Entrance Exams Coaching
             <div
               style={{
@@ -55,7 +70,7 @@ const DesignPage = () => {
               }}
             ></div>
           </Title>
-          <Paragraph style={{ fontSize: 20, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
+          <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, lineHeight: 1.8, color: "#333", marginBottom: 40 }}>
             Your gateway to top design colleges in India including NID, NIFT, IITs (UCEED/CEED), MITID, and UID.
           </Paragraph>
 
@@ -66,22 +81,22 @@ const DesignPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Why Choose Design as a Career?</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Why Choose Design as a Career?</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
                   bodyStyle={{ padding: "24px" }}
                 >
-                  <Paragraph style={{ fontSize: 18, marginBottom: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginBottom: 16 }}>
                     Design is not just about aesthetics – it's about solving real-world problems with innovation and creativity.
                   </Paragraph>
                   <Title level={4} style={{ color: "#0a2c64" }}>Career Opportunities:</Title>
@@ -93,7 +108,7 @@ const DesignPage = () => {
                     "Graphic & Communication Design",
                     "Interior & Furniture Design"
                   ])}
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     The demand for creative professionals is growing rapidly across industries.
                   </Paragraph>
                 </Card>
@@ -106,16 +121,16 @@ const DesignPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Key Design Entrance Exams</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Key Design Entrance Exams</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -147,16 +162,16 @@ const DesignPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Our Coaching Program</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Our Coaching Program</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -194,32 +209,32 @@ const DesignPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>ccess Stories</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>ccess Stories</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
                   bodyStyle={{ padding: "24px" }}
                 >
                   <div style={{ borderLeft: "4px solid #0a2c64", paddingLeft: 16, marginBottom: 16 }}>
-                    <Paragraph italic style={{ fontSize: 18 }}>
+                    <Paragraph italic style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
                       "I cracked NID in my first attempt, thanks to the mock test series and personalized feedback sessions!"
                     </Paragraph>
-                    <Text strong style={{ fontSize: 16 }}>– Ananya R., NID Ahmedabad</Text>
+                    <Text strong style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>– Ananya R., NID Ahmedabad</Text>
                   </div>
                   <div style={{ borderLeft: "4px solid #0a2c64", paddingLeft: 16 }}>
-                    <Paragraph italic style={{ fontSize: 18 }}>
+                    <Paragraph italic style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>
                       "The faculty helped me think beyond basic sketching and taught me how to present ideas like a designer."
                     </Paragraph>
-                    <Text strong style={{ fontSize: 16 }}>– Karan M., UCEED Rank Holder</Text>
+                    <Text strong style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */ }}>– Karan M., UCEED Rank Holder</Text>
                   </div>
                 </Card>
               </motion.div>
@@ -231,16 +246,16 @@ const DesignPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Who Can Join?</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Who Can Join?</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -251,7 +266,7 @@ const DesignPage = () => {
                     "Graduates aiming for PG design courses",
                     "Students preparing for BFA / NATA / B.Des / M.Des"
                   ])}
-                  <Paragraph style={{ fontSize: 18, marginTop: 16 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginTop: 16 }}>
                     No matter your background, we'll help you discover and grow your creative potential.
                   </Paragraph>
                 </Card>
@@ -264,16 +279,16 @@ const DesignPage = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={isMobile ? {} : { scale: 1.03 }}
                 style={{ cursor: "pointer" }}
               >
                 <Card
-                  title={<span style={{ fontSize: "24px" }}>Ready to Start Your Design Journey?</span>}
+                  title={<span style={{ fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */ }}>Ready to Start Your Design Journey?</span>}
                   style={cardStyle}
                   headStyle={{ 
                     backgroundColor: "#FF8C00", 
                     color: "#fff",
-                    fontSize: "24px",
+                    fontSize: "clamp(0.875rem, 3vw, 1.375rem)" /* Responsive: 14px to 22px */,
                     padding: "20px 24px",
                     border: 'none'
                   }}
@@ -286,7 +301,7 @@ const DesignPage = () => {
                   <Title level={3} style={{ color: "#0a2c64", marginBottom: 16 }}>
                     Explore our flexible batches and free demo classes
                   </Title>
-                  <Paragraph style={{ fontSize: 20, marginBottom: 24 }}>
+                  <Paragraph style={{ fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */, marginBottom: 24 }}>
                     Your dream design college is just an exam away – let's crack it together!
                   </Paragraph>
                   <button style={{
@@ -294,7 +309,7 @@ const DesignPage = () => {
                     color: "white",
                     border: "none",
                     padding: "12px 24px",
-                    fontSize: "18px",
+                    fontSize: "clamp(0.875rem, 2.5vw, 1rem)" /* Responsive: 14px to 16px */,
                     borderRadius: "8px",
                     cursor: "pointer",
                     fontWeight: "bold",

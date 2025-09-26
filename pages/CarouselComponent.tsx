@@ -33,7 +33,7 @@ const CarouselComponent: React.FC = () => {
   return (
     <div style={{ 
       position: 'relative',
-      marginTop: '50px',
+      marginTop: '20px', /* Reduced from 70px */
       width: '100%',
       maxWidth: '100%',
       marginLeft: 'auto',
@@ -41,8 +41,7 @@ const CarouselComponent: React.FC = () => {
       paddingLeft: '0px',
       paddingRight: '0px'
     }}>
-      {/* Spacer div to push content down */}
-      <div style={{ height: '50px' }}></div>
+      {/* Removed spacer div that was pushing content down */}
 
       {/* Image Carousel */}
       <div
@@ -51,7 +50,7 @@ const CarouselComponent: React.FC = () => {
           borderRadius: '12px',
           overflow: 'hidden',
           position: 'relative',
-          marginTop: '40px'
+          marginTop: '10px' /* Reduced from 60px */
         }}
       >
         <Slider {...carouselSettings}>
@@ -102,7 +101,7 @@ const CarouselComponent: React.FC = () => {
           style={{
             background: 'linear-gradient(90deg, #ff5722, #ff9800)',
             color: '#fffefc',
-            marginTop: '30px',
+            marginTop: '50px',
             padding: '15px 0',
             overflow: 'hidden',
             fontFamily: '"Playfair Display", serif',

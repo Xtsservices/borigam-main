@@ -389,7 +389,7 @@ export default function CareerOpportunities() {
               style={{
                 color: "#ffffffff",
                 fontFamily: "'Open Sans', sans-serif",
-                fontSize: isMobile ? "28px" : "36px",
+                fontSize: 'clamp(1.25rem, 4vw, 2.25rem)', /* Responsive: 20px to 36px */
                 fontWeight: 700,
                 marginBottom: 0,
                 letterSpacing: "-0.5px",
@@ -416,20 +416,54 @@ export default function CareerOpportunities() {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        /* RESPONSIVE: Enhanced mobile-first search container */
         .search-container {
           display: flex;
           justify-content: center;
           margin-bottom: 40px;
           padding: 1rem 20px;
-          // background: linear-gradient(90deg, #ff5722, #ff9800);
           border-radius: 8px;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
+        
+        /* RESPONSIVE: Mobile search adjustments */
+        @media (max-width: 768px) {
+          .search-container {
+            padding: 0.75rem 15px;
+            margin-bottom: 30px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .search-container {
+            padding: 0.5rem 10px;
+            margin-bottom: 20px;
+          }
+        }
+        
+        /* RESPONSIVE: Enhanced input styling for mobile */
         .ant-input-affix-wrapper,
         .ant-input-search-button {
           border-radius: 12px !important;
           height: 48px;
         }
+        
+        /* RESPONSIVE: Mobile input adjustments */
+        @media (max-width: 768px) {
+          .ant-input-affix-wrapper,
+          .ant-input-search-button {
+            height: 44px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .ant-input-affix-wrapper,
+          .ant-input-search-button {
+            height: 40px;
+            border-radius: 8px !important;
+          }
+        }
+        
         .ant-input-search-button {
           background-color: #fa8c16 !important;
           border-color: #fa8c16 !important;
@@ -496,11 +530,19 @@ export default function CareerOpportunities() {
       `}</style>
       <section
         style={{
-          marginTop: "6rem",
+          marginTop: "8rem",
           padding: "60px 20px",
           backgroundColor: "#f9f9f9",
           minHeight: "100vh",
           perspective: "1200px",
+          /* RESPONSIVE: Mobile section adjustments */
+          ...(isMobile && {
+            marginTop: "4rem",
+            padding: "40px 15px",
+            minHeight: "auto"
+          }),
+          /* RESPONSIVE: Very small screens */
+          // Remove direct window.innerWidth usage in render
         }}
       >
 <div style={{ textAlign: "center" }}>
@@ -509,7 +551,7 @@ export default function CareerOpportunities() {
     style={{
       color: "#0a2c64",
       fontFamily: "'Open Sans', sans-serif",
-      fontSize: isMobile ? "28px" : "36px",
+      fontSize: 'clamp(1.25rem, 4vw, 2rem)', /* Responsive: 20px to 32px */
       fontWeight: 700,
       marginBottom: 0,
       letterSpacing: "-0.5px",
@@ -532,12 +574,15 @@ export default function CareerOpportunities() {
           style={{
             color: "#ff4e18", // primary color
             fontFamily: "'Open Sans', sans-serif",
-            fontSize: '1.5rem',
+            fontSize: 'clamp(0.75rem, 2.5vw, 1.5rem)', /* Responsive: 12px to 24px */
             fontWeight: 700,
             letterSpacing: "-0.5px",
             lineHeight: 1.2,
             textAlign: "center",
             marginBottom: "2.5rem",
+            /* RESPONSIVE: Mobile adjustments */
+            padding: isMobile ? '0 10px' : '0', /* Add padding on mobile */
+            wordWrap: 'break-word' /* Handle long text */
           }}
         >
           Career Opportunities at Borigam – Join Our Growing Team

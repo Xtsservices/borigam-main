@@ -36,7 +36,7 @@ const FoundationBatchCoaching = () => {
   return (
     <>
       <Header/>
-      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff", marginTop: "6rem" }}>
+      <div style={{ padding: "60px 30px", maxWidth: 1200, margin: "auto", backgroundColor: "#fff", marginTop: "clamp(4rem, 8vw, 8rem)" /* Responsive top margin */ }}>
         <motion.div 
           initial="hidden" 
           animate="visible" 

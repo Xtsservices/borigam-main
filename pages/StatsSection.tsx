@@ -15,13 +15,25 @@ const { Title, Text } = Typography;
 
 const StatsSection: React.FC = () => {
   const [trigger, setTrigger] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
     const interval = setInterval(() => {
       setTrigger(false);
       setTimeout(() => setTrigger(true), 100);
     }, 10000); // every 10s
-    return () => clearInterval(interval);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const stats = [
@@ -65,8 +77,21 @@ const StatsSection: React.FC = () => {
 
   return (
     <>
-      <div style={{ textAlign: 'center', marginTop: -170, marginBottom: 20 }}>
-        <Title level={2} style={{ color: '#000000ff', marginBottom: 10 }}>
+      <div style={{ 
+        textAlign: 'center', 
+        marginTop: isMobile ? 30 : 40, 
+        marginBottom: isMobile ? 20 : 30, 
+        position: 'relative', 
+        zIndex: 10,
+        padding: isMobile ? '0 15px' : '0'
+       }}>
+        <Title level={2} style={{ 
+          color: '#0a2c64', 
+          marginBottom: 10, 
+          fontSize: 'clamp(1.25rem, 5vw, 2.5rem)', /* Responsive: 20px to 40px */ 
+          fontWeight: 'bold',
+          textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+        }}>
           Our Achievements
         </Title>
         <div
@@ -74,7 +99,7 @@ const StatsSection: React.FC = () => {
         display: 'inline-block',
         height: 4,
         width: 64,
-        background: 'orange',
+        background: '#ff6600',
         borderRadius: 2,
         marginBottom: 20,
         animation: 'slideInLine 1s cubic-bezier(0.4,0,0.2,1)'
@@ -85,9 +110,9 @@ const StatsSection: React.FC = () => {
         style={{
           position: 'relative',
           color: '#fff',
-          padding: '60px 20px',
-          borderRadius: 16,
-          marginBottom: 60,
+          padding: isMobile ? '40px 15px' : '60px 20px',
+          borderRadius: isMobile ? 12 : 16,
+          marginBottom: isMobile ? 40 : 60,
           overflow: 'hidden',
           backgroundImage: `url('/images/Our Achievements.jpeg')`,
           backgroundSize: 'cover',
@@ -119,7 +144,7 @@ const StatsSection: React.FC = () => {
         />
 
         <div style={{ position: 'relative', zIndex: 3 }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div style={{ textAlign: 'center', marginBottom: isMobile ? 30 : 40 }}>
             
             <style>
               {`
@@ -136,21 +161,28 @@ const StatsSection: React.FC = () => {
             {stats.map((stat, index) => (
               <Col
                 key={index}
-                xs={24}
-                sm={12}
+                xs={12}
+                sm={8}
                 md={8}
                 lg={4}
                 style={{
                   textAlign: 'center',
                 }}
               >
-                <div style={{ marginBottom: 16 }}>{stat.icon}</div>
+                <div style={{ marginBottom: isMobile ? 12 : 16 }}>
+                  {React.cloneElement(stat.icon, { 
+                    style: { 
+                      fontSize: 'clamp(1.25rem, 4vw, 2.25rem)', /* Responsive: 20px to 36px */ 
+                      color: '#fff' 
+                    } 
+                  })}
+                </div>
                 <Title
                   level={2}
                   style={{
                     color: '#fff',
                     marginBottom: 8,
-                    fontSize: 40,
+                    fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', /* Responsive: 28px to 40px */
                   }}
                 >
                   {trigger ? (
@@ -165,7 +197,14 @@ const StatsSection: React.FC = () => {
                     <span>0{stat.suffix}</span>
                   )}
                 </Title>
-                <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: 20 }}>{stat.label}</Text>
+                <Text style={{ 
+                  color: 'rgba(255,255,255,0.9)', 
+                  fontSize: 'clamp(0.75rem, 2.5vw, 1.25rem)', /* Responsive: 12px to 20px */
+                  display: 'block',
+                  lineHeight: 1.4
+                }}>
+                  {stat.label}
+                </Text>
               </Col>
             ))}
           </Row>

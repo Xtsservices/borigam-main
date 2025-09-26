@@ -52,25 +52,46 @@ const TestimonialsIndex = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const carouselRef = useRef<any>(null);
   const router = useRouter();
+  
+  // Responsive breakpoint hooks
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const settings = {
-    dots: false,
+    dots: isMobile ? true : false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: isMobile ? 1 : 2,
     slidesToScroll: 1,
+    autoplay: isMobile,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 992,
         settings: {
           slidesToShow: 1,
+          dots: true,
         },
       },
       {
-        breakpoint: 576,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           arrows: false,
+          dots: true,
+          autoplay: true,
+          autoplaySpeed: 4000,
         },
       },
     ],
@@ -83,9 +104,9 @@ const TestimonialsIndex = () => {
   return (
     <div
       style={{
-        marginTop: "-10rem",
+        marginTop: isMobile ? "-5rem" : isTablet ? "-7rem" : "-12rem",
         backgroundColor: "#f5f5f5",
-        padding: "80px 0",
+        padding: isMobile ? "40px 0" : isTablet ? "60px 0" : "80px 0",
         position: "relative",
       }}
     >
@@ -93,26 +114,30 @@ const TestimonialsIndex = () => {
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "0 20px",
+          padding: isMobile ? "0 15px" : "0 20px",
         }}
       >
-        {/* Header with title and View All button */}
+        {/* Header with title and View All button - RESPONSIVE */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "40px",
+            alignItems: isMobile ? "flex-start" : "center",
+            marginBottom: isMobile ? "25px" : "40px",
             flexWrap: "wrap",
+            flexDirection: isMobile ? "column" : "row",
+            gap: isMobile ? "15px" : "0",
           }}
         >
           <Title
             level={2}
             style={{
               color: "#333",
-              fontSize: "2rem",
+              fontSize: 'clamp(0.75rem, 2.5vw, 1.75rem)', /* Responsive: 12px to 28px */
               fontWeight: 700,
               margin: 0,
+              textAlign: isMobile ? "center" : "left",
+              width: isMobile ? "100%" : "auto",
             }}
           >
             Student Success Stories
@@ -124,10 +149,12 @@ const TestimonialsIndex = () => {
               backgroundColor: "#ff6b00",
               borderColor: "#ff6b00",
               fontWeight: 500,
-              height: "40px",
-              padding: "0 25px",
+              height: isMobile ? "45px" : "40px",
+              padding: isMobile ? "0 30px" : "0 25px",
               borderRadius: "4px",
               boxShadow: "0 2px 8px rgba(255, 107, 0, 0.2)",
+              width: isMobile ? "100%" : "auto",
+              fontSize: 'clamp(0.625rem, 1.5vw, 0.8125rem)', /* Responsive: 10px to 13px */
             }}
           >
             View All Reviews
@@ -137,41 +164,44 @@ const TestimonialsIndex = () => {
         <div
           style={{
             display: "flex",
-            flexDirection: "row",
-            marginBottom: "40px",
+            flexDirection: isMobile ? "column" : "row",
+            marginBottom: isMobile ? "25px" : "40px",
             flexWrap: "wrap",
+            gap: isMobile ? "20px" : "0",
           }}
         >
-          {/* Left Box */}
+          {/* Left Box - RESPONSIVE */}
           <div
             style={{
-              flex: "1",
-              minWidth: "300px",
+              flex: isMobile ? "none" : "1",
+              minWidth: isMobile ? "100%" : "300px",
               backgroundColor: "#ff6b00",
               color: "white",
-              padding: "40px",
+              padding: isMobile ? "30px 20px" : isTablet ? "35px" : "40px",
               borderRadius: "10px",
               boxShadow: "0 10px 30px rgba(255, 107, 0, 0.3)",
-              marginRight: "30px",
+              marginRight: isMobile ? "0" : "30px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <Title
               level={2}
               style={{
                 color: "white",
-                fontSize: "2.5rem",
+                fontSize: 'clamp(1rem, 3vw, 2.25rem)', /* Responsive: 16px to 36px */
                 fontWeight: 700,
                 marginBottom: "20px",
+                lineHeight: 1.2,
               }}
             >
               BORIGAM SUCCESS STORIES
             </Title>
             <Paragraph
               style={{
-                fontSize: "14px",
+                fontSize: 'clamp(0.625rem, 1.5vw, 0.8125rem)', /* Responsive: 10px to 13px */
                 color: "rgba(255, 255, 255, 0.9)",
                 marginBottom: 0,
                 lineHeight: 1.6,
@@ -183,56 +213,60 @@ const TestimonialsIndex = () => {
             </Paragraph>
           </div>
 
-          {/* Right Carousel */}
+          {/* Right Carousel - RESPONSIVE */}
           <div
             style={{
-              flex: "1.5",
-              minWidth: "300px",
+              flex: isMobile ? "none" : "1.5",
+              minWidth: isMobile ? "100%" : "300px",
               position: "relative",
-              padding: "20px 0",
+              padding: isMobile ? "10px 0" : "20px 0",
             }}
           >
-            {/* Navigation Arrows */}
-            <Button
-              shape="circle"
-              icon={<LeftOutlined />}
-              onClick={() => carouselRef.current.prev()}
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "-25px",
-                transform: "translateY(-50%)",
-                backgroundColor: "white",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                zIndex: 2,
-                width: "50px",
-                height: "50px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "none",
-              }}
-            />
-            <Button
-              shape="circle"
-              icon={<RightOutlined />}
-              onClick={() => carouselRef.current.next()}
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "-25px",
-                transform: "translateY(-50%)",
-                backgroundColor: "white",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                zIndex: 2,
-                width: "50px",
-                height: "50px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "none",
-              }}
-            />
+            {/* Navigation Arrows - Hidden on mobile */}
+            {!isMobile && (
+              <>
+                <Button
+                  shape="circle"
+                  icon={<LeftOutlined />}
+                  onClick={() => carouselRef.current.prev()}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "-25px",
+                    transform: "translateY(-50%)",
+                    backgroundColor: "white",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    zIndex: 2,
+                    width: "50px",
+                    height: "50px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "none",
+                  }}
+                />
+                <Button
+                  shape="circle"
+                  icon={<RightOutlined />}
+                  onClick={() => carouselRef.current.next()}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "-25px",
+                    transform: "translateY(-50%)",
+                    backgroundColor: "white",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    zIndex: 2,
+                    width: "50px",
+                    height: "50px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "none",
+                  }}
+                />
+              </>
+            )}
 
             <Carousel ref={carouselRef} {...settings}>
               {Testimonials.map((testimonial, index) => (

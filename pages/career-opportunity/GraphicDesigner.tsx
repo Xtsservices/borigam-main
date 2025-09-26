@@ -41,7 +41,7 @@ const GraphicDesigner = () => {
       <div
         style={{
           padding: "60px 30px",
-          marginTop: "6rem",
+          marginTop: "8rem",
           maxWidth: 1200,
           margin: "auto",
           backgroundColor: "#fff",

@@ -42,7 +42,7 @@ const hoverVariant = {
   }
 };
 
-// Style objects
+// Style objects with enhanced responsive design
 const topicBoxStyle: React.CSSProperties = {
   background: 'linear-gradient(90deg, #ff5722, #ff9800)',
   color: '#fff',
@@ -50,7 +50,7 @@ const topicBoxStyle: React.CSSProperties = {
   borderRadius: '8px',
   display: 'inline-block',
   marginBottom: '20px',
-  fontSize: '20px',
+  fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', /* Responsive: 16px to 18px */
   fontWeight: 600,
   boxShadow: '0 4px 12px rgba(255, 69, 0, 0.3)',
   transition: 'all 0.3s ease'
@@ -68,7 +68,7 @@ const contentBoxStyle: React.CSSProperties = {
 };
 
 const paragraphStyle: React.CSSProperties = {
-  fontSize: '18px',
+  fontSize: 'clamp(0.875rem, 2vw, 1rem)', /* Responsive: 14px to 16px */
   lineHeight: 1.7,
   color: "#333",
   textAlign: 'justify',
@@ -109,11 +109,13 @@ const AboutPage: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Consistent dimensions
+  // Enhanced responsive dimensions with better mobile-first approach
   const boxHeight = isMobile ? 'auto' : '550px';
   const boxPadding = isMobile ? '20px' : isTablet ? '30px' : '40px';
+  const sectionGap = isMobile ? '20px' : isTablet ? '40px' : '60px';
+  const sectionMarginBottom = isMobile ? '40px' : isTablet ? '60px' : '80px';
 
-  // Section component for DRY code
+  // Enhanced Section component with better responsive design
   const Section = ({
     title,
     content,
@@ -127,12 +129,32 @@ const AboutPage: React.FC = () => {
     imageAlt: string;
     reverse?: boolean;
   }) => (
-    <div style={{ marginBottom: '80px' }}>
+    <div style={{ 
+      marginBottom: sectionMarginBottom,
+      /* RESPONSIVE: Center content and add proper horizontal padding */
+      padding: isMobile ? '0 5px' : '0 20px',
+      maxWidth: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '100%',
+      /* RESPONSIVE: Prevent content shifting */
+      boxSizing: 'border-box',
+      position: 'relative',
+      /* RESPONSIVE: Better mobile centering */
+      alignItems: 'center'
+    }}>
       <div style={{
         display: 'flex',
-        alignItems: 'stretch',
-        gap: isTablet ? '40px' : '60px',
-        flexDirection: isTablet ? 'column' : (reverse ? 'row-reverse' : 'row')
+        alignItems: isMobile ? 'center' : 'stretch',
+        gap: sectionGap,
+        /* RESPONSIVE: Stack vertically on mobile, respect reverse on larger screens */
+        flexDirection: isMobile ? 'column' : (reverse ? 'row-reverse' : 'row'),
+        /* RESPONSIVE: Limit width and center content */
+        maxWidth: isMobile ? '100%' : '1200px',
+        width: '100%',
+        /* RESPONSIVE: Ensure proper centering */
+        margin: '0 auto',
+        justifyContent: 'center'
       }}>
         {/* Image Box */}
         <motion.div
@@ -140,7 +162,12 @@ const AboutPage: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={reverse ? rightVariant : leftVariant}
-          style={{ flex: 1, height: boxHeight }}
+          style={{ 
+            flex: 1, 
+            height: boxHeight,
+            /* RESPONSIVE: Ensure minimum height on mobile */
+            minHeight: isMobile ? '250px' : 'auto'
+          }}
         >
           <motion.div
             whileHover="hover"
@@ -150,8 +177,12 @@ const AboutPage: React.FC = () => {
             <motion.img
               src={imageSrc}
               alt={imageAlt}
-              style={imageStyle}
-              whileHover={{ scale: 1.05 }}
+              style={{
+                ...imageStyle,
+                /* RESPONSIVE: Better mobile image sizing */
+                minHeight: isMobile ? '250px' : 'auto'
+              }}
+              whileHover={{ scale: isMobile ? 1.02 : 1.05 }} /* Less scaling on mobile */
             />
           </motion.div>
         </motion.div>
@@ -162,31 +193,77 @@ const AboutPage: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={reverse ? leftVariant : rightVariant}
-          style={{ flex: 1, height: boxHeight }}
+          style={{ 
+            flex: 1, 
+            height: boxHeight,
+            /* RESPONSIVE: Add margin top on mobile for better separation */
+            marginTop: isMobile ? '40px' : '0'
+          }}
         >
           <motion.div
             variants={hoverVariant}
             whileHover="hover"
             style={{
               ...contentBoxStyle,
-              padding: boxPadding
+              padding: boxPadding,
+              /* RESPONSIVE: Center content box and improve mobile styling */
+              borderRadius: isMobile ? '12px' : '16px',
+              margin: isMobile ? '0' : '0',
+              width: isMobile ? '100%' : 'auto',
+              maxWidth: isMobile ? '100%' : 'none',
+              /* RESPONSIVE: Additional centering for mobile */
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              /* RESPONSIVE: Prevent layout shifts */
+              boxSizing: 'border-box',
+              position: 'relative'
             }}
           >
             <motion.div
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: isMobile ? 1.01 : 1.02 }} /* Less scaling on mobile */
               style={{
                 ...topicBoxStyle,
-                fontSize: isMobile ? '18px' : '20px',
-                padding: '10px 16px'
+                fontSize: 'clamp(0.75rem, 2.5vw, 1.125rem)', /* Responsive: 12px to 18px */
+                padding: isMobile ? '8px 12px' : '10px 16px',
+                /* RESPONSIVE: Center topic box on mobile */
+                margin: isMobile ? '0 auto 20px auto' : '0 0 20px 0',
+                textAlign: 'center'
               }}
             >
               {title}
             </motion.div>
-            <motion.div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+            <motion.div style={{ 
+              flex: 1, 
+              display: 'flex', 
+              alignItems: 'center',
+              justifyContent: 'center', // Center content horizontally
+              width: '100%',
+              /* RESPONSIVE: Additional mobile centering */
+              flexDirection: 'column',
+              textAlign: isMobile ? 'center' : 'inherit',
+              /* RESPONSIVE: Prevent content shifting */
+              position: 'relative',
+              boxSizing: 'border-box'
+            }}>
               <Paragraph style={{
                 ...paragraphStyle,
-                fontSize: isMobile ? '16px' : '18px',
-                lineHeight: 1.6
+                fontSize: 'clamp(0.625rem, 2vw, 1rem)', /* Responsive: 10px to 16px */
+                lineHeight: 1.6,
+                /* RESPONSIVE: Better mobile text padding and centering */
+                paddingLeft: isMobile ? '15px' : isTablet ? '20px' : '40px',
+                paddingRight: isMobile ? '15px' : isTablet ? '20px' : '40px',
+                /* RESPONSIVE: Center text on mobile */
+                textAlign: isMobile ? 'center' : 'justify',
+                width: '100%',
+                margin: '0 auto',
+                /* RESPONSIVE: Additional mobile centering */
+                display: 'block',
+                maxWidth: '100%',
+                /* RESPONSIVE: Prevent layout shifts */
+                boxSizing: 'border-box',
+                position: 'relative'
               }}>
                 {content}
               </Paragraph>
@@ -213,11 +290,11 @@ const AboutPage: React.FC = () => {
     style={{
       color: "#0a2c64",
       fontFamily: "'Open Sans', sans-serif",
-      fontSize: isMobile ? "28px" : "36px",
+      fontSize: 'clamp(1.25rem, 4vw, 2rem)', /* Responsive: 20px to 32px */
       fontWeight: 700,
       marginBottom: 0,
       letterSpacing: "-0.5px",
-      marginTop: isMobile ? "4.5rem" : "9.5rem",
+      marginTop: 'clamp(6rem, 10vw, 11rem)', /* Responsive top margin */
     }}
   >
     About Us
@@ -237,12 +314,18 @@ const AboutPage: React.FC = () => {
           style={{
             color: "#ff4e18", // primary color
             fontFamily: "'Open Sans', sans-serif",
-            fontSize: '1.5rem',
+            // Responsive font sizing using clamp for smooth scaling
+            fontSize: 'clamp(1.25rem, 3vw, 2rem)',
             fontWeight: 700,
             letterSpacing: "-0.5px",
             lineHeight: 1.2,
             textAlign: "center",
-            marginBottom: "2.5rem",
+            marginBottom: isMobile ? "1.5rem" : isTablet ? "2rem" : "2.5rem",
+            // Additional mobile styling
+            ...isMobile && {
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem'
+            }
           }}
         >
          Why choose Borigam?
@@ -255,19 +338,39 @@ const AboutPage: React.FC = () => {
         }}></div>
        
 
-        {/* MAIN CONTENT */}
+        {/* MAIN CONTENT - RESPONSIVE CENTERED */}
         <div style={{
-          padding: isMobile ? "40px 5%" : "60px 5%",
-          maxWidth: 1400,
-          margin: "auto",
-          marginTop: "-12rem"
+          padding: isMobile ? "2rem 10px" : isTablet ? "3rem 5%" : "4rem 5%",
+          maxWidth: isMobile ? '100vw' : 1400,
+          margin: "0 auto", // Center the container
+          marginTop: isMobile ? "-4rem" : isTablet ? "-6rem" : "-10rem",
+          // RESPONSIVE: Better mobile spacing and centering
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+          /* RESPONSIVE: Additional mobile centering */
+          textAlign: isMobile ? 'center' : 'inherit',
+          justifyContent: 'center',
+          /* RESPONSIVE: Ensure content doesn't shift with footer changes */
+          position: 'relative',
+          minHeight: 'auto',
+          /* RESPONSIVE: Better mobile containment */
+          overflow: 'hidden'
         }}>
           ̰          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={leftVariant}
-            style={{ textAlign: 'center', marginBottom: '40px' }}
+            style={{ 
+              textAlign: 'center', 
+              marginBottom: '40px',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
           >
           
           </motion.div>
